@@ -1,0 +1,18 @@
+.alert{
+    padding: 1rem 2rem;
+    text-align: center;
+    color: #fff;
+    font-weight: var(--bold);
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+}
+.alert p{
+    margin: 0;
+}
+.error{
+    background-color: var(--red);
+}
+.success{
+    background-color: var(--green);
+}

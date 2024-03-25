@@ -1,0 +1,178 @@
+import { createContext, useEffect, useState } from "react";
+
+const SignupContext = createContext();
+
+const SignupProvider = ({ children }) => {
+
+    const [step, setStep] = useState(1);
+    const [user, setUser] = useState({
+        name: '',
+        lastname: '',
+        email: '',
+        password: '',
+        password2: '',
+        phone: '',
+        role: ''
+    });
+    const [validCode, setValidCode] = useState(false);
+
+
+    const [characters, setCharacters] = useState(false); 
+    const [number, setNumber] = useState(false);
+    const [uppercase, setUppercase] = useState(false);
+    const [lowercase, setLowercase] = useState(false);
+    const [special, setSpecial] = useState(false);
+    const [passwordsCheck, setPasswordsCheck] = useState(true);
+    const [barpercentage, setBarPercentage] = useState(0);
+
+    const [hidePassword, setHidePassword] = useState(true);
+
+    const [continueBtn1, setContinueBtn1] = useState(false);
+    const [continueBtn2, setContinueBtn2] = useState(false);
+    const [continueBtn3, setContinueBtn3] = useState(false);
+
+    const nextStep = () => {
+        setStep(step + 1);
+    }
+
+    const prevStep = () => {
+        setStep(step - 1);
+    }
+
+    const handleStep = (step) => {
+        switch(step) {
+            case 1:
+                setStep(step);
+            case 2:
+                if(continueBtn1){
+                    setStep(step);
+                }
+                break;
+            case 3:
+                if(continueBtn2){
+                    setStep(step);
+                }
+                break;
+            case 4:
+                if(continueBtn3){
+                    setStep(step);
+                }
+                break;
+            default:
+                break;
+        }
+        // setStep(step);
+    }
+
+    const handleChange = (e) => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleRole = (e) => {
+        let name;
+        let value;
+        if(e.target.name){
+            name = e.target.name;
+            value = e.target.value;
+        }else if(e.target.tagName === 'I'){
+            name = e.target.parentElement.name;
+            value = e.target.parentElement.value;
+        }
+        setUser({
+            ...user,
+            [name]: value
+        });
+    }
+
+    const handlePassword = (e) => {
+        const password = e.target.value;
+        const hasNumber = /\d/;
+        const hasUppercase = /[A-Z]/;
+        const hasLowercase = /[a-z]/;
+        const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/;
+        let percentage = 0;
+
+        if(password.length >= 8) {
+            setCharacters(true);
+            percentage += 25;
+        } else {
+            setCharacters(false);
+        }
+        if(hasNumber.test(password)) {
+            setNumber(true);
+            percentage += 25;
+        }else{
+            setNumber(false);
+        }
+        if(hasUppercase.test(password)) {
+            setUppercase(true);
+            percentage += 12.5;
+        }else{
+            setUppercase(false);
+        }
+        if(hasLowercase.test(password)) {
+            setLowercase(true);
+            percentage += 12.5;
+        }else{
+            setLowercase(false);
+        }
+        if(hasSpecial.test(password)) {
+            setSpecial(true);
+            percentage += 25;
+        }else{
+            setSpecial(false);
+        }
+        setBarPercentage(percentage);
+    }
+
+    const handlePassword2 = (e) => {
+        if(e.target.value === user.password) {
+            setPasswordsCheck(true);
+        }else{
+            setPasswordsCheck(false);
+        }
+    }
+
+    const handleHidePassword = () => {
+        setHidePassword(!hidePassword);
+    }
+
+    return (
+        <SignupContext.Provider value={{
+            step,
+            nextStep,
+            prevStep,
+            handleStep,
+            user,
+            handleChange,
+            handleRole,
+            validCode,
+            setValidCode,
+            characters,
+            number,
+            uppercase,
+            lowercase,
+            special,
+            barpercentage,
+            handlePassword,
+            passwordsCheck,
+            handlePassword2,
+            continueBtn1,
+            setContinueBtn1,
+            continueBtn2,
+            setContinueBtn2,
+            continueBtn3,
+            setContinueBtn3,
+            hidePassword,
+            handleHidePassword
+        }}>
+            {children}
+        </SignupContext.Provider>
+    );
+}
+
+export { SignupProvider };
+export default SignupContext;

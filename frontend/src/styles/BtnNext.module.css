@@ -1,0 +1,17 @@
+.btn-next{
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    background-color: var(--dark_blue);
+    color: #fff;
+    text-align: center;
+}
+.btn-next:hover{
+    background-color: color-mix(in xyz-d50, var(--dark_blue) 60%, #000);
+}
+.disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}

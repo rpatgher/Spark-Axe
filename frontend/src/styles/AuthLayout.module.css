@@ -1,0 +1,66 @@
+.auth{
+    background-color: var(--gray);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    display: flex;
+    width: calc(100vw - 4rem);
+    height: calc(100vh - 4rem);
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+@media(min-width: 768px){
+    .card{
+        flex-direction: row;
+        margin: 7rem;
+        width: calc(100vw - 2*7rem);
+        height: calc(100vh - 2*7rem);
+    }
+}
+.form{
+    flex: 0 1 100%;
+    background-color: var(--white);
+    padding: 2rem 4rem;
+    overflow: scroll;
+}
+@media (min-width: 480px){
+    .form{
+        padding: 6rem 8rem;
+    }
+}
+@media (min-width: 768px){
+    .form{
+        padding: 6rem 8rem;
+    }
+}
+@media (min-width: 1024px){
+    .form{
+        flex: 0 1 40%;
+        padding: 4rem 6rem;
+    }
+}
+@media (min-width: 1450px){
+    .form{
+        padding: 2rem 10rem;
+    }
+}
+.image{
+    position: relative;
+    flex: 1;
+    /* background-color: darken($color: var(--gray), $amount: 1); */
+}
+.exit{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 6rem;
+    height: 6rem;
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--dark_gray);
+    cursor: pointer;
+}
