@@ -33,7 +33,7 @@ const SidebarDashboard = () => {
             <div className={styles.body}>
                 <Link to='/dashboard' className={`${styles.item} ${location.pathname === '/dashboard' ? styles.item_active : ''}`}>
                     <i className="fa-solid fa-house"></i>
-                    <p>Home</p>
+                    <p>Inicio</p>
                 </Link>
                 <Link to='/dashboard/orders' className={`${styles.item} ${location.pathname === '/dashboard/orders' ? styles.item_active : ''}`}>
                 <i className="fa-solid fa-basket-shopping"></i>
@@ -53,7 +53,7 @@ const SidebarDashboard = () => {
                 </Link>
                 <Link to='/dashboard/stats' className={`${styles.item} ${location.pathname === '/dashboard/stats' ? styles.item_active : ''}`}>
                 <i className="fa-solid fa-square-poll-vertical"></i>
-                    <p>Stats Generales</p>
+                    <p>Estadísticas Generales</p>
                 </Link>
                 <Link to='/dashboard/coupons' className={`${styles.item} ${location.pathname === '/dashboard/coupons' ? styles.item_active : ''}`}>
                 <i className="fa-solid fa-ticket-simple"></i>

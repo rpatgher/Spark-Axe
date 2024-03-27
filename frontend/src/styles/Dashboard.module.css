@@ -10,9 +10,10 @@
 }
 .main{
     flex: 1;
-    border-radius: 2rem;
-    /* background-color: var(--white);
-    margin: 2rem 4rem; */
+    /* background-color: var(--white); */
+    margin: 0 3rem;
+    overflow: scroll;
+    scrollbar-width: none;
 }
 
 .red-box {

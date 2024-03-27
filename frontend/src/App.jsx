@@ -16,6 +16,7 @@ import Forgot from './pages/Forgot';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Orders from './pages/Orders/Orders';
 import Products from './pages/Products/Products';
+import NewProduct from './pages/Products/NewProduct';
 import Inventory from './pages/Inventory/Inventory';
 import Customers from './pages/Customers/Customers';
 import Stats from './pages/Stats/Stats';
@@ -51,6 +52,7 @@ function App() {
                 <Route index element={<Dashboard />} />
                 <Route path="orders" element={<Orders />} />
                 <Route path="products" element={<Products />} />
+                <Route path="products/new" element={<NewProduct />} />
                 <Route path="inventory" element={<Inventory />} />
                 <Route path="customers" element={<Customers />} />
                 <Route path="stats" element={<Stats />} />

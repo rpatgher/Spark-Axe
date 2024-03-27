@@ -1,0 +1,61 @@
+.body{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-bottom: 5rem;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.field{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 2rem;
+    gap: 1rem;
+    border-radius: 1rem;
+}
+.field label{
+    font-size: 1.6rem;
+}
+.field textarea{
+    resize: none;
+}
+.field input, .field textarea{
+    font-size: 1.4rem;
+    padding: 1rem;
+    border: 1px solid var(--gray);
+    background-color: var(--white);
+    border-radius: 1rem;
+}
+.preview{
+    background-color: var(--white);
+    border-radius: 1rem;
+    padding: 2rem;
+}
+.preview p{
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+}
+.button{
+    all: unset;
+    background-color: var(--blue);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 1.6rem;
+    text-align: center;
+}
+.button:hover{
+    background-color: var(--dark_blue);
+}
