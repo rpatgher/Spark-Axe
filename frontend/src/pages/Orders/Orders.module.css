@@ -1,0 +1,18 @@
+.ordersContainer {
+    /* Tus estilos para el contenedor de la tabla */
+}
+
+.ordersTable {
+    /* Tus estilos para la tabla en sí */
+    width: 90%;
+    border-collapse: collapse;
+    align-items: center;
+}
+
+.ordersTable th, .ordersTable td {
+    /* Estilos comunes para th y td */
+    padding: 30px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
