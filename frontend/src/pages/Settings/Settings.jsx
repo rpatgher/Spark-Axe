@@ -3,7 +3,7 @@
 const Settings = () => {
     return (
         <div>
-            <h1>Settings</h1>
+            <h3>Settings</h3>
         </div>
     )
 }
