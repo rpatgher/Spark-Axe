@@ -45,7 +45,8 @@ const createElement = async (req, res) => {
     }
     const element = Element.build(req.body);
     element.website_id = website.id;
-    element.image = req.file.filename;
+    element.image = req.files.image[0].filename;
+    element.image_hover = req.files.image2[0].filename;
     try {
         await element.save();
         res.json({ msg: 'Element created successfully' });
@@ -57,5 +58,6 @@ const createElement = async (req, res) => {
 
 export {
     createElement,
+    getElements,
     getElement
 };

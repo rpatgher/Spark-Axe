@@ -14,7 +14,7 @@ const HeaderDashboard = () => {
     return (
         <header className={styles.header}>
             <div className={styles.heading}>
-                <h2>Bienvenido a Velasci</h2>
+                <h2>Bienvenido a Spark Axe</h2>
                 <p>{websites[0].name}</p>
             </div>
             <div className={styles.main}>
