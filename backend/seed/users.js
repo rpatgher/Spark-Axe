@@ -11,7 +11,7 @@ const usuarios = [
         confirmed: 1
     },
     {
-        name: "Juan",
+        name: "Diego",
         lastname: "Lopez Araiza",
         email: "correo2@correo.com",
         password: bcrypt.hashSync('Password3$', 10),

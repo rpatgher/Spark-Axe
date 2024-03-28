@@ -22,8 +22,8 @@ dotenv.config({ path: '.env' });
 const app = express();
 // Enable JSON 
 app.use(express.json());
-// Enable multipart/form-data
-// app.use(express.urlencoded({ extended: true }));
+// Enabling static files
+app.use(express.static('public'));
 
 // Config CORS
 const whiteList = [process.env.FRONTEND_URL];

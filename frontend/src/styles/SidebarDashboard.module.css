@@ -2,6 +2,8 @@
     background-color: var(--white);
     width: 20rem;
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
 }
 .sidebar-header{
     display: flex;
@@ -35,11 +37,24 @@
     margin: 0;
     font-size: 1.2rem;
 }
-.body{
+.main-menu{
     display: flex;
     flex-direction: column;
     padding: 2rem 1rem;
-    gap: 2rem;
+    gap: 1.5rem;
+}
+.setting-menu{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+.body{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 .item{
     all: unset;

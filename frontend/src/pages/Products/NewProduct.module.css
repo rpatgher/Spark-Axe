@@ -1,9 +1,27 @@
+.go-back{
+    margin: 3rem 0;
+}
+.go-back a{
+    all: unset;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--blue);
+}
+.go-back a:hover{
+    color: var(--dark_blue);
+    text-decoration: underline;
+}
+.heading{
+    font-size: 2.4rem;
+    margin: 2rem 0;
+}
 .body{
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 2rem;
     align-items: flex-start;
     margin-bottom: 5rem;
+    position: relative;
 }
 .form{
     display: flex;
@@ -31,6 +49,15 @@
     background-color: var(--white);
     border-radius: 1rem;
 }
+.input-color{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.input-color div{
+    width: 6rem;
+    height: 3rem;
+}
 .preview{
     background-color: var(--white);
     border-radius: 1rem;
@@ -43,9 +70,11 @@
 }
 .right{
     display: flex;
-    flex-direction: column;
     gap: 2rem;
-    height: 100%;
+    flex-direction: column;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 3rem;
 }
 .button{
     all: unset;

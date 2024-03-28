@@ -1,0 +1,140 @@
+.heading{
+    font-size: 2.4rem;
+    margin: 2rem 0;
+}
+.filters{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+.searcher{
+    position: relative;
+}
+.searcher input{
+    padding: .5rem .5rem .5rem 3rem;
+    width: 100%;
+    border-radius: 1rem;
+    border: none;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    margin: 0;
+    background-color: var(--white);
+}
+.searcher i{
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 1rem;
+    font-size: 1.4rem;
+    color: var(--dark_gray);
+}
+.btn-new-product{
+    all: unset;
+    cursor: pointer;    
+    color: #fff;
+    background-color: var(--blue);
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.6rem;
+}
+.btn-new-product:hover{
+    background-color: var(--dark_blue);
+}
+table{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid var(--gray);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+thead{
+    background-color: var(--gray);
+}
+th{
+    padding: 1.5rem 0;
+    font-size: 1.6rem;
+}
+.col-description,
+.col-actions {
+    width: 10%;
+}
+.col-id,
+.col-name,
+.col-category,
+.col-price{
+    width: 15%;
+}
+.col-color,
+.col-image,
+.col-select{
+    width: 5%;
+}
+tr td{
+    text-align: center;
+    padding: .5rem 0;
+    border-bottom: 2px solid var(--gray);
+    font-size: 1.4rem;
+    background-color: var(--white);
+}
+tr:last-of-type td{
+    border-bottom: none;
+}
+.noproducts{
+    text-align: center;
+    font-size: 2rem;
+    padding: 2rem 0;
+}
+.noproducts a{
+    color: var(--blue);
+}
+.cell-select input, .col-select input{
+    appearance: none;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+    border-radius: .5rem;
+    border: 1px solid var(--dark_gray);
+    transition: all .3s ease-in-out;
+}
+.cell-select input:checked, .col-select input:checked{
+    border-radius: 50%;
+    background-color: var(--dark_gray);
+    transition: all .3s ease-in-out;
+}
+.cell-image img{
+    width: auto;
+    height: 4rem;
+    border-radius: .5rem;
+}
+.cell-id{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cell-color div{
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto;
+    border-radius: .5rem;
+}
+.cell-actions{
+    text-align: left;
+}
+.cell-actions i, .cell-description i{
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+.cell-actions, .cell-description{
+    font-size: 2.2rem;
+}
+.cell-actions:hover, .cell-description:hover{
+    color: var(--dark_gray);
+    transition: all .1s ease-in-out;
+}

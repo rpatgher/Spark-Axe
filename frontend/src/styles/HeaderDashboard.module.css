@@ -52,6 +52,7 @@
     background-color: var(--white);
     padding: 1rem;
     position: relative;
+    width: 15rem;
 }
 .darkmode{
     all: unset;
@@ -101,6 +102,22 @@
 .name{
     font-size: 1.2rem;
     font-weight: var(--bold);
+}
+.name p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: hidden;
+    width: 8rem;
+    position: relative;
+}
+.name p::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 80%, var(--white) 95%, var(--white) 100%);
 }
 .description{
     font-size: 1rem;
