@@ -7,7 +7,7 @@ const Customer = db.define('customer', {
         type: DataTypes.UUID,
         primaryKey: true,
         allowNull: false,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: DataTypes.UUIDV4 
     },
     name: {
         type: DataTypes.STRING,

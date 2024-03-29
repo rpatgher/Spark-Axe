@@ -1,26 +1,39 @@
-
-.vertical-tabs-container {
-
+/* Settings.jsx CSS */
+.vertical-tabs{
 
 }
+.tab-menu{
+  border: 0px;
 
-.vertical-tabs {
+}
+#tab{
+  border: none;
+
+  color: rgb(165, 164, 164);
+}
+#tab.active{
+  border: none;
+  color: black;
+}
+#tab:hover{
+  border: none;
+  color: black;
+}
+
+.hello{
+  background-color: aquamarine;
+  width: 100%;
+  height: 10px;
   display: flex;
-  flex-direction: row;
 }
 
-.vertical-tab {
-  padding: 10px;
-  cursor: pointer;
+.hello2{
+  background-color: rgb(25, 92, 70);
+  height: 10px;
+  width: 110px;
 }
-
-.vertical-tab.active {
-  background-color: #f0f0f0;
-  font-weight: bold;
-
-}
-
-.tab-content {
-  padding: 10px;
-
+.hello3{
+  background-color: rgb(9, 15, 13);
+  height: 10px;
+  width: 160px;
 }

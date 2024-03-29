@@ -4,8 +4,6 @@
 }
 .filters{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 3rem;
 }
 .searcher{
@@ -16,7 +14,7 @@
     width: 100%;
     border-radius: 1rem;
     border: none;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     margin-bottom: 1rem;
     position: relative;
     margin: 0;
@@ -27,7 +25,7 @@
     transform: translateY(-50%);
     top: 50%;
     left: 1rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: var(--dark_gray);
 }
 .btn-new-product{
@@ -35,14 +33,22 @@
     cursor: pointer;    
     color: #fff;
     background-color: var(--blue);
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
     border-radius: .5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: .5rem;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
+    justify-content: end;
 }
+
+.searcher {
+    display: flex;
+    align-items: center;
+}
+
+
 .btn-new-product:hover{
     background-color: var(--dark_blue);
 }
@@ -59,7 +65,7 @@ thead{
 }
 th{
     padding: 1.5rem 0;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 }
 .col-description,
 .col-actions {
@@ -80,7 +86,7 @@ tr td{
     text-align: center;
     padding: .5rem 0;
     border-bottom: 2px solid var(--gray);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     background-color: var(--white);
 }
 tr:last-of-type td{
@@ -138,3 +144,61 @@ tr:last-of-type td{
     color: var(--dark_gray);
     transition: all .1s ease-in-out;
 }
+
+
+.btn-filter {
+    margin-left: 1rem;
+    border: none;
+    
+}
+.filterter{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    position: relative;
+}
+.darkmode, .filterter{
+    cursor: pointer;
+    border-radius: 1rem;
+}
+
+
+.dropdown{
+    position: absolute;
+    display: none;
+    bottom: 0rem; /* Position the dropdown content below the profile element */
+    transform: translateY(100%);
+    width: 12rem;
+}
+.dropdownContent {
+    background-color: #f9f9f9;
+    flex-basis: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    top: 0.5rem;
+    transform: translateY(10%);
+    width: 12rem;
+}
+.dropdownContent button{
+    all: unset;
+}
+.dropdownContent a, .dropdownContent button {
+    color: black;
+    padding: 1rem 1.4rem;
+    text-decoration: none;
+    display: block;
+    border-radius: 1rem;
+}
+
+.dropdownContent a:hover, .dropdownContent button:hover {
+    background-color: #f1f1f1;
+    width: 9rem;
+}
+
+.filterter:hover .dropdown, .filterter .dropdown:hover {
+    display: block;
+}
+

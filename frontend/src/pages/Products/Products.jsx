@@ -16,7 +16,10 @@ import useAuth from '../../hooks/useAuth';
 import formatToMoney from '../../helpers/formatMoney';
 
 
+
+
 const Products = () => {
+    
     const { auth } = useAuth();
     const [products, setProducts] = useState([]);
 
@@ -43,11 +46,28 @@ const Products = () => {
     return (
         <>
             <h2 className={styles.heading}>Productos</h2>
-            <div className={styles.filters}>
+            <div className={`${styles.filters} `}>
                 <div className={styles.searcher}>
                     <input type="text" placeholder="Buscar productos" />
                     <i className="fa-solid fa-search"></i>
+                    {/*Dropdown filter Remy*/}
+                    
                 </div>
+                <div className={styles.filterter}>
+                <button className={`fa-solid fa-sort ${styles["btn-filter"]}`}>
+      </button>
+            
+                   
+                    <div className={styles.dropdown}>
+                    <div className={styles.dropdownContent}>
+                        <button><i className="fa-solid fa-hashtag"></i> <strong>Numero de ID</strong></button>
+                        <button><i className="fa-solid fa-a"></i><strong> Nombre</strong></button>
+                        <button><i className="fa-solid fa-money-check-dollar"></i> <strong>Precio</strong></button>
+                        <button><i className="fa-solid fa-layer-group"></i> <strong>Categoria</strong></button>
+                    </div>
+                    </div>
+                </div>
+                
                 <Link to='/dashboard/products/new'>
                     <button
                         className={styles["btn-new-product"]}

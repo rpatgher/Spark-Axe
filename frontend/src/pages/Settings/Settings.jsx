@@ -1,46 +1,135 @@
 import React, { useState } from 'react';
-import './VerticalTabs.css'; 
+import './VerticalTabs.css';
 
 function VerticalTabs() {
-    const [activeTab, setActiveTab] = useState(0);
-  
-    const handleTabClick = (index) => {
-      setActiveTab(index);
-    };
-  
-    return (
-      <div className="vertical-tabs-container">
-        <div className="vertical-tabs">
-          {tabs.map((tab, index) => (
-            <div
-              key={index}
-              className={`vertical-tab ${activeTab === index ? 'active' : ''}`}
-              onClick={() => handleTabClick(index)}
-            >
-              {tab.title}
-            </div>
-          ))}
-        </div>
-        <div className="tab-content">
-          {tabs[activeTab].content}
-        </div>
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+  };
+
+  return (
+    <div className="vertical-tabs">
+      <div className="tab-menu">
+        <button
+          id='tab'
+          className={activeTab === 0 ? 'active' : ''}
+          onClick={() => handleTabClick(0)}
+        >
+          Perfil Tienda
+        </button>
+        <button
+          id='tab'
+          className={activeTab === 1 ? 'active' : ''}
+          onClick={() => handleTabClick(1)}
+        >
+          Especificaciones
+        </button>
       </div>
-    );
-  }
-  
-  const tabs = [
-    {
-      title: 'Tab 1',
-      content: 'Content of Tab 1'
-    },
-    {
-      title: 'Tab 2',
-      content: 'Content of Tab 2'
-    },
-    {
-      title: 'Tab 3',
-      content: 'Content of Tab 3'
-    }
-  ];
-  
+      <div className='hello'>
+  <div className='hello2'>
+    </div>
+    <div className='hello3'>
+    </div>
+      </div>
+      <div className="tab-content">
+        {activeTab === 0 && <div>Content for Tab 1</div>}
+        {activeTab === 1 && (
+          <div>
+          <p><strong>Nombre de tienda</strong></p>
+          <p>Elibaba</p>
+          <p><strong>Tipo de Sitio Web</strong></p>
+          <p>E-commerce</p>
+          <p><strong>Administrador</strong></p>
+          <p>Eli Knanni</p>
+          <p><strong>Descripcion de la tienda</strong></p>
+          <p>Tienda de vapes</p>
+
+          <h3>Avatar</h3>
+          <div className="image-grid">
+            <div className="image-item">
+              <img
+                src="/Tienda(Morada).png"
+                alt="Image 1"
+                onClick={() => replaceWithInput(this)}
+              />
+            </div>
+           
+              <button className={activeTab === 2 ? 'active' : ''}
+        onClick={() => handleTabClick(2)}>Edit</button>
+            </div>
+          </div>
+          
+        )}
+        {activeTab === 2 && (
+         <div>
+         <p>Nombre de tienda</p>
+         <input type="text" />
+         <p>Tipo de Sitio Web</p>
+         <select >
+           <option value="option1">Option 1</option>
+           <option value="option2">Option 2</option>
+           <option value="option3">Option 3</option>
+         </select>
+         <p>Administrador</p>
+         <select >
+           <option value="option1">Option 1</option>
+           <option value="option2">Option 2</option>
+           <option value="option3">Option 3</option>
+         </select>
+         <p>Descripcion de la tienda</p>
+         <textarea ></textarea>
+
+         <h3>Avatar</h3>
+         <hr />
+         <div className="image-grid">
+           <div className="image-item">
+             <img
+               src="/Tienda(Morada).png"
+               alt="Image 1"
+               onClick={() => replaceWithInput(this)}
+             />
+           </div>
+           <div className="image-item">
+             <img
+               src="Tienda(Morada).png"
+               alt="Image 2"
+               onClick={() => replaceWithInput(this)}
+             />
+           </div>
+           <div className="image-item">
+             <img
+               src="Tienda(Morada).png"
+               alt="Image 3"
+               onClick={() => replaceWithInput(this)}
+             />
+           </div>
+           <div className="image-item">
+             <img
+               src="Tienda(Morada).png"
+               alt="Image 4"
+               onClick={() => replaceWithInput(this)}
+             />
+           </div>
+           <div className="image-item">
+             <img
+               src="Tienda(Morada).png"
+               alt="Image 5"
+               onClick={() => replaceWithInput(this)}
+             />
+             <button className={activeTab === 1 ? 'active' : ''}
+       onClick={() => handleTabClick(1)}>Save changes</button>
+           </div>
+         </div>
+       </div> 
+          
+        )}
+        
+        
+      </div>
+    </div>
+  );
+}
+
 export default VerticalTabs;
+
