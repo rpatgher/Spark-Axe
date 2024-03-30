@@ -3,10 +3,10 @@ import db from "../config/db.js";
 
 const Element = db.define('element', {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER.ZEROFILL,
         primaryKey: true,
         allowNull: false,
-        defaultValue: DataTypes.UUIDV4
+        autoIncrement: true
     },
     name: {
         type: DataTypes.STRING,

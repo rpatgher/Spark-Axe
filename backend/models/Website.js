@@ -38,7 +38,15 @@ const Website = db.define('website', {
     language: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    // element_alias: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
+    // elements_alias: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
 }, {});
 
 

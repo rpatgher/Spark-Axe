@@ -22,6 +22,35 @@ const NewProduct = () => {
         image: '',
         image2: ''
     });
+    const [categories, setCategories] = useState([]);
+
+    const [initialCategoriesActive, setInitialCategoriesActive] = useState(false);
+    const [initialCategories, setInitialCategories] = useState([
+        {
+            "name": "Marca",
+            "subcategories": [
+                "Waka",
+                "iPlay"
+            ]
+        },
+        {
+            "name": "Hits",
+            "subcategories": [
+                "6000",
+                "5000",
+                "3000",
+                "4000"
+            ]
+        },
+        {
+            "name": "Sabor",
+            "subcategories": [
+                "Fresa",
+                "Limón"
+            ]
+        }
+    ]);
+    const [filteredInitialCategories, setFilteredInitialCategories] = useState(initialCategories.filter(category => !categories.map(item => item.category).includes(category.name)));
 
     const handleChange = (e) => {
         setProduct({
@@ -44,6 +73,20 @@ const NewProduct = () => {
             console.log('Todos los campos son obligatorios');
             return;
         }
+        const token = localStorage.getItem('token');
+        const configCat = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        let categories_id = [];
+        try{
+            const { data: dataCategories } = await clientAxios.post('/api/categories', { website_id: auth.websites[0].id, categories}, configCat);
+            categories_id = dataCategories.subcategoriesIds;
+        }catch(error){
+            console.log(error);
+        }
         // Send data to the server
         const data = new FormData();
         data.append('name', product.name);
@@ -54,7 +97,7 @@ const NewProduct = () => {
         data.append('image', product.image);
         data.append('image2', product.image2);
         data.append('website_id', auth.websites[0].id);
-        const token = localStorage.getItem('token');
+        data.append('categories_id', JSON.stringify(categories_id));
         const config = {
             headers: {
                 "Content-Type": "multipart/form-data",
@@ -69,6 +112,56 @@ const NewProduct = () => {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const addCategory = (category) => {
+        if(category !== '' && !categories.map(item => item.category).includes(category)){
+            setCategories([
+                ...categories,
+                {
+                    category,
+                    subcategories: []
+                }
+            ]);
+            document.getElementById('category').value = '';
+        }
+    }
+
+    const deleteCategory = (category) => {
+        const newCategories = categories.filter(item => item.category !== category);
+        setCategories(newCategories);
+    }
+
+    const addSubcategory = (category, subcategory) => {
+        const newCategories = categories.map(item => {
+            if(item.category === category && !item.subcategories.includes(subcategory)){
+                return {
+                    ...item,
+                    subcategories: [
+                        ...item.subcategories,
+                        subcategory
+                    ]
+                }
+            }
+            return item;
+        });
+        setCategories(newCategories);
+        document.getElementById(`${category}`).value = '';
+    }
+
+    const deleteSubcategory = (e) => {
+        const subcategory = e.target.textContent;
+        const category = e.target.parentElement.parentElement.parentElement.children[0].textContent;
+        const newCategories = categories.map(item => {
+            if(item.category === category){
+                return {
+                    ...item,
+                    subcategories: item.subcategories.filter(sub => sub !== subcategory)
+                }
+            }
+            return item;
+        });
+        setCategories(newCategories);
     }
 
     return (
@@ -159,6 +252,84 @@ const NewProduct = () => {
                             onChange={handleChangeFile}
                         />
                     </div>
+                    <div className={styles.field}>
+                        <label htmlFor="category">Agrega una nueva categoría</label>
+                        <div className={styles["input-category"]}>
+                            <input 
+                                type="text" 
+                                id="category" 
+                                name="category"
+                                placeholder='Nueva categoría'
+                                onFocus={() => setInitialCategoriesActive(true)}
+                                onBlur={() => setTimeout(() => setInitialCategoriesActive(false), 200)}
+                            />
+                            {initialCategoriesActive && (
+                                <div className={styles["initial-categories"]}>
+                                    {
+                                        filteredInitialCategories.length > 0 && filteredInitialCategories.map((category, index) => (
+                                            <button
+                                                key={index}
+                                                type='button'
+                                                onClick={() => addCategory(category.name)}
+                                            >{category.name}</button>
+                                        ))
+                                    }
+                                </div>
+                            )}
+                            <button
+                                className={styles["btn-add-category"]}
+                                type='button'
+                                onClick={() => addCategory(document.getElementById('category').value)}
+                            >
+                                <i className="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                        <div className={styles.categories}>
+                            {
+                                categories.length > 0 && categories.map((category, index) => (
+                                    <div key={index} className={styles.category}>
+                                        <div className={styles["label-delete"]}>
+                                            <label htmlFor={`${category.category}`}>{category.category}</label>
+                                            <button
+                                                className={styles["btn-delete-category"]}
+                                                type='button'
+                                                onClick={() => deleteCategory(category.category)}
+                                            >
+                                                <i className="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                        <div className={styles["input-subcategories"]}>
+                                            <div className={styles["input-subcategories-btn"]}>
+                                                <button
+                                                    className={styles["btn-add-category"]}
+                                                    type='button'
+                                                    onClick={() => addSubcategory(category.category, document.getElementById(`${category.category}`).value)}
+                                                >
+                                                    <i className="fa-solid fa-plus"></i>
+                                                </button>
+                                                <input 
+                                                    type="text" 
+                                                    id={`${category.category}`} 
+                                                    name={`${category.category}`}
+                                                    placeholder={`Subcategoría de ${category.category}`}
+                                                />
+                                                <div className={styles["initial-subcategories"]}>
+                                                    {/* TODO: initial subcategories */}
+                                                </div>
+                                            </div>
+                                            <div className={styles.subcategories}>
+                                                {
+                                                    category.subcategories.map((subcategory, index) => (
+                                                        <p key={index} onDoubleClick={deleteSubcategory}>{subcategory}</p>
+                                                    ))
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div className={styles.right}>
                     <div className={styles.preview}>
@@ -168,7 +339,13 @@ const NewProduct = () => {
                         className={styles.button}
                         type='submit'
                     >
-                        Crear Producto
+                        Guardar Borrador
+                    </button>
+                    <button
+                        className={`${styles.button} ${styles["btn-publish"]}`}
+                        type='type'
+                    >
+                        Publicar Producto
                     </button>
                 </div>
             </form>

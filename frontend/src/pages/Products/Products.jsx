@@ -19,10 +19,8 @@ import formatToMoney from '../../helpers/formatMoney';
 
 
 const Products = () => {
-    
     const { auth } = useAuth();
     const [products, setProducts] = useState([]);
-
 
     useEffect(() => {
         // Get products from the server
@@ -43,31 +41,40 @@ const Products = () => {
         };
         return () => getProducts();
     }, []);
+
     return (
         <>
             <h2 className={styles.heading}>Productos</h2>
             <div className={`${styles.filters} `}>
                 <div className={styles.searcher}>
                     <input type="text" placeholder="Buscar productos" />
-                    <i className="fa-solid fa-search"></i>
-                    {/*Dropdown filter Remy*/}
-                    
-                </div>
-                <div className={styles.filterter}>
-                <button className={`fa-solid fa-sort ${styles["btn-filter"]}`}>
-      </button>
-            
-                   
-                    <div className={styles.dropdown}>
-                    <div className={styles.dropdownContent}>
-                        <button><i className="fa-solid fa-hashtag"></i> <strong>Numero de ID</strong></button>
-                        <button><i className="fa-solid fa-a"></i><strong> Nombre</strong></button>
-                        <button><i className="fa-solid fa-money-check-dollar"></i> <strong>Precio</strong></button>
-                        <button><i className="fa-solid fa-layer-group"></i> <strong>Categoria</strong></button>
+                    <i className={`fa-solid fa-search ${styles["search-icon"]}`}></i>
+                    <div className={styles.filterter}>
+                        <button className={`${styles["btn-filter"]}`}>
+                            <i className='fa-solid fa-sort'></i>
+                        </button>
+                        <div className={styles.dropdown}>
+                            <div className={styles.dropdownContent}>
+                                <button>
+                                    <i className="fa-solid fa-hashtag"></i>
+                                    Numero de ID
+                                </button>
+                                <button>
+                                    <i className="fa-solid fa-a"></i>
+                                    Nombre
+                                </button>
+                                <button>
+                                    <i className="fa-solid fa-money-check-dollar"></i>
+                                    Precio
+                                </button>
+                                <button>
+                                    <i className="fa-solid fa-layer-group"></i>
+                                    Categoria
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    </div>
                 </div>
-                
                 <Link to='/dashboard/products/new'>
                     <button
                         className={styles["btn-new-product"]}
@@ -94,7 +101,7 @@ const Products = () => {
                 <tbody>
                     {products.length === 0 ? (
                         <tr>
-                            <td colspan="9" className={styles.noproducts}>No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
+                            <td colSpan="9" className={styles.noproducts}>No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
                         </tr>
                     ) :
                         products.map(product => (
@@ -103,7 +110,7 @@ const Products = () => {
                             >
                                 <td className={styles["cell-select"]}><input type="checkbox" /></td>
                                 <td className={styles["cell-image"]}><img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/elements/${product.image}`} alt={`${product.name} Product Image`} /></td>
-                                <td className={styles["cell-id"]}>{product.id}</td>
+                                <td className={styles["cell-id"]}>{String(product.id).padStart(10, '0')}</td>
                                 <td>{product.name}</td>
                                 <td className={styles["cell-description"]}>
                                     <i className="fa-regular fa-note-sticky"></i>

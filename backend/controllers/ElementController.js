@@ -1,5 +1,5 @@
 // ************* Models *************
-import { Element, Website } from '../models/index.js';
+import { Element, Website, ElementCategory } from '../models/index.js';
 
 const getElement = async (req, res) => {
     const element = await Element.findByPk(req.params.id);
@@ -34,6 +34,9 @@ const getElements = async (req, res) => {
 }
 
 const createElement = async (req, res) => {
+    const { categories_id } = req.body;
+    const subcategories = JSON.parse(categories_id);
+    // return res.status(200).json({ msg: 'ok'});
     const website = await Website.findByPk(req.body.website_id);
     if(!website){
         const error = new Error('Website not found');
@@ -46,13 +49,22 @@ const createElement = async (req, res) => {
     const element = Element.build(req.body);
     element.website_id = website.id;
     element.image = req.files.image[0].filename;
-    element.image_hover = req.files.image2[0].filename;
+    if(req.files.image2){
+        element.image_hover = req.files.image2[0].filename;
+    }
     try {
-        await element.save();
+        const createdElement = await element.save();
+        const elementCategory = subcategories.map(category => {
+            return {
+                elementId: createdElement.id,
+                subcategoryId: category
+            }
+        });
+        await ElementCategory.bulkCreate(elementCategory);
         res.json({ msg: 'Element created successfully' });
     } catch (error) {
         console.log(error);
-        res.status(400).json({ msg: 'An error ocurred' });
+        res.status(400).json({ msg: error.message });
     }
 }
 

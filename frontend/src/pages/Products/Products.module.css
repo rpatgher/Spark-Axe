@@ -4,6 +4,7 @@
 }
 .filters{
     display: flex;
+    justify-content: space-between;
     margin-bottom: 3rem;
 }
 .searcher{
@@ -20,7 +21,7 @@
     margin: 0;
     background-color: var(--white);
 }
-.searcher i{
+.search-icon{
     position: absolute;
     transform: translateY(-50%);
     top: 50%;
@@ -47,8 +48,6 @@
     display: flex;
     align-items: center;
 }
-
-
 .btn-new-product:hover{
     background-color: var(--dark_blue);
 }
@@ -94,7 +93,7 @@ tr:last-of-type td{
 }
 .noproducts{
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.4rem;
     padding: 2rem 0;
 }
 .noproducts a{
@@ -147,9 +146,10 @@ tr:last-of-type td{
 
 
 .btn-filter {
+    all: unset;
     margin-left: 1rem;
-    border: none;
-    
+    cursor: pointer;
+    background-color: transparent;
 }
 .filterter{
     display: flex;
@@ -172,7 +172,7 @@ tr:last-of-type td{
     width: 12rem;
 }
 .dropdownContent {
-    background-color: #f9f9f9;
+    background-color: var(--white);
     flex-basis: 120px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -184,17 +184,16 @@ tr:last-of-type td{
 }
 .dropdownContent button{
     all: unset;
-}
-.dropdownContent a, .dropdownContent button {
-    color: black;
+    font-weight: var(--bold);
     padding: 1rem 1.4rem;
-    text-decoration: none;
-    display: block;
     border-radius: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
-.dropdownContent a:hover, .dropdownContent button:hover {
-    background-color: #f1f1f1;
+.dropdownContent button:hover {
+    background-color: var(--light_gray);
     width: 9rem;
 }
 
