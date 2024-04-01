@@ -201,3 +201,21 @@ tr:last-of-type td{
     display: block;
 }
 
+.buttonCat{
+    margin-right: 10px;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--gray);
+}
+.buttonCat:hover{
+    background-color: black;
+    color: white;
+}
+
+.buttonCat.active{
+    background-color: black;
+    color: white;
+}

@@ -71,6 +71,15 @@ const Products = () => {
                                     <i className="fa-solid fa-layer-group"></i>
                                     Categoria
                                 </button>
+                                <hr></hr>
+                                <button>
+                                    <i className="fa-solid fa-arrow-down-wide-short"></i>
+                                    A-Z
+                                </button>
+                                <button>
+                                    <i className="fa-solid fa-arrow-up-wide-short"></i>
+                                    Z-A
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -84,6 +93,12 @@ const Products = () => {
                     </button>
                 </Link>
             </div>
+            <div className={styles.buttonsRow}>
+                <button className={styles.buttonCat}>Todos</button>
+                <button className={styles.buttonCat}>Button 2</button>
+                <button className={styles.buttonCat}>Button 3</button>
+                <button className={styles.buttonCat}>Button 4</button>
+                </div>
             <table className={styles.table}>
                 <thead>
                     <tr>
