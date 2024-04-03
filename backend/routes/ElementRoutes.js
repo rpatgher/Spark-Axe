@@ -18,4 +18,7 @@ router.post('/', checkAuth, uploadImages, createElement);
 router.route('/:id')
     .get(checkAuth, getElements);
 
+router.route('/one/:id')
+    .get(checkAuth, getElement);
+
 export default router;

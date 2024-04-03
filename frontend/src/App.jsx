@@ -17,6 +17,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Orders from './pages/Orders/Orders';
 import Products from './pages/Products/Products';
 import NewProduct from './pages/Products/NewProduct';
+import EditProduct from './pages/Products/EditProduct';
 import Inventory from './pages/Inventory/Inventory';
 import Customers from './pages/Customers/Customers';
 import Stats from './pages/Stats/Stats';
@@ -53,6 +54,7 @@ function App() {
                 <Route path="orders" element={<Orders />} />
                 <Route path="products" element={<Products />} />
                 <Route path="products/new" element={<NewProduct />} />
+                <Route path="products/edit/:id" element={<EditProduct />} />
                 <Route path="inventory" element={<Inventory />} />
                 <Route path="customers" element={<Customers />} />
                 <Route path="stats" element={<Stats />} />

@@ -2,7 +2,11 @@
 import { Element, Website, ElementCategory } from '../models/index.js';
 
 const getElement = async (req, res) => {
-    const element = await Element.findByPk(req.params.id);
+    const element = await Element.findOne({
+        where: {
+            id: req.params.id
+        }
+    });
     if(!element){
         const error = new Error('Element not found');
         return res.status(404).json({ msg: error.message });
