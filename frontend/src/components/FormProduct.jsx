@@ -8,7 +8,7 @@ import styles from '../styles/FormProduct.module.css';
 // ************** hooks *************
 import useAuth from '../hooks/useAuth';
 
-const FormProduct = ({initalProduct}) => {
+const FormProduct = ({initalProduct, initialCategoriesFromDB}) => {
     const { auth } = useAuth();
     const navigate = useNavigate();
     const [product, setProduct] = useState({
@@ -39,6 +39,13 @@ const FormProduct = ({initalProduct}) => {
             image2: ''
         })
     }, [initalProduct]);
+
+
+    useEffect(() => {
+        if(initialCategoriesFromDB){
+            setCategories(initialCategoriesFromDB);
+        }
+    }, [initialCategoriesFromDB]);
 
     useEffect(() => {
         const getCategories = async () => {

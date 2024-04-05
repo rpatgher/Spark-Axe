@@ -1,10 +1,21 @@
 // ************* Models *************
-import { Element, Website, ElementCategory } from '../models/index.js';
+import { Element, Website, ElementCategory, Category, Subcategory } from '../models/index.js';
 
 const getElement = async (req, res) => {
     const element = await Element.findOne({
         where: {
             id: req.params.id
+        }
+    });
+    const categories = await Category.findAll({
+        include: {
+            model: Subcategory,
+            inlcude: {
+                model: Element,
+                where: {
+                    id: element.id
+                }
+            }
         }
     });
     if(!element){
@@ -16,7 +27,7 @@ const getElement = async (req, res) => {
         const error = new Error('Unauthorized');
         return res.status(401).json({ msg: error.message });
     }
-    res.json(element);
+    res.json({element, categories});
 }
 
 const getElements = async (req, res) => {

@@ -13,6 +13,7 @@ import FormProduct from '../../components/FormProduct';
 const EditProduct = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         const getElement = async () => {
@@ -27,7 +28,14 @@ const EditProduct = () => {
             }
             try {
                 const response = await clientAxios.get(`/api/elements/one/${id}`, config);
-                setProduct(response.data);
+                setProduct(response.data.element);
+                const formatedCategories = response.data.categories.map(category => {
+                    return {
+                        category: category.name,
+                        subcategories: category.subcategories.map(subcategory => subcategory.name),
+                    }
+                });
+                setCategories(formatedCategories);
             } catch (error) {
                 console.log(error);
             }
@@ -37,7 +45,7 @@ const EditProduct = () => {
     
     return (
         <>
-            <h2 className={styles.heading}>Editar Producto</h2>
+            <h2 className={styles.heading}>Editar Producto: {product.name}</h2>
             <div className={styles["go-back"]}>
                 <Link to='/dashboard/products'>
                     <i className="fa-solid fa-arrow-left"></i> Regresar
@@ -45,6 +53,7 @@ const EditProduct = () => {
             </div>
             <FormProduct
                 initalProduct={product}
+                initialCategoriesFromDB={categories}
             />
         </>
     )
