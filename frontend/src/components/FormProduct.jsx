@@ -8,7 +8,7 @@ import styles from '../styles/FormProduct.module.css';
 // ************** hooks *************
 import useAuth from '../hooks/useAuth';
 
-const FormProduct = ({initalProduct, initialCategoriesFromDB}) => {
+const FormProduct = ({initalProduct, setModalDelete, publishProduct}) => {
     const { auth } = useAuth();
     const navigate = useNavigate();
     const [product, setProduct] = useState({
@@ -18,7 +18,8 @@ const FormProduct = ({initalProduct, initialCategoriesFromDB}) => {
         stock: initalProduct?.stock || '',
         color: initalProduct?.color || '',
         image: '',
-        image2: ''
+        image2: '',
+        published: initalProduct?.published || false
     });
     const [categories, setCategories] = useState([]);
 
@@ -36,16 +37,10 @@ const FormProduct = ({initalProduct, initialCategoriesFromDB}) => {
             stock: initalProduct?.stock || '',
             color: initalProduct?.color || '',
             image: '',
-            image2: ''
-        })
+            image2: '',
+        });
+        setCategories(initalProduct?.categories || []);
     }, [initalProduct]);
-
-
-    useEffect(() => {
-        if(initialCategoriesFromDB){
-            setCategories(initialCategoriesFromDB);
-        }
-    }, [initialCategoriesFromDB]);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -92,10 +87,13 @@ const FormProduct = ({initalProduct, initialCategoriesFromDB}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if([product.name, product.description, product.price, product.stock, product.image].includes('')){
+        if([product.name, product.description, product.price, product.stock].includes('')){
             // TODO: Add alert
             console.log('Todos los campos son obligatorios');
             return;
+        }
+        if(product.image === '' && initalProduct && !initalProduct.id){
+            console.log('La imagen es obligatoria');
         }
         const token = localStorage.getItem('token');
         const configCat = {
@@ -129,7 +127,12 @@ const FormProduct = ({initalProduct, initialCategoriesFromDB}) => {
             }
         }
         try {
-            const response = await clientAxios.post('/api/elements', data, config);
+            let response;
+            if(!initalProduct && !initalProduct?.id){
+                response = await clientAxios.post('/api/elements', data, config);
+            }else{
+                response = await clientAxios.put(`/api/elements/${initalProduct.id}`, data, config);
+            }
             if(response.status === 200){
                 navigate('/dashboard/products');
             }
@@ -434,20 +437,24 @@ const FormProduct = ({initalProduct, initialCategoriesFromDB}) => {
                 >
                     Guardar Producto
                 </button>
-                <div className={styles["delete-publish"]}>
-                    <button
-                        className={`${styles.button} ${styles["btn-publish"]}`}
-                        type='type'
-                    >
-                        Publicar Producto
-                    </button>
-                    <button
-                        className={`${styles.button} ${styles["btn-delete"]}`}
-                        type='type'
-                    >
-                        Borrar Producto
-                    </button>
-                </div>
+                {initalProduct && (
+                    <div className={styles["delete-publish"]}>
+                        <button
+                            className={`${styles.button} ${styles["btn-publish"]} ${initalProduct.published ? styles["btn-unpublish"] : ''}`}
+                            type='button'
+                            onClick={publishProduct}
+                        >
+                            {initalProduct.published ? 'Archivar Producto' : 'Publicar Producto'}
+                        </button>
+                        <button
+                            className={`${styles.button} ${styles["btn-delete"]}`}
+                            type='button'
+                            onClick={() => setModalDelete(true)}
+                        >
+                            Borrar Producto
+                        </button>
+                    </div>
+                )}
             </div>
         </form>
     )

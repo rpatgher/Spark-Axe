@@ -1,33 +1,65 @@
+import fs from 'fs';
+
 // ************* Models *************
 import { Element, Website, ElementCategory, Category, Subcategory } from '../models/index.js';
 
 const getElement = async (req, res) => {
-    const element = await Element.findOne({
+    const elementFromDB = await Element.findOne({
         where: {
             id: req.params.id
-        }
-    });
-    const categories = await Category.findAll({
-        include: {
-            model: Subcategory,
-            inlcude: {
-                model: Element,
-                where: {
-                    id: element.id
-                }
+        },
+        include: [
+            {
+                model: Subcategory,
+                include: [
+                    {
+                        model: Category
+                    }
+                ]
             }
-        }
+        ]
     });
-    if(!element){
+    if(!elementFromDB){
         const error = new Error('Element not found');
         return res.status(404).json({ msg: error.message });
     }
-    const website = await Website.findByPk(element.website_id);
+    const website = await Website.findByPk(elementFromDB.website_id);
     if(website.user_id.toString() !== req.user.id.toString()){
         const error = new Error('Unauthorized');
         return res.status(401).json({ msg: error.message });
     }
-    res.json({element, categories});
+    const element = {
+        id: elementFromDB.id,
+        name: elementFromDB.name,
+        description: elementFromDB.description,
+        image: elementFromDB.image,
+        image_hover: elementFromDB.image_hover,
+        price: elementFromDB.price,
+        stock: elementFromDB.stock,
+        color: elementFromDB.color,
+        published: elementFromDB.published,
+        categories: elementFromDB.subcategories.map(subcategory => {
+            return {
+                category: subcategory.category.name,
+                subcategory: subcategory.name,
+            }
+        })
+    }
+    let categories = element.categories.reduce((acc, current) => {
+        if(!acc[current.category]){
+            acc[current.category] = [];
+        }
+        acc[current.category].push(current.subcategory);
+        return acc;
+    }, {});
+    categories = Object.entries(categories).map(([key, value]) => {
+        return {
+            category: key,
+            subcategories: value
+        }
+    });
+    element.categories = categories;
+    res.json(element);
 }
 
 const getElements = async (req, res) => {
@@ -83,8 +115,136 @@ const createElement = async (req, res) => {
     }
 }
 
+const updateElement = async (req, res) => {
+    const { categories_id } = req.body;
+    const subcategories = JSON.parse(categories_id);
+    const elementFromDB = await Element.findOne({
+        where: {
+            id: req.params.id
+        }
+    });
+    if(!elementFromDB){
+        // Delete the current images from the server
+        if(req.files.image){
+            fs.unlinkSync(`public/uploads/elements/${req.files.image[0].filename}`);
+        }
+        if(req.files.image2){
+            fs.unlinkSync(`public/uploads/elements/${req.files.image2[0].filename}`);
+        }
+        const error = new Error('Element not found');
+        return res.status(404).json({ msg: error.message });
+    }
+    // Delete old images from the server
+    if(req.files.image){
+        fs.unlinkSync(`public/uploads/elements/${elementFromDB.image}`);
+    }
+    if(req.files.image2){
+        fs.unlinkSync(`public/uploads/elements/${elementFromDB.image_hover}`);
+    }
+    const website = await Website.findByPk(elementFromDB.website_id);
+    if(website.user_id.toString() !== req.user.id.toString()){
+        // Delete the current images from the server
+        if(req.files.image){
+            fs.unlinkSync(`public/uploads/elements/${req.files.image[0].filename}`);
+        }
+        if(req.files.image2){
+            fs.unlinkSync(`public/uploads/elements/${req.files.image2[0].filename}`);
+        }
+        const error = new Error('Unauthorized');
+        return res.status(401).json({ msg: error.message });
+    }
+    const element = req.body;
+    if(req.files.image){
+        element.image = req.files.image[0].filename;
+    }else{
+        element.image = elementFromDB.image;
+    }
+    if(req.files.image2){
+        element.image_hover = req.files.image2[0].filename;
+    }else{
+        element.image_hover = elementFromDB.image_hover;
+    }
+    try {
+        await Element.update(element, {
+            where: {
+                id: req.params.id
+            }
+        });
+        await ElementCategory.destroy({
+            where: {
+                elementId: req.params.id
+            }
+        });
+        const elementCategory = subcategories.map(category => {
+            return {
+                elementId: req.params.id,
+                subcategoryId: category
+            }
+        });
+        await ElementCategory.bulkCreate(elementCategory);
+        res.json({ msg: 'Element updated successfully' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ msg: error.message });
+    }
+}
+
+const deleteElement = async (req, res) => {
+    const elementFromDB = await Element.findOne({
+        where: {
+            id: req.params.id
+        }
+    });
+    if(!elementFromDB){
+        const error = new Error('Element not found');
+        return res.status(404).json({ msg: error.message });
+    }
+    const website = await Website.findByPk(elementFromDB.website_id);
+    if(website.user_id.toString() !== req.user.id.toString()){
+        const error = new Error('Unauthorized');
+        return res.status(401).json({ msg: error.message });
+    }
+    try {
+        await Element.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        if(elementFromDB.image){
+            fs.unlinkSync(`public/uploads/elements/${elementFromDB.image}`);
+        }
+        if(elementFromDB.image_hover){
+            fs.unlinkSync(`public/uploads/elements/${elementFromDB.image_hover}`);
+        }
+        res.json({ msg: 'Element deleted successfully' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ msg: error.message });
+    }
+}
+
+const publishProduct =  async (req, res) => {
+    const { id } = req.params;
+    const product = await Element.findByPk(id);
+    if(!product){
+        const error = new Error('Element not found');
+        return res.status(404).json({ msg: error.message });
+    }
+    product.published = !product.published;
+    try {
+        await product.save();
+        res.json({ msg: 'Product published successfully' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ msg: error.message });
+    }
+}
+
 export {
     createElement,
     getElements,
-    getElement
+    getElement,
+    updateElement,
+    deleteElement,
+    publishProduct
 };

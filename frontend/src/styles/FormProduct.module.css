@@ -130,6 +130,14 @@
 .btn-publish:hover{
     background-color: color-mix(in srgb, var(--green) 85%, #000);
 }
+.btn-unpublish{
+    background-color: color-mix(in srgb, var(--yellow) 90%, #000);
+    width: 50%;
+}
+.btn-unpublish:hover{
+    background-color: color-mix(in srgb, var(--yellow) 80%, #000);
+    width: 50%;
+}
 .btn-delete{
     background-color: var(--red);
     width: 50%;

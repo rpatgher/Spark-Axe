@@ -162,13 +162,14 @@ const Products = () => {
                         <th className={styles["col-color"]}>Color</th>
                         <th className={styles["col-category"]}>Categoría</th>
                         <th className={styles["col-id"]}>ID</th>
+                        <th className={styles["col-published"]}>Publicado</th>
                         <th className={styles["col-actions"]}></th>
                     </tr>
                 </thead>
                 <tbody>
                     {products.length === 0 ? (
                         <tr>
-                            <td colSpan="9" className={styles.noproducts}>No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
+                            <td colSpan="10" className={styles.noproducts}>No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
                         </tr>
                     ) :
                         products.map(product => (
@@ -186,6 +187,7 @@ const Products = () => {
                                 {/* TODO: Enable category */}
                                 <td>iPlay</td>
                                 <td className={styles["cell-id"]}>{String(product.id).padStart(10, '0')}</td>
+                                <td className={styles["cell-published"]}><div style={{ backgroundColor: product.published ? 'var(--green)' : 'var(--red)'}}></div></td>
                                 <td className={styles["cell-actions"]}>
                                     <Link to={`edit/${product.id}`}><i className="fa-solid fa-pen"></i></Link>
                                 </td>

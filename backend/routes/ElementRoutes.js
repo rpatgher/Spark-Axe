@@ -4,7 +4,10 @@ import multer from "multer";
 import {
     createElement,
     getElements,
-    getElement
+    getElement,
+    updateElement,
+    deleteElement,
+    publishProduct
 } from '../controllers/ElementController.js';
 
 import checkAuth from "../middleware/checkAuth.js";
@@ -16,9 +19,14 @@ const router = express.Router();
 router.post('/', checkAuth, uploadImages, createElement);
 
 router.route('/:id')
-    .get(checkAuth, getElements);
+    .get(checkAuth, getElements)
+    .put(checkAuth, uploadImages, updateElement)
+    .delete(checkAuth, deleteElement);
+    
 
 router.route('/one/:id')
     .get(checkAuth, getElement);
+
+router.post('/publish/:id', checkAuth, publishProduct);
 
 export default router;

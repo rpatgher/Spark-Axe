@@ -66,16 +66,18 @@ th{
     padding: 1.5rem 0;
     font-size: 1.4rem;
 }
-.col-id,
+
+.col-published,
+.col-actions,
 .col-description {
     width: 10%;
 }
 .col-name,
 .col-category,
-.col-actions,
 .col-price{
     width: 15%;
 }
+.col-id,
 .col-color,
 .col-image,
 .col-select{
@@ -128,6 +130,12 @@ tr:last-of-type td{
     height: 3rem;
     margin: 0 auto;
     border-radius: .5rem;
+}
+.cell-published div{
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+    border-radius: 50%;
 }
 .cell-actions{
     text-align: center;

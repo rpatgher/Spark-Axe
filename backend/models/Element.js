@@ -34,6 +34,11 @@ const Element = db.define('element', {
     stock: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    published: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 }, {});
 
