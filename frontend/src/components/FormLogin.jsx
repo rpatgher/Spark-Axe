@@ -8,7 +8,7 @@ import useLogin from '../hooks/useLogin'
 import styles from '../styles/Login.module.css'
 
 // ************** Components **************
-import Alert from './Alert';
+import Alert from './Alert/Alert';
 
 
 const FormLogin = () => {

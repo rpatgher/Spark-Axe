@@ -8,8 +8,8 @@ import ProtectedLayout from './layouts/ProtectedLayout';
 
 // ***************** Pages *****************
 import Home from './pages/Home';
-import About from './pages/About';
-import Login from './pages/Login';
+import About from './pages/About/About';
+import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import Forgot from './pages/Forgot';
 

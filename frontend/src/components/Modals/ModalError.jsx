@@ -1,9 +1,9 @@
 
 // ************** Styles **************
-import styles from '../styles/ModalError.module.css';
+import styles from './ModalError.module.css';
 
 // **************** Hooks ****************
-import useApp from '../hooks/useApp';
+import useApp from '../../hooks/useApp';
 
 const ModalError = () => {
     const { showModal, closeModalError, screenshotImage } = useApp();

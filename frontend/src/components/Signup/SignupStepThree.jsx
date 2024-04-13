@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
 // ************** Hooks **************
-import useSignup from '../hooks/useSignup';
+import useSignup from '../../hooks/useSignup';
 
 // ************** Styles **************
-import styles from '../styles/Signup.module.css'
+import styles from '../../styles/Signup.module.css'
 
 // ***************** Components *****************
-import BtnNext from './BtnNext';
+import BtnNext from '../Btns/BtnNext';
 
 // ************** Images **************
-import verifyImage from '../assets/img/verify-tel.png';
+import verifyImage from '../../assets/img/verify-tel.png';
 
 const SignupStepThree = () => {
     const { prevStep, continueBtn3, setContinueBtn3, validCode, setValidcode } = useSignup();

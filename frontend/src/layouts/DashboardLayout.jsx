@@ -5,9 +5,9 @@ import html2canvas from 'html2canvas';
 import styles from '../styles/Dashboard.module.css';
 
 // *********** Components ************ 
-import SidebarDashboard from '../components/SidebarDashboard'
-import HeaderDashboard from '../components/HeaderDashboard'
-import ModalError from "../components/ModalError";
+import SidebarDashboard from '../components/SidebarDashboard/SidebarDashboard'
+import HeaderDashboard from '../components/HeaderDashboard/HeaderDashboard'
+import ModalError from "../components/Modals/ModalError";
 
 // **************** Hooks ****************
 import useApp from '../hooks/useApp';

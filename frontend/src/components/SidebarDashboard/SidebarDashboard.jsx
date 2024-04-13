@@ -2,13 +2,13 @@ import { Link, useLocation } from 'react-router-dom';
 
 
 // **************** Hooks ****************
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 
 // **************** Styles ****************
-import styles from '../styles/SidebarDashboard.module.css';
+import styles from './SidebarDashboard.module.css';
 
 // **************** Images ****************
-import categoryIcon from '../assets/img/e-commerce_icon.jpeg';
+import categoryIcon from '../../assets/img/e-commerce_icon.jpeg';
 
 
 

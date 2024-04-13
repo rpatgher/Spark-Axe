@@ -7,10 +7,10 @@ import useSignup from '../hooks/useSignup';
 import styles from '../styles/Signup.module.css'
 
 // ***************** Components *****************
-import SignupStepOne from './SignupStepOne';
-import SignupStepTwo from './SignupStepTwo';
-import SignupStepThree from './SignupStepThree';
-import SignupStepFour from './SignupStepFour';
+import SignupStepOne from './Signup/SignupStepOne';
+import SignupStepTwo from './Signup/SignupStepTwo';
+import SignupStepThree from './Signup/SignupStepThree';
+import SignupStepFour from './Signup/SignupStepFour';
 
 const NUM_STEPS = [1, 2, 3, 4];
 

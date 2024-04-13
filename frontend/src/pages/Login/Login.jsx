@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
-import { LoginProvider } from '../providers/LoginProvider';
+import { LoginProvider } from '../../providers/LoginProvider';
 
 // ************** Styles **************
-import styles from '../styles/Login.module.css'
+import styles from '../../styles/Login.module.css'
 
 // ***************** Components *****************
-import FormLogin from "../components/FormLogin";
+import FormLogin from "../../components/FormLogin";
 
 // ************** Images **************
-import google from '../assets/img/google.png'
+import google from '../../assets/img/google.png'
 
 const Login = () => {
     return (

@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
 // **************** Hooks ****************
-import useApp from '../hooks/useApp';
-import useAuth from '../hooks/useAuth';
+import useApp from '../../hooks/useApp';
+import useAuth from '../../hooks/useAuth';
 
 // **************** Styles ****************
-import styles from '../styles/HeaderDashboard.module.css';
+import styles from './HeaderDashboard.module.css';
 
 const HeaderDashboard = () => {
     const { theme, handleToggleTheme } = useApp();

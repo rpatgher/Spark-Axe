@@ -1,4 +1,4 @@
-import styles from '../styles/Alert.module.css'
+import styles from './Alert.module.css'
 
 const Alert = ({error, message}) => {
     return (

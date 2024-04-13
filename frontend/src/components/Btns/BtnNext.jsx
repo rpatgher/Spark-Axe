@@ -1,8 +1,8 @@
 // ************** Hooks **************
-import useSignup from '../hooks/useSignup';
+import useSignup from '../../hooks/useSignup';
 
 // ************** Styles **************
-import styles from '../styles/BtnNext.module.css';
+import styles from './BtnNext.module.css';
 
 
 const BtnPrevNext = ({disabled}) => {

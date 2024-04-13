@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
 // ************** Hooks **************
-import useSignup from '../hooks/useSignup';
+import useSignup from '../../hooks/useSignup';
 
 // ************** Styles **************
-import styles from '../styles/Signup.module.css'
+import styles from '../../styles/Signup.module.css'
 
 // ***************** Components *****************
-import BtnNext from './BtnNext';
+import BtnNext from '../Btns/BtnNext';
 
 const SignupStepTwo = () => {
     const { 
