@@ -21,6 +21,7 @@ import formatToMoney from '../../helpers/formatMoney';
 const Products = () => {
     const { auth } = useAuth();
     const [products, setProducts] = useState([]);
+    // Order means the order of the products, asc or desc (the sorting order)
     const [order, setOrder] = useState('asc');
     const [orderType, setOrderType] = useState('name');
 
@@ -147,55 +148,57 @@ const Products = () => {
                         className={styles["btn-new-product"]}
                     >
                         <i className="fa-solid fa-plus"></i>
-                        Agregar Producto
+                        <p>Agregar Producto</p>
                     </button>
                 </Link>
             </div>
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th className={styles["col-select"]}><input type="checkbox" /></th>
-                        <th className={styles["col-image"]}>Imagen</th>
-                        <th className={styles["col-name"]}>Nombre</th>
-                        <th className={styles["col-description"]}>Descripción</th>
-                        <th className={styles["col-price"]}>Precio</th>
-                        <th className={styles["col-color"]}>Color</th>
-                        <th className={styles["col-category"]}>Categoría</th>
-                        <th className={styles["col-id"]}>ID</th>
-                        <th className={styles["col-published"]}>Publicado</th>
-                        <th className={styles["col-actions"]}></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.length === 0 ? (
+            <div className={styles["table-wrapper"]}>   
+                <table className={styles.table}>
+                    <thead>
                         <tr>
-                            <td colSpan="10" className={styles.noproducts}>No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
+                            <th className={styles["col-select"]}><input type="checkbox" /></th>
+                            <th className={styles["col-image"]}>Imagen</th>
+                            <th className={styles["col-name"]}>Nombre</th>
+                            <th className={styles["col-description"]}>Descripción</th>
+                            <th className={styles["col-price"]}>Precio</th>
+                            <th className={styles["col-color"]}>Color</th>
+                            <th className={styles["col-category"]}>Categoría</th>
+                            <th className={styles["col-id"]}>ID</th>
+                            <th className={styles["col-published"]}>Publicado</th>
+                            <th className={styles["col-actions"]}></th>
                         </tr>
-                    ) :
-                        products.map(product => (
-                            <tr
-                                key={product.id}
-                            >
-                                <td className={styles["cell-select"]}><input type="checkbox" /></td>
-                                <td className={styles["cell-image"]}><img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/elements/${product.image}`} alt={`${product.name} Product Image`} /></td>
-                                <td>{product.name}</td>
-                                <td className={styles["cell-description"]}>
-                                    <i className="fa-regular fa-note-sticky"></i>
-                                </td>
-                                <td>${formatToMoney(product.price)}</td>
-                                <td className={styles["cell-color"]}><div style={{ backgroundColor: product.color }} ></div></td>
-                                {/* TODO: Enable category */}
-                                <td>iPlay</td>
-                                <td className={styles["cell-id"]}>{String(product.id).padStart(10, '0')}</td>
-                                <td className={styles["cell-published"]}><div style={{ backgroundColor: product.published ? 'var(--green)' : 'var(--red)'}}></div></td>
-                                <td className={styles["cell-actions"]}>
-                                    <Link to={`edit/${product.id}`}><i className="fa-solid fa-pen"></i></Link>
-                                </td>
+                    </thead>
+                    <tbody>
+                        {products.length === 0 ? (
+                            <tr>
+                                <td colSpan="10" className={styles.noproducts}>No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
                             </tr>
-                        )) 
-                    }
-                </tbody>
-            </table>
+                        ) :
+                            products.map(product => (
+                                <tr
+                                    key={product.id}
+                                >
+                                    <td className={styles["cell-select"]}><input type="checkbox" /></td>
+                                    <td className={styles["cell-image"]}><img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/elements/${product.image}`} alt={`${product.name} Product Image`} /></td>
+                                    <td>{product.name}</td>
+                                    <td className={styles["cell-description"]}>
+                                        <i className="fa-regular fa-note-sticky"></i>
+                                    </td>
+                                    <td>${formatToMoney(product.price)}</td>
+                                    <td className={styles["cell-color"]}><div style={{ backgroundColor: product.color }} ></div></td>
+                                    {/* TODO: Enable category */}
+                                    <td>iPlay</td>
+                                    <td className={styles["cell-id"]}>{String(product.id).padStart(10, '0')}</td>
+                                    <td className={styles["cell-published"]}><div style={{ backgroundColor: product.published ? 'var(--green)' : 'var(--red)'}}></div></td>
+                                    <td className={styles["cell-actions"]}>
+                                        <Link to={`edit/${product.id}`}><i className="fa-solid fa-pen"></i></Link>
+                                    </td>
+                                </tr>
+                            )) 
+                        }
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }

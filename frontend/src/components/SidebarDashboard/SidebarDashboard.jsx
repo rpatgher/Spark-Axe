@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 
@@ -17,6 +18,8 @@ const SidebarDashboard = () => {
     const { auth } = useAuth();
     const { websites } = auth;
     const website = websites[0];
+
+    const [menuActive, setMenuActive] = useState(false);
     return (
         <aside className={styles.sidebar}>
             <header className={styles["sidebar-header"]}>
@@ -29,8 +32,15 @@ const SidebarDashboard = () => {
                         <p>{website.type}</p>
                     </div>
                 </div>
+                <div 
+                    className={styles.menu}
+                    onClick={() => setMenuActive(!menuActive)}
+                >
+                    <i className="fa-solid fa-bars"></i>
+                </div>
+
             </header>
-            <div className={styles.body}>
+            <div className={`${styles.body} ${menuActive ? styles["menu-active"] : ""}`}>
                 <div className={styles["main-menu"]}>
                     <Link to='/dashboard' className={`${styles.item} ${location.pathname === '/dashboard' ? styles.item_active : ''}`}>
                         <i className="fa-solid fa-house"></i>

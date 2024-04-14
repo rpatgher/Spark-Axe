@@ -3,17 +3,13 @@ import db from "../config/db.js";
 
 const Order = db.define('order', {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER.ZEROFILL,
         primaryKey: true,
         allowNull: false,
-        defaultValue: DataTypes.UUIDV4
+        autoIncrement: true
     },
     deadline: {
         type: DataTypes.DATE,
-        allowNull: false
-    },
-    total: {
-        type: DataTypes.FLOAT,
         allowNull: false
     },
     status: {
@@ -22,7 +18,11 @@ const Order = db.define('order', {
     },
     notes: {
         type: DataTypes.STRING
-    }
+    },
+    total: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
 }, {});
 
 export default Order;

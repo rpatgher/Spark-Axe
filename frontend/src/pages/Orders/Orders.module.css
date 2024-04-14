@@ -1,18 +1,58 @@
-.ordersContainer {
-    /* Tus estilos para el contenedor de la tabla */
+.heading{
+    font-size: 2.4rem;
+    margin: 2rem 0;
 }
-
-.ordersTable {
-    /* Tus estilos para la tabla en sí */
-    width: 90%;
-    border-collapse: collapse;
-    align-items: center;
+.table-wrapper{
+    overflow-x: scroll;
 }
-
-.ordersTable th, .ordersTable td {
-    /* Estilos comunes para th y td */
-    padding: 30px;
-    text-align: left;
-    border-bottom: 1px solid #ccc;
+.orders-table td{
+    padding: 1rem;
 }
-
+.col-id,
+.col-customer,
+.col-status,
+.col-total,
+.col-details{
+    width: 10%;
+}
+.col-date,
+.col-deadline{
+    width: 15%;
+}
+.col-notes{
+    width: 20%;
+}
+.select{
+    all: unset;
+    width: 100%;
+    padding: .5rem;
+    font-size: 1.2rem;
+    border: none;
+    background-color: var(--gray);
+    border-radius: .5rem;
+}
+.details{
+    cursor: pointer;
+    font-size: 1.8rem;
+}
+.details-active td{
+    background-color: var(--gray_dashboard);
+}
+.products-table{
+    border-spacing: 0;
+    border-radius: 0;
+    overflow: hidden;
+}
+.products-table th{
+    padding: .5rem;
+    font-size: 1.2rem;
+}
+.products-table td{
+    padding: .5rem;
+    font-size: 1rem;
+    margin: 0;
+    border-bottom: 2px solid var(--gray) !important;
+}
+.products-table tr:last-of-type td{
+    border-bottom: none !important;
+}

@@ -8,6 +8,7 @@ import UserRouter from './routes/UserRoutes.js';
 import WebsiteRouter from './routes/WebsiteRoutes.js';
 import ElementRouter from './routes/ElementRoutes.js';
 import CategoryRouter from './routes/CategoryRoutes.js';
+import OrderRouter from './routes/OrderRoutes.js';
 
 // Connect DB
 import db from './config/db.js';
@@ -44,6 +45,7 @@ app.use('/api/users', UserRouter);
 app.use('/api/websites', WebsiteRouter);
 app.use('/api/elements', ElementRouter);
 app.use('/api/categories', CategoryRouter);
+app.use('/api/orders', OrderRouter);
 
 
 

@@ -43,13 +43,23 @@
     font-size: 1.2rem;
     justify-content: end;
 }
-
+.btn-new-product p {
+    margin: 0;
+}
+@media (max-width: 478px){
+    .btn-new-product p {
+        display: none;
+    }
+}
 .searcher {
     display: flex;
     align-items: center;
 }
 .btn-new-product:hover{
     background-color: var(--dark_blue);
+}
+.table-wrapper{
+    overflow-x: scroll;
 }
 table{
     width: 100%;
@@ -58,6 +68,11 @@ table{
     border: 2px solid var(--gray);
     border-radius: 1rem;
     overflow: hidden;
+}
+@media (max-width: 768px){
+    table{
+        width: 90rem;
+    }
 }
 thead{
     background-color: var(--gray);

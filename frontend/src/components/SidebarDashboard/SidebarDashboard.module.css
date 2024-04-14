@@ -5,16 +5,55 @@
     display: flex;
     flex-direction: column;
 }
+@media (max-width: 768px){
+    .sidebar{
+        width: 8rem;
+    }
+}
+@media (max-width: 478px){
+    .sidebar{
+        width: 100%;
+    }
+}
 .sidebar-header{
     display: flex;
     flex-direction: column;
     border-bottom: 4px solid var(--gray_dashboard);
+}
+@media (max-width: 478px){
+    .sidebar-header{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.menu{
+    display: none;
+}
+@media (max-width: 478px){
+    .menu{
+        display: inline;
+        font-size: 3rem;
+        cursor: pointer;
+        padding: 0 2rem;
+    }
 }
 .store{
     display: flex;
     align-items: flex-start;
     gap: 1rem;
     padding: 2rem 1rem;
+}
+@media (max-width: 478px){
+    .store{
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media (max-width: 768px){
+    .store{
+        padding: 1rem;
+    }
 }
 .logo{
     width: 6rem;
@@ -24,6 +63,11 @@
     height: 100%;
     object-fit: cover;
     border-radius: 1rem 1rem 0 0;
+}
+@media (max-width: 768px){
+    .title{
+        display: none;
+    }
 }
 .title h2{
     margin: 0;
@@ -48,13 +92,24 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: center;
     padding: 1rem 1rem;
 }
 .body{
     display: flex;
     flex-direction: column;
     flex: 1;
+}
+@media (max-width: 478px){
+    .body{
+        max-height: 0;
+        overflow-y: hidden;
+        flex: unset;
+        transition: all 0.3s ease;
+    }
+    .menu-active{
+        max-height: 100vh;
+        transition: all 0.3s ease;
+    }
 }
 .item{
     all: unset;
@@ -67,10 +122,29 @@
     background-color: var(--white);
     font-size: 1.4rem;
 }
+@media (max-width: 768px){
+    .item{
+        justify-content: center;
+    }
+}
+@media (max-width: 478px){
+    .item{
+        justify-content: unset;
+    }
+}
 .item p{
     margin: 0;
 }
-
+@media (max-width: 768px){
+    .item p{
+        display: none;
+    }
+}
+@media (max-width: 478px){
+    .item p{
+        display: inline;
+    }
+}
 .item_active{
     background-color: var(--gray_dashboard);
 }
