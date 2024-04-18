@@ -12,6 +12,8 @@ import useAuth from '../../hooks/useAuth';
 // ******************** Helpers ********************
 import formatToMoney from '../../helpers/formatMoney';
 import formatDate from '../../helpers/formatDate';
+// **************** Images ****************
+import lunaAxImage from '../../assets/img/luna_ax.png';
 
 const Orders = () => {
     const { auth } = useAuth();
@@ -63,7 +65,12 @@ const Orders = () => {
                     <tbody>
                         {orders.length === 0 ? (
                             <tr>
-                                <td colSpan="10" className={styles.noproducts}>No cuentas con pedidos aún.</td>
+                                
+                                <td colSpan="10" className={styles.noproducts}>
+                                <div>
+                               <img className={styles["imgAX"]} src={lunaAxImage} alt="Axolotl-Waiting" />
+                               </div>
+                                    No cuentas con pedidos aún.</td>
                             </tr>
                         ) :
                             orders.map(order => (

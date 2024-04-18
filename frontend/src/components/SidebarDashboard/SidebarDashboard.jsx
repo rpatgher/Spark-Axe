@@ -33,6 +33,7 @@ const SidebarDashboard = () => {
                     </div>
                 </div>
                 <div 
+                
                     className={styles.menu}
                     onClick={() => setMenuActive(!menuActive)}
                 >
@@ -62,6 +63,7 @@ const SidebarDashboard = () => {
                     <i className="fa-solid fa-users"></i>
                         <p>Clientes</p>
                     </Link>
+{/*
                     <Link to='/dashboard/stats' className={`${styles.item} ${location.pathname === '/dashboard/stats' ? styles.item_active : ''}`}>
                     <i className="fa-solid fa-square-poll-vertical"></i>
                         <p>Estadísticas Generales</p>
@@ -74,6 +76,7 @@ const SidebarDashboard = () => {
                     <i className="fa-solid fa-gifts"></i>
                         <p>Promociones</p>
                     </Link>
+                    */}
                     <Link to='/dashboard/delivery' className={`${styles.item} ${location.pathname === '/dashboard/delivery' ? styles.item_active : ''}`}>
                     <i className="fa-solid fa-truck-fast"></i>
                         <p>Envío</p>

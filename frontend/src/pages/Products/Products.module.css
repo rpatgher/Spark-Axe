@@ -1,6 +1,6 @@
 .heading{
-    font-size: 2.4rem;
-    margin: 2rem 0;
+    font-size: 3.4rem;
+    margin: 4rem 0;
 }
 .filters{
     display: flex;
@@ -12,7 +12,8 @@
 }
 .searcher input{
     padding: .5rem .5rem .5rem 3rem;
-    width: 100%;
+    width: 400px;
+    height: 40px;
     border-radius: 1rem;
     border: none;
     font-size: 1.4rem;
@@ -32,16 +33,17 @@
 .btn-new-product{
     all: unset;
     cursor: pointer;    
-    color: #fff;
-    background-color: var(--blue);
+    color: #000000;
+    background-color: #e8b410;
     padding: 1rem 1rem;
     border-radius: .5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: .5rem;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     justify-content: end;
+    font-weight: bold;
 }
 .btn-new-product p {
     margin: 0;
@@ -56,7 +58,8 @@
     align-items: center;
 }
 .btn-new-product:hover{
-    background-color: var(--dark_blue);
+    color: #fff;
+    background-color: #000000;
 }
 .table-wrapper{
     overflow-x: scroll;
@@ -126,7 +129,6 @@ tr:last-of-type td{
     transition: all .3s ease-in-out;
 }
 .cell-select input:checked, .col-select input:checked{
-    border-radius: 50%;
     background-color: var(--dark_gray);
     transition: all .3s ease-in-out;
 }
@@ -226,4 +228,9 @@ tr:last-of-type td{
 }
 .filterter:hover .dropdown, .filterter .dropdown:hover {
     display: block;
+}
+
+.imgAX{
+    height: 300px;
+    width: 400px;
 }

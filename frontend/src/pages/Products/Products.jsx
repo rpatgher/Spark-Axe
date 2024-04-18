@@ -14,6 +14,8 @@ import useAuth from '../../hooks/useAuth';
 
 // ******************** Helpers ********************
 import formatToMoney from '../../helpers/formatMoney';
+// **************** Images ****************
+import lunaAxImage from '../../assets/img/luna_ax.png';
 
 
 
@@ -171,8 +173,14 @@ const Products = () => {
                     <tbody>
                         {products.length === 0 ? (
                             <tr>
-                                <td colSpan="10" className={styles.noproducts}>No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
+                                <td colSpan="10" className={styles.noproducts}>
+                                <div>
+                               <img className={styles["imgAX"]} src={lunaAxImage} alt="Axolotl-Waiting" />
+                               </div>
+                        
+                                    No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
                             </tr>
+                            
                         ) :
                             products.map(product => (
                                 <tr
