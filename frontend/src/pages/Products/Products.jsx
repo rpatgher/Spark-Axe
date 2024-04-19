@@ -91,6 +91,7 @@ const Products = () => {
                     <i className={`fa-solid fa-search ${styles["search-icon"]}`}></i>
                     <div className={styles.filterter}>
                         <button className={`${styles["btn-filter"]}`}>
+                            <strong>Filtrar  </strong> 
                             <i className='fa-solid fa-sort'></i>
                         </button>
                         <div className={styles.dropdown}>
@@ -154,6 +155,26 @@ const Products = () => {
                     </button>
                 </Link>
             </div>
+            <div className={styles["Filtertabs"]}>
+            <div className={styles["radio-inputs"]}>
+            <label className={styles["radio"]}>
+    <span className={styles["name"]}><bold>Filtros:</bold></span>
+  </label>
+  <label className={styles["radio"]}>
+    <input type="radio" name="radio"/>
+    <span className={styles["name"]}>Todos</span>
+  </label>
+  <label className={styles["radio"]}>
+    <input type="radio" name="radio"/>
+    <span className={styles["name"]}>Publicados</span>
+  </label>
+      
+  <label className={styles["radio"]}>
+    <input type="radio" name="radio"/>
+    <span className={styles["name"]}>Archivados</span>
+  </label>
+</div>
+</div>
             <div className={styles["table-wrapper"]}>   
                 <table className={styles.table}>
                     <thead>
