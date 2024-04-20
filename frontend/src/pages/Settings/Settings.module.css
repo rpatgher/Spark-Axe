@@ -56,3 +56,18 @@
     background-color: #ddd;
 
   }
+
+.list{
+    position: relative;
+    margin:0;
+    left: -25px;
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0; /* Remove default left padding */
+    content: "•"; /* Unicode character for bullet */
+}
+  
+  .list li{
+    content: "•"; /* Unicode character for bullet */
+    color: blue; /* Customize bullet color */
+    margin-right: 5px; /* Adjust spacing between bullet and text */
+  }

@@ -44,7 +44,10 @@ function Settings() {
       <h3>Sparkaxe+</h3>
       <p>$300/Mensual </p>
       <h3>Incluye</h3>
-      <p>Manejo de Productos</p>
+      <ul>
+        <li className={styles.list}>Manejo de Pedidos</li>
+        <li className={styles.list}>Manejo de Productos</li>
+      </ul>
       <h3> Cuenta</h3>
       <p>Imediatamente borra tu cuenta de tienda y cancela tu plan </p>
       <button className={styles.Borrar}>Cancelar subscripcion</button>
