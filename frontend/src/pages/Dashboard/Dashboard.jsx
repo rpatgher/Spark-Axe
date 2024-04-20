@@ -15,6 +15,11 @@ const Dashboard = () => {
                 <p className={styles["ProfileHead"]}>Tienes <span style={{ color: 'blue' }}>4 notificaciones</span> </p>
                 <p className={styles["ProfileHead"]}>Sparkaxe</p>
                 </div>
+                <div className={styles["Menu"]}>
+                    <div className={styles["Menu-item"]}>
+                    Hello
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -7,6 +7,7 @@
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
     width: 300px;
     Height: 300px;
+    margin: 10px;
 
 }
 .Profile:hover{
@@ -14,6 +15,7 @@
     Height: 310px;
     padding: 5px;
     box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+    margin: 5px;
 
 
 }
@@ -30,4 +32,28 @@
 .Dashboard{
     margin: 100px;
     display: flex;
+}
+.Menu{
+    border-radius: 14px;
+
+    background-color: rgb(78, 80, 82, 0.6);
+    width: 300px;
+    Height: 300px;
+    margin: 10px;
+}
+.Menu:hover{
+    width:310px;
+    Height: 310px;
+    padding: 5px;
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+    margin: 5px;
+
+
+}
+.Menu-item{
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    width: 50px;
+    Height: 50px;
+    margin: 10px;
 }
