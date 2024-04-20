@@ -3,17 +3,24 @@
 }
 .go-back a{
     all: unset;
-    font-size: 1.2rem;
+    font-size: 2rem;
     cursor: pointer;
-    color: var(--blue);
+    color:black;
+    opacity: 30%;
+    font-weight: bold;
 }
 .go-back a:hover{
-    color: var(--dark_blue);
-    text-decoration: underline;
+    opacity: 100%;
 }
 .heading{
-    font-size: 2rem;
-    margin: 2rem 0;
+    font-size: 3.4rem;
+    margin: 4rem 0;
+}
+.headingback{
+    font-size: 3.4rem;
+    margin: 4rem 0;
+    opacity: 30%;
+    color: #000;
 }
 
 .modal{

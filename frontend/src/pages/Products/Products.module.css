@@ -7,6 +7,9 @@
     justify-content: space-between;
     margin-bottom: 3rem;
 }
+.Textfilter{
+    margin-right: 10px;
+}
 .searcher{
     position: relative;
 }
@@ -33,8 +36,8 @@
 .btn-new-product{
     all: unset;
     cursor: pointer;    
-    color: #000000;
-    background-color: #e8b410;
+    color: #ffffff;
+    background-color: #5a5a5a;
     padding: 1rem 1rem;
     border-radius: .5rem;
     display: flex;
@@ -44,6 +47,12 @@
     font-size: 1.5rem;
     justify-content: end;
     font-weight: bold;
+}
+.btn-new-product:hover{
+   
+    color: #ffffff;
+    background-color: #000000;
+   
 }
 .btn-new-product p {
     margin: 0;
@@ -62,7 +71,8 @@
     background-color: #000000;
 }
 .table-wrapper{
-    overflow-x: scroll;
+    overflow-x: scroll, hidden;
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
 }
 table{
     width: 100%;
@@ -71,6 +81,7 @@ table{
     border: 2px solid var(--gray);
     border-radius: 1rem;
     overflow: hidden;
+    
 }
 @media (max-width: 768px){
     table{
@@ -176,14 +187,14 @@ tr:last-of-type td{
 
 .btn-filter {
     all: unset;
-    margin-left: 1rem;
+    margin-left: 0rem;
     cursor: pointer;
     background-color: transparent;
 }
 .filterter{
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
     padding: 1rem;
     position: relative;
 }
@@ -213,7 +224,7 @@ tr:last-of-type td{
     all: unset;
     font-weight: var(--bold);
     padding: 1rem 1.4rem;
-    border-radius: 1rem;
+    border-radius: 0rem;
     display: flex;
     gap: 0.5rem;
     align-items: center;
@@ -253,7 +264,20 @@ tr:last-of-type td{
   .radio-inputs .radio input {
     display: none;
   }
-  
+  .radio-inputs .radio .nameP {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgba(51, 65, 85, 1);
+    transition: all .15s ease-in-out;
+    margin-top: 5px;
+    margin-bottom: 5px;
+ 
+  }
   .radio-inputs .radio .name {
     display: flex;
     cursor: pointer;

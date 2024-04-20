@@ -30,6 +30,7 @@
     padding: 1rem;
     border: 1px solid var(--gray);
     background-color: var(--white);
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
     border-radius: 1rem;
 }
 .input-color{
@@ -309,7 +310,8 @@
   }
   .file-upload-label-done {
     cursor: pointer;
-    background-color: #ddd;
+    font-weight: bolder;
+    background-color: #c3c2fc;
     padding: 30px 70px;
     border-radius: 40px;
     border: 2px dashed var(--blue);
