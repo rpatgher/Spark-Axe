@@ -264,6 +264,8 @@ tr:last-of-type td{
     padding: .5rem 0;
     color: rgba(51, 65, 85, 1);
     transition: all .15s ease-in-out;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
   
   .radio-inputs .radio input:checked + .name {
