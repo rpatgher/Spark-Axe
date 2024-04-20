@@ -19,11 +19,27 @@ function Settings() {
         <button className={`${styles.tablinks} ${activeTab === 'Tokyo' ? styles.active : ''}`} onClick={() => openCity('Tokyo')}>Plan</button>
       </div>
 
-      <div id="London" className={styles.tabcontent} style={{display: activeTab === 'London' ? 'block' : 'none'}}>
+      <div id="London" className={styles.tabcontent} style={{display: activeTab === 'London' ?  'flex' : 'none'}}>
+      <div className={styles.leftdiv}>
       <h2 className={styles.heading}>Elibaba</h2>
-      <p><strong>Nombre de Tienda</strong></p>
-      <p>Elibaba</p>
-    
+      <div className={styles.profilecard}>
+        <h4>Sparkaxe +</h4>
+        <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Plan</button>
+        <button className={styles.linkother}><i class="fa-solid fa-store"></i> Configurar Tienda</button>
+        <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
+      </div>
+      <p><strong>¿Algun problema</strong></p>
+      <button className={styles.linksettings}><i class="fa-solid fa-comments"></i> Contactanos</button>
+      <p></p>
+      <button className={styles.linksettings}><i class="fa-solid fa-cloud"></i> Sobre Nosotros</button>
+      <p></p>
+      <button className={styles.linksettings}><i class="fa-solid fa-box"></i> Otro</button>
+      </div>
+      <div className={styles.rightdiv}>
+      <div className={styles.rightcontent}>
+        <p>hello</p>
+      </div>
+      </div>
       </div>
 
       <div id="Paris" className={styles.tabcontent} style={{display: activeTab === 'Paris' ? 'block' : 'none'}}>
@@ -53,6 +69,9 @@ function Settings() {
     <ul>
       <li className={styles.list}>Manejo de Pedidos</li>
       <li className={styles.list}>Manejo de Productos</li>
+      <li className={styles.list}>Manejo de Inventario</li>
+      <li className={styles.list}>Manejo de Clientes</li>
+      <li className={styles.list}>Manejo de Envio</li>
     </ul>
     <h3> Cuenta</h3>
     <p>Imediatamente borra tu cuenta de tienda y cancela tu plan </p>
@@ -62,8 +81,10 @@ function Settings() {
     <div className={styles.rightcontent}>
     <h3>Version de Sparkaxe+</h3>
       <p>Version 1.2</p>
-      <div>
-        <h3>Informacion de pago</h3>
+      <div className={styles.divinfo}>
+        <h4>¿Como cambiar metodo de pago?</h4>
+        <p>En su metodo de pago seleccionado se hace el ciclo de facturación mensualmente si desea cambiarlo presione aqui.</p>
+        <button className={styles.linksettings}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
       </div>
       </div>
   </div>
