@@ -59,7 +59,13 @@ function Settings() {
     <button className={styles.Borrar}>Cancelar subscripcion</button>
   </div>
   <div className={styles.rightdiv}>
-    hola
+    <div className={styles.rightcontent}>
+    <h3>Version de Sparkaxe+</h3>
+      <p>Version 1.2</p>
+      <div>
+        <h3>Informacion de pago</h3>
+      </div>
+      </div>
   </div>
 </div>
 

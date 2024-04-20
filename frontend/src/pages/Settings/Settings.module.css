@@ -81,3 +81,7 @@
     width: 60%;
     border-left: 1px solid #ccc;
   }
+  .rightcontent{
+    padding-left: 20px;
+    margin-top: 4rem;
+  }
