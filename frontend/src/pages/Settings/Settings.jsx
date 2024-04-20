@@ -1,144 +1,56 @@
 import React, { useState } from 'react';
-import './VerticalTabs.css';
+import styles from  './Settings.module.css';
 // **************** Images ****************
 import TiendaM from '../../assets/img/TiendaM.png';
 
-function VerticalTabs() {
-  const [activeTab, setActiveTab] = useState(0);
+function Settings() {
+  const [activeTab, setActiveTab] = useState('London');
 
-  const handleTabClick = (index) => {
-    setActiveTab(index);
+  const openCity = (cityName) => {
+    setActiveTab(cityName);
   };
 
   return (
-    <div className="vertical-tabs">
-      <div className="tab-menu">
-        <button
-          id='tab'
-          className={activeTab === 0 ? 'active' : ''}
-          onClick={() => handleTabClick(0)}
-        >
-          Perfil Tienda
-        </button>
-        <button
-          id='tab'
-          className={activeTab === 1 ? 'active' : ''}
-          onClick={() => handleTabClick(1)}
-        >
-          Especificaciones
-        </button>
+    <div>
+   
+   <div className={styles.tab}>
+        <button className={`${styles.tablinks} ${activeTab === 'London' ? styles.active : ''}`} onClick={() => openCity('London')}>General</button>
+        <button className={`${styles.tablinks} ${activeTab === 'Paris' ? styles.active : ''}`} onClick={() => openCity('Paris')}>Configuración</button>
+        <button className={`${styles.tablinks} ${activeTab === 'Tokyo' ? styles.active : ''}`} onClick={() => openCity('Tokyo')}>Plan</button>
       </div>
-      <div className='hello'>
-  <div className='hello2'>
-    </div>
-    <div className='hello3'>
-    </div>
+
+      <div id="London" className={styles.tabcontent} style={{display: activeTab === 'London' ? 'block' : 'none'}}>
+      <h2 className={styles.heading}>Elibaba</h2>
+      <p><strong>Nombre de Tienda</strong></p>
+      <p>Elibaba</p>
+    
       </div>
-      <div className="tab-content">
-        {activeTab === 0 && <div>Content for Tab 1</div>}
-        {activeTab === 1 && (
-          <div>
-          <p><strong>Nombre de tienda</strong></p>
-          <p>Elibaba</p>
-          <p><strong>Tipo de Sitio Web</strong></p>
-          <p>E-commerce</p>
-          <p><strong>Administrador</strong></p>
-          <p>Eli Knanni</p>
-          <p><strong>Descripcion de la tienda</strong></p>
-          <p>Tienda de vapes</p>
 
-          <h3>Avatar</h3>
-          <div className="image-grid">
-            <div className="image-item">
-              <img
-                className='StoreAvatar'
-                src={TiendaM}
-                alt="Image 1"
-                onClick={() => replaceWithInput(this)}
-              />
-            </div>
-           
-              <button className={activeTab === 2 ? 'active' : ''}
-        onClick={() => handleTabClick(2)}>Edit</button>
-            </div>
-          </div>
-          
-        )}
-        {activeTab === 2 && (
-         <div>
-         <p>Nombre de tienda</p>
-         <input type="text" />
-         <p>Tipo de Sitio Web</p>
-         <select >
-           <option value="option1">Option 1</option>
-           <option value="option2">Option 2</option>
-           <option value="option3">Option 3</option>
-         </select>
-         <p>Administrador</p>
-         <select >
-           <option value="option1">Option 1</option>
-           <option value="option2">Option 2</option>
-           <option value="option3">Option 3</option>
-         </select>
-         <p>Descripcion de la tienda</p>
-         <textarea ></textarea>
+      <div id="Paris" className={styles.tabcontent} style={{display: activeTab === 'Paris' ? 'block' : 'none'}}>
+      <h2 className={styles.heading}>Configuración de Tienda</h2>
+      <p><strong>Nombre de Tienda</strong></p>
+      <p>Elibaba</p>
+      <p><strong>Tipo de sitio web</strong></p>
+      <p>E-commerce</p>
+      <p><strong>Administrador</strong></p>
+      <p>Eli knanni</p>
+      <p><strong>Descripcion de la tienda</strong></p>
+      <p>Tienda de vapes</p>
+      <p><strong>Avatar</strong></p>
+      </div>
 
-         <h3>Avatar</h3>
-         <hr />
-         <div className="image-grid">
-           <div className="image-item">
-             <img
-               className='StoreAvatar'
-               src={TiendaM}
-               alt="Image 1"
-               onClick={() => replaceWithInput(this)}
-             />
-           </div>
-           <div className="image-item">
-             <img
-               className='StoreAvatar'
-               src={TiendaM}
-               alt="Image 2"
-               onClick={() => replaceWithInput(this)}
-             />
-           </div>
-           <div className="image-item">
-             <img
-               className='StoreAvatar'
-               src={TiendaM}
-               alt="Image 3"
-               onClick={() => replaceWithInput(this)}
-             />
-           </div>
-           <div className="image-item">
-             <img
-               className='StoreAvatar'
-               src={TiendaM}
-               alt="Image 4"
-               onClick={() => replaceWithInput(this)}
-             />
-           </div>
-           <div className="image-item">
-             <img
-               className='StoreAvatar'
-               src={TiendaM}
-               alt="Image 5"
-               onClick={() => replaceWithInput(this)}
-             />
-             </div>
-          
-         </div>
-         <button className={activeTab === 1 ? 'active' : ''}
-       onClick={() => handleTabClick(1)}>Save changes</button>
-       </div> 
-          
-        )}
-        
-        
+      <div id="Tokyo" className={styles.tabcontent} style={{display: activeTab === 'Tokyo' ? 'block' : 'none'}}>
+      <h2 className={styles.heading}>Tu Sparkaxe Plan</h2>
+      <h3>Sparkaxe+</h3>
+      <p>$300/Mensual </p>
+      <h3>Incluye</h3>
+      <p>Manejo de Productos</p>
+      <h3> Cuenta</h3>
+      <p>Imediatamente borra tu cuenta de tienda y cancela tu plan </p>
+      <button className={styles.Borrar}>Cancelar subscripcion</button>
       </div>
     </div>
   );
 }
 
-export default VerticalTabs;
-
+export default Settings;
