@@ -26,7 +26,7 @@ const ModalError = () => {
                         />
                     }
                 <p className={styles.description}>
-                    Si una función o producto no está funcionando correctamente, puedes proporcionar comentarios para ayudarnos a mejorar Velasci. </p>
+                    Si una función o producto no está funcionando correctamente, puedes proporcionar comentarios para ayudarnos a mejorar Sparkaxe. </p>
                     <button 
                         type="submit"
                     >Marcar error</button>
