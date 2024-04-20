@@ -36,12 +36,6 @@
     border-radius: 10px 10px 0 0; /* top-left, top-right, bottom-right, bottom-left */
   
   }
-  
-  /* Style the tab content */
-  .tabcontent {
-    display: none;
-    padding: 6px 12px;
-  }
 
   .Borrar{
     position: relative;
@@ -70,4 +64,20 @@
     content: "•"; /* Unicode character for bullet */
     color: blue; /* Customize bullet color */
     margin-right: 5px; /* Adjust spacing between bullet and text */
+  }
+
+    /* Style the tab content */
+    .tabcontent {
+      display: flex;
+      padding: 6px 12px;
+  
+    }
+
+  .leftdiv{
+    width: 40%;
+  
+  }
+  .rightdiv{
+    width: 60%;
+    border-left: 1px solid #ccc;
   }
