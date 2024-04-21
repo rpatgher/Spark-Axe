@@ -117,10 +117,11 @@
     display: block;
     background-color: #e4d129;
     border-radius: 15px;
-    width: 50%;
+    width: 60%;
     padding: 20px;
     box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3); /* Box shadow for depth */
     color:#fffafa;
+    margin-bottom: 60px;
   }
   .linkother{
     width: 100%;
@@ -251,4 +252,18 @@
 }
 .go-back button:hover{
   opacity: 100%;
+}
+
+.linkother{
+  align-items: left;
+  text-align: left;
+  border: none;
+  color: var(--white);
+  background-color: transparent;
+  cursor: pointer;
+  margin: 5px
+}
+
+.linkother:hover{
+  color: var(--dark_blue)
 }

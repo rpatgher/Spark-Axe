@@ -258,7 +258,10 @@ const Products = () => {
                                         <Link to={`edit/${product.id}`}><i className="fa-solid fa-pen"></i></Link>
                                     </td>
                                 </tr>
-                            ))
+                            )
+                            
+                        )
+                           
                         }
                     </tbody>
                 </table>

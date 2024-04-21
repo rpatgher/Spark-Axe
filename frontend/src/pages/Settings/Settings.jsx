@@ -27,12 +27,12 @@ function Settings() {
       <div className={styles.leftdiv}>
       <h2 className={styles.heading}>Elibaba</h2>
       <div className={styles.profilecard}>
-        <h4>Sparkaxe +</h4>
-        <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Plan</button>
-        <button className={styles.linkother}><i class="fa-solid fa-store"></i> Configurar Tienda</button>
+        <h2>Sparkaxe +</h2>
+        <button className={styles.linkother} onClick={() => openCity('Tokyo')}><i class="fa-regular fa-credit-card"></i> Plan</button>
+        <button className={styles.linkother} onClick={() => openCity('Paris')}><i class="fa-solid fa-store" ></i> Configurar Tienda</button>
         <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
       </div>
-      <p><strong>¿Algun problema</strong></p>
+      <p><strong>¿Algun problema?</strong></p>
       <button className={styles.linksettings}><i class="fa-solid fa-comments"></i> Contactanos</button>
       <p></p>
       <button className={styles.linksettings}><i class="fa-solid fa-cloud"></i> Sobre Nosotros</button>
