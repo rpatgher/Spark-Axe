@@ -7,10 +7,11 @@ import clientAxios from '../../config/clientAxios';
 import styles from './Products.module.css';
 
 // ******************** Components ********************
-
+import FloatAlert from '../../components/Alert/FloatAlert';
 
 // ******************** Hooks ********************
 import useAuth from '../../hooks/useAuth';
+import useApp from '../../hooks/useApp';
 
 // ******************** Helpers ********************
 import formatToMoney from '../../helpers/formatMoney';
@@ -22,6 +23,7 @@ import lunaAxImage from '../../assets/img/luna_ax.png';
 
 const Products = () => {
     const { auth } = useAuth();
+    const { alert } = useApp();
     const [products, setProducts] = useState([]);
     // Order means the order of the products, asc or desc (the sorting order)
     const [order, setOrder] = useState('asc');
@@ -67,7 +69,7 @@ const Products = () => {
                 setProducts(data);
             } catch (error) {
                 console.log(error);
-            }   
+            }
         };
         return () => getProducts();
     }, []);
@@ -84,6 +86,7 @@ const Products = () => {
 
     return (
         <>
+            {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
             <h2 className={styles.heading}>Productos</h2>
             <div className={`${styles.filters} `}>
                 <div className={styles.searcher}>
@@ -91,7 +94,7 @@ const Products = () => {
                     <i className={`fa-solid fa-search ${styles["search-icon"]}`}></i>
                     <div className={styles.filterter}>
                         <button className={`${styles["btn-filter"]}`}>
-                            <strong className={`${styles["Textfilter"]}`}>Filtrar</strong> 
+                            <strong className={`${styles["Textfilter"]}`}>Filtrar</strong>
                             <i className='fa-solid fa-sort'></i>
                         </button>
                         <div className={styles.dropdown}>
@@ -127,7 +130,7 @@ const Products = () => {
                                     <i className="fa-solid fa-layer-group"></i>
                                     Categoria
                                 </button> */}
-                                <hr className={styles.divider}/>
+                                <hr className={styles.divider} />
                                 <button
                                     className={`${order === 'asc' ? styles.active : ''}`}
                                     value={'asc'}
@@ -156,26 +159,26 @@ const Products = () => {
                 </Link>
             </div>
             <div className={styles["Filtertabs"]}>
-            <div className={styles["radio-inputs"]}>
-            <label className={styles["radio"]}>
-    <span className={styles["nameP"]}><bold>Visibles:</bold></span>
-  </label>
-  <label className={styles["radio"]}>
-    <input type="radio" name="radio"/>
-    <span className={styles["name"]}>Todos</span>
-  </label>
-  <label className={styles["radio"]}>
-    <input type="radio" name="radio"/>
-    <span className={styles["name"]}>Publicados</span>
-  </label>
-      
-  <label className={styles["radio"]}>
-    <input type="radio" name="radio"/>
-    <span className={styles["name"]}>Archivados</span>
-  </label>
-</div>
-</div>
-            <div className={styles["table-wrapper"]}>   
+                <div className={styles["radio-inputs"]}>
+                    <label className={styles["radio"]}>
+                        <span className={styles["nameP"]}>Visibles:</span>
+                    </label>
+                    <label className={styles["radio"]}>
+                        <input type="radio" name="radio" />
+                        <span className={styles["name"]}>Todos</span>
+                    </label>
+                    <label className={styles["radio"]}>
+                        <input type="radio" name="radio" />
+                        <span className={styles["name"]}>Publicados</span>
+                    </label>
+
+                    <label className={styles["radio"]}>
+                        <input type="radio" name="radio" />
+                        <span className={styles["name"]}>Archivados</span>
+                    </label>
+                </div>
+            </div>
+            <div className={styles["table-wrapper"]}>
                 <table className={styles.table}>
                     <thead>
                         <tr>
@@ -195,13 +198,13 @@ const Products = () => {
                         {products.length === 0 ? (
                             <tr>
                                 <td colSpan="10" className={styles.noproducts}>
-                                <div>
-                               <img className={styles["imgAX"]} src={lunaAxImage} alt="Axolotl-Waiting" />
-                               </div>
-                        
+                                    <div>
+                                        <img className={styles["imgAX"]} src={lunaAxImage} alt="Axolotl-Waiting" />
+                                    </div>
+
                                     No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
                             </tr>
-                            
+
                         ) :
                             products.map(product => (
                                 <tr
@@ -218,12 +221,12 @@ const Products = () => {
                                     {/* TODO: Enable category */}
                                     <td>iPlay</td>
                                     <td className={styles["cell-id"]}>{String(product.id).padStart(10, '0')}</td>
-                                    <td className={styles["cell-published"]}><div style={{ backgroundColor: product.published ? 'var(--green)' : 'var(--red)'}}></div></td>
+                                    <td className={styles["cell-published"]}><div className={`${product.published ? styles.published : styles.unpublished}`}>{product.published ? 'Publicado' : 'Archivado'}</div></td>
                                     <td className={styles["cell-actions"]}>
                                         <Link to={`edit/${product.id}`}><i className="fa-solid fa-pen"></i></Link>
                                     </td>
                                 </tr>
-                            )) 
+                            ))
                         }
                     </tbody>
                 </table>

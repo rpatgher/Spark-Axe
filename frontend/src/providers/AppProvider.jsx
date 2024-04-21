@@ -8,6 +8,8 @@ const AppProvider = ({ children }) => {
     const [modalError, setModalError] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [screenshotImage, setScreenshotImage] = useState(null);
+
+    const [alert, setAlert] = useState({});
     
     useEffect(() => {
         const userSetPreference = getUserSetPreference();
@@ -61,6 +63,13 @@ const AppProvider = ({ children }) => {
         }, 300);
     }
 
+    const handleAlert = (msg, error) => {
+        setAlert({ msg, error });
+        setTimeout(() => {
+            setAlert({});
+        }, 3500);
+    }
+
     return (
         <AppContext.Provider value={{
             theme,
@@ -70,7 +79,9 @@ const AppProvider = ({ children }) => {
             closeModalError,
             showModal,
             screenshotImage,
-            setScreenshotImage
+            setScreenshotImage,
+            alert,
+            handleAlert
         }}>
             {children}
         </AppContext.Provider>

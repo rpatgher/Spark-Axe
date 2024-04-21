@@ -17,13 +17,13 @@
 .main{
     flex: 1;
     /* background-color: var(--white); */
-    margin: 0 3rem;
+    padding: 0 3rem;
     overflow: scroll;
     scrollbar-width: none;
 }
 @media (max-width: 1024px){
     .main{
-        margin: 0 1rem;
+        padding: 0 1rem;
     }
 }
 .red-box {
