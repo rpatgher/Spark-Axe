@@ -8,6 +8,7 @@ import styles from './Products.module.css';
 
 // ******************** Components ********************
 import FloatAlert from '../../components/Alert/FloatAlert';
+import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 
 // ******************** Hooks ********************
 import useAuth from '../../hooks/useAuth';
@@ -28,6 +29,9 @@ const Products = () => {
     // Order means the order of the products, asc or desc (the sorting order)
     const [order, setOrder] = useState('asc');
     const [orderType, setOrderType] = useState('name');
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [visible, setVisible] = useState('all');
+    const [search, setSearch] = useState('');
 
     const sortedProducts = products.sort((a, b) => {
         if (order === 'asc') {
@@ -67,6 +71,7 @@ const Products = () => {
             try {
                 const { data } = await clientAxios(`/api/elements/${auth.websites[0].id}`, config);
                 setProducts(data);
+                setFilteredProducts(data);
             } catch (error) {
                 console.log(error);
             }
@@ -76,21 +81,60 @@ const Products = () => {
 
     const handleOrder = (e) => {
         setOrder(e.target.value);
-        setProducts(sortedProducts);
+        setFilteredProducts(sortedProducts);
     }
 
     const handleOrderType = (e) => {
         setOrderType(e.target.value);
-        setProducts(sortedProducts);
+        setFilteredProducts(sortedProducts);
+    }
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value);
+        filterProducts(e.target.value, visible);
+    }
+
+    const handleVisible = (e) => {
+        console.log(e.target.dataset.value);
+        setVisible(e.target.dataset.value);
+        filterProducts(search, e.target.dataset.value);
+    }
+
+    const filterProducts = (search, visible) => {
+        const visibleFiltered = products.filter(product => {
+            if (visible === 'all') {
+                return product;
+            }
+            if (visible === 'published') {
+                return product.published;
+            }
+            if (visible === 'unpublished') {
+                return !product.published;
+            }
+        });
+        if (search === '') {
+            setFilteredProducts(visibleFiltered);
+            return;
+        }
+        const filtered = visibleFiltered.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
+        console.log(filtered);
+        setFilteredProducts(filtered);
     }
 
     return (
         <>
             {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
-            <h2 className={styles.heading}>Productos</h2>
+            <HeadingsRuta 
+                currentHeading="Productos"
+                routes={[]}
+            />
             <div className={`${styles.filters} `}>
                 <div className={styles.searcher}>
-                    <input type="text" placeholder="Buscar productos" />
+                    <input 
+                        type="text" 
+                        placeholder="Buscar productos" 
+                        onChange={handleSearch}
+                    />
                     <i className={`fa-solid fa-search ${styles["search-icon"]}`}></i>
                     <div className={styles.filterter}>
                         <button className={`${styles["btn-filter"]}`}>
@@ -160,22 +204,10 @@ const Products = () => {
             </div>
             <div className={styles["Filtertabs"]}>
                 <div className={styles["radio-inputs"]}>
-                    <label className={styles["radio"]}>
-                        <span className={styles["nameP"]}>Visibles:</span>
-                    </label>
-                    <label className={styles["radio"]}>
-                        <input type="radio" name="radio" />
-                        <span className={styles["name"]}>Todos</span>
-                    </label>
-                    <label className={styles["radio"]}>
-                        <input type="radio" name="radio" />
-                        <span className={styles["name"]}>Publicados</span>
-                    </label>
-
-                    <label className={styles["radio"]}>
-                        <input type="radio" name="radio" />
-                        <span className={styles["name"]}>Archivados</span>
-                    </label>
+                    <p className={styles.visibles}>Visibles: </p>
+                    <button onClick={handleVisible} className={`${visible === "all" ? styles.active : ''}`} data-value="all">Todos</button>
+                    <button onClick={handleVisible} className={`${visible === "published" ? styles.active : ''}`} data-value="published">Publicados</button>
+                    <button onClick={handleVisible} className={`${visible === "unpublished" ? styles.active : ''}`} data-value="unpublished">Archivados</button>
                 </div>
             </div>
             <div className={styles["table-wrapper"]}>
@@ -195,7 +227,7 @@ const Products = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.length === 0 ? (
+                        {filteredProducts.length === 0 ? (
                             <tr>
                                 <td colSpan="10" className={styles.noproducts}>
                                     <div>
@@ -206,7 +238,7 @@ const Products = () => {
                             </tr>
 
                         ) :
-                            products.map(product => (
+                            filteredProducts.map(product => (
                                 <tr
                                     key={product.id}
                                 >

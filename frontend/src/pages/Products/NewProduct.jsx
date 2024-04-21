@@ -5,11 +5,17 @@ import styles from './NewProduct.module.css';
 
 // ************** Components *************
 import FormProduct from '../../components/FormProduct';
+import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 
 const NewProduct = () => {
     return (
         <>
-            <h2><Link to='/dashboard/products' tooltip="Regresar"><span className={styles.headingback}>Productos / </span></Link><span className={styles.heading}>Nuevo Producto</span></h2>
+            <HeadingsRuta 
+                currentHeading="Nuevo Producto"
+                routes={[
+                    {name: "Productos", path: "/dashboard/products"},
+                ]}
+            />
             <div className={styles["go-back"]}>
                 <Link to='/dashboard/products'>
                     <i className="fa-solid fa-arrow-left"></i> Regresar
