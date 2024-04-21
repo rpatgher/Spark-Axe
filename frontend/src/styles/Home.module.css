@@ -6,7 +6,7 @@
     background-color: #333;
   }
   
-  .navB {
+.navB {
     float: left;
   }
   
@@ -18,8 +18,8 @@
     text-decoration: none;
   }
   
-  navB a:hover:not(.active) {
-    background-color: #111;
+.navB a:hover {
+    background-color: #494747;
   }
   
   .active {
@@ -36,4 +36,8 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+  }
+
+  .rightnavB a:hover {
+    background-color: #494747;
   }
