@@ -341,10 +341,12 @@ tr:last-of-type td {
     transition: all .15s ease-in-out;
     margin: 1rem 1rem 1rem 0;
     padding: 0;
+    background-color: transparent;
 
 }
 .visibles2{
     cursor: pointer;
+    background-color: transparent;
 }
 
 .active {

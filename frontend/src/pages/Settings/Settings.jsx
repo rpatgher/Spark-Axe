@@ -141,7 +141,8 @@ function Settings() {
                         
                 </div>
 
-                <button className={styles.Buttonguardar} onClick={() => openCity2('Paris')}>Guardar cambios</button>
+                <button className={styles.Buttonguardar} onClick={(e) => { e.preventDefault(); openCity2('Paris') }}>Guardar cambios</button>
+
                 </div>
                 </form>
                 </div>  
