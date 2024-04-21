@@ -321,54 +321,28 @@ tr:last-of-type td {
 }
 
 .radio-inputs {
-    position: relative;
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
     padding: 0.25rem;
-    width: 300px;
+    width: 400px;
     font-size: 14px;
 }
-
-.radio-inputs .radio {
-    flex: 1 1 auto;
-    text-align: center;
-}
-
-.radio-inputs .radio input {
-    display: none;
-}
-.radio-inputs .radio .nameP {
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
+.radio-inputs button {
+    margin: 0;
     border: none;
-    padding: .5rem 0;
+    padding: .5rem 1rem;
+    border-radius: 0.5rem;
+}
+.visibles {
+    border-radius: 0.5rem;
     color: var(--dark_blue);
     font-weight: var(--bold);
     transition: all .15s ease-in-out;
-    margin-top: 5px;
-    margin-bottom: 5px;
-
+    margin: 1rem 1rem 1rem 0;
+    padding: 0;
 }
-
-.radio-inputs .radio .name {
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
-    border: none;
-    padding: .5rem 0;
-    color: rgba(51, 65, 85, 1);
-    transition: all .15s ease-in-out;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-.radio-inputs .radio input:checked+.name {
+.active {
     background-color: #fff;
     font-weight: 600;
 }
