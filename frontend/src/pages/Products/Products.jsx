@@ -205,9 +205,9 @@ const Products = () => {
             <div className={styles["Filtertabs"]}>
                 <div className={styles["radio-inputs"]}>
                     <p className={styles.visibles}>Visibles: </p>
-                    <button onClick={handleVisible} className={`${visible === "all" ? styles.active : ''}`} data-value="all">Todos</button>
-                    <button onClick={handleVisible} className={`${visible === "published" ? styles.active : ''}`} data-value="published">Publicados</button>
-                    <button onClick={handleVisible} className={`${visible === "unpublished" ? styles.active : ''}`} data-value="unpublished">Archivados</button>
+                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "all" ? styles.active : ''}`} data-value="all">Todos</button>
+                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "published" ? styles.active : ''}`} data-value="published">Publicados</button>
+                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "unpublished" ? styles.active : ''}`} data-value="unpublished">Archivados</button>
                 </div>
             </div>
             <div className={styles["table-wrapper"]}>
