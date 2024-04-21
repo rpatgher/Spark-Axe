@@ -118,3 +118,107 @@
   .linkother{
     width: 100%;
   }
+
+  .form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.field{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 2rem;
+    gap: 1rem;
+    border-radius: 1rem;
+}
+.field label{
+    font-size: 1.4rem;
+}
+.field textarea{
+    resize: none;
+}
+.field input, .field textarea{
+    font-size: 1.4rem;
+    padding: 1rem;
+    border: 1px solid var(--gray);
+    background-color: var(--white);
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
+    border-radius: 1rem;
+}
+.body{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 15rem;
+  position: relative;
+}
+.fieldD{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  padding: 2rem;
+  gap: 1rem;
+  border-radius: 1rem;
+}
+
+.fieldD label{
+  font-size: 1.4rem;
+}
+.fieldD input, .fieldD textarea{
+  font-weight: bold;
+  font-size: 1.4rem;
+  color:#000;
+  padding: 1rem;
+  border: 1px solid black;
+  background-color: var(--white);
+  box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
+  border-radius: 1rem;
+}
+.buttoncontactchange{
+  border: none;
+  background-color: var(--blue);
+  color: var(--white);
+  width: 250px;
+  font-size: 15px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.buttoncontactchange:hover{
+
+  background-color: var(--dark_blue)
+
+}
+.interiorbutton{
+  font-size: 12px;
+  color:#ddd;
+}
+.buttoncontactchange p {
+  padding: 0px;
+  margin:0px;
+}
+.buttondiv{
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  text-align: center; /* Align text horizontally */
+}
+.headingback{
+  font-size: 3.4rem;
+  margin: 4rem 0;
+  opacity: 30%;
+  color: #000;
+}
+
+.Buttonguardar{
+    border: none;
+    background-color: var(--blue);
+    color: var(--white);
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.Buttonguardar:hover {
+  background-color: var(--dark_blue)
+}

@@ -5,9 +5,13 @@ import TiendaM from '../../assets/img/TiendaM.png';
 
 function Settings() {
   const [activeTab, setActiveTab] = useState('London');
+  const [activeTab2, setActiveTab2] = useState('Normal');
 
   const openCity = (cityName) => {
     setActiveTab(cityName);
+  };
+  const openCity2 = (cityName2) => {
+    setActiveTab2 (cityName2);
   };
 
   return (
@@ -16,6 +20,7 @@ function Settings() {
    <div className={styles.tab}>
         <button className={`${styles.tablinks} ${activeTab === 'London' ? styles.active : ''}`} onClick={() => openCity('London')}>General</button>
         <button className={`${styles.tablinks} ${activeTab === 'Paris' ? styles.active : ''}`} onClick={() => openCity('Paris')}>Configuración</button>
+        <button className={`${styles.tablinks} ${activeTab === 'Editar' ? styles.active : ''}`} onClick={() => openCity('Editar')}>Editar</button>
         <button className={`${styles.tablinks} ${activeTab === 'Tokyo' ? styles.active : ''}`} onClick={() => openCity('Tokyo')}>Plan</button>
       </div>
 
@@ -43,6 +48,7 @@ function Settings() {
       </div>
 
       <div id="Paris" className={styles.tabcontent} style={{display: activeTab === 'Paris' ? 'block' : 'none'}}>
+        
       <h2 className={styles.heading}>Configuración de Tienda</h2>
       <p><strong>Nombre de Tienda</strong></p>
       <p>Elibaba</p>
@@ -57,7 +63,79 @@ function Settings() {
       <p><strong>Tipo de divisa</strong></p>
       <p>$MXN</p>
       <p><strong>Avatar</strong></p>
+      <button className={styles.linksettings} >Editar Configuración de Tienda</button>
+      <button className={`${styles.tablinks} ${activeTab === 'Editar' ? styles.active : ''}`} onClick={() => openCity('Editar')}>Editar</button>
+      
       </div>
+
+      <div id="Paris" className={styles.tabcontent} style={{display: activeTab === 'Editar' ? 'block' : 'none'}}>
+        
+      <h2><span className={styles.headingback}>Configuración de Tienda / </span><span className={styles.heading}>Editar</span></h2>
+      <form 
+            className={styles.body}
+        >
+            <div className={styles.form}>
+                <div className={styles.field}>
+                    <label htmlFor="">Nombre de Tienda</label>
+                    <input 
+                        type="text" 
+                        id="" 
+                        name="" 
+                        placeholder={`Nombre de Tienda`}
+                    />
+                </div>
+                <p>aqui va dropdown tipos de tienda</p>
+                <div className={styles.field}>
+                    <label htmlFor="">Administrador</label>
+                    <input 
+                        type="text" 
+                        id="" 
+                        name="" 
+                        placeholder={`Administrador de Tienda`}
+                    />
+                </div>
+                <div className={styles.field}>
+                    <label htmlFor="">Descripción de Tienda</label>
+                    <textarea 
+                        id="" 
+                        rows="10" 
+                        name="" 
+                        placeholder={`Descripción de Tienda`}
+                    />
+                </div>
+                <div className={styles.fieldD} title="Contacte Sparkaxe">
+                    <label htmlFor="">Dominio Web (si desea cambiarlo contacte sparkaxe)</label>
+                    <input 
+                        type="text" 
+                        id="" 
+                        name="" 
+                        value={`Elibaba.com`}
+                        disabled />
+                        <div className={styles.buttondiv}>
+                          <button className={styles.buttoncontactchange}>Contacte Sparkaxe <p className={styles.interiorbutton}>(Puede a ver costos adicionales)</p></button>
+                          </div>
+                        
+                </div>
+                <div className={styles.fieldD} title="Contacte Sparkaxe">
+                    <label htmlFor="">Tipo de divisa</label>
+                    <input 
+                        type="text" 
+                        id="" 
+                        name="" 
+                        value={`$MXN (Peso Mexicano)`}
+                        disabled />
+                        <div className={styles.buttondiv}>
+                          <button className={styles.buttoncontactchange}>Contacte Sparkaxe <p className={styles.interiorbutton}>(Puede a ver costos adicionales)</p></button>
+                          </div>
+                        
+                </div>
+
+                <button className={styles.Buttonguardar}>Guardar cambios</button>
+                </div>
+                </form>
+                
+      </div>
+    
 
       <div id="Tokyo" className={styles.tabcontent} style={{ display: activeTab === 'Tokyo' ? 'flex' : 'none' }}>
   <div className={styles.leftdiv}>

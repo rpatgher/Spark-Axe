@@ -3,3 +3,51 @@
     width: 334px;
     align-items: center;
 }
+.headingback{
+    font-size: 3.4rem;
+    margin: 4rem 0;
+    opacity: 30%;
+    color: #000;
+    cursor: pointer;
+  }
+.heading{
+    font-size: 3.4rem;
+    margin: 4rem 0;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.field{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 2rem;
+    gap: 1rem;
+    border-radius: 1rem;
+}
+.field label{
+    font-size: 1.4rem;
+}
+.field textarea{
+    resize: none;
+}
+.field input, .field textarea{
+    font-size: 1.4rem;
+    padding: 1rem;
+    border: 1px solid var(--gray);
+    background-color: var(--white);
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
+    border-radius: 1rem;
+}
+
+.body{
+  display: grid;
+  grid-template-columns:1fr;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 15rem;
+  position: relative;
+}
