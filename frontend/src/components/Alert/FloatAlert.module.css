@@ -1,0 +1,24 @@
+.container{
+    position: absolute;
+    left: 50%;
+    color: #fff;
+    padding: 1rem 2rem;
+    top: 10rem;
+    border-radius: 1rem;
+    z-index: 1000;
+    transform: translateY(-2rem);
+    opacity: 0;
+    transition: all .3s ease;
+}
+.animation{
+    transform: unset;
+    transition: all .3s ease;
+    opacity: 1;
+}
+.error{
+    background-color: color-mix(in srgb, var(--red) 90%, #fff);
+}
+
+.success{
+    background-color: var(--green);
+}
