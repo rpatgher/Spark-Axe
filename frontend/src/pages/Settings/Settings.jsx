@@ -85,7 +85,17 @@ function Settings() {
                         placeholder={`Nombre de Tienda`}
                     />
                 </div>
-                <p>aqui va dropdown tipos de tienda</p>
+                <div className={styles.field}>
+            <label for="" >Select an option:</label>
+            <select id="" name="">
+            <option value="" disabled selected>Escoje Tipo de Tienda</option>
+                <option value="option1">E-commerce</option>
+                <option value="option2">Enterprise</option>
+                <option value="option3">Landing page</option>
+                <option value="option2">Studio Portfolio</option>
+                <option value="option2">Blog</option>
+            </select>
+        </div>
                 <div className={styles.field}>
                     <label htmlFor="">Administrador</label>
                     <input 

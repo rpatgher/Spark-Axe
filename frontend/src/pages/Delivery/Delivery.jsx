@@ -27,8 +27,8 @@ function Delivery() {
             </div>
             <div id="Editar" className={styles.tabcontent} style={{display: activeTab === 'Editar' ?  'block' : 'none'}}>
             <h2><span className={styles.headingback} onClick={() => openCity('London')} >Envio / </span><span className={styles.heading}>Editar</span></h2>
-            <div className={styles["go-back"]} onClick={() => openCity('London')}>
-                <button> <i className="fa-solid fa-arrow-left"  ></i> Regresar</button>
+            <div className={styles["go-back"]}>
+                <button onClick={() => openCity('London')}> <i className="fa-solid fa-arrow-left"  ></i> Regresar</button>
             </div>
             <form 
             className={styles.body}
