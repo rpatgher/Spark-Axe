@@ -52,3 +52,43 @@
   position: relative;
   width: 50%;
 }
+
+.Buttonguardar{
+    border: none;
+    background-color: var(--blue);
+    color: var(--white);
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 50%;
+}
+.Buttonguardar:hover {
+  background-color: var(--dark_blue)
+}
+
+.linksettings{
+    border: none;
+    color: rgb(11, 11, 163);
+    left: -5px;
+    position: relative;
+    background-color: #ebebeb;
+  }
+  .linksettings:hover{
+    color: rgb(0, 0, 255);
+    cursor: url('path/to/clicker-cursor.png'), pointer;
+  }
+
+  .go-back button{
+    all: unset;
+    font-size: 2rem;
+    cursor: pointer;
+    color:black;
+    opacity: 30%;
+    font-weight: bold;
+    border: none;
+    margin: 5px;
+    margin-bottom: 20px;
+}
+.go-back button:hover{
+    opacity: 100%;
+}

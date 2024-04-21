@@ -20,13 +20,16 @@ function Delivery() {
             <div>  <img className={styles["imgA"]} src={lunaAxImage} alt="Axolotl-Waiting" /></div>
             <p>Con Sparkaxe llega mas lejos personaliza precios de envio</p>
             <strong>Precio de envio Normal</strong>
-            <p>$100 MXn</p>
-            <strong>Precio de envio Extra</strong>
-            <p>$25 MXn</p>
-            <button onClick={() => openCity('Editar')}>Cambiar precios de envio</button>
+            <p>$100 MXN</p>
+            <strong>Precio de envio Extra despues de 5km</strong>
+            <p>$25 MXN</p>
+            <button className={styles.linksettings} onClick={() => openCity('Editar')}>Cambiar precios de envio</button>
             </div>
             <div id="Editar" className={styles.tabcontent} style={{display: activeTab === 'Editar' ?  'block' : 'none'}}>
             <h2><span className={styles.headingback} onClick={() => openCity('London')} >Envio / </span><span className={styles.heading}>Editar</span></h2>
+            <div className={styles["go-back"]} onClick={() => openCity('London')}>
+                <button> <i className="fa-solid fa-arrow-left"  ></i> Regresar</button>
+            </div>
             <form 
             className={styles.body}
         >
@@ -61,7 +64,7 @@ function Delivery() {
                     />
                 </div>
                 </form>
-                <button onClick={() => openCity('London')}>Guardar cambios</button>
+                <button className={styles.Buttonguardar} onClick={() => openCity('London')}>Guardar cambios</button>
                 </div>
             </div>
     )
