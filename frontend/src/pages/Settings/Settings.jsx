@@ -5,7 +5,7 @@ import TiendaM from '../../assets/img/TiendaM.png';
 
 function Settings() {
   const [activeTab, setActiveTab] = useState('London');
-  const [activeTab2, setActiveTab2] = useState('Normal');
+  const [activeTab2, setActiveTab2] = useState('Paris');
 
   const openCity = (cityName) => {
     setActiveTab(cityName);
@@ -20,7 +20,6 @@ function Settings() {
    <div className={styles.tab}>
         <button className={`${styles.tablinks} ${activeTab === 'London' ? styles.active : ''}`} onClick={() => openCity('London')}>General</button>
         <button className={`${styles.tablinks} ${activeTab === 'Paris' ? styles.active : ''}`} onClick={() => openCity('Paris')}>Configuración</button>
-        <button className={`${styles.tablinks} ${activeTab === 'Editar' ? styles.active : ''}`} onClick={() => openCity('Editar')}>Editar</button>
         <button className={`${styles.tablinks} ${activeTab === 'Tokyo' ? styles.active : ''}`} onClick={() => openCity('Tokyo')}>Plan</button>
       </div>
 
@@ -48,7 +47,7 @@ function Settings() {
       </div>
 
       <div id="Paris" className={styles.tabcontent} style={{display: activeTab === 'Paris' ? 'block' : 'none'}}>
-        
+        <div id="Paris" className={styles.tabcontent} style={{display: activeTab2 === 'Paris' ? 'block' : 'none'}}>
       <h2 className={styles.heading}>Configuración de Tienda</h2>
       <p><strong>Nombre de Tienda</strong></p>
       <p>Elibaba</p>
@@ -63,14 +62,16 @@ function Settings() {
       <p><strong>Tipo de divisa</strong></p>
       <p>$MXN</p>
       <p><strong>Avatar</strong></p>
-      <button className={styles.linksettings} >Editar Configuración de Tienda</button>
-      <button className={`${styles.tablinks} ${activeTab === 'Editar' ? styles.active : ''}`} onClick={() => openCity('Editar')}>Editar</button>
+      <button className={styles.linksettings} onClick={() => openCity2('Editar')}>Editar Configuración de Tienda</button>
       
       </div>
 
-      <div id="Paris" className={styles.tabcontent} style={{display: activeTab === 'Editar' ? 'block' : 'none'}}>
+      <div id="Paris" className={styles.tabcontent} style={{display: activeTab2 === 'Editar' ? 'block' : 'none'}}>
         
-      <h2><span className={styles.headingback}>Configuración de Tienda / </span><span className={styles.heading}>Editar</span></h2>
+      <h2><span className={styles.headingback} onClick={() => openCity2('Paris')}>Configuración de Tienda / </span><span className={styles.heading}>Editar</span></h2>
+      <div className={styles["go-back"]} onClick={() => openCity2('Paris')}>
+                <button> <i className="fa-solid fa-arrow-left"  ></i> Regresar</button>
+            </div>
       <form 
             className={styles.body}
         >
@@ -130,9 +131,10 @@ function Settings() {
                         
                 </div>
 
-                <button className={styles.Buttonguardar}>Guardar cambios</button>
+                <button className={styles.Buttonguardar} onClick={() => openCity2('Paris')}>Guardar cambios</button>
                 </div>
                 </form>
+                </div>  
                 
       </div>
     

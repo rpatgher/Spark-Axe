@@ -2,6 +2,13 @@
     font-size: 3.4rem;
     margin: 4rem 0;
 }
+.headingback{
+  font-size: 3.4rem;
+  margin: 4rem 0;
+  opacity: 30%;
+  color: #000;
+  cursor: pointer;
+}
 
 /* Style the tab */
 .tab {
@@ -221,4 +228,19 @@
 }
 .Buttonguardar:hover {
   background-color: var(--dark_blue)
+}
+
+.go-back button{
+  all: unset;
+  font-size: 2rem;
+  cursor: pointer;
+  color:black;
+  opacity: 30%;
+  font-weight: bold;
+  border: none;
+  margin: 5px;
+  margin-bottom: 20px;
+}
+.go-back button:hover{
+  opacity: 100%;
 }
