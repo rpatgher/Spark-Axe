@@ -91,10 +91,10 @@
     color: rgb(11, 11, 163);
     left: -5px;
     position: relative;
-    background-color: #ebebeb;
+    background-color: transparent;
   }
   .linksettings:hover{
-    color: rgb(0, 0, 255);
+    color: rgb(34, 34, 92);
     cursor: url('path/to/clicker-cursor.png'), pointer;
   }
   .divinfo{
