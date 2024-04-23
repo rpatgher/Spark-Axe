@@ -5,9 +5,10 @@
     align-items: center;
     justify-content: space-between;
     backdrop-filter: blur(10px); /* Applies a blur effect to the background */
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
-    background-color: rgba(37, 38, 40, .21);
-    background-image: radial-gradient(circle at 25%, hsla(0, 0%, 100%, .2), rgba(50, 50, 50, .2) 80%);
+    box-shadow: var(--boxed);
+    background-image: url('../../assets/img/backgroundcard.jpg');
+    background-blend-mode:initial;
+    background-position: center;
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
 }
@@ -23,6 +24,7 @@
 .heading h2{
     margin: 0;
     font-size: 2.6rem;
+    color:#f1f1f1
 }
 @media (max-width: 768px){
     .header h2{
@@ -32,6 +34,7 @@
 .heading p{
     margin: 0;
     font-size: 2rem;
+    color:#f1f1f1
 }
 @media (max-width: 768px){
     .header p{
