@@ -115,12 +115,14 @@
   }
   .profilecard{
     display: block;
-    background-color: #e4d129;
+    background-image: url('../../assets/img/backgroundcard.jpg');
+    background-blend-mode: color;
+    background-position: center;
     border-radius: 15px;
     width: 60%;
     padding: 20px;
     box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3); /* Box shadow for depth */
-    color:#fffafa;
+    color: #DD9A05;
     margin-bottom: 60px;
   }
   .linkother{
@@ -265,5 +267,21 @@
 }
 
 .linkother:hover{
-  color: var(--dark_blue)
+  color: var(--dark_grey);
+}
+.TiendaM{
+  border-radius: 10px;
+  width: 400px;
+ 
+}
+
+.Tiendaprofile{
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 420px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+ 
 }

@@ -41,7 +41,14 @@ function Settings() {
       </div>
       <div className={styles.rightdiv}>
       <div className={styles.rightcontent}>
-        <p>hello</p>
+      <div className={styles.Tiendaprofile}> <img className={styles["TiendaM"]} src={TiendaM} alt="Axolotl-Waiting" />
+        <h2>Resumen de Tienda</h2>
+        <p><strong>Descripcion de la tienda</strong></p>
+      <p>Tienda de vapes</p>
+      </div>
+     
+      
+
       </div>
       </div>
       </div>
