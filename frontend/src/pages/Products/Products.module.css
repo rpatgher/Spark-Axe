@@ -212,13 +212,14 @@ tr:last-of-type td {
 .published {
     background-color: color-mix(in srgb, var(--green) 30%, #fff);
     color: color-mix(in srgb, var(--green) 80%, #000000);
-    border: 1px solid var(--green);
+    font-weight: bold;
+    
 }
 
 .unpublished {
     background-color: color-mix(in srgb, var(--yellow) 30%, #fff);
     color: color-mix(in srgb, var(--yellow) 80%, #000000);
-    border: 1px solid var(--yellow);
+    font-weight: bold;
 }
 
 .cell-actions {

@@ -81,3 +81,50 @@
     margin: 5px;
     transition: 0.4s;
 }
+.bigtop{
+    position: relative;
+    width: 600px;
+    background-color: aliceblue;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    height: 50px;
+    padding: 10px;
+}
+
+.big:hover .bigtop{
+    width: 610px;
+    Height: 55px;
+    transition: 0.4s;
+    margin: -5px 0 0 -5px; /* Adjust margins to compensate for padding and box-shadow */
+    padding: 10px; /* Restore padding */
+}
+
+.Most{
+    border-radius: 14px;
+    flex: 1;
+    background-color: rgb(255, 255, 255);
+    min-width: 300px;
+    Height: 300px;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.Most:hover{
+    min-width: 310px;
+    Height: 310px;
+    padding: 5px;
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+    margin: 5px;
+    transition: 0.4s;
+
+
+}
+
+.Most h4{
+    margin:10px;
+}
+.Mostproduct{
+    width: 250px;
+    filter: drop-shadow(10px 10px 10px grey);
+}
