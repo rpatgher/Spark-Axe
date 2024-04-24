@@ -87,8 +87,8 @@
     backdrop-filter: blur(8px); /* Blur the background color */
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
-    height: 50px;
-    padding: 10px;
+    height: 60px;
+    padding: 5px;
 }
 
 .big:hover .bigtop{
@@ -96,7 +96,7 @@
     Height: 55px;
     transition: 0.4s;
     margin: -5px 0 0 -5px; /* Adjust margins to compensate for padding and box-shadow */
-    padding: 10px; /* Restore padding */
+    padding: 5px; /* Restore padding */
 }
 
 .Most{
