@@ -130,7 +130,6 @@
 }
 .profilecard{
     margin: 10px;
-    display: block;
     flex: 2;
     background-image: url('../../assets/img/backgroundcard.jpg');
     background-blend-mode: color;
@@ -141,7 +140,7 @@
     padding: 20px;
     box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3); /* Box shadow for depth */
     color: #DD9A05;
-    margin-bottom: 60px;
+    
   }
 
   .profilecard:hover{
@@ -152,7 +151,7 @@
     margin: 5px;
     transition: 0.4s;
 }
-  .profilecard h2{
+  .profilecard h3{
     font-size: 50px;
 
 
