@@ -7,3 +7,5 @@ const generateJWT = (id) => {
 }
 
 export default generateJWT;
+
+//JWT stands for JSON Web Token.

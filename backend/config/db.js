@@ -1,3 +1,5 @@
+//Este archivo se conecta a la base de Datos usando sequlize que es un ORM que prepara los datos para que los usemos en todo el sistema//
+
 import { Sequelize } from "sequelize";
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });

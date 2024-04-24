@@ -1,3 +1,5 @@
+//This document creates and checks if there are categories with subcategories
+
 import { Op } from 'sequelize';
 // ************* Models *************
 import { Category, Subcategory } from '../models/index.js';
