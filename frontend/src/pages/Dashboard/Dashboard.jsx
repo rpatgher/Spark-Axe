@@ -8,7 +8,7 @@ const Dashboard = () => {
     return (
         <div>
             <div className={styles["Dashboard"]}>
-                <h1>La mejor forma de manejar tu negocio a tu manera</h1>
+                <h1>Sparkaxe+<span> La mejor forma de manejar tu negocio a tu manera</span></h1>
             <div  className={styles["row"]}>
                 <div className={styles["Profile"]}>
                 <div>
