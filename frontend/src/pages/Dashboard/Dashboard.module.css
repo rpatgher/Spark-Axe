@@ -171,3 +171,16 @@
   .linkother:hover{
     color: var(--dark_grey);
   }
+
+.Homehead{
+    width: 1200px;
+    font-size: 7.4rem;
+    text-align: center;
+}
+
+
+.Homehead-grey{
+    color: #706c67;
+    font-size: 7.4rem;
+    text-align: center;
+}

@@ -8,7 +8,7 @@ const Dashboard = () => {
     return (
         <div>
             <div className={styles["Dashboard"]}>
-                <h1>Sparkaxe+<span> La mejor forma de manejar tu negocio a tu manera</span></h1>
+                <h1 className={styles["Homehead"]}>Sparkaxe+<span className={styles["Homehead-grey"]}> La mejor forma de manejar tu negocio a tu manera</span></h1>
             <div  className={styles["row"]}>
                 <div className={styles["Profile"]}>
                 <div>
@@ -29,6 +29,37 @@ const Dashboard = () => {
                     <p>hello qorld</p>
                     </div>     
                 </div>
+
+
+
+
+               
+
+
+
+
+
+
+
+
+                <div  className={styles["row"]}>
+                <div className={styles["big"]}>
+                    <div className={styles["bigtop"]}>
+                    <p><i class="fa-solid fa-bell"></i> Avisos</p>
+                    </div>
+                    <p>hello qorld</p>
+                    </div>     
+                    <div className={styles.profilecard}>
+        <h3>Sparkaxe +</h3>
+        <button className={styles.linkother} onClick={() => openCity('Tokyo')}><i class="fa-regular fa-credit-card"></i> Plan</button>
+        <button className={styles.linkother} onClick={() => openCity('Paris')}><i class="fa-solid fa-store" ></i> Configurar Tienda</button>
+        <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
+      </div>
+                
+                 
+                </div>
+
+
 
 
 
@@ -54,30 +85,6 @@ const Dashboard = () => {
                     </div>
                     
                 </div>
-                 
-                </div>
-
-
-
-
-
-
-
-
-                <div  className={styles["row"]}>
-                <div className={styles["big"]}>
-                    <div className={styles["bigtop"]}>
-                    <p><i class="fa-solid fa-bell"></i> Avisos</p>
-                    </div>
-                    <p>hello qorld</p>
-                    </div>     
-                    <div className={styles.profilecard}>
-        <h3>Sparkaxe +</h3>
-        <button className={styles.linkother} onClick={() => openCity('Tokyo')}><i class="fa-regular fa-credit-card"></i> Plan</button>
-        <button className={styles.linkother} onClick={() => openCity('Paris')}><i class="fa-solid fa-store" ></i> Configurar Tienda</button>
-        <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
-      </div>
-                
                  
                 </div>
             </div>
