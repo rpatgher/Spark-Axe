@@ -1,3 +1,4 @@
+//This code defines a middleware function checkAuth to authenticate users using JSON Web Tokens (JWT). 
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import Website from "../models/Website.js";

@@ -1,3 +1,4 @@
+//this code is for file storage it uses multer for uploads with node js remy eres un egnio
 import multer from "multer";
 import shortid from "shortid";
 import slug from "slug";

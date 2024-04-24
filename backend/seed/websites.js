@@ -1,6 +1,6 @@
 const websites = [
     {
-        name: "Shakalo Store",
+        name: "Shakalo stroes",
         type: "E-commerce",
         phone: "+5545497970",
         email: "shakalostore@shakalostore.store",

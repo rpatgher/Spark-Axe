@@ -1,3 +1,4 @@
+//this is for the second image
 import multer from "multer";
 import shortid from "shortid";
 import slug from "slug";
