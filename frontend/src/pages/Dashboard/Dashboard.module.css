@@ -89,6 +89,7 @@
     border-top-right-radius: 14px;
     height: 60px;
     padding: 5px;
+    padding-left: 15px;
 }
 
 .big:hover .bigtop{
@@ -183,4 +184,8 @@
     color: #706c67;
     font-size: 7.4rem;
     text-align: center;
+}
+.anouncetable{
+    border:none;
+    box-shadow: none;
 }

@@ -47,7 +47,22 @@ const Dashboard = () => {
                     <div className={styles["bigtop"]}>
                     <p><i class="fa-solid fa-bell"></i> Avisos</p>
                     </div>
-                    <p>hello qorld</p>
+                    <table className={styles["anouncetable"]}>
+                        <tr>
+                        <th>Update version 1.4</th>
+                        <td>Update a funcionalidades de agregacion de productos y animaciones</td>
+                        </tr>
+                        <tr>
+                        <th>Update version 1.3</th>
+                        <td>Update a funcionalidades de agregacion de productos y animaciones</td>
+                        </tr>
+                        <tr>
+                        <th>Update version 1.2</th>
+                        <td>Update a funcionalidades de agregacion de productos y animaciones</td>
+                        </tr>
+                       
+                        
+                        </table>
                     </div>     
                     <div className={styles.profilecard}>
         <h3>Sparkaxe +</h3>
