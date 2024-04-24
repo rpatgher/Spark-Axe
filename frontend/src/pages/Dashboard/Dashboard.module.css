@@ -98,6 +98,7 @@
     transition: 0.4s;
     margin: -5px 0 0 -5px; /* Adjust margins to compensate for padding and box-shadow */
     padding: 5px; /* Restore padding */
+    padding-left: 15px;
 }
 
 .Most{
