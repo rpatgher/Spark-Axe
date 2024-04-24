@@ -128,3 +128,47 @@
     width: 250px;
     filter: drop-shadow(10px 10px 10px grey);
 }
+.profilecard{
+    margin: 10px;
+    display: block;
+    flex: 2;
+    background-image: url('../../assets/img/backgroundcard.jpg');
+    background-blend-mode: color;
+    background-position: center;
+    border-radius: 15px;
+    min-width: 620px;
+    Height: 300px;
+    padding: 20px;
+    box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3); /* Box shadow for depth */
+    color: #DD9A05;
+    margin-bottom: 60px;
+  }
+
+  .profilecard:hover{
+    min-width: 630px;
+    Height: 310px;
+    padding: 25px;
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+    margin: 5px;
+    transition: 0.4s;
+}
+  .profilecard h2{
+    font-size: 50px;
+
+
+  }
+
+  .linkother{
+    align-items: left;
+    text-align: left;
+    border: none;
+    color: #b8a38f;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 20px;
+  }
+  
+  .linkother:hover{
+    color: var(--dark_grey);
+  }

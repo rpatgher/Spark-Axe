@@ -35,10 +35,11 @@ const Dashboard = () => {
 
                 <div  className={styles["row"]}>
                 <div className={styles["big"]}>
-                    <div className={styles["Menu-item"]}>
-                    Hello
+                    <div className={styles["bigtop"]}>
+                    <p><i className="fa-solid fa-basket-shopping"></i>  Ultimos pedidos</p>
                     </div>
-                    </div> 
+                    <p>hello qorld</p>
+                    </div>     
                 <div className={styles["Profile"]}>
                 <div>
                                <img className={styles["ProfilePic"]} src={lunaAxImage} alt="Axolotl-Waiting" />
@@ -65,15 +66,17 @@ const Dashboard = () => {
 
                 <div  className={styles["row"]}>
                 <div className={styles["big"]}>
-                    <div className={styles["Menu-item"]}>
-                    Hello
+                    <div className={styles["bigtop"]}>
+                    <p><i class="fa-solid fa-bell"></i> Avisos</p>
                     </div>
-                    </div> 
-                    <div className={styles["big"]}>
-                    <div className={styles["Menu-item"]}>
-                    Hello
-                    </div>
-                    </div> 
+                    <p>hello qorld</p>
+                    </div>     
+                    <div className={styles.profilecard}>
+        <h2>Sparkaxe +</h2>
+        <button className={styles.linkother} onClick={() => openCity('Tokyo')}><i class="fa-regular fa-credit-card"></i> Plan</button>
+        <button className={styles.linkother} onClick={() => openCity('Paris')}><i class="fa-solid fa-store" ></i> Configurar Tienda</button>
+        <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
+      </div>
                 
                  
                 </div>
