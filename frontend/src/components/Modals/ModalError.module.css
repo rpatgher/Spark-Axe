@@ -9,7 +9,10 @@
     left: 0;
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px); /* Blur the background color */
+    transition: background-color 0.3s, backdrop-filter 0.3s; /* Smooth transition */
 }
+
 /* Style for the card container (initially hidden) */
 .container{
     border-radius: 1rem;

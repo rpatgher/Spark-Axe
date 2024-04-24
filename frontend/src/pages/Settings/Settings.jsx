@@ -25,7 +25,7 @@ function Settings() {
 
       <div id="London" className={styles.tabcontent} style={{display: activeTab === 'London' ?  'flex' : 'none'}}>
       <div className={styles.leftdiv}>
-      <h2 className={styles.heading}>Elibaba</h2>
+      <h2 className={styles.heading}>General</h2>
       <div className={styles.profilecard}>
         <h2>Sparkaxe +</h2>
         <button className={styles.linkother} onClick={() => openCity('Tokyo')}><i class="fa-regular fa-credit-card"></i> Plan</button>
@@ -42,9 +42,10 @@ function Settings() {
       <div className={styles.rightdiv}>
       <div className={styles.rightcontent}>
       <div className={styles.Tiendaprofile}> <img className={styles["TiendaM"]} src={TiendaM} alt="Axolotl-Waiting" />
-        <h2>Resumen de Tienda</h2>
-        <p><strong>Descripcion de la tienda</strong></p>
-      <p>Tienda de vapes</p>
+        <h2>Elibaba</h2>
+        <p><strong>elibaba.com</strong></p>
+        <p>Descripcion: Tienda de vapes</p>
+        <p>Creada el 23/04/2024</p>
       </div>
      
       
