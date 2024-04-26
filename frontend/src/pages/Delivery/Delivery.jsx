@@ -18,8 +18,8 @@ function Delivery() {
         <div id="London" className={styles.tabcontent} style={{display: activeTab === 'London' ?  'block' : 'none'}}>
             <div className={styles.envio}>
                 <div className={styles.content}>
-                <h1>Envio</h1>
-                <p>Con Sparkaxe llega mas lejos personaliza precios de envio</p>
+                <h1 className={styles.heading} >Envio</h1>
+                <img className={styles["imgA"]} src={lunaAxImage} alt="Axolotl-Waiting" />
                 <div className={styles.envio}>
                 <div className={styles.content}>
                 <p>Precio de envio </p>
@@ -36,9 +36,10 @@ function Delivery() {
                 
                 </div>
             <button className={styles.linksettings} onClick={() => openCity('Editar')}>Cambiar precios de envio</button>
+            
                 </div>
                 <div className={styles.image}>
-                <img className={styles["imgA"]} src={lunaAxImage} alt="Axolotl-Waiting" />
+             
                 </div>
             </div>
             

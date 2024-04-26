@@ -4,15 +4,16 @@
     height: 400px;
 }
 .headingback{
-    font-size: 3.4rem;
+    font-size: 5.4rem;
     margin: 4rem 0;
     opacity: 30%;
     color: #000;
     cursor: pointer;
   }
 .heading{
-    font-size: 3.4rem;
+    font-size: 5.4rem;
     margin: 4rem 0;
+    font-weight: bold;
 }
 
 .form{
