@@ -1,5 +1,7 @@
 .imgA {
     align-items: center;
+    width: auto;
+    height: 400px;
 }
 .headingback{
     font-size: 3.4rem;
@@ -90,4 +92,20 @@
 }
 .go-back button:hover{
     opacity: 100%;
+}
+
+
+.envio{
+    display: flex;
+}
+.content{
+ flex: 1;
+}
+.image{
+
+flex: 2;
+}
+.result{
+    font-weight: bold;
+    font-size: 30px;
 }

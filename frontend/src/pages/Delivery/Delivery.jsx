@@ -16,14 +16,32 @@ function Delivery() {
     return (
         <div>
         <div id="London" className={styles.tabcontent} style={{display: activeTab === 'London' ?  'block' : 'none'}}>
-            <h1>Envio</h1>
-            <div>  <img className={styles["imgA"]} src={lunaAxImage} alt="Axolotl-Waiting" /></div>
-            <p>Con Sparkaxe llega mas lejos personaliza precios de envio</p>
-            <strong>Precio de envio Normal</strong>
-            <p>$100 MXN</p>
-            <strong>Precio de envio Extra despues de 5km</strong>
-            <p>$25 MXN</p>
+            <div className={styles.envio}>
+                <div className={styles.content}>
+                <h1>Envio</h1>
+                <p>Con Sparkaxe llega mas lejos personaliza precios de envio</p>
+                <div className={styles.envio}>
+                <div className={styles.content}>
+                <p>Precio de envio </p>
+            <p className={styles.result}>$100 MXN</p>
+                </div>
+                <div className={styles.content}>
+                <p>Precio de envio extra</p>
+                <p className={styles.result}>$25 MXN</p>
+                </div>
+                <div className={styles.content}>
+                <p>Distancia para extra</p>
+                <p className={styles.result}>5 KM</p>
+                </div>
+                
+                </div>
             <button className={styles.linksettings} onClick={() => openCity('Editar')}>Cambiar precios de envio</button>
+                </div>
+                <div className={styles.image}>
+                <img className={styles["imgA"]} src={lunaAxImage} alt="Axolotl-Waiting" />
+                </div>
+            </div>
+            
             </div>
             <div id="Editar" className={styles.tabcontent} style={{display: activeTab === 'Editar' ?  'block' : 'none'}}>
             <h2><span className={styles.headingback} onClick={() => openCity('London')} >Envio / </span><span className={styles.heading}>Editar</span></h2>
