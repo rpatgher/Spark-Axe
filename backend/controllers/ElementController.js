@@ -1,3 +1,4 @@
+//These functions handle various operations related to elements in your application. They interact with your database to create, read, update, and delete elements. They also perform checks to ensure that users are authorized to perform these operations.
 import fs from 'fs';
 
 // ************* Models *************

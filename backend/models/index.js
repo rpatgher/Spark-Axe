@@ -7,6 +7,7 @@ import Category from "./Category.js";
 import Subcategory from "./Subcategory.js";
 import ElementCategory from "./ElementCategory.js";
 import OrderElement from "./OrderElement.js";
+import Delivery from "./Delivery.js";
 
 
 User.hasMany(Website, { foreignKey: 'user_id' });
@@ -22,7 +23,8 @@ Order.belongsTo(Website, { foreignKey: 'website_id' });
 Element.belongsToMany(Order, { through: OrderElement });
 Order.belongsToMany(Element, { through: OrderElement });
 Order.belongsTo(Customer, { foreignKey: 'customer_id' });
+Delivery.belongsTo(Website, { foreignKey: 'website_id' });
 // Customer.belongsTo(Website, { foreignKey: 'website_id' });
 
 
-export { User, Website, Element, Customer, Order, Category, Subcategory, ElementCategory, OrderElement };
+export { User, Website, Element, Customer, Order, Category, Subcategory, ElementCategory, OrderElement, Delivery };
