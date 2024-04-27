@@ -1,43 +1,52 @@
+body{
+  background-color: var(--gray_dashboard);
+}
 .navbar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  }
-  
-.navB {
-    float: left;
-  }
-  
-.navB  a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-.navB a:hover {
-    background-color: #494747;
-  }
-  
-  .active {
-    background-color: #04AA6D;
-  }
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #fff9f95b;
+}
 
-  .rightnavB{
-    float: right;
-  }
+.navB {
+  float: left;
+}
+
+.navB  a {
+  display: block;
+  color: var(--dark_gray);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navB a:hover {
+  background-color: #cfcdcd;
+}
+
+.active {
+  background-color: #04AA6D;
+}
+
+.rightnavB{
+  float: right;
+}
 
 .rightnavB a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
+  display: block;
+  color: var(--dark_gray);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
 
-  .rightnavB a:hover {
-    background-color: #494747;
-  }
+.rightnavB a:hover {
+  background-color: #cfcdcd;
+}
+.head{
+  width: 80%;
+  margin-left: 10%;
+  font-size: 7.4rem;
+  text-align: center;
+}

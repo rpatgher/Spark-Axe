@@ -16,7 +16,7 @@ const About = () => {
             <Link to="/login"><li className={styles.rightnavB}><a>Iniciar Sesion</a></li></Link>
 </ul>
             </div>
-            <h1 className={styles.home}>About</h1>
+            <h1 className={styles.head}>Conoce mas de nosotros</h1>
         </div>
     )
 }

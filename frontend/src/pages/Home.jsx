@@ -16,7 +16,7 @@ const Home = () => {
             <Link to="/login"><li className={styles.rightnavB}><a>Iniciar Sesion</a></li></Link>
 </ul>
             </div>
-            <h1 className={styles.home}>Home</h1>
+            <h1 className={styles.head}>Sparkaxe+ La mejor forma de manejar tu negocio a tu manera</h1>
         </div>
     )
 }
