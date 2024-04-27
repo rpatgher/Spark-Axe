@@ -3,6 +3,7 @@ import styles from './Dashboard.module.css';
 // **************** Images ****************
 import lunaAxImage from '../../assets/img/TiendaM.png';
 import Vape from '../../assets/img/vape.webp';
+import bustop from '../../assets/img/bustop.jpg';
 
 const Dashboard = () => {
     return (
@@ -86,13 +87,26 @@ const Dashboard = () => {
                     </div>
                     <p>hello qorld</p>
                     </div>     
-                <div className={styles["Profile"]}>
-                <div>
-                               <img className={styles["ProfilePic"]} src={lunaAxImage} alt="Axolotl-Waiting" />
-                               </div>
-                <h2 className={styles["ProfileHead"]}>Hola Diego,</h2>
-                <p className={styles["ProfileHead"]}>Tienes <span style={{ color: 'blue' }}>4 notificaciones</span> </p>
-                <p className={styles["ProfileHead"]}>Sparkaxe+</p>
+                <div className={styles["enviodiv"]}>
+                <div className={styles.left}> <img className={styles["bustop"]} src={bustop} alt="Most sold product" /></div>
+                    <div className={styles.right}>
+                    <div className={styles.content}>
+                    <p className={styles.result}>$100 MXN</p>
+                <p>Precio de envio </p>
+          
+                </div>
+                <div className={styles.content}>
+                <p className={styles.result}>$25 MXN</p>
+                <p>Precio de envio extra</p>
+                </div>
+                <div className={styles.content}>
+                <p className={styles.result}>5 KM</p>
+                <p>Distancia para extra</p>
+                </div>
+                <button className={styles.buttondeliver}>Envio</button>
+                </div>
+                              
+                               
                 </div>
                 <div className={styles["Menu"]}>
                     <div className={styles["Menu-item"]}>

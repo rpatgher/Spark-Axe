@@ -11,7 +11,8 @@
     cursor: pointer;
   }
 .heading{
-    font-size: 5.4rem;
+    font-size: 7.4rem;
+    text-align: center;
     margin: 4rem 0;
     font-weight: bold;
 }
@@ -52,7 +53,7 @@
   align-items: flex-start ;
   margin-bottom: 15rem;
   position: relative;
-  width: 50%;
+  width: 100%;
 }
 
 .Buttonguardar{
@@ -62,7 +63,7 @@
     font-size: 15px;
     border-radius: 10px;
     padding: 10px;
-    width: 50%;
+    width: 100%;
 }
 .Buttonguardar:hover {
   background-color: var(--dark_blue)
@@ -109,4 +110,9 @@ flex: 2;
 .result{
     font-weight: bold;
     font-size: 30px;
+}
+
+.tabcontent{
+    width:60%;
+    margin-left: 20%;
 }
