@@ -9,3 +9,4 @@ const generateJWT = (id) => {
 export default generateJWT;
 
 //JWT stands for JSON Web Token.
+//this validates if the user is who he says he is

@@ -30,3 +30,5 @@ const checkAuth = async (req, res, next) => {
 }
 
 export default checkAuth;
+
+//req.headers.authorization.startsWith('Bearer'): Checks if the Authorization header starts with 'Bearer', indicating that it's a JWT.
