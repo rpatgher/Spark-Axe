@@ -1,10 +1,10 @@
 // ******************** Styles ********************
-import styles from '../styles/Home.module.css';
+import styles from './contact.module.css';
 
 import { Link } from "react-router-dom"
 
 
-const Home = () => {
+const About = () => {
     return (
         <div>
             <div className={styles.nav}>
@@ -16,9 +16,9 @@ const Home = () => {
             <Link to="/login"><li className={styles.rightnavB}><a>Login</a></li></Link>
 </ul>
             </div>
-            <h1 className={styles.home}>Home</h1>
+            <h1 className={styles.home}>Contact</h1>
         </div>
     )
 }
 
-export default Home
+export default About

@@ -9,6 +9,7 @@ import ProtectedLayout from './layouts/ProtectedLayout';
 // ***************** Pages *****************
 import Home from './pages/Home';
 import About from './pages/About/About';
+import Contact from './pages/Contact/Contact';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import Forgot from './pages/Forgot';
@@ -40,6 +41,7 @@ function App() {
             <Route path="/" element={<LandingLayout />}>
               <Route index element={<Home />} />
               <Route path="about" element={<About />} />
+              <Route path="contact" element={<Contact />} />
             </Route>
             <Route path="/" element={<AuthLayout />}>
               <Route path="login" element={<Login />} />
