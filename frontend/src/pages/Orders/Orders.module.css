@@ -56,3 +56,7 @@
 .products-table tr:last-of-type td{
     border-bottom: none !important;
 }
+.imgAX {
+    height: 300px;
+    width: 400px;
+}

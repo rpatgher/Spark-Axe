@@ -11,7 +11,7 @@
     cursor: pointer;
   }
 .heading{
-    font-size: 7.4rem;
+    font-size: 5.4rem;
     text-align: center;
     margin: 4rem 0;
     font-weight: bold;
@@ -47,6 +47,7 @@
 }
 
 .body{
+    align-items: center;
   display: grid;
   grid-template-columns:1fr;
   gap: 2rem;
@@ -71,14 +72,15 @@
 
 .linksettings{
     border: none;
-    color: rgb(11, 11, 163);
-    left: -5px;
-    position: relative;
-    background-color: transparent;
+    background-color: #000;
+    color: var(--white);
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
   }
   .linksettings:hover{
-    color: rgb(34, 34, 92);
-    cursor: url('path/to/clicker-cursor.png'), pointer;
+    background-color: var(--dark_gray)
   }
 
   .go-back button{
@@ -90,7 +92,7 @@
     font-weight: bold;
     border: none;
     margin: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 .go-back button:hover{
     opacity: 100%;
@@ -112,7 +114,31 @@ flex: 2;
     font-size: 30px;
 }
 
-.tabcontent{
+.tabcontent1{
+    width:70%;
+    margin-left: 25%;
+    margin-top: 20px;
+}
+.tabcontent2{
+    margin-top: 50px;
     width:60%;
     margin-left: 20%;
+    margin-bottom: 50px;
+}
+
+.enviocontent{
+
+    background: rgba(255, 255, 255, 0.432);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.31);
+    width: 80%;
+    height: 80%;
+    border-color: white;
+    border-radius: 20px;
+    margin-left:10%;
+    margin-top: 10px;
+    padding-bottom: 20px;
 }

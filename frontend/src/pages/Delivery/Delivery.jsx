@@ -14,11 +14,12 @@ function Delivery() {
       };
   
     return (
-        <div>
-        <div id="London" className={styles.tabcontent} style={{display: activeTab === 'London' ?  'block' : 'none'}}>
+        <div className={styles.background}> 
+        <div className={styles.enviocontent}>
+        <div id="London" className={styles.tabcontent1} style={{display: activeTab === 'London' ?  'block' : 'none'}}>
             <div className={styles.envio}>
                 <div className={styles.content}>
-                <h1 className={styles.heading} >Envio</h1>
+                <h1 className={styles.heading} >Envia a cualquier parte </h1>
                 <img className={styles["imgA"]} src={lunaAxImage} alt="Axolotl-Waiting" />
                 <div className={styles.envio}>
                 <div className={styles.content}>
@@ -44,7 +45,7 @@ function Delivery() {
             </div>
             
             </div>
-            <div id="Editar" className={styles.tabcontent} style={{display: activeTab === 'Editar' ?  'block' : 'none'}}>
+            <div id="Editar" className={styles.tabcontent2} style={{display: activeTab === 'Editar' ?  'block' : 'none'}}>
             <h2><span className={styles.headingback} onClick={() => openCity('London')} >Envio / </span><span className={styles.heading}>Editar</span></h2>
             <div className={styles["go-back"]}>
                 <button onClick={() => openCity('London')}> <i className="fa-solid fa-arrow-left"  ></i> Regresar</button>
@@ -84,6 +85,7 @@ function Delivery() {
                 </div>
                 </form>
                 <button className={styles.Buttonguardar} onClick={() => openCity('London')}>Guardar cambios</button>
+                </div>
                 </div>
             </div>
     )

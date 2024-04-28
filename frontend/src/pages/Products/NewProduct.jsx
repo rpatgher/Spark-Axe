@@ -9,7 +9,7 @@ import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 
 const NewProduct = () => {
     return (
-        <>
+        <div className={styles.form}>
             <HeadingsRuta 
                 currentHeading="Nuevo Producto"
                 routes={[
@@ -22,7 +22,7 @@ const NewProduct = () => {
                 </Link>
             </div>
             <FormProduct/>
-        </>
+        </div>
     )
 }
 

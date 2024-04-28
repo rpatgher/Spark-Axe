@@ -41,10 +41,17 @@
 .Menu{
     border-radius: 14px;
     flex: 1;
-    background-color: rgb(78, 80, 82, 0.6);
+    background-color: rgba(78, 80, 82, 0.315);
+    backdrop-filter: blur(14px);
+    align-items: center;
+    align-content: center;
+    text-align: center;
     min-width: 300px;
     Height: 300px;
     margin: 10px;
+    color: #fff;
+    font-size: 3.4rem;
+    font-weight: bold;
 }
 .Menu:hover{
     min-width: 310px;
@@ -56,13 +63,7 @@
 
 
 }
-.Menu-item{
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-    width: 50px;
-    Height: 50px;
-    margin: 10px;
-}
+
 
 .big{
     border-radius: 14px;
@@ -245,6 +246,7 @@
     border-radius: 5px;
     padding: 3px;
     width:100%;
+    cursor: pointer;
 }
 .buttondeliver:hover{
     background-color: #706c67;
@@ -267,4 +269,7 @@
   .link:hover {
     color: inherit; /* Ensure text color remains the same when hovered */
     text-decoration: underline;
+  }
+  .axwork{
+    width: 200px;
   }

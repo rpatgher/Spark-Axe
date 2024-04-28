@@ -6,6 +6,7 @@ import styles from './Dashboard.module.css';
 import lunaAxImage from '../../assets/img/TiendaM.png';
 import Vape from '../../assets/img/vape.webp';
 import bustop from '../../assets/img/bustop.jpg';
+import axwork from '../../assets/img/axolotl_worker.png';
 
 const Dashboard = () => {
     return (
@@ -29,7 +30,7 @@ const Dashboard = () => {
                     <div className={styles["bigtop"]}>
                     <p><i className="fa-solid fa-dolly"></i>  Inventario bajo</p>
                     </div>
-                    <p>hello qorld</p>
+                   
                     </div>     
                 </div>
 
@@ -87,7 +88,7 @@ const Dashboard = () => {
                     <div className={styles["bigtop"]}>
                     <p><i className="fa-solid fa-basket-shopping"></i>  Ultimos pedidos</p>
                     </div>
-                    <p>hello qorld</p>
+                   
                     </div>     
                 <div className={styles["enviodiv"]}>
                 <div className={styles.left}> <img className={styles["bustop"]} src={bustop} alt="Most sold product" /></div>
@@ -111,9 +112,8 @@ const Dashboard = () => {
                                
                 </div>
                 <div className={styles["Menu"]}>
-                    <div className={styles["Menu-item"]}>
-                    Hello
-                    </div>
+            <p>Trabajando para mejorar sparkaxe</p>
+            
                     
                 </div>
                  

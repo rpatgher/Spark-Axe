@@ -5,6 +5,7 @@ const Inventory = () => {
     return (
         <>
             <h2 className={styles.heading}>Inventario</h2>
+            <h4>Maneja tu inventario facilmente con solo 3 clicks</h4>
             <div className={styles["table-wrapper"]}>
                 <table className={styles["inventory-table"]}>
                     <thead>
