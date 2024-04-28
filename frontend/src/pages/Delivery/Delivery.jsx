@@ -19,7 +19,7 @@ function Delivery() {
         <div id="London" className={styles.tabcontent1} style={{display: activeTab === 'London' ?  'block' : 'none'}}>
             <div className={styles.envio}>
                 <div className={styles.content}>
-                <h1 className={styles.heading} >Envia a cualquier parte </h1>
+                <h1 className={styles.heading} >Envia a cualquier parte del mundo</h1>
                 <img className={styles["imgA"]} src={lunaAxImage} alt="Axolotl-Waiting" />
                 <div className={styles.envio}>
                 <div className={styles.content}>
