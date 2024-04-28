@@ -71,6 +71,7 @@
     min-width: 600px;
     Height: 300px;
     margin: 10px;
+    box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3); /* Box shadow for depth */
 }
 .big:hover{
     min-width: 610px;
@@ -111,6 +112,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3); /* Box shadow for depth */
 }
 .Most:hover{
     min-width: 310px;
@@ -171,7 +173,7 @@
   }
   
   .linkother:hover{
-    color: var(--dark_grey);
+    color: #DD9A05;
   }
 
 .Homehead{
@@ -242,4 +244,27 @@
     border: none;
     border-radius: 5px;
     padding: 3px;
+    width:100%;
 }
+.buttondeliver:hover{
+    background-color: #706c67;
+}
+.enviodiv:hover{
+    min-width: 310px;
+    Height: 310px;
+    padding: 5px;
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+    margin: 5px;
+    transition: 0.4s;
+
+
+}
+.link {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    color: inherit; /* Ensure text color remains the same when hovered */
+    text-decoration: underline;
+  }

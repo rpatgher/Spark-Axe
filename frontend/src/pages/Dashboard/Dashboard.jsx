@@ -1,3 +1,5 @@
+import { Link, useLocation } from 'react-router-dom';
+
 // ******************** Styles ********************
 import styles from './Dashboard.module.css';
 // **************** Images ****************
@@ -67,8 +69,8 @@ const Dashboard = () => {
                     </div>     
                     <div className={styles.profilecard}>
         <h3>Sparkaxe +</h3>
-        <button className={styles.linkother} onClick={() => openCity('Tokyo')}><i class="fa-regular fa-credit-card"></i> Plan</button>
-        <button className={styles.linkother} onClick={() => openCity('Paris')}><i class="fa-solid fa-store" ></i> Configurar Tienda</button>
+        <Link to='/dashboard/settings'><button className={styles.linkother} onClick={() => openCity('Tokyo')}><i class="fa-regular fa-credit-card"></i> Plan</button></Link>
+        <Link to='/dashboard/settings'><button className={styles.linkother} onClick={() => openCity('Paris')}><i class="fa-solid fa-store" ></i> Configurar Tienda</button></Link>
         <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
       </div>
                 
@@ -103,7 +105,7 @@ const Dashboard = () => {
                 <p className={styles.result}>5 KM</p>
                 <p>Distancia para extra</p>
                 </div>
-                <button className={styles.buttondeliver}>Envio</button>
+                <Link to='/dashboard/delivery'><button className={styles.buttondeliver} >Envio</button></Link> 
                 </div>
                               
                                
