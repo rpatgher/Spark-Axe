@@ -4,6 +4,78 @@
     margin-top: 6rem;
 }
 
-.megarow td:first-child {
-    width: 100%;
+
+
+.guardar{
+    background-color: var(--blue);
+    padding: 5px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+    cursor: pointer;
+}
+.guardar:hover{
+    background-color: rgb(42, 14, 143);
+}
+
+.editar{
+    background-color: var(--dark_gray);
+    padding: 5px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+    cursor: pointer;
+}
+.editar:hover{
+    background-color: black;
+}
+
+input{
+    border-radius: 5px;
+    border: 1px solid rgb(167, 167, 163);
+    padding: 5px;
+    height: 20px;
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
+}
+.cargar{
+    background-color: var(--dark_gray);
+    padding: 5px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 120px;
+    cursor: pointer;
+}
+.cargar:hover{
+    background-color: black;
+}
+
+.cell-select input,
+.col-select input {
+    appearance: none;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+    border-radius: .5rem;
+    border: 1px solid var(--dark_gray);
+    transition: all .3s ease-in-out;
+}
+
+.cell-select input:checked,
+.col-select input:checked {
+    background-color: var(--dark_gray);
+    transition: all .3s ease-in-out;
+    position: relative;
+}
+
+.cell-select input:checked::after,
+.col-select input:checked::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '✓';
+    color: var(--white);
 }

@@ -46,6 +46,7 @@ const Customers = () => {
                 <table className={styles["inventory-table"]}>
                     <thead>
                         <tr>
+                        <th className={styles["cell-select"]}><input type="checkbox" /></th>
                             <th>Nombre</th>
                             <th>Email</th>
                             <th>Numero</th>
@@ -56,23 +57,24 @@ const Customers = () => {
                     <tbody>
                         {data.map((item, index) => (
                             <tr key={index}>
+                                 <td className={styles["cell-select"]}><input type="checkbox" /></td>
                                 <td>{renderTableCell(item.nombre, "nombre", index)}</td>
                                 <td>{renderTableCell(item.email, "email", index)}</td>
                                 <td>{renderTableCell(item.numero, "numero", index)}</td>
                                 <td>{renderTableCell(item.id, "id", index)}</td>
                                 <td>
                                     {editingRow === index ? (
-                                        <button onClick={handleSaveClick}>Guardar</button>
+                                        <button onClick={handleSaveClick} className={styles.guardar}>Guardar</button>
                                     ) : (
-                                        <button onClick={() => handleEditClick(index)}>Editar</button>
+                                        <button onClick={() => handleEditClick(index)}className={styles.editar}>Editar</button>
                                     )}
                                 </td>
                             </tr>
 
                         ))}
                         <tr className={styles.megarow}>
-                                <td colSpan="5">
-                                    Solo se pueden ver 20 clientes a la vez 
+                                <td colSpan="6">
+                                    <button className={styles.cargar}>Cargar mas</button>
                                 </td>
                             </tr>
                     </tbody>
