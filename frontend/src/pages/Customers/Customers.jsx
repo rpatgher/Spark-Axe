@@ -68,7 +68,13 @@ const Customers = () => {
                                     )}
                                 </td>
                             </tr>
+
                         ))}
+                        <tr className={styles.megarow}>
+                                <td colSpan="5">
+                                    Solo se pueden ver 20 clientes a la vez 
+                                </td>
+                            </tr>
                     </tbody>
                 </table>
             </div>
