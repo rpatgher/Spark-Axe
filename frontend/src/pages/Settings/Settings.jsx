@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import styles from  './Settings.module.css';
 // **************** Images ****************
 import TiendaM from '../../assets/img/TiendaM.png';
@@ -33,9 +34,10 @@ function Settings() {
         <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
       </div>
       <p><strong>¿Algun problema?</strong></p>
-      <button className={styles.linksettings}><i class="fa-solid fa-comments"></i> Contactanos</button>
+      <Link to="/contact">
+      <button className={styles.linksettings}><i class="fa-solid fa-comments"></i> Contactanos</button></Link>
       <p></p>
-      <button className={styles.linksettings}><i class="fa-solid fa-cloud"></i> Sobre Nosotros</button>
+      <Link to="/about"><button className={styles.linksettings}><i class="fa-solid fa-cloud"></i> Sobre Nosotros</button></Link>
       <p></p>
       <button className={styles.linksettings}><i class="fa-solid fa-box"></i> Otro</button>
       </div>
