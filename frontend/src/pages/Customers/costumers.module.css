@@ -79,3 +79,14 @@ input{
     content: '✓';
     color: var(--white);
 }
+/* costumers.module.css */
+.container {
+    position: relative;
+}
+
+.counter {
+    position: absolute;
+    top: -60px;
+    right: 0;
+    margin: 10px;
+}
