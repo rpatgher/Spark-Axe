@@ -64,9 +64,18 @@ const Customers = () => {
 
     return (
         <>
+        <div className={styles.top}>
+
+
+            <div className={styles.topcontent}>
             <h2 className={styles.heading}>Clientes</h2>
             <h4>Acercate mas a tus clientes</h4>
-            <img className={styles["imgA"]} src={clients} alt="Axolotl-Waiting" />
+            </div>
+            <div className={styles.topimage}>
+            <img className={styles["back"]} src={clients} alt="Axolotl-Waiting" />
+            </div>
+        </div>
+            
             <div className={styles.container}>
                 {selectedCount > 0 && <div className={styles.selected}><p className={styles.counter}><strong>Selected:</strong> {selectedCount}</p><button className={styles.delete}><i className="fa-solid fa-trash"></i> Eliminar</button></div>}
                 <div className={styles["table-wrapper"]}>

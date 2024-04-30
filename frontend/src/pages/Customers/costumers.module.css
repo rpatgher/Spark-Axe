@@ -134,3 +134,18 @@ input{
  
     box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
 }
+.back{
+    height:200px;
+    width: 1000px;
+}
+.top{
+    display: flex;
+}
+.topcontent{
+  flex:1;
+   
+}
+.topimage{
+   
+   
+}
