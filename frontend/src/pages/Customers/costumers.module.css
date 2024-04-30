@@ -83,10 +83,54 @@ input{
 .container {
     position: relative;
 }
-
-.counter {
+.selected {
+    display: flex; /* Make .selected a flex container */
+    align-items: center; /* Center items vertically */
     position: absolute;
     top: -60px;
-    right: 0;
+    right: 0px;
     margin: 10px;
+    width: 200px;
+}
+
+.counter {
+    flex: 1; /* Take up remaining space */
+    margin-right: 10px; /* Add some space between counter and delete button */
+}
+
+.delete {
+    flex: 0 0 auto; /* Don't grow or shrink, keep its size */
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
+    font-weight: bold;
+}
+.delete:hover{
+    background-color: rgb(145, 12, 12);
+}
+.deletemini{
+    flex: 0 0 auto; /* Don't grow or shrink, keep its size */
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.deletemini:hover{
+    background-color: rgb(145, 12, 12);
+}
+.selectedRow{
+    border: #d1c5ff;
+}
+/* Override styles for table cells inside selected row */
+.selectedRow td {
+    background-color: #eef1f3; /* Change this to the color you prefer */
+ 
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
 }
