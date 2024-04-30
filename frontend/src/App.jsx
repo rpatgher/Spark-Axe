@@ -20,6 +20,7 @@ import Products from './pages/Products/Products';
 import NewProduct from './pages/Products/NewProduct';
 import EditProduct from './pages/Products/EditProduct';
 import Inventory from './pages/Inventory/Inventory';
+import SetInventory from './pages/Inventory/SetInventory';
 import Customers from './pages/Customers/Customers';
 import Stats from './pages/Stats/Stats';
 import Coupons from './pages/Coupons/Coupons';
@@ -58,6 +59,7 @@ function App() {
                 <Route path="products/new" element={<NewProduct />} />
                 <Route path="products/edit/:id" element={<EditProduct />} />
                 <Route path="inventory" element={<Inventory />} />
+                <Route path="inventory/set" element={<SetInventory />} />
                 <Route path="customers" element={<Customers />} />
                 <Route path="stats" element={<Stats />} />
                 <Route path="coupons" element={<Coupons />} />

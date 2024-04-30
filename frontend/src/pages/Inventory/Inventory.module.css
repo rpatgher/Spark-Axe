@@ -149,3 +149,14 @@ input{
    
    
 }
+table{
+    margin-top: 20px;
+}
+.configinventory{
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+}

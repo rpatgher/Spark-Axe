@@ -1,7 +1,9 @@
 // Customers.js
 import React, { useState, useEffect } from 'react';
 import styles from './inventory.module.css';
-import clients from '../../assets/img/clients.png';
+import clients from '../../assets/img/inventory.png';
+import { Link } from 'react-router-dom';
+
 
 const Inventory = () => {
     const [editingRow, setEditingRow] = useState(null);
@@ -70,6 +72,7 @@ const Inventory = () => {
             <div className={styles.topcontent}>
             <h2 className={styles.heading}>Inventario</h2>
             <h4>Ten mas control sobre tu negocio</h4>
+            <Link to='/dashboard/inventory/set'><button className={styles.configinventory}><i class="fa-solid fa-dolly"></i> Configurar inventario</button></Link>
             </div>
             <div className={styles.topimage}>
             <img className={styles["back"]} src={clients} alt="Axolotl-Waiting" />
