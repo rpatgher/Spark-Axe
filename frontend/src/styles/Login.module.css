@@ -137,6 +137,7 @@
     background-color: var(--dark_blue);
     color: #FFFFFF;
     transition: background-color 0.2s ease;
+    height: auto;
 }
 .submit:hover{
     background-color: color-mix(in xyz-d50, var(--dark_blue) 60%, #000);
