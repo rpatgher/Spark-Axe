@@ -1,6 +1,6 @@
 // ******************** Styles ********************
 import styles from '../styles/Home.module.css';
-
+import logo from '../assets/img/logo.png';
 import { Link } from "react-router-dom"
 
 
@@ -16,7 +16,10 @@ const Home = () => {
             <Link to="/login"><li className={styles.rightnavB}><a>Iniciar Sesion</a></li></Link>
 </ul>
             </div>
-            <h1 className={styles.head}>Sparkaxe+ La mejor forma de manejar tu negocio a tu manera</h1>
+            <div className={styles.header}>
+            <img className={styles["logo"]} src={logo} alt="Sparkaxe-logo" />
+            <h1 className={styles.head}>Sparkaxe La mejor forma de manejar tu negocio a tu manera</h1>
+            </div>
         </div>
     )
 }

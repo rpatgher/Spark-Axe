@@ -47,3 +47,11 @@
   font-size: 7.4rem;
   text-align: center;
 }
+.logo{
+  align-items: center;
+  width: 200px;
+}
+.header{
+  text-align: center;
+  margin-top: 200px;
+}
