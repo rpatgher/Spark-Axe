@@ -153,3 +153,16 @@ input{
 table{
     margin-top: 20px;
 }
+.contactbtn{
+    font-size: 15px;
+    color: white;
+    background-color: var(--dark_gray);
+    border: solid 2px white;
+    border-radius: 5px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.contactbtn:hover{
+    background-color: black;
+}
