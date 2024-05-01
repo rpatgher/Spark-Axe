@@ -157,9 +157,10 @@ table{
     font-size: 15px;
     color: white;
     background-color: var(--dark_gray);
-    border: solid 2px white;
+   margin: 5px;
+   border: none;
     border-radius: 5px;
-    padding: 3px;
+    padding: 5px;
     cursor: pointer;
 }
 
