@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import html2canvas from 'html2canvas';
 
 // **************** Styles ****************
@@ -36,7 +36,10 @@ const DashboardLayout = () => {
         // fakeLink.remove();
     }
 
-    if(auth.websites.length === 0) return <div>No websites</div>
+    if(auth.websites.length === 0) return <div className={styles.Noweb}>
+        <h1>No websites</h1>
+        <Link to="/contact"> <button>Contact us</button></Link>
+        </div>
     
     return (
         <div className={styles.dashboard}>

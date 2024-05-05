@@ -54,3 +54,15 @@
     transform: rotate(180deg);
     margin: 0;
 }
+        
+.Noweb{
+    text-align: center;
+}
+.Noweb button{
+    border-radius: 5px;
+    font-size: 30px;
+    color: white;
+    background-color: var(--blue);
+    border: none;
+    padding: 10px;
+}
