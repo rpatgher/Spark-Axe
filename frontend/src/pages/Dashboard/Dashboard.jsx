@@ -30,7 +30,35 @@ const Dashboard = () => {
                     <div className={styles["bigtop"]}>
                     <p><i className="fa-solid fa-dolly"></i>  Inventario bajo</p>
                     </div>
-                   
+                    <table className={styles["anouncetable"]}>
+                        <tr>
+                        <th>producto	</th>
+                        <th>stock</th>
+                        <th>Status</th>
+                      </tr>
+                      <tr>
+                        <td>Vape1</td>
+                        <td>77</td>
+                        <td>bajo</td>
+                      </tr>
+                      <tr>
+                        <td>Vape2	</td>
+                        <td>77</td>
+                        <td>bajo</td>
+                      </tr>
+                      <tr>
+                        <td>Vape3	</td>
+                        <td>77</td>
+                        <td>bajo</td>
+                      </tr>
+                      <tr>
+                        <td>Vape4</td>
+                        <td>77</td>
+                        <td>bajo</td>
+                      </tr>
+                       
+                        
+                        </table>
                     </div>     
                 </div>
 
@@ -88,7 +116,37 @@ const Dashboard = () => {
                     <div className={styles["bigtop"]}>
                     <p><i className="fa-solid fa-basket-shopping"></i>  Ultimos pedidos</p>
                     </div>
-                   
+                
+                    <table className={styles["anouncetable"]}>
+                        <tr>
+                        <th>Fecha de pedido	</th>
+                        <th>Estado</th>
+                        <th>Total</th>
+                      </tr>
+                      <tr>
+                        <td>3 de de mayo de 2024		</td>
+                        <td>En proceso</td>
+                        <td>$ 10000</td>
+                      </tr>
+                      <tr>
+                        <td>3 de de mayo de 2024		</td>
+                        <td>En proceso</td>
+                        <td>$ 10000</td>
+                      </tr>
+                      <tr>
+                        <td>3 de de mayo de 2024		</td>
+                        <td>En proceso</td>
+                        <td>$ 10000</td>
+                      </tr>
+                      <tr>
+                        <td>3 de de mayo de 2024		</td>
+                        <td>En proceso</td>
+                        <td>$ 10000</td>
+                      </tr>
+                       
+                        
+                        </table>
+                       
                     </div>     
                 <div className={styles["enviodiv"]}>
                 <div className={styles.left}> <img className={styles["bustop"]} src={bustop} alt="Most sold product" /></div>
