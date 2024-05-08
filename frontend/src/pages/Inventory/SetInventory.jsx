@@ -7,7 +7,7 @@ import lunaAxImage from '../../assets/img/envio.png';
 // ******************** Styles ********************
 import styles from './SetInventory.module.css';
 
-function Delivery() {
+function SetInventory() {
   
     return (
         <div className={styles.background}> 
@@ -58,4 +58,4 @@ function Delivery() {
     )
 }
 
-export default Delivery
+export default SetInventory
