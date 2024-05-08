@@ -97,7 +97,7 @@ const Orders = () => {
                                         <td
                                             className={styles.details}
                                             onClick={() => toggleDetails(order.id)}
-                                        >Ver  <i class="fa-regular fa-eye"></i></td>
+                                        >Ver  <i className="fa-regular fa-eye"></i></td>
                                     </tr>
                                     {details === order.id && (
                                         <tr>
