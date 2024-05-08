@@ -61,7 +61,7 @@ const Dashboard = () => {
         <div className={styles["row"]}>
           <div className={styles["big"]}>
             <div className={styles["bigtop"]}>
-              <p><i class="fa-solid fa-bell"></i> Avisos</p>
+              <p><i className="fa-solid fa-bell"></i> Avisos</p>
             </div>
             <table className={styles["anouncetable"]}>
               <tr>
@@ -82,9 +82,9 @@ const Dashboard = () => {
           </div>
           <div className={styles.profilecard}>
             <h3>Sparkaxe +</h3>
-            <Link to='/dashboard/settings'><button className={styles.linkother} onClick={() => openCity('Tokyo')}><i class="fa-regular fa-credit-card"></i> Plan</button></Link>
-            <Link to='/dashboard/settings'><button className={styles.linkother} onClick={() => openCity('Paris')}><i class="fa-solid fa-store" ></i> Configurar Tienda</button></Link>
-            <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
+            <Link to='/dashboard/settings'><button className={styles.linkother} onClick={() => openCity('Tokyo')}><i className="fa-regular fa-credit-card"></i> Plan</button></Link>
+            <Link to='/dashboard/settings'><button className={styles.linkother} onClick={() => openCity('Paris')}><i className="fa-solid fa-store" ></i> Configurar Tienda</button></Link>
+            <button className={styles.linkother}><i className="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
           </div>
 
 
