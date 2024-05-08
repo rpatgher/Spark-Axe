@@ -6,7 +6,6 @@ import styles from './Dashboard.module.css';
 import lunaAxImage from '../../assets/img/TiendaM.png';
 import Vape from '../../assets/img/vape.webp';
 import bustop from '../../assets/img/bustop.jpg';
-import axwork from '../../assets/img/axolotl_worker.png';
 
 const Dashboard = () => {
     return (
