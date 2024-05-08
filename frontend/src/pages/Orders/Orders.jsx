@@ -101,7 +101,8 @@ const Orders = () => {
                                     </tr>
                                     {details === order.id && (
                                         <tr>
-                                            <td colSpan="8">
+                                            <td colSpan="8" className={styles.products23}>
+                                            <h2 className={styles.infofloatl}>Tabla de Productos en el pedido:</h2>
                                                 <table className={styles["products-table"]}>
                                                     <thead>
                                                         <tr>
@@ -122,6 +123,7 @@ const Orders = () => {
                                                         ))}
                                                     </tbody>
                                                 </table>
+                                                <h2 className={styles.infofloatr}>Total de Pedido: <span className={styles.infofloatrb}>${formatToMoney(parseFloat(order.total))}</span></h2>
                                             </td>
                                         </tr>
                                     )}
