@@ -5,3 +5,4 @@ const clientAxios = axios.create({
 });
 
 export default clientAxios;
+//crea axios y le hace una url

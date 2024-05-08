@@ -9,6 +9,8 @@ const Customer = db.define('customer', {
         allowNull: false,
         defaultValue: DataTypes.UUIDV4 
     },
+
+    // los uuid son string gigantes random unicos
     name: {
         type: DataTypes.STRING,
         allowNull: false

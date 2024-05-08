@@ -150,6 +150,7 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
         }
         try {
             let response;
+            //si no tiene id es porque es un nuevo producto entonces se hace un post
             if (!initalProduct && !initalProduct?.id) {
                 response = await clientAxios.post('/api/elements', data, config);
             } else {

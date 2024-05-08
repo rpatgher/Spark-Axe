@@ -23,7 +23,11 @@ Element.belongsToMany(Order, { through: OrderElement });
 Order.belongsToMany(Element, { through: OrderElement });
 Order.belongsTo(Customer, { foreignKey: 'customer_id' });
 
+//deliveries has one website
+//alrevez website.hasOne(deliveries)
+
 // Customer.belongsTo(Website, { foreignKey: 'website_id' });
 
-
+//belongs to hace que alla una foreign key que hace para exportar los registros de muchas tabla
+//en tablas siempre va estar el uno en la tbla de muchos
 export { User, Website, Element, Customer, Order, Category, Subcategory, ElementCategory, OrderElement };

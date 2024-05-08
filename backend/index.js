@@ -52,3 +52,5 @@ app.use('/api/orders', OrderRouter);
 // Listen
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
+
+//conectar la base de datos y mantener la conexion
