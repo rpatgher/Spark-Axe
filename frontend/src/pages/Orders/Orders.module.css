@@ -60,3 +60,23 @@
     height: 300px;
     width: 400px;
 }
+.products23{
+    background-color: var(--gray_dashboard);
+}
+.products23 td{
+    background-color: var(--gray_dashboard);
+    font-size: 12px;
+}
+.infofloatl{
+    float: left;
+    margin-right: 10px;
+    
+}
+.infofloatr{
+    float: right;
+    margin-right: 10px;
+    font-weight: normal;
+}
+.infofloatrb{
+    font-weight: bold ;
+}

@@ -167,3 +167,19 @@ table{
 .contactbtn:hover{
     background-color: black;
 }
+
+.contactbtnt{
+    font-size: 15px;
+    color: white;
+    background-color: var(--dark_gray);
+   margin: 5px;
+   border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    rotate: 90deg;
+}
+
+.contactbtnt:hover{
+    background-color: black;
+}

@@ -27,6 +27,15 @@ const HeaderDashboard = () => {
                 </button>
                 <div className={styles.notification}>
                     <i className="fa-regular fa-bell"></i>
+                    <div className={styles.dropdown2}>
+                    <div className={styles.dropdownContent2}>
+                        <p><strong><i class="fa-solid fa-bell"></i> Aviso 1</strong> que pedo remy</p>
+                        <hr></hr>
+                        <p><strong><i class="fa-solid fa-bell"></i> Aviso 2</strong> remy es gei</p>
+                        <hr></hr>
+                        <p><strong><i class="fa-solid fa-bell"></i> Aviso 3</strong> shakalitos at work this is something alalalalala ohh yeha</p>
+                    </div>
+                    </div>
                 </div>
                 <div className={styles.profile}>
                     <div className={styles.image}>
