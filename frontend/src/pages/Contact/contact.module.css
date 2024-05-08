@@ -68,6 +68,7 @@ body{
   text-align: center;
   margin: 4rem 0;
   font-weight: bold;
+  text-align: center;
 }
 
 .form{
@@ -198,4 +199,5 @@ flex: 2;
 .axworker{
   height: 200px;
   width: 200px;
+  border-radius: 50%;
 }

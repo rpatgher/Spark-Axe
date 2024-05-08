@@ -3,7 +3,7 @@ import styles from './contact.module.css';
 
 import { Link } from "react-router-dom"
 import logo from '../../assets/img/axolotl worker.png';
-
+import error from '../../assets/img/marcar_error.png';
 
 const About = () => {
     return (
@@ -21,9 +21,22 @@ const About = () => {
             <div className={styles.background}> 
             <p className={styles.headp}>Ofrecemos Soporte Técnico 24/7 para optimizar tu experiencia en nuestro sitio web. ¡Confía en nuestros expertos para resolver cualquier inconveniente y garantizar un funcionamiento óptimo en todo momento!</p>
             <div className={styles.enviocontent}>
+                <div>
             <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
 
-            <h3><span className={styles.headingother}>Editar</span></h3>
+            <h3><span className={styles.headingother}>Soporte</span></h3>
+            </div>
+            <div>
+            <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
+
+            <h3><span className={styles.headingother}>Aplicar</span></h3>
+            </div>
+            <div>
+            <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
+
+            <h3><span className={styles.headingother}>Preguntas frequentes</span></h3>
+            </div>
+
             </div>
             <div className={styles.enviocontent}>
             <h2><span className={styles.headingother}>Marcar error</span></h2>
@@ -31,7 +44,7 @@ const About = () => {
             </div>
         <div className={styles.enviocontent}>
         <div className={styles.tabcontent1}>
-            <h2><span className={styles.heading}>Soporte</span></h2>
+            <h2 className={styles.heading}>Soporte</h2>
             
            
             <form 
@@ -43,7 +56,7 @@ const About = () => {
                         type="" 
                         id="" 
                         name="" 
-                        placeholder={`10`}
+                        placeholder={`Nombre completo`}
             
                     />
                 </div>
@@ -53,7 +66,7 @@ const About = () => {
                         type="" 
                         id="" 
                         name="" 
-                        placeholder={`20`}
+                        placeholder={`ejemplo@correo.com`}
             
                     />
                 </div>
@@ -63,7 +76,7 @@ const About = () => {
                         type="" 
                         id="" 
                         name="" 
-                        placeholder={`30`}
+                        placeholder={`dominio.com`}
             
                     />
                 </div>
@@ -73,12 +86,12 @@ const About = () => {
                         type="" 
                         id="" 
                         name="" 
-                        placeholder={`30`}
+                        placeholder={`Describe el problema`}
             
                     />
                 </div>
                 </form>
-                <Link to='/dashboard/inventory'> <button className={styles.Buttonguardar}>Guardar cambios</button></Link>
+                <Link to='/dashboard/inventory'> <button className={styles.Buttonguardar}>Enviar</button></Link>
                 </div>
                 </div>
             </div>
