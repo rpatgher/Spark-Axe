@@ -241,11 +241,31 @@ const publishProduct =  async (req, res) => {
     }
 }
 
+const updateStock = async (req, res) => {
+    const { id } = req.params;
+    const data = req.body;
+    if(!data.stock || !data.price){
+        const error = new Error('Invalid Request');
+        return res.status(500).json({ msg: error.message });
+    }
+    try {
+        const element = await Element.findByPk(id);
+        element.stock = data.stock;
+        element.price = data.price;
+        await element.save();
+        res.status(200).json({msg: "Stock and price updated successfully"});
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ msg: 'Internal Server Error' });
+    }
+}
+
 export {
     createElement,
     getElements,
     getElement,
     updateElement,
     deleteElement,
-    publishProduct
+    publishProduct,
+    updateStock
 };
