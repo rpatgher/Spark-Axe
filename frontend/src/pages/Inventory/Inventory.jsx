@@ -3,18 +3,21 @@ import React, { useState, useEffect } from 'react';
 import styles from './inventory.module.css';
 import clients from '../../assets/img/inventory.png';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import clientAxios from '../../config/clientAxios';
 
 
 const Inventory = () => {
+    const { auth } = useAuth();
     const [editingRow, setEditingRow] = useState(null);
     const [selectAll, setSelectAll] = useState(false);
-    const [data, setData] = useState([
-        { producto: "Vape1", stock: "77", precio: "23", status: "good", selected: false },
-        { producto: "Vape1", stock: "77", precio: "23", status: "low", selected: false },
-        { producto: "Vape1", stock: "77", precio: "23", status: "good", selected: false },
-        { producto: "Vape1", stock: "77", precio: "23", status: "low", selected: false },
-        { producto: "Vape1", stock: "77", precio: "23", status: "low", selected: false },
-    ]);
+    const [data, setData] = useState([]);
+    const [currentElement, setCurrentElement] = useState({});
+    const [inventory, setInventory] = useState({
+        low: 10,
+        medium: 20,
+        high: 30
+    });
     const dataLength = data.length;
     const [selectedCount, setSelectedCount] = useState(0);
 
@@ -23,15 +26,50 @@ const Inventory = () => {
         setSelectedCount(count);
     }, [data]);
 
+    useEffect(() => {
+        const getElements = async () => {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            try {
+                const { data } = await clientAxios(`/api/elements/${auth.websites[0].id}`, config);
+                setData(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        return () => getElements();
+    }, []);
+
     const handleEditClick = (index) => {
         setEditingRow(index);
     };
 
-    const handleSaveClick = () => {
+    const handleSaveClick = async () => {
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        try {
+            await clientAxios.put(`/api/elements/stock/${currentElement.id}`, currentElement, config);
+        } catch (error) {
+            console.log(error);
+        }
         setEditingRow(null);
     };
 
     const handleInputChange = (event, field, index) => {
+        setCurrentElement({
+        ...data[index],
+            [field]: event.target.value
+        });
         const newData = [...data];
         newData[index][field] = event.target.value;
         setData(newData);
@@ -54,13 +92,24 @@ const Inventory = () => {
         if (index === editingRow && field !== "producto" && field !== "status") {
             return (
                 <input
-                    type="text"
+                    type="number"
+                    className={styles["input-stock"]}
                     value={value}
                     onChange={(event) => handleInputChange(event, field, index)}
                 />
             );
         } else {
             return value;
+        }
+    };
+
+    const setStatus = (stock) => {
+        if(stock >= inventory.high){
+            return "Alto";
+        }else if (stock >= inventory.medium){
+            return "Medio";
+        }else{
+            return "Bajo";
         }
     };
 
@@ -105,14 +154,19 @@ const Inventory = () => {
                                             checked={item.selected}
                                         />
                                     </td>
-                                    <td>{renderTableCell(item.producto, "producto", index)}</td>
+                                    <td>{item.name}</td>
                                     <td>{renderTableCell(item.stock, "stock", index)}</td>
-                                    <td>{renderTableCell(item.precio, "precio", index)}</td>
-                                    <td>{renderTableCell(item.status, "status", index)}</td>
+                                    <td>{renderTableCell(item.price, "price", index)}</td>
+                                    <td>{setStatus(item.stock)}</td>
                                     
                                     <td>
                                         {editingRow === index ? (
-                                            <div><button onClick={handleSaveClick} className={styles.guardar}>Guardar</button><button className={styles.deletemini}><i className="fa-solid fa-trash"></i></button></div>
+                                            <div>
+                                                <button 
+                                                    onClick={handleSaveClick} 
+                                                    className={styles.guardar}
+                                                >Guardar</button>
+                                            </div>
                                         ) : (
                                             <button onClick={() => handleEditClick(index)} className={styles.editar}>Editar</button>
                                         )}

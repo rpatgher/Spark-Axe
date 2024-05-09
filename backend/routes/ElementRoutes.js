@@ -7,7 +7,8 @@ import {
     getElement,
     updateElement,
     deleteElement,
-    publishProduct
+    publishProduct,
+    updateStock
 } from '../controllers/ElementController.js';
 
 import checkAuth from "../middleware/checkAuth.js";
@@ -23,6 +24,8 @@ router.route('/:id')
     .put(checkAuth, uploadImages, updateElement)
     .delete(checkAuth, deleteElement);
     
+router.route('/stock/:id')
+    .put(checkAuth, updateStock);
 
 router.route('/one/:id')
     .get(checkAuth, getElement);

@@ -3,9 +3,6 @@
     margin: 2rem 0;
     margin-top: 6rem;
 }
-
-
-
 .guardar{
     background-color: var(--blue);
     padding: 5px;
@@ -14,6 +11,11 @@
     border-radius: 5px;
     width: 80px;
     cursor: pointer;
+}
+.input-stock{
+    width: 5rem;
+    text-align: center;
+
 }
 .guardar:hover{
     background-color: rgb(42, 14, 143);
@@ -143,10 +145,6 @@ input{
 }
 .topcontent{
   flex:1;
-   
-}
-.topimage{
-   
    
 }
 table{
