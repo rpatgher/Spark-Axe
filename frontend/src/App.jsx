@@ -9,10 +9,13 @@ import ProtectedLayout from './layouts/ProtectedLayout';
 // ***************** Pages *****************
 import Home from './pages/Home';
 import About from './pages/About/About';
-import Contact from './pages/Contact/Contact';
+import Contact from './pages/Contact/contact';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import Forgot from './pages/Forgot';
+
+//import Support from './pages/Support/Support';
+//import ModalerrortSP from './pages/Support/Modalerrorabout';
 
 import Dashboard from './pages/Dashboard/Dashboard';
 import Orders from './pages/Orders/Orders';
@@ -43,12 +46,14 @@ function App() {
               <Route index element={<Home />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
+             
             </Route>
             <Route path="/" element={<AuthLayout />}>
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Signup />} />
               <Route path="forgot-password" element={<Forgot />} />
             </Route>
+
 
             
             <Route path="/" element={<ProtectedLayout />}>

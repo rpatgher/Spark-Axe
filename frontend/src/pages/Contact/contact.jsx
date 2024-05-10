@@ -38,13 +38,21 @@ const About = () => {
             </div>
 
             </div>
-            <div className={styles.enviocontent}>
-            <h2><span className={styles.headingother}>Marcar error</span></h2>
-            <p>En tu dashboard en el lado derecho abajo hay un boton rojo nombrado Marcar error si deseas</p>
+            <div className={styles.enviocontent2}>
+        
+            <div className={styles.marcarerrordivinfo}>
+            <h2><span className={styles.heading}>Soporte dentro de tu cuenta sparkaxe</span></h2>
+            <p>En tu panel de control, en la esquina inferior derecha, encontrarás un botón rojo etiquetado como "Marcar error". Si necesitas soporte de cualquier tipo, simplemente haz clic en él. Se tomará una captura de pantalla de tu pantalla y se te proporcionará un formulario para que describas el error ocurrido. Nuestro equipo de soporte te contestará lo antes posible para ayudarte, contando con especialistas en la materia para resolver tu inconveniente.</p>
+            </div>
+            <div className={styles.marcarerrordiv}>
+            <button className={styles.marcarerror}>Marcar error</button>
+            </div>
+          
             </div>
         <div className={styles.enviocontent}>
         <div className={styles.tabcontent1}>
             <h2 className={styles.heading}>Soporte</h2>
+            <p>Si ya tienes cuenta y necesitas soporte llena este formulario de caso de no tener cuenta y querer solicitar una <span>Haz clic aqui</span></p>
             
            
             <form 
