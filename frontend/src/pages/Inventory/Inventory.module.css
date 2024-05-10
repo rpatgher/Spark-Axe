@@ -1,7 +1,15 @@
+.inventory-wrapper{
+    padding-bottom: 6rem;
+}
 .heading{
     font-size: 5.4rem;
     margin: 2rem 0;
     margin-top: 6rem;
+}
+.topimage{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 .guardar{
     background-color: var(--blue);
@@ -16,6 +24,20 @@
     width: 5rem;
     text-align: center;
 
+}
+.col-select,
+.col-stock,
+.col-status {
+    width: 10%;
+}
+
+.col-product{
+    width: 30%;
+}
+
+.col-price,
+.col-edit {
+    width: 20%;
 }
 .guardar:hover{
     background-color: rgb(42, 14, 143);
@@ -69,6 +91,28 @@ input{
     background-color: var(--dark_gray);
     transition: all .3s ease-in-out;
     position: relative;
+}
+.status{
+    padding: .5rem 0;
+    margin: 0;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 4rem;
+    display: inline-block;
+    margin: 0 auto;
+}
+.status-high{
+    background-color: color-mix(in srgb, var(--green) 30%, #fff);
+    color: color-mix(in srgb, var(--green) 80%, #000000);
+}
+.status-medium{
+    background-color: color-mix(in srgb, var(--yellow) 30%, #fff);
+    color: color-mix(in srgb, var(--yellow) 80%, #000000);
+}
+.status-low{
+    background-color: color-mix(in srgb, var(--red) 30%, #fff);
+    color: color-mix(in srgb, var(--red) 80%, #000000);
 }
 
 .cell-select input:checked::after,
@@ -156,4 +200,17 @@ table{
     padding: 5px;
     border: none;
     cursor: pointer;
+}
+.imgAX {
+    height: 300px;
+    width: 400px;
+}
+.noproducts {
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 2rem 0;
+}
+
+.noproducts a {
+    color: var(--blue);
 }

@@ -212,7 +212,6 @@ tr:last-of-type td {
     background-color: color-mix(in srgb, var(--green) 30%, #fff);
     color: color-mix(in srgb, var(--green) 80%, #000000);
     font-weight: bold;
-    
 }
 
 .unpublished {
@@ -398,18 +397,4 @@ tr:last-of-type td {
 }
 .cargar:hover{
     background-color: black;
-}
-.go-top{
-    border: none;
-    background-color: var(--yellow);
-    color: var(--white);
-    border-radius: 50%;
-    width: 5rem;
-    height: 5rem;
-    font-size: 3rem;
-    cursor: pointer;
-
-    position: fixed;
-    bottom: 5rem;
-    right: 3rem;
 }

@@ -10,6 +10,7 @@ import styles from './Products.module.css';
 import FloatAlert from '../../components/Alert/FloatAlert';
 import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 import Modal from '../../components/Modals/GeneralModal';
+import GoTopBtn from '../../components/Btns/GoTopBtn';
 
 // ******************** Hooks ********************
 import useAuth from '../../hooks/useAuth';
@@ -17,6 +18,7 @@ import useApp from '../../hooks/useApp';
 
 // ******************** Helpers ********************
 import formatToMoney from '../../helpers/formatMoney';
+
 // **************** Images ****************
 import lunaAxImage from '../../assets/img/luna_ax.png';
 
@@ -150,14 +152,6 @@ const Products = () => {
         const newData = [...filteredProducts];
         newData[index].selected = !newData[index].selected; // Update selected property
         setFilteredProducts(newData);
-    };
-
-    const handleGoTop = () => {
-        const top = document.querySelector('main');
-        top.scroll({ 
-            top: 0,
-            behavior: "smooth"
-        });
     };
 
     return (
@@ -330,43 +324,40 @@ const Products = () => {
                                 }
                             }   
                         )}
-                        <tr className={styles.megarow}>
-                            <td colSpan="2"></td>
-                            <td colSpan="2">
-                                <strong>Inventario cargados: </strong>{visibleCount}
-                            </td>
-                            <td colSpan="2">
-                                {dataLength > limit &&
-                                    <button 
-                                        className={styles.cargar}
-                                        type='button'
-                                        onClick={() => {
-                                            setSelectAll(false);
-                                            setLimit(limit + limitIncrement);
-                                        }}
-                                    >Cargar más</button>
-                                }
-                            </td>
-                            <td colSpan="2">
-                                {limit > limitIncrement &&
-                                    <button 
-                                        className={styles.cargar}
-                                        type='button'
-                                        onClick={() => setLimit(limit - limitIncrement)}
-                                    >Cargar menos</button>
-                                }
-                            </td>
-                            <td colSpan="2"></td>
-                        </tr>
+                        {dataLength > limitIncrement &&
+                            <tr className={styles.megarow}>
+                                <td colSpan="2"></td>
+                                <td colSpan="2">
+                                    <strong>Productos cargados: </strong>{visibleCount}
+                                </td>
+                                <td colSpan="2">
+                                    {dataLength > limit &&
+                                        <button 
+                                            className={styles.cargar}
+                                            type='button'
+                                            onClick={() => {
+                                                setSelectAll(false);
+                                                setLimit(limit + limitIncrement);
+                                            }}
+                                        >Cargar más</button>
+                                    }
+                                </td>
+                                <td colSpan="2">
+                                    {limit > limitIncrement &&
+                                        <button 
+                                            className={styles.cargar}
+                                            type='button'
+                                            onClick={() => setLimit(limit - limitIncrement)}
+                                        >Cargar menos</button>
+                                    }
+                                </td>
+                                <td colSpan="2"></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
-            <button
-                className={styles["go-top"]}
-                onClick={handleGoTop}
-            >
-                <i className="fa-solid fa-arrow-up"></i>
-            </button>
+            <GoTopBtn />
             {modalDelete && 
                 <Modal 
                     modalActive={setModalDelete}

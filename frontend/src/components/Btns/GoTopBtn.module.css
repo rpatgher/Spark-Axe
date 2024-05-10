@@ -1,0 +1,14 @@
+.go-top{
+    border: none;
+    background-color: var(--yellow);
+    color: var(--white);
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    font-size: 3rem;
+    cursor: pointer;
+
+    position: fixed;
+    bottom: 5rem;
+    right: 3rem;
+}

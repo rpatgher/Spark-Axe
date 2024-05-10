@@ -1,10 +1,21 @@
-// Customers.js
 import React, { useState, useEffect } from 'react';
-import styles from './inventory.module.css';
-import clients from '../../assets/img/inventory.png';
 import { Link } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+
 import clientAxios from '../../config/clientAxios';
+
+// ******************** Styles ********************
+import styles from './inventory.module.css';
+
+// ******************** Hooks ********************
+import useAuth from '../../hooks/useAuth';
+
+// ******************** Helpers ********************
+import formatToMoney from '../../helpers/formatMoney';
+
+// **************** Images ****************
+import clients from '../../assets/img/inventory.png';
+import lunaAxImage from '../../assets/img/luna_ax.png';
+import GoTopBtn from '../../components/Btns/GoTopBtn';
 
 
 const Inventory = () => {
@@ -20,11 +31,16 @@ const Inventory = () => {
     });
     const dataLength = data.length;
     const [selectedCount, setSelectedCount] = useState(0);
+    const [visibleCount, setVisibleCount] = useState(0);
+    const [limit, setLimit] = useState(10);
+    const [limitIncrement, setLimitIncrement] = useState(10);
 
     useEffect(() => {
-        const count = data.filter(item => item.selected).length;
+        const count = data.filter(item => item.selected && item.visible).length;
+        const visible = data.filter(item => item.visible).length;
+        setVisibleCount(visible);
         setSelectedCount(count);
-    }, [data]);
+    }, [data, limit]);
 
     useEffect(() => {
         const getElements = async () => {
@@ -98,22 +114,28 @@ const Inventory = () => {
                 />
             );
         } else {
+            if(field === "price"){
+                return `$${formatToMoney(value)}`;
+            }
             return value;
         }
     };
 
-    const setStatus = (stock) => {
+    const setStatus = (stock, item) => {
         if (stock >= inventory.high) {
-            return "Alto";
+            item.status = "high";
+            return (<p className={`${styles.status} ${styles["status-high"]}`}>Alto</p>);
         } else if (stock >= inventory.medium) {
-            return "Medio";
+            item.status = "medium";
+            return (<p className={`${styles.status} ${styles["status-medium"]}`}>Medio</p>);
         } else {
-            return "Bajo";
+            item.status = "low";
+            return (<p className={`${styles.status} ${styles["status-low"]}`}>Bajo</p>);
         }
     };
 
     return (
-        <>
+        <div className={styles["inventory-wrapper"]}>
             <div className={styles.top}>
                 <div className={styles.topcontent}>
                     <h2 className={styles.heading}>Inventario</h2>
@@ -129,60 +151,100 @@ const Inventory = () => {
                 {selectedCount > 0 && 
                     <div className={styles.selected}>
                         <p className={styles.counter}><strong>Selected:</strong> {selectedCount}</p>
-                        <button className={styles.delete}><i className="fa-solid fa-trash"></i>Eliminar</button>
+                        <button 
+                            className={styles.delete}
+                        ><i className="fa-solid fa-trash"></i>Eliminar</button>
                     </div>
                 }
                 <div className={styles["table-wrapper"]}>
                     <table className={styles["inventory-table"]}>
                         <thead>
                             <tr>
-                                <th className={styles["cell-select"]}>
+                                <th className={styles["col-select"]}>
                                     <input type="checkbox" onChange={handleSelectAll} checked={selectAll} />
                                 </th>
-                                <th className={styles["cell-product"]}>Producto</th>
-                                <th className={styles["cell-stock"]}>Cantidad</th>
-                                <th className={styles["cell-price"]}>Precio</th>
-                                <th className={styles["cell-status"]}>Estatus</th>
-                                <th className={styles["cell-edit"]}>Editar</th>
+                                <th className={styles["col-product"]}>Producto</th>
+                                <th className={styles["col-stock"]}>Cantidad</th>
+                                <th className={styles["col-price"]}>Precio</th>
+                                <th className={styles["col-status"]}>Estatus</th>
+                                <th className={styles["col-edit"]}></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map((item, index) => (
-                                <tr key={item.id} className={item.selected ? styles.selectedRow : ''}>
-                                    <td className={styles["cell-select"]}>
-                                        <input
-                                            type="checkbox"
-                                            onChange={() => handleSelect(index)}
-                                            checked={item.selected || false}
-                                        />
-                                    </td>
-                                    <td>{item.name}</td>
-                                    <td>{renderTableCell(item.stock, "stock", index)}</td>
-                                    <td>{renderTableCell(item.price, "price", index)}</td>
-                                    <td>{setStatus(item.stock)}</td>
-
-                                    <td>
-                                        {editingRow === index ? (
-                                            <div>
-                                                <button
-                                                    onClick={handleSaveClick}
-                                                    className={styles.guardar}
-                                                >Guardar</button>
-                                            </div>
-                                        ) : (
-                                            <button onClick={() => handleEditClick(index)} className={styles.editar}>Editar</button>
-                                        )}
-                                    </td>
+                            {data.length === 0 ? (
+                                <tr>
+                                    <td colSpan="10" className={styles.noproducts}>
+                                        <div>
+                                            <img className={styles["imgAX"]} src={lunaAxImage} alt="Axolotl-Waiting" />
+                                        </div>
+                                        No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
                                 </tr>
-                            ))}
-                            {dataLength > 2 &&
+                            ):
+                                data.map((item, index) => {
+                                    if(index < limit){
+                                        item.visible = true;
+                                        return (
+                                            <tr 
+                                                key={item.id} 
+                                                className={item.selected ? styles.selectedRow : ''}
+                                            >
+                                                <td className={styles["cell-select"]}>
+                                                    <input
+                                                        type="checkbox"
+                                                        onChange={() => handleSelect(index)}
+                                                        checked={item.selected || false}
+                                                    />
+                                                </td>
+                                                <td>{item.name}</td>
+                                                <td>{renderTableCell(item.stock, "stock", index)}</td>
+                                                <td>{renderTableCell(item.price, "price", index)}</td>
+                                                <td>{setStatus(item.stock, item)}</td>
+
+                                                <td>
+                                                    {editingRow === index ? (
+                                                        <div>
+                                                            <button
+                                                                onClick={handleSaveClick}
+                                                                className={styles.guardar}
+                                                            >Guardar</button>
+                                                        </div>
+                                                    ) : (
+                                                        <button onClick={() => handleEditClick(index)} className={styles.editar}>Editar</button>
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        )
+                                    }else{
+                                        item.visible = false;
+                                        item.selected = false;
+                                    }
+                                })
+                            }
+                            {dataLength > limitIncrement &&
                                 <tr className={styles.megarow}>
-                                    <td></td>
-                                    <td colSpan="1">
-                                        <strong>Inventario cargados: </strong>{dataLength}
+                                    <td colSpan="2">
+                                        <strong>Inventario cargados: </strong>{visibleCount}
                                     </td>
-                                    <td colSpan="3">
-                                        <button className={styles.cargar}>Cargar mas</button>
+                                    <td colSpan="1">
+                                        {dataLength > limit &&
+                                            <button 
+                                                className={styles.cargar}
+                                                type='button'
+                                                onClick={() => {
+                                                    setSelectAll(false);
+                                                    setLimit(limit + limitIncrement);
+                                                }}
+                                            >Cargar más</button>
+                                        }
+                                    </td>
+                                    <td colSpan="1">
+                                        {limit > limitIncrement &&
+                                            <button 
+                                                className={styles.cargar}
+                                                type='button'
+                                                onClick={() => setLimit(limit - limitIncrement)}
+                                            >Cargar menos</button>
+                                        }
                                     </td>
                                     <td colSpan="2"></td>
                                 </tr>
@@ -191,7 +253,8 @@ const Inventory = () => {
                     </table>
                 </div>
             </div>
-        </>
+            <GoTopBtn />
+        </div>
     );
 }
 

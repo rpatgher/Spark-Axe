@@ -9,6 +9,7 @@ import styles from './NewProduct.module.css';
 // ************** Components *************
 import FormProduct from '../../components/FormProduct';
 import GeneralModal from '../../components/Modals/GeneralModal';
+import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 
 
 const EditProduct = () => {
@@ -80,8 +81,13 @@ const EditProduct = () => {
     }
     
     return (
-        <>
-            <h2 className={styles.heading}>Editar Producto: {product?.name}</h2>
+        <div className={styles.form}>
+            <HeadingsRuta
+                currentHeading={`Editar Producto: ${product?.name || ''}`}
+                routes={[
+                    {name: "Productos", path: "/dashboard/products"},
+                ]}
+            />
             <div className={styles["go-back"]}>
                 <Link to='/dashboard/products'>
                     <i className="fa-solid fa-arrow-left"></i> Regresar
@@ -99,7 +105,7 @@ const EditProduct = () => {
                     text='¿Estás seguro de eliminar este producto?'
                 />
             )}
-        </>
+        </div>
     )
 }
 
