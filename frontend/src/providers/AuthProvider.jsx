@@ -8,6 +8,8 @@ const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
     const [loading, setLoading] = useState(true);
 
+    const [profileModal, setProfileModal] = useState(false);
+
     useEffect(() => {
         const authUser = async () => {
             const token = localStorage.getItem('token');
@@ -55,7 +57,9 @@ const AuthProvider = ({ children }) => {
             setAuth,
             loading,
             logoutAuth,
-            updateMatrixAmount
+            updateMatrixAmount,
+            profileModal,
+            setProfileModal
         }}>
             {children}
         </AuthContext.Provider>
