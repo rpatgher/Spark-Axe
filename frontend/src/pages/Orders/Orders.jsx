@@ -102,6 +102,7 @@ const Orders = () => {
                                     {details === order.id && (
                                         <tr>
                                             <td colSpan="8" className={styles.products23}>
+                                                <h2> Ubicacion de entrega: Case de Remy 43, Colonia chapultepec, CDMX</h2>
                                             <h2 className={styles.infofloatl}>Tabla de Productos en el pedido:</h2>
                                                 <table className={styles["products-table"]}>
                                                     <thead>
