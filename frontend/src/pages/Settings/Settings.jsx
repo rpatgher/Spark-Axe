@@ -29,17 +29,17 @@ function Settings() {
       <h2 className={styles.heading}>General</h2>
       <div className={styles.profilecard}>
         <h2>Sparkaxe +</h2>
-        <button className={styles.linkother} onClick={() => openCity('Tokyo')}><i class="fa-regular fa-credit-card"></i> Plan</button>
-        <button className={styles.linkother} onClick={() => openCity('Paris')}><i class="fa-solid fa-store" ></i> Configurar Tienda</button>
-        <button className={styles.linkother}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
+        <button className={styles.linkother} onClick={() => openCity('Tokyo')}><i className="fa-regular fa-credit-card"></i> Plan</button>
+        <button className={styles.linkother} onClick={() => openCity('Paris')}><i className="fa-solid fa-store" ></i> Configurar Tienda</button>
+        <button className={styles.linkother}><i className="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
       </div>
       <p><strong>¿Algun problema?</strong></p>
       <Link to="/contact">
-      <button className={styles.linksettings}><i class="fa-solid fa-comments"></i> Contactanos</button></Link>
+      <button className={styles.linksettings}><i className="fa-solid fa-comments"></i> Contactanos</button></Link>
       <p></p>
-      <Link to="/about"><button className={styles.linksettings}><i class="fa-solid fa-cloud"></i> Sobre Nosotros</button></Link>
+      <Link to="/about"><button className={styles.linksettings}><i className="fa-solid fa-cloud"></i> Sobre Nosotros</button></Link>
       <p></p>
-      <button className={styles.linksettings}><i class="fa-solid fa-box"></i> Otro</button>
+      <button className={styles.linksettings}><i className="fa-solid fa-box"></i> Otro</button>
       </div>
       <div className={styles.rightdiv}>
       <div className={styles.rightcontent}>
@@ -185,7 +185,7 @@ function Settings() {
       <div className={styles.divinfo}>
         <h4>¿Como cambiar metodo de pago?</h4>
         <p>En su metodo de pago seleccionado se hace el ciclo de facturación mensualmente si desea cambiarlo presione aqui.</p>
-        <button className={styles.linksettings}><i class="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
+        <button className={styles.linksettings}><i className="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
       </div>
       </div>
   </div>

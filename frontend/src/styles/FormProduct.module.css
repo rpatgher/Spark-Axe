@@ -376,6 +376,7 @@ input.empty-field, textarea.empty-field{
 }
 .btn-saving{
     animation: pulse 2s infinite;
+    cursor: progress;
 }
 @keyframes pulse {
     0%, 100% {

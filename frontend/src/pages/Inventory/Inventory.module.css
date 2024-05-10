@@ -53,7 +53,6 @@ input{
 .cargar:hover{
     background-color: black;
 }
-
 .cell-select input,
 .col-select input {
     appearance: none;
@@ -102,7 +101,7 @@ input{
 
 .delete {
     flex: 0 0 auto; /* Don't grow or shrink, keep its size */
-    background-color: red;
+    background-color: var(--red);
     color: white;
     border: none;
     border-radius: 5px;
@@ -134,7 +133,7 @@ input{
 .selectedRow td {
     background-color: #eef1f3; /* Change this to the color you prefer */
  
-    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
+    /* box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); */
 }
 .back{
     height:200px;

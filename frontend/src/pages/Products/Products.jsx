@@ -9,6 +9,7 @@ import styles from './Products.module.css';
 // ******************** Components ********************
 import FloatAlert from '../../components/Alert/FloatAlert';
 import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
+import Modal from '../../components/Modals/GeneralModal';
 
 // ******************** Hooks ********************
 import useAuth from '../../hooks/useAuth';
@@ -32,6 +33,21 @@ const Products = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [visible, setVisible] = useState('all');
     const [search, setSearch] = useState('');
+    const [selectedCount, setSelectedCount] = useState(0);
+    const [visibleCount, setVisibleCount] = useState(0);
+    const [selectAll, setSelectAll] = useState(false);
+    const [dataLength, setDataLength] = useState(0);
+    const [limit, setLimit] = useState(10);
+    const [limitIncrement, setLimitIncrement] = useState(10);
+
+    const [modalDelete, setModalDelete] = useState(false);
+
+    useEffect(() => {
+        const count = filteredProducts.filter(item => item.selected && item.visible).length;
+        const countVisible = filteredProducts.filter(item => item.visible).length;
+        setSelectedCount(count);
+        setVisibleCount(countVisible);
+    }, [filteredProducts, limit]);
 
     const sortedProducts = products.sort((a, b) => {
         if (order === 'asc') {
@@ -72,6 +88,7 @@ const Products = () => {
                 const { data } = await clientAxios(`/api/elements/${auth.websites[0].id}`, config);
                 setProducts(data);
                 setFilteredProducts(data);
+                setDataLength(data.length);
             } catch (error) {
                 console.log(error);
             }
@@ -80,11 +97,13 @@ const Products = () => {
     }, []);
 
     const handleOrder = (e) => {
+        setSelectAll(false);
         setOrder(e.target.value);
         setFilteredProducts(sortedProducts);
     }
 
     const handleOrderType = (e) => {
+        setSelectAll(false);
         setOrderType(e.target.value);
         setFilteredProducts(sortedProducts);
     }
@@ -95,12 +114,13 @@ const Products = () => {
     }
 
     const handleVisible = (e) => {
-        console.log(e.target.dataset.value);
         setVisible(e.target.dataset.value);
         filterProducts(search, e.target.dataset.value);
     }
 
     const filterProducts = (search, visible) => {
+        setSelectAll(false);
+        setFilteredProducts(filteredProducts.map(product => product.selected = false));
         const visibleFiltered = products.filter(product => {
             if (visible === 'all') {
                 return product;
@@ -117,12 +137,31 @@ const Products = () => {
             return;
         }
         const filtered = visibleFiltered.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
-        console.log(filtered);
         setFilteredProducts(filtered);
     }
 
+    const handleSelectAll = () => {
+        const newData = filteredProducts.map(item => (item.visible ? { ...item, selected: !selectAll } : item));
+        setFilteredProducts(newData);
+        setSelectAll(!selectAll);
+    };
+
+    const handleSelect = (index) => {
+        const newData = [...filteredProducts];
+        newData[index].selected = !newData[index].selected; // Update selected property
+        setFilteredProducts(newData);
+    };
+
+    const handleGoTop = () => {
+        const top = document.querySelector('main');
+        top.scroll({ 
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
     return (
-        <>
+        <div className={styles["products-wrapper"]}>
             {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
             <HeadingsRuta 
                 currentHeading="Productos"
@@ -209,12 +248,28 @@ const Products = () => {
                     <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "published" ? styles.active : ''}`} data-value="published">Publicados</button>
                     <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "unpublished" ? styles.active : ''}`} data-value="unpublished">Archivados</button>
                 </div>
+                {selectedCount > 0 && 
+                    <div className={styles.selected}>
+                        <p className={styles.counter}><strong>Seleccionados:</strong> {selectedCount}</p>
+                        <button 
+                            className={styles.delete}
+                            type='button'
+                            onClick={() => setModalDelete(true)}
+                        ><i className="fa-solid fa-trash"></i>Eliminar</button>
+                    </div>
+                }
             </div>
             <div className={styles["table-wrapper"]}>
                 <table className={styles.table}>
                     <thead>
                         <tr>
-                            <th className={styles["col-select"]}><input type="checkbox" /></th>
+                            <th className={styles["col-select"]}>
+                                <input 
+                                    type="checkbox" 
+                                    onChange={handleSelectAll}
+                                    checked={selectAll}
+                                />
+                            </th>
                             <th className={styles["col-image"]}>Imagen</th>
                             <th className={styles["col-name"]}>Nombre</th>
                             <th className={styles["col-description"]}>Descripción</th>
@@ -238,35 +293,88 @@ const Products = () => {
                             </tr>
 
                         ) :
-                            filteredProducts.map(product => (
-                                <tr
-                                    key={product.id}
-                                >
-                                    <td className={styles["cell-select"]}><input type="checkbox" /></td>
-                                    <td className={styles["cell-image"]}><img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/elements/${product.image}`} alt={`${product.name} Product Image`} /></td>
-                                    <td>{product.name}</td>
-                                    <td className={styles["cell-description"]}>
-                                        <i className="fa-regular fa-note-sticky"></i>
-                                    </td>
-                                    <td>${formatToMoney(product.price)}</td>
-                                    <td className={styles["cell-color"]}><div style={{ backgroundColor: product.color }} ></div></td>
-                                    {/* TODO: Enable category */}
-                                    <td>iPlay</td>
-                                    <td className={styles["cell-id"]}>{String(product.id).padStart(10, '0')}</td>
-                                    <td className={styles["cell-published"]}><div className={`${product.published ? styles.published : styles.unpublished}`}>{product.published ? 'Publicado' : 'Archivado'}</div></td>
-                                    <td className={styles["cell-actions"]}>
-                                        <Link to={`edit/${product.id}`}><i className="fa-solid fa-pen"></i></Link>
-                                    </td>
-                                </tr>
-                            )
-                            
-                        )
-                           
-                        }
+                            filteredProducts.map((product, index) => {
+                                if(index < limit){
+                                    product.visible = true;
+                                   return (
+                                    <tr
+                                        key={product.id}
+                                        className={product.selected ? styles.selectedRow : ''}
+                                    >
+                                        <td className={styles["cell-select"]}>
+                                            <input 
+                                                type="checkbox"
+                                                onChange={() => handleSelect(index)}
+                                                checked={product.selected || false}
+                                            />
+                                        </td>
+                                        <td className={styles["cell-image"]}><img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/elements/${product.image}`} alt={`${product.name} Product Image`} /></td>
+                                        <td>{product.name}</td>
+                                        <td className={styles["cell-description"]}>
+                                            <i className="fa-regular fa-note-sticky"></i>
+                                        </td>
+                                        <td>${formatToMoney(product.price)}</td>
+                                        <td className={styles["cell-color"]}><div style={{ backgroundColor: product.color }} ></div></td>
+                                        {/* TODO: Enable category */}
+                                        <td>iPlay</td>
+                                        <td className={styles["cell-id"]}>{String(product.id).padStart(10, '0')}</td>
+                                        <td className={styles["cell-published"]}><div className={`${product.published ? styles.published : styles.unpublished}`}>{product.published ? 'Publicado' : 'Archivado'}</div></td>
+                                        <td className={styles["cell-actions"]}>
+                                            <Link to={`edit/${product.id}`}><i className="fa-solid fa-pen"></i></Link>
+                                        </td>
+                                    </tr>
+                                   ) 
+                                }else{
+                                    product.visible = false;
+                                    product.selected = false;
+                                }
+                            }   
+                        )}
+                        <tr className={styles.megarow}>
+                            <td colSpan="2"></td>
+                            <td colSpan="2">
+                                <strong>Inventario cargados: </strong>{visibleCount}
+                            </td>
+                            <td colSpan="2">
+                                {dataLength > limit &&
+                                    <button 
+                                        className={styles.cargar}
+                                        type='button'
+                                        onClick={() => {
+                                            setSelectAll(false);
+                                            setLimit(limit + limitIncrement);
+                                        }}
+                                    >Cargar más</button>
+                                }
+                            </td>
+                            <td colSpan="2">
+                                {limit > limitIncrement &&
+                                    <button 
+                                        className={styles.cargar}
+                                        type='button'
+                                        onClick={() => setLimit(limit - limitIncrement)}
+                                    >Cargar menos</button>
+                                }
+                            </td>
+                            <td colSpan="2"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-        </>
+            <button
+                className={styles["go-top"]}
+                onClick={handleGoTop}
+            >
+                <i className="fa-solid fa-arrow-up"></i>
+            </button>
+            {modalDelete && 
+                <Modal 
+                    modalActive={setModalDelete}
+                    text='¿Estás seguro de eliminar los productos seleccionados?'
+                    actionModal={() => console.log('Deleted')}
+                />
+            }
+        </div>
     )
 }
 

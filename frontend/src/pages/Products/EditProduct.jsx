@@ -8,6 +8,7 @@ import styles from './NewProduct.module.css';
 
 // ************** Components *************
 import FormProduct from '../../components/FormProduct';
+import GeneralModal from '../../components/Modals/GeneralModal';
 
 
 const EditProduct = () => {
@@ -92,23 +93,11 @@ const EditProduct = () => {
                 publishProduct={publishProduct}
             />
             {modalDelete && (
-                <div className={styles.modal}>
-                    <div className={styles["modal-content"]}>
-                        <h3>¿Estás seguro de eliminar este producto?</h3>
-                        <div className={styles.buttons}>
-                            <button
-                                className={styles.cancel}
-                                type='button'
-                                onClick={() => setModalDelete(false)}
-                            >Cancelar</button>
-                            <button
-                                className={styles.delete}
-                                type='button'
-                                onClick={deleteProduct}
-                            >Eliminar</button>
-                        </div>
-                    </div>
-                </div>
+                <GeneralModal
+                    modalActive={setModalDelete}
+                    actionModal={deleteProduct}
+                    text='¿Estás seguro de eliminar este producto?'
+                />
             )}
         </>
     )

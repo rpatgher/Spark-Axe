@@ -67,7 +67,7 @@ const Inventory = () => {
 
     const handleInputChange = (event, field, index) => {
         setCurrentElement({
-        ...data[index],
+            ...data[index],
             [field]: event.target.value
         });
         const newData = [...data];
@@ -84,7 +84,6 @@ const Inventory = () => {
     const handleSelect = (index) => {
         const newData = [...data];
         newData[index].selected = !newData[index].selected; // Update selected property
-        console.log(newData[index].selected); // Log the updated selected value
         setData(newData);
     };
 
@@ -104,32 +103,35 @@ const Inventory = () => {
     };
 
     const setStatus = (stock) => {
-        if(stock >= inventory.high){
+        if (stock >= inventory.high) {
             return "Alto";
-        }else if (stock >= inventory.medium){
+        } else if (stock >= inventory.medium) {
             return "Medio";
-        }else{
+        } else {
             return "Bajo";
         }
     };
 
     return (
         <>
-        <div className={styles.top}>
-
-
-            <div className={styles.topcontent}>
-            <h2 className={styles.heading}>Inventario</h2>
-            <h4>Ten mas control sobre tu negocio</h4>
-            <Link to='/dashboard/inventory/set'><button className={styles.configinventory}><i class="fa-solid fa-dolly"></i> Configurar inventario</button></Link>
+            <div className={styles.top}>
+                <div className={styles.topcontent}>
+                    <h2 className={styles.heading}>Inventario</h2>
+                    <h4>Ten mas control sobre tu negocio</h4>
+                    <Link to='/dashboard/inventory/set'><button className={styles.configinventory}><i className="fa-solid fa-dolly"></i> Configurar inventario</button></Link>
+                </div>
+                <div className={styles.topimage}>
+                    <img className={styles["back"]} src={clients} alt="Axolotl-Waiting" />
+                </div>
             </div>
-            <div className={styles.topimage}>
-            <img className={styles["back"]} src={clients} alt="Axolotl-Waiting" />
-            </div>
-        </div>
-            
+
             <div className={styles.container}>
-                {selectedCount > 0 && <div className={styles.selected}><p className={styles.counter}><strong>Selected:</strong> {selectedCount}</p><button className={styles.delete}><i className="fa-solid fa-trash"></i> Eliminar</button></div>}
+                {selectedCount > 0 && 
+                    <div className={styles.selected}>
+                        <p className={styles.counter}><strong>Selected:</strong> {selectedCount}</p>
+                        <button className={styles.delete}><i className="fa-solid fa-trash"></i>Eliminar</button>
+                    </div>
+                }
                 <div className={styles["table-wrapper"]}>
                     <table className={styles["inventory-table"]}>
                         <thead>
@@ -137,11 +139,11 @@ const Inventory = () => {
                                 <th className={styles["cell-select"]}>
                                     <input type="checkbox" onChange={handleSelectAll} checked={selectAll} />
                                 </th>
-                                <th>producto</th>
-                                <th>stock</th>
-                                <th>Precio</th>
-                                <th>Status</th>
-                                <th>Editar</th>
+                                <th className={styles["cell-product"]}>Producto</th>
+                                <th className={styles["cell-stock"]}>Cantidad</th>
+                                <th className={styles["cell-price"]}>Precio</th>
+                                <th className={styles["cell-status"]}>Estatus</th>
+                                <th className={styles["cell-edit"]}>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -151,19 +153,19 @@ const Inventory = () => {
                                         <input
                                             type="checkbox"
                                             onChange={() => handleSelect(index)}
-                                            checked={item.selected}
+                                            checked={item.selected || false}
                                         />
                                     </td>
                                     <td>{item.name}</td>
                                     <td>{renderTableCell(item.stock, "stock", index)}</td>
                                     <td>{renderTableCell(item.price, "price", index)}</td>
                                     <td>{setStatus(item.stock)}</td>
-                                    
+
                                     <td>
                                         {editingRow === index ? (
                                             <div>
-                                                <button 
-                                                    onClick={handleSaveClick} 
+                                                <button
+                                                    onClick={handleSaveClick}
                                                     className={styles.guardar}
                                                 >Guardar</button>
                                             </div>
@@ -173,7 +175,7 @@ const Inventory = () => {
                                     </td>
                                 </tr>
                             ))}
-                            {dataLength > 4 &&
+                            {dataLength > 2 &&
                                 <tr className={styles.megarow}>
                                     <td></td>
                                     <td colSpan="1">

@@ -3,9 +3,6 @@
     margin: 2rem 0;
     margin-top: 6rem;
 }
-
-
-
 .guardar{
     background-color: var(--blue);
     padding: 5px;
@@ -145,11 +142,6 @@ input{
   flex:1;
    
 }
-.topimage{
-   
-   
-}
-
 table{
     margin-top: 20px;
 }

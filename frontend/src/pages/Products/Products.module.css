@@ -1,3 +1,7 @@
+.products-wrapper{
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
 .filters {
     display: flex;
     justify-content: space-between;
@@ -352,4 +356,60 @@ tr:last-of-type td {
 
 .Filtertabs {
     border-top: 2px solid var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+.selected {
+    display: flex; /* Make .selected a flex container */
+    align-items: center; /* Center items vertically */
+    gap: 2rem;
+}
+.counter{
+    margin: 0;
+}
+.delete {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
+    font-weight: bold;
+}
+.delete:hover{
+    background-color: color-mix(in srgb, var(--red) 80%, #000000);
+}
+.selectedRow{
+    border: #d1c5ff;
+}
+.selectedRow td {
+    background-color: #eef1f3; /* Change this to the color you prefer */
+    /* box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); */
+}
+.cargar{
+    background-color: var(--dark_gray);
+    padding: 5px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 120px;
+    cursor: pointer;
+}
+.cargar:hover{
+    background-color: black;
+}
+.go-top{
+    border: none;
+    background-color: var(--yellow);
+    color: var(--white);
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    font-size: 3rem;
+    cursor: pointer;
+
+    position: fixed;
+    bottom: 5rem;
+    right: 3rem;
 }
