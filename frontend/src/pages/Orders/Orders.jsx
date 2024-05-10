@@ -90,6 +90,7 @@ const Orders = () => {
                                                 <option value="IP">En proceso</option>
                                                 <option value="S">Enviado</option>
                                                 <option value="C">Cerrado</option>
+                                                <option value="CA">Cancelado</option>
                                             </select>
                                         </td>
                                         <td>{order.notes}</td>
