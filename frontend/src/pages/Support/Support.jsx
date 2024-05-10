@@ -1,22 +1,10 @@
-import React from 'react';
-import html2canvas from 'html2canvas';
 
 const Support = () => {
-    const takeScreenshot = () => {
-        html2canvas(document.body).then(canvas => {
-            const link = document.createElement('a');
-            link.download = 'screenshot.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        });
-    };
-
-    return (
+    return(
         <div>
-            <button onClick={takeScreenshot}>Take Screenshot</button>
-            <p>Hello</p>
+            <button>print</button>
+            <p>hello</p>
         </div>
     );
 }
-
 export default Support;
