@@ -252,7 +252,7 @@ flex: 2;
   position: relative;
   display: flex;
   justify-content: center;
-  top: -270px;
+  top: -355px;
   z-index: 1;
   transition: 0.5s;
 }
@@ -260,7 +260,7 @@ flex: 2;
   position: relative;
   display: flex;
   justify-content: center;
-  top: -290px;
+  top: -370px;
   z-index: 1;
   transition: 0.5s;
 }
