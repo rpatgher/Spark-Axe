@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // **************** Hooks ****************
@@ -9,8 +10,9 @@ import styles from './HeaderDashboard.module.css';
 
 const HeaderDashboard = () => {
     const { theme, handleToggleTheme } = useApp();
-    const { logoutAuth, auth } = useAuth();
+    const { logoutAuth, auth, setProfileModal } = useAuth();
     const { name, lastname, websites, role } = auth;
+
     return (
         <header className={styles.header}>
             <div className={styles.heading}>
@@ -51,15 +53,19 @@ const HeaderDashboard = () => {
                     </div>
                     <div className={styles.dropdown}>
                     <div className={styles.dropdownContent}>
-                        <Link to="/dashboard"><i className="fa-solid fa-user-gear"></i>Perfil</Link>
+                        <button
+                            onClick={() => setProfileModal(true)}
+                        >
+                            <i className="fa-solid fa-user-gear"></i>Perfil
+                        </button>
                         <button
                             onClick={logoutAuth}
-                        ><i className="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</button>
+                        ><i className="fa-solid fa-right-from-bracket"></i>Cerrar Sesión</button>
                     </div>
                     </div>
                 </div>
             </div>
-            
+
         </header>
     )
 }

@@ -155,7 +155,8 @@
 .dropdown{
     position: absolute;
     display: none;
-    bottom: 0rem; /* Position the dropdown content below the profile element */
+    bottom: 0; /* Position the dropdown content below the profile element */
+    left: 0;
     transform: translateY(100%);
 }
 .dropdownContent {
@@ -165,8 +166,8 @@
     z-index: 1;
     border-radius: 1rem;
     font-size: 1.2rem;
-    top: 0.5rem;
-    transform: translateY(10%);
+    transform: translateY(1rem);
+    width: 15rem;
 }
 .dropdownContent button{
     all: unset;
@@ -174,6 +175,7 @@
 .dropdownContent a, .dropdownContent button {
     color: black;
     padding: 1rem 1.4rem;
+    width: calc(100% - 2.8rem);
     text-decoration: none;
     display: block;
     border-radius: 1rem;
@@ -245,6 +247,7 @@
 }
 .dropdownContent2 button{
     all: unset;
+    width: 100%;
 }
 .dropdownContent2 p, .dropdownContent2 button {
     color: black;

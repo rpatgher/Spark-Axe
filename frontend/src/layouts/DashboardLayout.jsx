@@ -8,6 +8,7 @@ import styles from '../styles/Dashboard.module.css';
 import SidebarDashboard from '../components/SidebarDashboard/SidebarDashboard'
 import HeaderDashboard from '../components/HeaderDashboard/HeaderDashboard'
 import ModalError from "../components/Modals/ModalError";
+import ModalProfile from "../components/Modals/ModalProfile";
 
 // **************** Hooks ****************
 import useApp from '../hooks/useApp';
@@ -15,7 +16,7 @@ import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
     const { darkmode, openModalError, modalError, setScreenshotImage } = useApp();
-    const { auth } = useAuth();
+    const { auth, profileModal } = useAuth();
 
 
     const takeScreenshot = async () => {
@@ -54,6 +55,9 @@ const DashboardLayout = () => {
                     {modalError && <ModalError />}
                 </main>
             </div>
+            {profileModal && (
+                <ModalProfile />
+            )}
         </div>
     )
 }
