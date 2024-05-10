@@ -148,21 +148,10 @@ const Inventory = () => {
             </div>
 
             <div className={styles.container}>
-                {selectedCount > 0 && 
-                    <div className={styles.selected}>
-                        <p className={styles.counter}><strong>Selected:</strong> {selectedCount}</p>
-                        <button 
-                            className={styles.delete}
-                        ><i className="fa-solid fa-trash"></i>Eliminar</button>
-                    </div>
-                }
                 <div className={styles["table-wrapper"]}>
                     <table className={styles["inventory-table"]}>
                         <thead>
                             <tr>
-                                <th className={styles["col-select"]}>
-                                    <input type="checkbox" onChange={handleSelectAll} checked={selectAll} />
-                                </th>
                                 <th className={styles["col-product"]}>Producto</th>
                                 <th className={styles["col-stock"]}>Cantidad</th>
                                 <th className={styles["col-price"]}>Precio</th>
@@ -185,16 +174,9 @@ const Inventory = () => {
                                         item.visible = true;
                                         return (
                                             <tr 
-                                                key={item.id} 
-                                                className={item.selected ? styles.selectedRow : ''}
+                                                
                                             >
-                                                <td className={styles["cell-select"]}>
-                                                    <input
-                                                        type="checkbox"
-                                                        onChange={() => handleSelect(index)}
-                                                        checked={item.selected || false}
-                                                    />
-                                                </td>
+                                                
                                                 <td>{item.name}</td>
                                                 <td>{renderTableCell(item.stock, "stock", index)}</td>
                                                 <td>{renderTableCell(item.price, "price", index)}</td>
@@ -216,7 +198,7 @@ const Inventory = () => {
                                         )
                                     }else{
                                         item.visible = false;
-                                        item.selected = false;
+                                      
                                     }
                                 })
                             }
