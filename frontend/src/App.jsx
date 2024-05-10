@@ -14,8 +14,7 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import Forgot from './pages/Forgot';
 
-//import Support from './pages/Support/Support';
-//import ModalerrortSP from './pages/Support/Modalerrorabout';
+import Support from './pages/Support/Support';
 
 import Dashboard from './pages/Dashboard/Dashboard';
 import Orders from './pages/Orders/Orders';
@@ -46,6 +45,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
+              <Route path="support" element={<Support />} />
              
             </Route>
             <Route path="/" element={<AuthLayout />}>
