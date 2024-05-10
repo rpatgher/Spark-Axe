@@ -44,6 +44,8 @@ const Products = () => {
 
     const [modalDelete, setModalDelete] = useState(false);
 
+    const [productDescription, setProductDescription] = useState({});
+
     useEffect(() => {
         const count = filteredProducts.filter(item => item.selected && item.visible).length;
         const countVisible = filteredProducts.filter(item => item.visible).length;
@@ -153,6 +155,10 @@ const Products = () => {
         newData[index].selected = !newData[index].selected; // Update selected property
         setFilteredProducts(newData);
     };
+
+    const showDescription = (product) => {
+        setProductDescription(product);
+    }
 
     return (
         <div className={styles["products-wrapper"]}>
@@ -305,7 +311,11 @@ const Products = () => {
                                         <td className={styles["cell-image"]}><img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/elements/${product.image}`} alt={`${product.name} Product Image`} /></td>
                                         <td>{product.name}</td>
                                         <td className={styles["cell-description"]}>
-                                            <i className="fa-regular fa-note-sticky"></i>
+                                            <button
+                                                onClick={() => showDescription(product)}
+                                            >
+                                                <i className="fa-regular fa-note-sticky"></i>
+                                            </button>
                                         </td>
                                         <td>${formatToMoney(product.price)}</td>
                                         <td className={styles["cell-color"]}><div style={{ backgroundColor: product.color }} ></div></td>
@@ -357,6 +367,20 @@ const Products = () => {
                     </tbody>
                 </table>
             </div>
+            {productDescription.name &&
+                <div className={styles["modal-wrapper"]}>
+                    <div className={styles["modal-description"]}>
+                        <button 
+                            className={styles["close-modal"]}
+                            onClick={() => setProductDescription({})}
+                        >
+                            <i className="fa-solid fa-times"></i>
+                        </button>
+                        <h3>{productDescription.name}</h3>
+                        <p>{productDescription.description}</p>
+                    </div>
+                </div>
+            }
             <GoTopBtn />
             {modalDelete && 
                 <Modal 

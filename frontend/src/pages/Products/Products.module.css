@@ -234,7 +234,10 @@ tr:last-of-type td {
     cursor: pointer;
     transition: all .1s ease-in-out;
 }
-
+.cell-description button{
+    all: unset;
+    cursor: pointer;
+}
 .cell-actions,
 .cell-description {
     font-size: 2.2rem;
@@ -245,6 +248,34 @@ tr:last-of-type td {
     color: var(--dark_gray);
     transition: all .1s ease-in-out;
 }
+.modal-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-description{
+    background-color: var(--white);
+    position: relative;
+    border-radius: 1rem;
+    padding: 2rem;
+    min-width: 40rem;
+}
+.close-modal{
+    all: unset;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    cursor: pointer;
+}
+
 
 
 .btn-filter {
