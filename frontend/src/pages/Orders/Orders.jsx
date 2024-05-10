@@ -103,30 +103,33 @@ const Orders = () => {
                                     {details === order.id && (
                                         <tr>
                                             <td colSpan="8" className={styles.products23}>
-                                                <h2> Ubicacion de entrega: Case de Remy 43, Colonia chapultepec, CDMX</h2>
-                                            <h2 className={styles.infofloatl}>Tabla de Productos en el pedido:</h2>
-                                                <table className={styles["products-table"]}>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Producto</th>
-                                                            <th>Cantidad</th>
-                                                            <th>Precio</th>
-                                                            <th>Subtotal</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {order.elements.map((element) => (
-                                                            <tr key={`${element.name}-${order.id}`}>
-                                                                <td>{element.name}</td>
-                                                                <td>{element.order_element.quantity}</td>
-                                                                <td>${formatToMoney(element.price)}</td>
-                                                                <td>${formatToMoney(element.price * element.order_element.quantity)}</td>
-                                                            </tr>
-                                                        ))}
-                                                    </tbody>
-                                                </table>
-                                                <h2 className={styles.infofloatr}>Total de Pedido: <span className={styles.infofloatrb}>${formatToMoney(parseFloat(order.total))}</span></h2>
-                                            </td>
+    <button onClick={handleButtonClick}>Hello</button>
+    <h2> Ubicacion de entrega: Case de Remy 43, Colonia chapultepec, CDMX</h2>
+    <h2 className={styles.infofloatl}>Tabla de Productos en el pedido:</h2>
+    <table className={styles["products-table"]}>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {order.elements.map((element) => (
+                <tr key={`${element.name}-${order.id}`}>
+                    <td>{element.name}</td>
+                    <td>{element.order_element.quantity}</td>
+                    <td>${formatToMoney(element.price)}</td>
+                    <td>${formatToMoney(element.price * element.order_element.quantity)}</td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+    <h2 className={styles.infofloatr}>Total de Pedido: <span className={styles.infofloatrb}>${formatToMoney(parseFloat(order.total))}</span></h2>
+    <h2 className={styles.infofloatr}>Status: <span className={styles.infofloatrb}>{(order.status)}</span></h2>
+</td>
+
                                         </tr>
                                     )}
                                 </Fragment>
