@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
 // ******************** Styles ********************
 import styles from './Dashboard.module.css';
 // **************** Images ****************
@@ -7,13 +7,57 @@ import lunaAxImage from '../../assets/img/TiendaM.png';
 import Vape from '../../assets/img/vape.webp';
 import bustop from '../../assets/img/bustop.jpg';
 import useAuth from '../../hooks/useAuth';
+import clientAxios from '../../config/clientAxios';
 
 
 
 const Dashboard = () => {
-  const {auth} = useAuth();
 
+  useEffect(() => {
+    const getElements = async () => {
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        try {
+            const { data } = await clientAxios(`/api/elements/${auth.websites[0].id}`, config);
+            setData(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    return () => getElements();
+}, []);
+
+  const {auth} = useAuth();
+  const [data, setData] = useState([]);
   const { name, lastname, websites, role } = auth;
+  const [inventory, setInventory] = useState({
+    low: 10,
+    medium: 20,
+    high: 30
+});
+const dataLength = data.length;
+const [visibleCount, setVisibleCount] = useState(0);
+    const [limit, setLimit] = useState(4);
+  
+  const setStatus = (stock, item) => {
+    if (stock >= inventory.high) {
+        item.status = "high";
+        return (<p className={`${styles.status} ${styles["status-high"]}`}>Alto</p>);
+    } else if (stock >= inventory.medium) {
+        item.status = "medium";
+        return (<p className={`${styles.status} ${styles["status-medium"]}`}>Medio</p>);
+    } else {
+        item.status = "low";
+        return (<p className={`${styles.status} ${styles["status-low"]}`}>Bajo</p>);
+    }
+};
+
+
   return (
     <div className={styles["dashboard-container"]}>
       <div className={styles["Dashboard"]}>
@@ -35,33 +79,39 @@ const Dashboard = () => {
             <div className={styles["bigtop"]}>
               <p><i className="fa-solid fa-dolly"></i>  Inventario bajo</p>
             </div>
-            <table className={styles["anouncetable"]}>
-              <tr>
-                <th>producto	</th>
-                <th>stock</th>
-                <th>Status</th>
-              </tr>
-              <tr>
-                <td>Vape1</td>
-                <td>77</td>
-                <td>bajo</td>
-              </tr>
-              <tr>
-                <td>Vape2	</td>
-                <td>77</td>
-                <td>bajo</td>
-              </tr>
-              <tr>
-                <td>Vape3	</td>
-                <td>77</td>
-                <td>bajo</td>
-              </tr>
-              <tr>
-                <td>Vape4</td>
-                <td>77</td>
-                <td>bajo</td>
-              </tr>
-            </table>
+            <table className={styles["anouncetable2"]}>
+                    
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Estatus</th>
+                            </tr>
+                            {data.length === 0 ? (
+                                <tr>
+                                    <td colSpan="10" >
+                                        No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
+                                </tr>
+                            ):
+                                data.map((item, index) => {
+                                    if(index < limit){
+                                        item.visible = true;
+                                        return (
+                                            <tr 
+                                                key={item.id} 
+                                            >
+                                                <td>{item.name}</td>
+                                                <td>{(item.stock, "stock", index)}</td>
+                                                <td>{setStatus(item.stock, item)}</td>
+                                            </tr>
+                                        )
+                                    }else{
+                                        item.visible = false;
+                                      
+                                    }
+                                })
+                            }
+                        
+                    </table>
           </div>
         </div>
         <div className={styles["row"]}>
@@ -149,7 +199,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className={styles["Menu"]}>
-          <i class="fa-solid fa-person-digging"></i>
+          <i className="fa-solid fa-person-digging"></i>
             <p>Trabajando para mejorar sparkaxe</p>
           </div>
         </div>
