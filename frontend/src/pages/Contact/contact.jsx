@@ -52,7 +52,7 @@ const About = () => {
         <div className={styles.enviocontent}>
         <div className={styles.tabcontent1}>
             <h2 className={styles.heading}>Soporte</h2>
-            <p>Si ya tienes cuenta y necesitas soporte llena este formulario de caso de no tener cuenta y querer solicitar una <span>Haz clic aqui</span></p>
+            <p style={{ textAlign: 'center' }} >Si ya tienes cuenta y necesitas soporte llena este formulario de caso de no tener cuenta y querer solicitar una <Link to="/support"><strong style={{cursor: "pointer"}}> Haz clic aqui</strong></Link></p>
             
            
             <form 
