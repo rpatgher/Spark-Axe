@@ -13,10 +13,11 @@ const ModalCategories = ({categories, closeModal}) => {
                     <i className="fa-solid fa-times"></i>
                 </button>
                 <h2>Categorías</h2>
+                <hr></hr>
                 {categories.map((category, index) => (
                     <div key={index} className={styles["category"]}>
                         <h3>{category.category}</h3>
-                        <ul>
+                        <ul className={styles.category}>
                             {category.subcategories.map((subcategory, index) => (
                                 <li key={index}>{subcategory}</li>
                             ))}

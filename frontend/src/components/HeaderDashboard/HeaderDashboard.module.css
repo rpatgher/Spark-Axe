@@ -244,6 +244,7 @@
     transform: translateY(10%);
     padding: 1rem 1.4rem;
     cursor: default;
+
 }
 .dropdownContent2 button{
     all: unset;
@@ -258,5 +259,5 @@
 
 .notification:hover .dropdown2, .profile .dropdown2:hover {
     display: block;
+    z-index: 999; /* Adjust the value as needed */
 }
-

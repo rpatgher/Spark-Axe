@@ -410,8 +410,12 @@ const Products = () => {
                         >
                             <i className="fa-solid fa-times"></i>
                         </button>
-                        <h3>{productDescription.name}</h3>
-                        <p>{productDescription.description}</p>
+                        <h2>Descripcion de Producto</h2>
+                        <hr></hr>
+                        <p className={styles.descriptioninfotitle}>Nombre de producto:</p>
+                        <p className={styles.descriptioninfo}> {productDescription.name}</p>
+                        <p className={styles.descriptioninfotitle}>Descripcion: </p>
+                        <p className={styles.descriptioninfo}> {productDescription.description}</p>
                     </div>
                 </div>
             }

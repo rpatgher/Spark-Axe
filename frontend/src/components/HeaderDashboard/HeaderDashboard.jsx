@@ -31,7 +31,7 @@ const HeaderDashboard = () => {
                     <i className="fa-regular fa-bell"></i>
                     <div className={styles.dropdown2}>
                     <div className={styles.dropdownContent2}>
-                        <p><strong><i className="fa-solid fa-bell"></i> Aviso 1</strong> que pedo remy</p>
+                       <p><strong><i className="fa-solid fa-bell"></i> Aviso 1</strong> que pedo remy</p>
                         <hr></hr>
                         <p><strong><i className="fa-solid fa-bell"></i> Aviso 2</strong> remy es gei</p>
                         <hr></hr>

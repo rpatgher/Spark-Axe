@@ -435,3 +435,15 @@ tr:last-of-type td {
 .cargar:hover{
     background-color: black;
 }
+.descriptioninfo{
+    color: rgb(99, 93, 93);
+    font-weight: normal;
+    max-width: 350px;
+    line-height: 1.5;
+}
+.descriptioninfotitle{
+    font-weight: bold;
+}
+.close-modal:hover{
+    color: var(--red);
+}
