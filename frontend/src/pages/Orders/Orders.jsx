@@ -44,6 +44,17 @@ const Orders = () => {
     const toggleDetails = (orderId) => {
         setDetails(details === orderId ? '' : orderId);
     }
+    
+    //Share to whatsapp pedidos
+        const shareArrayToWhatsApp = () => {
+        const message = "hello"; // Join array elements with new lines
+        shareToWhatsApp(message);
+    };
+    const shareToWhatsApp = (message) => {
+        const url = `whatsapp://send?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    };
+    //**********Acaba Share to whatsapp *///////////////
 
     return (
         <>
@@ -103,7 +114,7 @@ const Orders = () => {
                                     {details === order.id && (
                                         <tr>
                                             <td colSpan="8" className={styles.products23}>
-    <button onClick={handleButtonClick}>Hello</button>
+    <button onClick={shareArrayToWhatsApp}>Print</button>
     <h2> Ubicacion de entrega: Case de Remy 43, Colonia chapultepec, CDMX</h2>
     <h2 className={styles.infofloatl}>Tabla de Productos en el pedido:</h2>
     <table className={styles["products-table"]}>
