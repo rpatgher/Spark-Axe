@@ -25,11 +25,11 @@
 }
 .Profile {
     border-radius: 14px;
-    background-color: #fff;
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     width: 25%;
+    justify-content: center;
 }
 .Profile:hover {
     box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37);
@@ -41,10 +41,12 @@
     height: 100px;
     width: 100px;
     position: relative;
-    Margin: 20px
+    Margin: 20px;
+ 
 }
 .ProfileHead {
     margin-left: 20px;
+    margin-right: 20px;
 }
 .Most {
     border-radius: 14px;

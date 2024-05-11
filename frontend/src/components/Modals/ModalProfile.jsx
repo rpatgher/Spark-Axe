@@ -29,7 +29,7 @@ const ModalProfile = () => {
             className={styles.body}
         >
             <div className={styles.field}>
-                    <label htmlFor="">Tu nombre</label>
+                    <label htmlFor="">Tu Nombre</label>
                     <input 
                         type="" 
                         id="" 
@@ -49,7 +49,7 @@ const ModalProfile = () => {
                     />
                 </div>
                 <div className={styles.field}>
-                    <label htmlFor="">Nombre del sitio web</label>
+                    <label htmlFor="">Numero de telefono</label>
                     <input 
                         type="" 
                         id="" 
@@ -58,16 +58,8 @@ const ModalProfile = () => {
             
                     />
                 </div>
-                <div className={styles.field}>
-                    <label htmlFor="">Describe el problema</label>
-                    <textarea 
-                        type="" 
-                        id="" 
-                        name="" 
-                        placeholder={`Describe el problema`}
-            
-                    />
-                </div>
+                <p>Cambiar contraseña</p>
+                
                 </form>
             </div>
         </div>

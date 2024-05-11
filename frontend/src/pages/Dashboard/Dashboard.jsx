@@ -6,8 +6,14 @@ import styles from './Dashboard.module.css';
 import lunaAxImage from '../../assets/img/TiendaM.png';
 import Vape from '../../assets/img/vape.webp';
 import bustop from '../../assets/img/bustop.jpg';
+import useAuth from '../../hooks/useAuth';
+
+
 
 const Dashboard = () => {
+  const {auth} = useAuth();
+
+  const { name, lastname, websites, role } = auth;
   return (
     <div className={styles["dashboard-container"]}>
       <div className={styles["Dashboard"]}>
@@ -17,9 +23,9 @@ const Dashboard = () => {
             <div>
               <img className={styles["ProfilePic"]} src={lunaAxImage} alt="Axolotl-Waiting" />
             </div>
-            <h2 className={styles["ProfileHead"]}>Hola Diego,</h2>
-            <p className={styles["ProfileHead"]}>Tienes <span style={{ color: 'blue' }}>4 notificaciones</span> </p>
-            <p className={styles["ProfileHead"]}>Sparkaxe</p>
+            <h2 className={styles["ProfileHead"]}>Hola {name}</h2>
+            <p className={styles["ProfileHead"]}>Bienvenido a {websites[0].name}, tienes <span style={{ fontWeight: 'bold' }}>4 notificaciones</span> </p>
+            <p className={styles["ProfileHead"]}>Sparkaxe+</p>
           </div>
           <div className={styles["Most"]}>
             <img className={styles["Mostproduct"]} src={Vape} alt="Most sold product" />
@@ -61,7 +67,7 @@ const Dashboard = () => {
         <div className={styles["row"]}>
           <div className={styles["big"]}>
             <div className={styles["bigtop"]}>
-              <p><i className="fa-solid fa-bell"></i> Avisos</p>
+              <p><i className="fa-solid fa-bell"></i> Avisos</p> 
             </div>
             <table className={styles["anouncetable"]}>
               <tr>
@@ -143,6 +149,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className={styles["Menu"]}>
+          <i class="fa-solid fa-person-digging"></i>
             <p>Trabajando para mejorar sparkaxe</p>
           </div>
         </div>
