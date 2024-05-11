@@ -91,7 +91,7 @@ body{
 .field textarea{
   resize: none;
 }
-.field input, .field textarea{
+.field input{
   font-size: 1.4rem;
   padding: 1rem;
   border: 1px solid var(--gray);
@@ -99,6 +99,17 @@ body{
   box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
   border-radius: 1rem;
   height: auto;
+}
+
+.field textarea{
+  font-size: 1.4rem;
+  padding: 1rem;
+  border: 1px solid var(--gray);
+  background-color: var(--white);
+  box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
+  border-radius: 1rem;
+  height: 20rem;
+
 }
 
 .body{

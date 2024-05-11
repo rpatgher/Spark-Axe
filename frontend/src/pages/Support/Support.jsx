@@ -19,6 +19,7 @@ const Support = () => {
              <div className={styles.enviocontent}>
         <div className={styles.tabcontent1}>
             <h2 className={styles.heading}>Aplicar</h2>
+            <p style={{ textAlign: 'center' }} >Muchas gracias por escoger Sparkaxe estamos emocionados por ayudarte en crecer tu negocio</p>
             <p style={{ textAlign: 'center' }} >Si ya tienes cuenta y necesitas soporte  <Link to="/contact"><strong style={{cursor: "pointer"}}> Haz clic aqui</strong></Link></p>
             
            

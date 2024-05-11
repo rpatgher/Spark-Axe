@@ -39,7 +39,7 @@ const ModalProfile = () => {
                 <p><strong>Avatar</strong></p>
                 <p><strong>Websites</strong></p>
                 <p>Shakalo store</p>
-                    <button className={styles.linksettings} onClick={() => openCity('Editar')}>Cambiar precios de envio</button>
+                    <button className={styles.linksettings} onClick={() => openCity('Editar')}>Cambiar Perfil</button>
                     </div>
                     <div id="Editar" className={styles.tabcontent1} style={{display: activeTab === 'Editar' ?  'block' : 'none'}}>
                     <form 
@@ -76,8 +76,9 @@ const ModalProfile = () => {
                     />
                 </div>
                 <p>Cambiar contraseña</p>
-                <button className={styles.linksettings} onClick={() => openCity('London')}>Cambiar precios de envio</button>
+                
                 </form>
+                <button className={styles.linksettings} onClick={() => openCity('London')}>Guardar cambios</button>
                     </div>
                     
                     </div>
