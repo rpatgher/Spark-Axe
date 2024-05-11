@@ -226,3 +226,113 @@ table{
       color: #838383; /* Color opaco */
     }
 }
+
+
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+}
+
+.Textfilter {
+    margin-right: 10px;
+}
+
+.searcher {
+    position: relative;
+}
+
+.searcher input {
+    padding: .5rem .5rem .5rem 3rem;
+    width: 400px;
+    height: 40px;
+    border-radius: 1rem;
+    border: none;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    position: relative;
+    margin: 0;
+    background-color: var(--white);
+}
+
+.search-icon {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 1rem;
+    font-size: 1.2rem;
+    color: var(--dark_gray);
+}
+.searcher {
+    display: flex;
+    align-items: center;
+}
+.btn-filter {
+    all: unset;
+    margin-left: 0rem;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.filterter {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    position: relative;
+}
+
+.darkmode,
+.filterter {
+    cursor: pointer;
+    border-radius: 1rem;
+}
+
+
+.dropdown {
+    position: absolute;
+    display: none;
+    bottom: 0rem;
+    /* Position the dropdown content below the profile element */
+    transform: translateY(100%);
+    width: 12rem;
+    z-index: 1;
+}
+
+.dropdownContent {
+    background-color: var(--white);
+    flex-basis: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    width: 12rem;
+    overflow: hidden;
+}
+
+.dropdownContent button {
+    all: unset;
+    font-weight: var(--bold);
+    padding: 1rem 1.4rem;
+    border-radius: 0rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: calc(100% - 2.8rem);
+}
+
+.dropdownContent button:hover,
+.dropdownContent .active {
+    background-color: var(--light_gray);
+}
+
+.divider {
+    border-top: 1px solid var(--gray);
+    margin: 0;
+}
+
+.filterter:hover .dropdown,
+.filterter .dropdown:hover {
+    display: block;
+}

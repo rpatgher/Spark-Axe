@@ -23,6 +23,10 @@ const Inventory = () => {
     const [editingRow, setEditingRow] = useState(null);
     const [selectAll, setSelectAll] = useState(false);
     const [data, setData] = useState([]);
+    const [order, setOrder] = useState('asc');
+    const [orderType, setOrderType] = useState('id');
+    const [search, setSearch] = useState('');
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const [currentElement, setCurrentElement] = useState({});
     const [inventory, setInventory] = useState({
         low: 10,
@@ -91,18 +95,6 @@ const Inventory = () => {
         setData(newData);
     };
 
-    const handleSelectAll = () => {
-        const newData = data.map(item => ({ ...item, selected: !selectAll }));
-        setData(newData);
-        setSelectAll(!selectAll);
-    };
-
-    const handleSelect = (index) => {
-        const newData = [...data];
-        newData[index].selected = !newData[index].selected; // Update selected property
-        setData(newData);
-    };
-
     const renderTableCell = (value, field, index) => {
         if (index === editingRow && field !== "producto" && field !== "status") {
             return (
@@ -134,6 +126,23 @@ const Inventory = () => {
         }
     };
 
+    const handleOrder = (e) => {
+        setSelectAll(false);
+        setOrder(e.target.value);
+        setFilteredProducts(sortedProducts);
+    };
+
+    const handleOrderType = (e) => {
+        setSelectAll(false);
+        setOrderType(e.target.value);
+        setFilteredProducts(sortedProducts);
+    };
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value);
+        filterProducts(e.target.value, visible);
+    };
+
     return (
         <div className={styles["inventory-wrapper"]}>
             <div className={styles.top}>
@@ -146,7 +155,65 @@ const Inventory = () => {
                     <img className={styles["back"]} src={clients} alt="Axolotl-Waiting" />
                 </div>
             </div>
-
+            <div className={`${styles.filters} `}>
+                <div className={styles.searcher}>
+                    <input 
+                        type="text" 
+                        placeholder="Buscar productos" 
+                        onChange={handleSearch}
+                    />
+                    <i className={`fa-solid fa-search ${styles["search-icon"]}`}></i>
+                    <div className={styles.filterter}>
+                        <button className={`${styles["btn-filter"]}`}>
+                            <strong className={`${styles["Textfilter"]}`}>Filtrar</strong>
+                            <i className='fa-solid fa-sort'></i>
+                        </button>
+                        <div className={styles.dropdown}>
+                            <div className={styles.dropdownContent}>
+                                <button
+                                    className={`${orderType === 'name' ? styles.active : ''}`}
+                                    value={'name'}
+                                    onClick={handleOrderType}
+                                >
+                                    <i className="fa-solid fa-a"></i>
+                                    Nombre
+                                </button>
+                                <button
+                                    className={`${orderType === 'stock' ? styles.active : ''}`}
+                                    value={'stock'}
+                                    onClick={handleOrderType}
+                                >
+                                    <i className="fa-solid fa-a"></i>
+                                    Cantidad
+                                </button>
+                                <button
+                                    className={`${orderType === 'price' ? styles.active : ''}`}
+                                    value={'price'}
+                                    onClick={handleOrderType}
+                                >
+                                    <i className="fa-solid fa-money-check-dollar"></i>
+                                    Precio
+                                </button>
+                                <hr className={styles.divider} />
+                                <button
+                                    className={`${order === 'asc' ? styles.active : ''}`}
+                                    value={'asc'}
+                                    onClick={handleOrder}
+                                >
+                                    Ascendente
+                                </button>
+                                <button
+                                    className={`${order === 'desc' ? styles.active : ''}`}
+                                    value={'desc'}
+                                    onClick={handleOrder}
+                                >
+                                    Descendente
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className={styles.container}>
                 <div className={styles["table-wrapper"]}>
                     <table className={styles["inventory-table"]}>
@@ -174,7 +241,8 @@ const Inventory = () => {
                                         item.visible = true;
                                         return (
                                             <tr 
-                                                
+                                                key={item.id} 
+                                                className={`${item.selected ? styles.selected : ''}`}
                                             >
                                                 
                                                 <td>{item.name}</td>
