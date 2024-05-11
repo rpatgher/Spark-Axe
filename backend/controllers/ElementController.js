@@ -1,5 +1,6 @@
 //These functions handle various operations related to elements in your application. They interact with your database to create, read, update, and delete elements. They also perform checks to ensure that users are authorized to perform these operations.
 import fs from 'fs';
+import { Op } from 'sequelize';
 
 // ************* Models *************
 import { Element, Website, ElementCategory, Category, Subcategory } from '../models/index.js';
@@ -224,6 +225,35 @@ const deleteElement = async (req, res) => {
     }
 }
 
+const deleteElements = async (req, res) => {
+    try {
+        const elements = await Element.findAll({
+            where: {
+                id: {
+                    [Op.in]: req.body.ids
+                }
+            }
+        });
+        elements.forEach(async element => {
+            await Element.destroy({
+                where: {
+                    id: element.id
+                }
+            });
+            if(element.image){
+                fs.unlinkSync(`public/uploads/elements/${element.image}`);
+            }
+            if(element.image_hover){
+                fs.unlinkSync(`public/uploads/elements/${element.image_hover}`);
+            }
+        });
+        res.json({ msg: 'Elements deleted successfully' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ msg: error.message });
+    }
+}
+
 const publishProduct =  async (req, res) => {
     const { id } = req.params;
     const product = await Element.findByPk(id);
@@ -266,6 +296,7 @@ export {
     getElement,
     updateElement,
     deleteElement,
+    deleteElements,
     publishProduct,
     updateStock
 };

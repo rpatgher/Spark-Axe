@@ -27,7 +27,7 @@ import lunaAxImage from '../../assets/img/luna_ax.png';
 
 const Products = () => {
     const { auth } = useAuth();
-    const { alert } = useApp();
+    const { alert, handleAlert } = useApp();
     const [products, setProducts] = useState([]);
     // Order means the order of the products, asc or desc (the sorting order)
     const [order, setOrder] = useState('asc');
@@ -104,23 +104,23 @@ const Products = () => {
         setSelectAll(false);
         setOrder(e.target.value);
         setFilteredProducts(sortedProducts);
-    }
+    };
 
     const handleOrderType = (e) => {
         setSelectAll(false);
         setOrderType(e.target.value);
         setFilteredProducts(sortedProducts);
-    }
+    };
 
     const handleSearch = (e) => {
         setSearch(e.target.value);
         filterProducts(e.target.value, visible);
-    }
+    };
 
     const handleVisible = (e) => {
         setVisible(e.target.dataset.value);
         filterProducts(search, e.target.dataset.value);
-    }
+    };
 
     const filterProducts = (search, visible) => {
         setSelectAll(false);
@@ -142,7 +142,7 @@ const Products = () => {
         }
         const filtered = visibleFiltered.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
         setFilteredProducts(filtered);
-    }
+    };
 
     const handleSelectAll = () => {
         const newData = filteredProducts.map(item => (item.visible ? { ...item, selected: !selectAll } : item));
@@ -158,6 +158,28 @@ const Products = () => {
 
     const showDescription = (product) => {
         setProductDescription(product);
+    };
+
+    const deleteSelected = async () => {
+        const selectedProducts = filteredProducts.filter(product => product.selected);
+        const ids = selectedProducts.map(product => product.id);
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        try {
+            const {data} = await clientAxios.post(`/api/elements/delete-all`, { ids }, config);
+            setProducts(products.filter(product => !ids.includes(product.id)));
+            setFilteredProducts(filteredProducts.filter(product => !ids.includes(product.id)));
+            handleAlert("Productos Eliminados Correctamente", false);
+            setModalDelete(false);
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     return (
@@ -386,7 +408,9 @@ const Products = () => {
                 <Modal 
                     modalActive={setModalDelete}
                     text='¿Estás seguro de eliminar los productos seleccionados?'
-                    actionModal={() => console.log('Deleted')}
+                    actionBtnText='Eliminar'
+                    actionBtnLoadingText='Eliminando...'
+                    actionModal={deleteSelected}
                 />
             }
         </div>

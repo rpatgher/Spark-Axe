@@ -117,18 +117,21 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             });
             return;
         }
-        
         if (product.image === '' && initalProduct && !initalProduct.id) {
             console.log('La imagen es obligatoria');
         }
+        let msgAlert = '';
         if(e.nativeEvent.submitter.dataset.action === 'publish'){
             product.published = true; 
             setPublishingProduct(true);
+            msgAlert = 'Producto publicado exitosamente';
         }else if (e.nativeEvent.submitter.dataset.action === 'unpublish'){
             product.published = false; 
             setPublishingProduct(true);
+            msgAlert = 'Producto archivado exitosamente';
         }else{
             setSavingProduct(true);
+            msgAlert = 'Producto guardado exitosamente';
         }
         const token = localStorage.getItem('token');
         const configCat = {
@@ -173,7 +176,8 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                 response = await clientAxios.put(`/api/elements/${initalProduct.id}`, data, config);
             }
             if (response.status === 200) {
-                handleAlert("Producto guardado exitosamente", false);
+
+                handleAlert(msgAlert, false);
                 navigate('/dashboard/products');
             }
         } catch (error) {
