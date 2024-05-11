@@ -114,9 +114,11 @@ const Orders = () => {
                                     {details === order.id && (
                                         <tr>
                                             <td colSpan="8" className={styles.products23}>
-    <button onClick={shareArrayToWhatsApp}>Print</button>
-    <h2> Ubicacion de entrega: Case de Remy 43, Colonia chapultepec, CDMX</h2>
-    <h2 className={styles.infofloatl}>Tabla de Productos en el pedido:</h2>
+                                            <button className={styles.STW} onClick={shareArrayToWhatsApp}>Compartir pedido <i class="fa-solid fa-share"></i></button>
+                                    <h1> Pedido: {String(order.id).padStart(10, '0')}</h1>
+    <div className={styles.Descriptioncontfather}>
+    <div className={styles.Descriptioncont}>
+    <h2 className={styles.infofloatl}>Productos en el pedido:</h2>
     <table className={styles["products-table"]}>
         <thead>
             <tr>
@@ -137,6 +139,15 @@ const Orders = () => {
             ))}
         </tbody>
     </table>
+    </div>
+    <div className={styles.Descriptioncont}>
+    <h2> Ubicacion de entrega:</h2>
+    <p> Case de Remy 43, Colonia chapultepec, CDMX</p>
+    <h2>Nota de pedido</h2>
+    <p>Notas de pedido como que te odio remy</p>
+
+    </div>
+    </div>
     <h2 className={styles.infofloatr}>Total de Pedido: <span className={styles.infofloatrb}>${formatToMoney(parseFloat(order.total))}</span></h2>
     <h2 className={styles.infofloatr}>Status: <span className={styles.infofloatrb}>{(order.status)}</span></h2>
 </td>

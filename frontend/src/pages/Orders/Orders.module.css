@@ -62,10 +62,12 @@
 }
 .products23{
     background-color: var(--gray_dashboard);
+    position: relative;
 }
 .products23 td{
     background-color: var(--gray_dashboard);
     font-size: 12px;
+    position: relative;
 }
 .infofloatl{
     float: left;
@@ -79,4 +81,24 @@
 }
 .infofloatrb{
     font-weight: bold ;
+}
+.Descriptioncontfather{
+    display: flex;
+    flex-direction: row;
+}
+.Descriptioncont{
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+}
+.STW{
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 5px;
+   margin: 5px;
+    float: right;
 }
