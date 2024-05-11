@@ -20,7 +20,6 @@ const Home = () => {
             <img className={styles["logo"]} src={logo} alt="Sparkaxe-logo" />
             <h1 className={styles.head}>Sparkaxe La mejor forma de manejar tu negocio a tu manera</h1>
             </div>
-            <Link to="/support">support</Link>
         </div>
     )
 }
