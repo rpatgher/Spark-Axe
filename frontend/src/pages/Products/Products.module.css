@@ -200,6 +200,12 @@ tr:last-of-type td {
     border-radius: .5rem;
 }
 
+.btn-categories{
+    all: unset;
+    cursor: pointer;
+    font-size: 1.6rem;
+}
+
 .cell-published div {
     display: inline;
     padding: .5rem;

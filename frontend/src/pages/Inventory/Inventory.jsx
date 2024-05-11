@@ -35,6 +35,8 @@ const Inventory = () => {
     const [limit, setLimit] = useState(10);
     const [limitIncrement, setLimitIncrement] = useState(10);
 
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         const count = data.filter(item => item.selected && item.visible).length;
         const visible = data.filter(item => item.visible).length;
@@ -63,9 +65,13 @@ const Inventory = () => {
 
     const handleEditClick = (index) => {
         setEditingRow(index);
+        data[index].selected = true;
+        setCurrentElement(data[index]);
     };
 
-    const handleSaveClick = async () => {
+    const handleSaveClick = async (index) => {
+        setLoading(true);
+        data[index].selected = false;
         const token = localStorage.getItem('token');
         const config = {
             headers: {
@@ -78,6 +84,7 @@ const Inventory = () => {
         } catch (error) {
             console.log(error);
         }
+        setLoading(false);
         setEditingRow(null);
     };
 
@@ -174,7 +181,8 @@ const Inventory = () => {
                                         item.visible = true;
                                         return (
                                             <tr 
-                                                
+                                                key={item.id} 
+                                                className={item.selected ? styles.selectedRow : ""}
                                             >
                                                 
                                                 <td>{item.name}</td>
@@ -186,12 +194,15 @@ const Inventory = () => {
                                                     {editingRow === index ? (
                                                         <div>
                                                             <button
-                                                                onClick={handleSaveClick}
-                                                                className={styles.guardar}
-                                                            >Guardar</button>
+                                                                onClick={() => handleSaveClick(index)}
+                                                                className={`${styles.guardar} ${loading ? styles.loading : ""}`}
+                                                            >{loading ? 'Guardando...' : 'Guardar'}</button>
                                                         </div>
                                                     ) : (
-                                                        <button onClick={() => handleEditClick(index)} className={styles.editar}>Editar</button>
+                                                        <button 
+                                                            onClick={() => handleEditClick(index)} 
+                                                            className={styles.editar}
+                                                        >Editar</button>
                                                     )}
                                                 </td>
                                             </tr>

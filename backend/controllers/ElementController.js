@@ -74,10 +74,54 @@ const getElements = async (req, res) => {
         const error = new Error('Unauthorized');
         return res.status(401).json({ msg: error.message });
     }
-    const elements = await Element.findAll({
+    let elements = await Element.findAll({
         where: {
-            website_id: website.id
+            website_id: website.id,
+        },
+        include: [
+            {
+                model: Subcategory,
+                include: [
+                    {
+                        model: Category
+                    }
+                ]
+            }
+        ]
+    });
+    elements = elements.map(element => {
+        const newElement = {
+            id: element.id,
+            name: element.name,
+            description: element.description,
+            image: element.image,
+            image_hover: element.image_hover,
+            price: element.price,
+            stock: element.stock,
+            color: element.color,
+            published: element.published,
+            categories: element.subcategories.map(subcategory => {
+                return {
+                    category: subcategory.category.name,
+                    subcategory: subcategory.name,
+                }
+            })
         }
+        let categories = newElement.categories.reduce((acc, current) => {
+            if(!acc[current.category]){
+                acc[current.category] = [];
+            }
+            acc[current.category].push(current.subcategory);
+            return acc;
+        }, {});
+        categories = Object.entries(categories).map(([key, value]) => {
+            return {
+                category: key,
+                subcategories: value
+            }
+        });
+        newElement.categories = categories;
+        return newElement;
     });
     res.json(elements);
 }
@@ -274,7 +318,7 @@ const publishProduct =  async (req, res) => {
 const updateStock = async (req, res) => {
     const { id } = req.params;
     const data = req.body;
-    if(!data.stock || !data.price){
+    if(data.stock === undefined  || data.price === undefined || data.stock === null || data.price === null){
         const error = new Error('Invalid Request');
         return res.status(500).json({ msg: error.message });
     }

@@ -214,3 +214,15 @@ table{
 .noproducts a {
     color: var(--blue);
 }
+.loading{
+    animation: pulse 2s infinite;
+    cursor: progress;
+}
+@keyframes pulse {
+    0%, 100% {
+      color: #fff; /* Color original */
+    }
+    50% {
+      color: #838383; /* Color opaco */
+    }
+}

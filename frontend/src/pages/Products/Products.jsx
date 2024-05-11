@@ -10,6 +10,7 @@ import styles from './Products.module.css';
 import FloatAlert from '../../components/Alert/FloatAlert';
 import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 import Modal from '../../components/Modals/GeneralModal';
+import ModalCategories from '../../components/Modals/ModalCategories';
 import GoTopBtn from '../../components/Btns/GoTopBtn';
 
 // ******************** Hooks ********************
@@ -43,8 +44,9 @@ const Products = () => {
     const [limitIncrement, setLimitIncrement] = useState(10);
 
     const [modalDelete, setModalDelete] = useState(false);
-
+    
     const [productDescription, setProductDescription] = useState({});
+    const [modalCategories, setModalCategories] = useState([]);
 
     useEffect(() => {
         const count = filteredProducts.filter(item => item.selected && item.visible).length;
@@ -159,6 +161,10 @@ const Products = () => {
     const showDescription = (product) => {
         setProductDescription(product);
     };
+
+    const showCategories = (categories) => {
+        setModalCategories(categories);
+    }
 
     const deleteSelected = async () => {
         const selectedProducts = filteredProducts.filter(product => product.selected);
@@ -297,7 +303,7 @@ const Products = () => {
                             <th className={styles["col-description"]}>Descripción</th>
                             <th className={styles["col-price"]}>Precio</th>
                             <th className={styles["col-color"]}>Color</th>
-                            <th className={styles["col-category"]}>Categoría</th>
+                            <th className={styles["col-category"]}>Categorías</th>
                             <th className={styles["col-id"]}>ID</th>
                             <th className={styles["col-published"]}>Publicado</th>
                             <th className={styles["col-actions"]}></th>
@@ -341,8 +347,14 @@ const Products = () => {
                                         </td>
                                         <td>${formatToMoney(product.price)}</td>
                                         <td className={styles["cell-color"]}><div style={{ backgroundColor: product.color }} ></div></td>
-                                        {/* TODO: Enable category */}
-                                        <td>iPlay</td>
+                                        <td>
+                                            <button
+                                                className={styles["btn-categories"]}
+                                                onClick={() => showCategories(product.categories)}
+                                            >
+                                                <i className="fa-solid fa-layer-group"></i>
+                                            </button>
+                                        </td>
                                         <td className={styles["cell-id"]}>{String(product.id).padStart(10, '0')}</td>
                                         <td className={styles["cell-published"]}><div className={`${product.published ? styles.published : styles.unpublished}`}>{product.published ? 'Publicado' : 'Archivado'}</div></td>
                                         <td className={styles["cell-actions"]}>
@@ -411,6 +423,12 @@ const Products = () => {
                     actionBtnText='Eliminar'
                     actionBtnLoadingText='Eliminando...'
                     actionModal={deleteSelected}
+                />
+            }
+            {modalCategories.length > 0 &&
+                <ModalCategories 
+                    categories={modalCategories}
+                    closeModal={() => setModalCategories([])}
                 />
             }
         </div>
