@@ -96,7 +96,6 @@ const EditProduct = () => {
             <FormProduct
                 initalProduct={product}
                 setModalDelete={setModalDelete}
-                publishProduct={publishProduct}
             />
             {modalDelete && (
                 <GeneralModal
