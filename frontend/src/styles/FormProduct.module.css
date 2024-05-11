@@ -374,6 +374,10 @@ input.empty-field, textarea.empty-field{
     border: 1px solid var(--red);
     background-color: color-mix(in srgb, var(--red) 30%, #fff);
 }
+.btn-disabled{
+    opacity: .5;
+    cursor: not-allowed;
+}
 .btn-saving{
     animation: pulse 2s infinite;
     cursor: progress;

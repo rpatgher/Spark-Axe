@@ -13,7 +13,7 @@ import useApp from '../hooks/useApp';
 // ************** components *************
 import FloatAlert from './Alert/FloatAlert';
 
-const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
+const FormProduct = ({ initalProduct, setModalDelete }) => {
     const { auth } = useAuth();
     const { alert, handleAlert } = useApp();
     const navigate = useNavigate();
@@ -36,6 +36,11 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
     const [initialSubCategoriesActive, setInitialSubCategoriesActive] = useState('');
 
     const [savingProduct, setSavingProduct] = useState(false);
+    const [publishingProduct, setPublishingProduct] = useState(false);
+
+
+    const [btnAddCategory, setBtnAddCategory] = useState(false);
+    const [btnAddSubcategory, setBtnAddSubcategory] = useState(false);
 
     useEffect(() => {
         setProduct({
@@ -116,7 +121,15 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
         if (product.image === '' && initalProduct && !initalProduct.id) {
             console.log('La imagen es obligatoria');
         }
-        setSavingProduct(true);
+        if(e.nativeEvent.submitter.dataset.action === 'publish'){
+            product.published = true; 
+            setPublishingProduct(true);
+        }else if (e.nativeEvent.submitter.dataset.action === 'unpublish'){
+            product.published = false; 
+            setPublishingProduct(true);
+        }else{
+            setSavingProduct(true);
+        }
         const token = localStorage.getItem('token');
         const configCat = {
             headers: {
@@ -141,6 +154,9 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
         data.append('image', product.image);
         data.append('image2', product.image2);
         data.append('website_id', auth.websites[0].id);
+        if(product.published !== undefined && product.published !== null){
+            data.append('published', product.published);
+        }
         data.append('categories_id', JSON.stringify(categories_id));
         const config = {
             headers: {
@@ -164,10 +180,12 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
             console.log(error);
         } finally {
             setSavingProduct(false);
+            setPublishingProduct(false);
         }
     }
 
     const addCategory = (category) => {
+        setBtnAddCategory(false);
         if (category !== '' && !categories.map(item => item.category).includes(category)) {
             setCategories([
                 ...categories,
@@ -194,6 +212,7 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
     }
 
     const addSubcategory = (category, subcategory) => {
+        setBtnAddSubcategory(false);
         const newCategories = categories.map(item => {
             if (item.category === category && !item.subcategories.includes(subcategory)) {
                 return {
@@ -247,8 +266,10 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
     const searchInitialCategories = (e) => {
         const search = e.target.value;
         if (search !== '') {
+            setBtnAddCategory(true);
             setFilteredInitialCategories(initialCategories.filter(category => category.name.toLowerCase().includes(search.toLowerCase())));
         } else {
+            setBtnAddCategory(false);
             setFilteredInitialCategories(initialCategories.filter(category => !categories.map(item => item.category).includes(category.name)));
         }
     }
@@ -256,6 +277,7 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
     const searchInitialSubCategories = (category, e) => {
         const search = e.target.value;
         if (search !== '') {
+            setBtnAddSubcategory(true);
             setInitialCategories(initialCategories.map(item => {
                 if (item.name === category) {
                     return {
@@ -266,6 +288,7 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
                 return item;
             }));
         } else {
+            setBtnAddSubcategory(false);
             setInitialCategories(backupInitialCategories.map(item => {
                 if (item.name === category) {
                     return {
@@ -389,6 +412,12 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
                                 name="category"
                                 placeholder='Nueva categoría'
                                 onChange={searchInitialCategories}
+                                onKeyDown={(e) => {
+                                    if(e.key === 'Enter'){
+                                        e.preventDefault();
+                                        addCategory(document.getElementById('category').value)
+                                    }
+                                }}
                                 onFocus={() => setInitialCategoriesActive(true)}
                                 onBlur={() => setTimeout(() => setInitialCategoriesActive(false), 150)}
                             />
@@ -405,13 +434,15 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
                                     }
                                 </div>
                             )}
-                            <button
-                                className={styles["btn-add-category"]}
-                                type='button'
-                                onClick={() => addCategory(document.getElementById('category').value)}
-                            >
-                                <i className="fa-solid fa-plus"></i>
-                            </button>
+                            {btnAddCategory &&
+                                <button
+                                    className={styles["btn-add-category"]}
+                                    type='button'
+                                    onClick={() => addCategory(document.getElementById('category').value)}
+                                >
+                                    <i className="fa-solid fa-plus"></i>
+                                </button>
+                            }
                         </div>
                         <div className={styles.categories}>
                             {
@@ -429,13 +460,15 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
                                         </div>
                                         <div className={styles["input-subcategories"]}>
                                             <div className={styles["input-subcategories-btn"]}>
-                                                <button
-                                                    className={styles["btn-add-category"]}
-                                                    type='button'
-                                                    onClick={() => addSubcategory(category.category, document.getElementById(`${category.category}`).value)}
-                                                >
-                                                    <i className="fa-solid fa-plus"></i>
-                                                </button>
+                                                {btnAddSubcategory &&
+                                                    <button
+                                                        className={styles["btn-add-category"]}
+                                                        type='button'
+                                                        onClick={() => addSubcategory(category.category, document.getElementById(`${category.category}`).value)}
+                                                    >
+                                                        <i className="fa-solid fa-plus"></i>
+                                                    </button>
+                                                }
                                                 <input
                                                     type="text"
                                                     id={`${category.category}`}
@@ -444,8 +477,19 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
                                                     onFocus={() => setInitialSubCategoriesActive(category.category)}
                                                     onBlur={() => setTimeout(() => setInitialSubCategoriesActive(''), 200)}
                                                     onChange={(e) => searchInitialSubCategories(category.category, e)}
+                                                    onKeyDown={(e) => {
+                                                        if(e.key === 'Enter'){
+                                                            e.preventDefault();
+                                                            addSubcategory(category.category, document.getElementById(`${category.category}`).value)
+                                                        }
+                                                    }}
                                                 />
-                                                <div className={styles["initial-subcategories"]}>
+                                                <div 
+                                                    className={styles["initial-subcategories"]}
+                                                    style={{
+                                                        width: btnAddSubcategory ? '90%' : '100%'
+                                                    }}
+                                                >
                                                     {
                                                         initialSubCategoriesActive === category.category && initialCategories.find(item => item.name === category.category)?.subcategories.map((subcategory, index) => {
                                                             if (!category.subcategories.includes(subcategory)) {
@@ -480,30 +524,36 @@ const FormProduct = ({ initalProduct, setModalDelete, publishProduct }) => {
                         <p>Vista Previa</p>
                     </div>
                     <button
-                        className={`${styles.button} ${savingProduct ? styles["btn-saving"] : ''}`}
+                        className={`${styles.button} ${savingProduct ? styles["btn-saving"] : ''} ${initalProduct && !initalProduct?.name ? styles["btn-disabled"] : ''}`}
                         type='submit'
-                        disabled={savingProduct}
+                        data-action='save'
+                        disabled={savingProduct || (initalProduct && !initalProduct?.name)}
                     >
                         {savingProduct ? 'Guardando...' : 'Guardar Producto'}
                     </button>
-                    {initalProduct && (
-                        <div className={styles["delete-publish"]}>
-                            <button
-                                className={`${styles.button} ${styles["btn-publish"]} ${initalProduct.published ? styles["btn-unpublish"] : ''}`}
-                                type='button'
-                                onClick={publishProduct}
+                    <div className={styles["delete-publish"]}>
+                        <button
+                            className={`${styles.button} ${styles["btn-publish"]} ${initalProduct?.published ? styles["btn-unpublish"] : '' } ${publishingProduct ? styles["btn-saving"] : ''} ${initalProduct && !initalProduct?.name ? styles["btn-disabled"] : ''}`}
+                            data-action={initalProduct && initalProduct?.published ? 'unpublish' : 'publish'}
+                            type='submit'
+                            style={{
+                                width: !initalProduct ? '100%' : '50%'
+                            }}
+                            disabled={initalProduct && !initalProduct?.name}
                             >
-                                {initalProduct.published ? 'Archivar Producto' : 'Publicar Producto'}
-                            </button>
+                            {initalProduct?.published ? !publishingProduct ? 'Archivar Producto' : 'Archivando...' : !publishingProduct ? 'Publicar Producto' : 'Publicando...'}
+                        </button>
+                        {initalProduct && (
                             <button
-                                className={`${styles.button} ${styles["btn-delete"]}`}
+                                className={`${styles.button} ${styles["btn-delete"]} ${!initalProduct.name ? styles["btn-disabled"] : ''}`}
                                 type='button'
                                 onClick={() => setModalDelete(true)}
+                                disabled={!initalProduct.name}
                             >
                                 Borrar Producto
                             </button>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </form>
         </>
