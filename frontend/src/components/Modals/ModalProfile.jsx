@@ -2,12 +2,18 @@
 
 // **************** Hooks ****************
 import useAuth from "../../hooks/useAuth";
+import React, { useState } from 'react';
 
 // **************** Styles ****************
 import styles from './ModalProfile.module.css';
 
 const ModalProfile = () => {
     const { auth, setProfileModal } = useAuth();
+    const [activeTab, setActiveTab] = useState('London');
+
+    const openCity = (cityName) => {
+        setActiveTab(cityName);
+      };
     return (
         <div className={styles["modal-wrapper"]}>
             <div className={styles["modal-profile"]}>
@@ -18,14 +24,24 @@ const ModalProfile = () => {
                     <i className="fa-solid fa-times"></i>
                 </button>
                 <h2>Configuracion de perfil</h2>
-                <p>Nombre</p>
-                <p>Correo</p>
-                <p>Numero telefonico</p>
-                <p>Contraseña</p>
+
+
+                <div id="London" className={styles.tabcontent1} style={{display: activeTab === 'London' ?  'block' : 'none'}}>
+                <p><strong>Nombre</strong></p>
+                <p>Diego</p>
+                <p><strong>Correo</strong></p>
+                <p>correo2@correo.com</p>
+                <p><strong>Numero telefonico</strong></p>
+                <p>+5560890823</p>
+                <p><strong>Contraseña</strong></p>
                 <p>Cambiar contraseña</p>
-                <p>Avatar</p>
-                <p>Websites</p>
-                <form 
+                <p><strong>Avatar</strong></p>
+                <p><strong>Websites</strong></p>
+                <p>Shakalo store</p>
+                    <button className={styles.linksettings} onClick={() => openCity('Editar')}>Cambiar precios de envio</button>
+                    </div>
+                    <div id="Editar" className={styles.tabcontent1} style={{display: activeTab === 'Editar' ?  'block' : 'none'}}>
+                    <form 
             className={styles.body}
         >
             <div className={styles.field}>
@@ -61,7 +77,9 @@ const ModalProfile = () => {
                 <p>Cambiar contraseña</p>
                 
                 </form>
-            </div>
+                    </div>
+                    
+                    </div>
         </div>
     )
 }
