@@ -45,3 +45,15 @@
 .delete:hover{
     background-color: color-mix(in srgb, var(--red) 80%, #000);
 }
+.active{
+    animation: pulse 2s infinite;
+    cursor: progress;
+}
+@keyframes pulse {
+    0%, 100% {
+      color: #fff; /* Color original */
+    }
+    50% {
+      color: #838383; /* Color opaco */
+    }
+}

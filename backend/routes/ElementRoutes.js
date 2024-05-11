@@ -5,6 +5,7 @@ import {
     createElement,
     getElements,
     getElement,
+    deleteElements,
     updateElement,
     deleteElement,
     publishProduct,
@@ -29,6 +30,9 @@ router.route('/stock/:id')
 
 router.route('/one/:id')
     .get(checkAuth, getElement);
+
+router.route('/delete-all')
+    .post(checkAuth, deleteElements);
 
 router.post('/publish/:id', checkAuth, publishProduct);
 
