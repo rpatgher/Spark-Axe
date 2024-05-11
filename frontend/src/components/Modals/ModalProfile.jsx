@@ -24,6 +24,7 @@ const ModalProfile = () => {
                     <i className="fa-solid fa-times"></i>
                 </button>
                 <h2>Configuracion de perfil</h2>
+                <hr></hr>
 
 
                 <div id="London" className={styles.tabcontent1} style={{display: activeTab === 'London' ?  'block' : 'none'}}>
@@ -75,7 +76,7 @@ const ModalProfile = () => {
                     />
                 </div>
                 <p>Cambiar contraseña</p>
-                
+                <button className={styles.linksettings} onClick={() => openCity('London')}>Cambiar precios de envio</button>
                 </form>
                     </div>
                     
