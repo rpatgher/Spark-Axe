@@ -190,9 +190,6 @@ input{
   flex:1;
    
 }
-table{
-    margin-top: 20px;
-}
 .configinventory{
     background-color: black;
     color: white;
@@ -232,7 +229,7 @@ table{
 .filters {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 3rem;
+    margin: 3rem 0;
 }
 
 .Textfilter {
@@ -335,4 +332,64 @@ table{
 .filterter:hover .dropdown,
 .filterter .dropdown:hover {
     display: block;
+}
+.radio-inputs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0.25rem;
+    width: 400px;
+    font-size: 14px;
+}
+.radio-inputs button {
+    margin: 0;
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: 0.5rem;
+}
+.visibles {
+    border-radius: 0.5rem;
+    color: var(--dark_blue);
+    font-weight: var(--bold);
+    transition: all .15s ease-in-out;
+    margin: 1rem 1rem 1rem 0;
+    padding: 0;
+    background-color: transparent;
+
+}
+.visibles2{
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.active {
+    background-color: #fff;
+    font-weight: 600;
+}
+
+.Filtertabs {
+    border-top: 2px solid var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+.selected {
+    display: flex; /* Make .selected a flex container */
+    align-items: center; /* Center items vertically */
+    gap: 2rem;
+}
+.counter{
+    margin: 0;
+}
+.delete {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
+    font-weight: bold;
+}
+.delete:hover{
+    background-color: color-mix(in srgb, var(--red) 80%, #000000);
 }

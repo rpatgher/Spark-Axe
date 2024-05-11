@@ -139,11 +139,7 @@ input{
     display: flex;
 }
 .topcontent{
-  flex:1;
-   
-}
-table{
-    margin-top: 20px;
+  flex:1;  
 }
 .contactbtn{
     font-size: 15px;

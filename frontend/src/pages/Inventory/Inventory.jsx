@@ -21,12 +21,13 @@ import GoTopBtn from '../../components/Btns/GoTopBtn';
 const Inventory = () => {
     const { auth } = useAuth();
     const [editingRow, setEditingRow] = useState(null);
-    const [selectAll, setSelectAll] = useState(false);
     const [data, setData] = useState([]);
+    const [visible, setVisible] = useState('all');
     const [order, setOrder] = useState('asc');
     const [orderType, setOrderType] = useState('id');
     const [search, setSearch] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([]);
+
     const [currentElement, setCurrentElement] = useState({});
     const [inventory, setInventory] = useState({
         low: 10,
@@ -34,16 +35,40 @@ const Inventory = () => {
         high: 30
     });
     const dataLength = data.length;
-    const [selectedCount, setSelectedCount] = useState(0);
     const [visibleCount, setVisibleCount] = useState(0);
     const [limit, setLimit] = useState(10);
     const [limitIncrement, setLimitIncrement] = useState(10);
 
+    const [loading, setLoading] = useState(false);
+
+    const sortedProducts = data.sort((a, b) => {
+        if (order === 'asc') {
+            if (orderType === 'stock') {
+                return a.stock - b.stock;
+            }
+            if (orderType === 'name') {
+                return a.name.localeCompare(b.name);
+            }
+            if (orderType === 'price') {
+                return a.price - b.price;
+            }
+        }
+        if (order === 'desc') {
+            if (orderType === 'stock') {
+                return b.stock - a.stock;
+            }
+            if (orderType === 'name') {
+                return b.name.localeCompare(a.name);
+            }
+            if (orderType === 'price') {
+                return b.price - a.price;
+            }
+        }
+    });
+
     useEffect(() => {
-        const count = data.filter(item => item.selected && item.visible).length;
         const visible = data.filter(item => item.visible).length;
         setVisibleCount(visible);
-        setSelectedCount(count);
     }, [data, limit]);
 
     useEffect(() => {
@@ -58,6 +83,7 @@ const Inventory = () => {
             try {
                 const { data } = await clientAxios(`/api/elements/${auth.websites[0].id}`, config);
                 setData(data);
+                setFilteredProducts(data);
             } catch (error) {
                 console.log(error);
             }
@@ -67,9 +93,13 @@ const Inventory = () => {
 
     const handleEditClick = (index) => {
         setEditingRow(index);
+        data[index].selected = true;
+        setCurrentElement(data[index]);
     };
 
-    const handleSaveClick = async () => {
+    const handleSaveClick = async (index) => {
+        setLoading(true);
+        data[index].selected = false;
         const token = localStorage.getItem('token');
         const config = {
             headers: {
@@ -82,6 +112,7 @@ const Inventory = () => {
         } catch (error) {
             console.log(error);
         }
+        setLoading(false);
         setEditingRow(null);
     };
 
@@ -127,13 +158,11 @@ const Inventory = () => {
     };
 
     const handleOrder = (e) => {
-        setSelectAll(false);
         setOrder(e.target.value);
         setFilteredProducts(sortedProducts);
     };
 
     const handleOrderType = (e) => {
-        setSelectAll(false);
         setOrderType(e.target.value);
         setFilteredProducts(sortedProducts);
     };
@@ -141,6 +170,35 @@ const Inventory = () => {
     const handleSearch = (e) => {
         setSearch(e.target.value);
         filterProducts(e.target.value, visible);
+    };
+
+    const handleVisible = (e) => {
+        setVisible(e.target.dataset.value);
+        filterProducts(search, e.target.dataset.value);
+    };
+
+    const filterProducts = (search, visible) => {
+        setFilteredProducts(filteredProducts.map(product => product.selected = false));
+        const visibleFiltered = data.filter(product => {
+            if (visible === 'all') {
+                return product;
+            }
+            if (visible === 'high') {
+                return product.stock >= inventory.high;
+            }
+            if (visible === 'medium') {
+                return product.stock >= inventory.medium && product.stock < inventory.high;
+            }
+            if (visible === 'low') {
+                return product.stock < inventory.medium;
+            }
+        });
+        if (search === '') {
+            setFilteredProducts(visibleFiltered);
+            return;
+        }
+        const filtered = visibleFiltered.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
+        setFilteredProducts(filtered);
     };
 
     return (
@@ -214,6 +272,15 @@ const Inventory = () => {
                     </div>
                 </div>
             </div>
+            <div className={styles["Filtertabs"]}>
+                <div className={styles["radio-inputs"]}>
+                    <p className={styles.visibles}>Visibles: </p>
+                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "all" ? styles.active : ''}`} data-value="all">Todos</button>
+                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "high" ? styles.active : ''}`} data-value="high">Alto</button>
+                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "medium" ? styles.active : ''}`} data-value="medium">Medio</button>
+                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "low" ? styles.active : ''}`} data-value="low">Bajo</button>
+                </div>
+            </div>
             <div className={styles.container}>
                 <div className={styles["table-wrapper"]}>
                     <table className={styles["inventory-table"]}>
@@ -236,13 +303,13 @@ const Inventory = () => {
                                         No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
                                 </tr>
                             ):
-                                data.map((item, index) => {
+                                filteredProducts.map((item, index) => {
                                     if(index < limit){
                                         item.visible = true;
                                         return (
                                             <tr 
                                                 key={item.id} 
-                                                className={`${item.selected ? styles.selected : ''}`}
+                                                className={`${item.selected ? styles.selectedRow : ''}`}
                                             >
                                                 
                                                 <td>{item.name}</td>
@@ -254,12 +321,15 @@ const Inventory = () => {
                                                     {editingRow === index ? (
                                                         <div>
                                                             <button
-                                                                onClick={handleSaveClick}
-                                                                className={styles.guardar}
-                                                            >Guardar</button>
+                                                                onClick={() => handleSaveClick(index)}
+                                                                className={`${styles.guardar} ${loading ? styles.loading : ""}`}
+                                                            >{loading ? 'Guardando...' : 'Guardar'}</button>
                                                         </div>
                                                     ) : (
-                                                        <button onClick={() => handleEditClick(index)} className={styles.editar}>Editar</button>
+                                                        <button 
+                                                            onClick={() => handleEditClick(index)} 
+                                                            className={styles.editar}
+                                                        >Editar</button>
                                                     )}
                                                 </td>
                                             </tr>
@@ -281,7 +351,6 @@ const Inventory = () => {
                                                 className={styles.cargar}
                                                 type='button'
                                                 onClick={() => {
-                                                    setSelectAll(false);
                                                     setLimit(limit + limitIncrement);
                                                 }}
                                             >Cargar más</button>
