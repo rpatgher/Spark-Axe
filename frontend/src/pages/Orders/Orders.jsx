@@ -59,6 +59,7 @@ const Orders = () => {
     return (
         <>
             <h2 className={styles.heading}>Pedidos de Productos</h2>
+            <h4>Administra tus pedidos</h4>
             <div className={styles["table-wrapper"]}>
                 <table className={styles["orders-table"]}>
                     <thead>
