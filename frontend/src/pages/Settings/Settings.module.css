@@ -52,9 +52,10 @@
     padding: 5px;
     border-radius: 5px;
     left: -5px;
+    cursor: pointer;
   }
   .Borrar:hover{
-    background-color: #ddd;
+   color: rgb(158, 6, 6);
 
   }
 
@@ -79,8 +80,11 @@
   
   }
   .rightdiv{
-    width: 60%;
+    display: flex;
+    align-items: center;
+
     border-left: 1px solid #ccc;
+    width: 60%;
   }
   .rightcontent{
     padding-left: 20px;
@@ -119,11 +123,13 @@
     background-blend-mode: color;
     background-position: center;
     border-radius: 15px;
-    width: 60%;
+    width: 80%;
+    height: 250px;
     padding: 20px;
     box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3); /* Box shadow for depth */
     color: #DD9A05;
     margin-bottom: 60px;
+    overflow: hidden;
   }
   .linkother{
     width: 100%;
@@ -149,6 +155,7 @@
   background-color: var(--white);
   box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
   border-radius: 1rem;
+  cursor: pointer;
 }
 .field label{
     font-size: 1.4rem;
@@ -195,6 +202,8 @@
   background-color: var(--white);
   box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
   border-radius: 1rem;
+  cursor: not-allowed;
+  height: auto;
 }
 .buttoncontactchange{
   border: none;
@@ -204,6 +213,7 @@
   font-size: 15px;
   border-radius: 10px;
   padding: 10px;
+  cursor: pointer;
 }
 .buttoncontactchange:hover{
 
@@ -238,6 +248,7 @@
     font-size: 15px;
     border-radius: 10px;
     padding: 10px;
+    cursor: pointer;
 }
 .Buttonguardar:hover {
   background-color: var(--dark_blue)
@@ -278,6 +289,7 @@
 }
 
 .Tiendaprofile{
+  flex: 1;
   background-color: white;
   padding: 10px;
   border-radius: 10px;

@@ -133,7 +133,9 @@ function Settings() {
                         value={`Elibaba.com`}
                         disabled />
                         <div className={styles.buttondiv}>
+                        <Link to="/contact">
                           <button className={styles.buttoncontactchange}>Contacte Sparkaxe <p className={styles.interiorbutton}>(Puede a ver costos adicionales)</p></button>
+                         </Link>
                           </div>
                         
                 </div>
@@ -146,7 +148,9 @@ function Settings() {
                         value={`$MXN (Peso Mexicano)`}
                         disabled />
                         <div className={styles.buttondiv}>
+                        <Link to="/contact">
                           <button className={styles.buttoncontactchange}>Contacte Sparkaxe <p className={styles.interiorbutton}>(Puede a ver costos adicionales)</p></button>
+                          </Link>
                           </div>
                         
                 </div>
