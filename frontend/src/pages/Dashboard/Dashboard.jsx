@@ -79,24 +79,23 @@ const [visibleCount, setVisibleCount] = useState(0);
             <div className={styles["bigtop"]}>
               <p><i className="fa-solid fa-dolly"></i>  Inventario bajo</p>
             </div>
-            <table className={styles["anouncetable2"]}>
-    <thead>
-        <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Estatus</th>
-        </tr>
-    </thead>
-    <tbody>
-        {data.length === 0 ? (
+            {data.length === 0 ? (
+    <tr>
+        <td colSpan="3">
+            <h2>¡Muy bien no hay inventario bajo!</h2>
+        </td>
+    </tr>
+) : (
+    <table className={styles["anouncetable2"]}>
+        <thead>
             <tr>
-                <td colSpan="3">
-                    No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link>
-                </td>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Estatus</th>
             </tr>
-        ) : (
-            // Filtramos los datos antes de mapearlos
-            data.filter(product => product.stock < inventory.medium).map((item, index) => {
+        </thead>
+        <tbody>
+            {data.filter(product => product.stock < inventory.medium).map((item, index) => {
                 if (index < limit) {
                     item.visible = true;
                     return (
@@ -110,10 +109,11 @@ const [visibleCount, setVisibleCount] = useState(0);
                     item.visible = false;
                     return null; // Si no se muestra, retornamos null
                 }
-            })
-        )}
-    </tbody>
-</table>
+            })}
+        </tbody>
+    </table>
+)}
+
 
           </div>
         </div>
