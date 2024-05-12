@@ -195,6 +195,7 @@ const Products = () => {
                 currentHeading="Productos"
                 routes={[]}
             />
+            <h4>Crea y edita tus productos</h4>
             <div className={`${styles.filters} `}>
                 <div className={styles.searcher}>
                     <input 
@@ -283,7 +284,7 @@ const Products = () => {
                             className={styles.delete}
                             type='button'
                             onClick={() => setModalDelete(true)}
-                        ><i className="fa-solid fa-trash"></i>Eliminar</button>
+                        ><i className="fa-solid fa-trash"></i> Eliminar</button>
                     </div>
                 }
             </div>

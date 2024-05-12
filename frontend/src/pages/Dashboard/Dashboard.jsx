@@ -73,7 +73,7 @@ const dataLength = data.length;
           </div>
           <div className={styles["Most"]}>
             <img className={styles["Mostproduct"]} src={Vape} alt="Most sold product" />
-            <h4>Producto mas vendido</h4>
+            <h4>Producto mas vendido </h4>
           </div>
           <div className={styles["big"]}>
             <div className={styles["bigtop"]}>

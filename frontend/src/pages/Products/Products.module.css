@@ -436,6 +436,7 @@ a.editar:hover{
     font-size: 15px;
     padding: 5px;
     font-weight: bold;
+    cursor: pointer;
 }
 .delete:hover{
     background-color: color-mix(in srgb, var(--red) 80%, #000000);
