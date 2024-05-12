@@ -41,7 +41,6 @@ const Dashboard = () => {
     high: 30
 });
 const dataLength = data.length;
-const [visibleCount, setVisibleCount] = useState(0);
     const [limit, setLimit] = useState(4);
   
   const setStatus = (stock, item) => {
@@ -79,12 +78,10 @@ const [visibleCount, setVisibleCount] = useState(0);
             <div className={styles["bigtop"]}>
               <p><i className="fa-solid fa-dolly"></i>  Inventario bajo</p>
             </div>
-            {data.length === 0 ? (
-    <tr>
-        <td colSpan="3">
-            <h2>¡Muy bien no hay inventario bajo!</h2>
-        </td>
-    </tr>
+            {data.filter(product => product.stock < inventory.medium).length === 0 ? (
+              <div>
+    <h2>¡Muy bien no hay inventario bajo!</h2>
+    </div>
 ) : (
     <table className={styles["anouncetable2"]}>
         <thead>
@@ -113,6 +110,7 @@ const [visibleCount, setVisibleCount] = useState(0);
         </tbody>
     </table>
 )}
+
 
 
           </div>
