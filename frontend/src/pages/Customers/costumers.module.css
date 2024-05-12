@@ -58,6 +58,7 @@ input{
     border-radius: .5rem;
     border: 1px solid var(--dark_gray);
     transition: all .3s ease-in-out;
+    cursor: pointer;
 }
 
 .cell-select input:checked,
