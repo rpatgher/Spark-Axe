@@ -24,7 +24,7 @@ const Inventory = () => {
     const [data, setData] = useState([]);
     const [visible, setVisible] = useState('all');
     const [order, setOrder] = useState('asc');
-    const [orderType, setOrderType] = useState('id');
+    const [orderType, setOrderType] = useState('name');
     const [search, setSearch] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -91,15 +91,37 @@ const Inventory = () => {
         return () => getElements();
     }, []);
 
-    const handleEditClick = (index) => {
-        setEditingRow(index);
-        data[index].selected = true;
-        setCurrentElement(data[index]);
+    const handleEditClick = (itemId) => {
+        setEditingRow(itemId);
+        setData(data.map(product => {
+            if (product.id === itemId) {
+                product.selected = true;
+                setCurrentElement(product);
+            }else{
+                product.selected = false;
+            }
+            return product;
+        }));
+        setFilteredProducts(filteredProducts.map(product => {
+            if (product.id === itemId) {
+                product.selected = true;
+            }else{
+                product.selected = false;
+            }
+            return product;
+        }));
     };
 
-    const handleSaveClick = async (index) => {
+    const handleSaveClick = async (itemId) => {
+        const currentElement = data.find(product => product.id === itemId);
+        if(currentElement.stock === '' || currentElement.stock < 0){
+            currentElement.stock = 0;
+        }
+        if(currentElement.price === '' || currentElement.price < 0){
+            currentElement.price = 0;
+        }
         setLoading(true);
-        data[index].selected = false;
+        currentElement.selected = false;
         const token = localStorage.getItem('token');
         const config = {
             headers: {
@@ -109,6 +131,7 @@ const Inventory = () => {
         }
         try {
             await clientAxios.put(`/api/elements/stock/${currentElement.id}`, currentElement, config);
+            filterProducts(search, visible);
         } catch (error) {
             console.log(error);
         }
@@ -116,24 +139,27 @@ const Inventory = () => {
         setEditingRow(null);
     };
 
-    const handleInputChange = (event, field, index) => {
+    const handleInputChange = (event, field, itemId) => {
         setCurrentElement({
-            ...data[index],
+            currentElement,
             [field]: event.target.value
         });
-        const newData = [...data];
-        newData[index][field] = event.target.value;
-        setData(newData);
+        setData(data.map(product => {
+            if (product.id === itemId) {
+                product[field] = event.target.value;
+            }
+            return product;
+        }));
     };
 
-    const renderTableCell = (value, field, index) => {
-        if (index === editingRow && field !== "producto" && field !== "status") {
+    const renderTableCell = (value, field, itemId) => {
+        if (itemId === editingRow && field !== "producto" && field !== "status") {
             return (
                 <input
                     type="number"
                     className={styles["input-stock"]}
                     value={value}
-                    onChange={(event) => handleInputChange(event, field, index)}
+                    onChange={(event) => handleInputChange(event, field, itemId)}
                 />
             );
         } else {
@@ -240,7 +266,7 @@ const Inventory = () => {
                                     value={'stock'}
                                     onClick={handleOrderType}
                                 >
-                                    <i className="fa-solid fa-a"></i>
+                                    <i className="fa-solid fa-box"></i>
                                     Cantidad
                                 </button>
                                 <button
@@ -294,7 +320,7 @@ const Inventory = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.length === 0 ? (
+                            {filteredProducts.length === 0 ? (
                                 <tr>
                                     <td colSpan="10" className={styles.noproducts}>
                                         <div>
@@ -313,30 +339,35 @@ const Inventory = () => {
                                             >
                                                 
                                                 <td>{item.name}</td>
-                                                <td>{renderTableCell(item.stock, "stock", index)}</td>
-                                                <td>{renderTableCell(item.price, "price", index)}</td>
+                                                <td>{renderTableCell(item.stock, "stock", item.id)}</td>
+                                                <td>{renderTableCell(item.price, "price", item.id)}</td>
                                                 <td>{setStatus(item.stock, item)}</td>
 
                                                 <td>
-                                                    {editingRow === index ? (
+                                                    {editingRow === item.id ? (
                                                         <div>
                                                             <button
-                                                                onClick={() => handleSaveClick(index)}
+                                                                onClick={() => handleSaveClick(item.id)}
                                                                 className={`${styles.guardar} ${loading ? styles.loading : ""}`}
-                                                            >{loading ? 'Guardando...' : 'Guardar'}</button>
+                                                            >
+                                                                <i className="fa-solid fa-save"></i>
+                                                                {loading ? 'Guardando...' : 'Guardar'}
+                                                            </button>
                                                         </div>
                                                     ) : (
                                                         <button 
-                                                            onClick={() => handleEditClick(index)} 
+                                                            onClick={() => handleEditClick(item.id)} 
                                                             className={styles.editar}
-                                                        >Editar</button>
+                                                        >
+                                                            <i className="fa-solid fa-pen"></i>
+                                                            Editar
+                                                        </button>
                                                     )}
                                                 </td>
                                             </tr>
                                         )
                                     }else{
                                         item.visible = false;
-                                      
                                     }
                                 })
                             }

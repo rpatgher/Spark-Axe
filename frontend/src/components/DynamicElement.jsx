@@ -1,11 +1,18 @@
 // ********************* Components for Dynamic Element *********************
+import DefaultProductComponent from '../DynamicElementComponents/DefaultProductComponent/Component';
 import ShakaloStoreComponent from '../DynamicElementComponents/ShakaloStore/VapeCard';
 
 const DynamicElement = ({element}) => {
+    const componentMap = {
+        'ShakaloStoreComponent': ShakaloStoreComponent,
+    }
+    
+    const userSiteType = 'ShakaloStoreComponent';
+    const ProductComponent = componentMap[userSiteType] || DefaultProductComponent;
+
     return (
         <div>
-            {/* TODO: Make it dynamic showing the corresponding component depending on the website */}
-            <ShakaloStoreComponent 
+            <ProductComponent 
                 vape={element}
             />
         </div>

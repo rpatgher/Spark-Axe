@@ -1,29 +1,35 @@
-.imgA {
+.inventory-wrapper {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    width: auto;
-    height: 400px;
-}
-.headingback{
-    font-size: 5.4rem;
-    margin: 4rem 0;
-    opacity: 30%;
-    color: #000;
-    cursor: pointer;
-  }
-.heading{
-    font-size: 5.4rem;
-    text-align: center;
-    margin: 4rem 0;
-    font-weight: bold;
+    height: 100%;
 }
 
-.form{
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
+.enviocontent {
+    background: rgba(255, 255, 255, 0.432);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.31);
+    border-radius: 20px;
 }
-.field{
+
+.tabcontent1 {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    position: relative;
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.field {
     display: flex;
     flex-direction: column;
     background-color: var(--white);
@@ -31,34 +37,27 @@
     gap: 1rem;
     border-radius: 1rem;
 }
-.field label{
+
+.field label {
     font-size: 1.4rem;
 }
-.field textarea{
+
+.field textarea {
     resize: none;
 }
-.field input, .field textarea{
+
+.field input,
+.field textarea {
     font-size: 1.4rem;
     padding: 1rem;
     border: 1px solid var(--gray);
     background-color: var(--white);
-    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1);
+    /* Box shadow for depth */
     border-radius: 1rem;
     height: auto;
 }
-
-.body{
-    align-items: center;
-  display: grid;
-  grid-template-columns:1fr;
-  gap: 2rem;
-  align-items: flex-start ;
-  margin-bottom: 15rem;
-  position: relative;
-  width: 100%;
-}
-
-.Buttonguardar{
+.Buttonguardar {
     border: none;
     background-color: var(--blue);
     color: var(--white);
@@ -69,72 +68,24 @@
     cursor: pointer;
 }
 .Buttonguardar:hover {
-  background-color: var(--dark_blue)
+    background-color: var(--dark_blue)
+}
+.linksettings:hover {
+    background-color: var(--dark_gray)
 }
 
-.linksettings{
-    border: none;
-    background-color: #000;
-    color: var(--white);
-    font-size: 15px;
-    border-radius: 10px;
-    padding: 10px;
-    width: 100%;
-  }
-  .linksettings:hover{
-    background-color: var(--dark_gray)
-  }
-
-  .go-back button{
+.go-back button {
     all: unset;
     font-size: 2rem;
     cursor: pointer;
-    color:black;
+    color: black;
     opacity: 30%;
     font-weight: bold;
     border: none;
     margin: 5px;
     margin-bottom: 40px;
 }
-.go-back button:hover{
+
+.go-back button:hover {
     opacity: 100%;
-}
-
-
-.envio{
-    display: flex;
-}
-.content{
- flex: 1;
-}
-.image{
-
-flex: 2;
-}
-.result{
-    font-weight: bold;
-    font-size: 30px;
-}
-
-.tabcontent1{
-    width:70%;
-    margin-left: 15%;
-    margin-top: 20px;
-}
-
-
-.enviocontent{
-
-    background: rgba(255, 255, 255, 0.432);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.31);
-    width: 80%;
-    height: 80%;
-    border-radius: 20px;
-    margin-left:10%;
-    margin-top: 50px;
-    padding-bottom: 20px;
 }
