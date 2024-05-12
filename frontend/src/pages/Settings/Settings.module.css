@@ -163,6 +163,7 @@
     background-color: var(--white);
     box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
     border-radius: 1rem;
+    height: auto;
 }
 .body{
   display: grid;
@@ -179,6 +180,7 @@
   padding: 2rem;
   gap: 1rem;
   border-radius: 1rem;
+  height: auto;
 }
 
 .fieldD label{
