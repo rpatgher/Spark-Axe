@@ -154,7 +154,7 @@ const dataLength = data.length;
               <p><i className="fa-solid fa-basket-shopping"></i>  Ultimos pedidos</p>
             </div>
 
-            <table className={styles["anouncetable"]}>
+            <table className={styles["anouncetable2"]}>
               <tr>
                 <th>Fecha de pedido	</th>
                 <th>Estado</th>

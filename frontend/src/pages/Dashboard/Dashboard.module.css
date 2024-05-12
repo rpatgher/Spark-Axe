@@ -236,3 +236,26 @@
 .happyax{
     width: 100px;
 }
+
+.anouncetable2 {
+   
+    width: 96%;
+    border: none;
+    box-shadow: none;
+    margin: 2%;
+
+
+}
+.anouncetable2 td{
+    height: 10px;
+    padding: 0px;
+    background-color: transparent;
+}
+.anouncetable2 th{
+    height: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0); 
+}
+.anouncetable2 thead{
+    box-shadow: 0 6px 12px 0 rgba(31, 38, 135, 0.37);
+}
