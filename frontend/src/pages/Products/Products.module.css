@@ -255,6 +255,28 @@ tr:last-of-type td {
     color: var(--dark_gray);
     transition: all .1s ease-in-out;
 }
+a.editar{
+    background-color: var(--dark_gray);
+    padding: .5rem 0;
+    color: var(--white);
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    width: 8rem;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 auto;
+}
+a.editar i{
+    font-size: 1rem;
+}
+a.editar:hover{
+    background-color: black;
+}
 .modal-wrapper{
     display: flex;
     align-items: center;

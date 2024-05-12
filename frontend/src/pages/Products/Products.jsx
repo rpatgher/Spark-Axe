@@ -357,8 +357,13 @@ const Products = () => {
                                         </td>
                                         <td className={styles["cell-id"]}>{String(product.id).padStart(10, '0')}</td>
                                         <td className={styles["cell-published"]}><div className={`${product.published ? styles.published : styles.unpublished}`}>{product.published ? 'Publicado' : 'Archivado'}</div></td>
-                                        <td className={styles["cell-actions"]}>
-                                            <Link to={`edit/${product.id}`}><i className="fa-solid fa-pen"></i></Link>
+                                        <td 
+                                            className={styles["cell-actions"]}
+                                        >
+                                            <Link to={`edit/${product.id}`} className={styles.editar}>
+                                                <i className="fa-solid fa-pen"></i>
+                                                Editar
+                                            </Link>
                                         </td>
                                     </tr>
                                    ) 

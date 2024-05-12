@@ -11,21 +11,26 @@ const VapeCard = ({ vape }) => {
         }
     }, [image]);
     
+    const setImageVape = () => {
+        if(image){
+            return <img src={viewImage} alt={`${name} Vape Image`} />;
+        }else if(initialImage){
+            return <img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/elements/${initialImage}`} alt={`${name} Vape Image`} />;
+        }else{
+            return;
+        }
+    }
 
     return (
         <div className="card" style={{ backgroundColor: `color-mix(in srgb, ${color} 40%, #fff)` }}>
             <div className="vape">
                 <div className="image">
-                    {image ?
-                        <img src={viewImage} alt={`${name} Vape Image`} />
-                        :
-                        <img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/elements/${initialImage}`} alt={`${name} Vape Image`} />
-                    }
+                    {setImageVape()}
                 </div>
                 <p className="descripcion">{name} </p>
             </div>
             <div className="price">
-                <p style={{ backgroundColor: color }}>${price}</p>
+                {price && <p style={{ backgroundColor: color, color: `color-mix(in srgb, ${color} 20%, #fff)` }}>${price}</p>}
             </div>
         </div>
     );
