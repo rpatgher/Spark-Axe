@@ -300,3 +300,6 @@
   box-shadow: var(--boxed);
  
 }
+.tabcontent2{
+  display: flex;
+}
