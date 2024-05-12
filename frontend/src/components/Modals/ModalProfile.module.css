@@ -16,7 +16,7 @@
     position: relative;
     border-radius: 1rem;
     padding: 2rem;
-    min-width: 40rem;
+    min-width: 60rem;
 }
 .close-modal{
     all: unset;
@@ -63,7 +63,7 @@
   grid-template-columns:1fr;
   gap: 2rem;
   align-items: flex-start ;
-  margin-bottom: 15rem;
+ 
   position: relative;
   width: 100%;
   }
@@ -81,4 +81,59 @@
   .Buttonguardar:hover {
   background-color: var(--dark_blue)
   }
-  
+  .Newwebsite{
+    background-color:  #5a5a5a;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+}
+.Newwebsite:hover{
+    background-color: #000000;
+}
+.edit{
+  margin-top: 20px;
+  border: none;
+    background-color: var(--blue);
+    color: var(--white);
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.edit:hover{
+  background-color: var(--dark_blue);
+}
+
+
+
+.field{
+  padding: 0px;
+}
+.field input,
+.field textarea {
+  height: auto;
+
+}
+form{
+  margin-bottom: 10px;
+}
+
+.back{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #858383;
+  font-weight: bold;
+  padding: 0%;
+}
+.back:hover{
+  color: #000000;
+}
+.backhead{
+  color: #858383;
+  cursor: pointer;
+}

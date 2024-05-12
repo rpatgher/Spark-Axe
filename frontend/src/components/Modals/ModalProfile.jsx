@@ -1,5 +1,5 @@
 
-
+import { Link } from "react-router-dom"
 // **************** Hooks ****************
 import useAuth from "../../hooks/useAuth";
 import React, { useState } from 'react';
@@ -23,11 +23,10 @@ const ModalProfile = () => {
                 >
                     <i className="fa-solid fa-times"></i>
                 </button>
-                <h2>Configuracion de perfil</h2>
-                <hr></hr>
-
 
                 <div id="London" className={styles.tabcontent1} style={{display: activeTab === 'London' ?  'block' : 'none'}}>
+                <h2>Configuracion de perfil</h2>
+                <hr></hr>
                 <p><strong>Nombre</strong></p>
                 <p>Diego</p>
                 <p><strong>Correo</strong></p>
@@ -38,13 +37,34 @@ const ModalProfile = () => {
                 <p>Cambiar contraseña</p>
                 <p><strong>Avatar</strong></p>
                 <p><strong>Websites</strong></p>
-                <p>Shakalo store</p>
-                    <button className={styles.linksettings} onClick={() => openCity('Editar')}>Cambiar Perfil</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Dominio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Shakalo store</td>
+                            <td>shakalo.com</td>
+                        </tr>
+                        <tr>
+                            <td colSpan={2}>
+                            <Link to="/support"><button className={styles.Newwebsite}>Agregar website</button></Link>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                    <button className={styles.edit} onClick={() => openCity('Editar')}>Configurar Perfil</button>
                     </div>
                     <div id="Editar" className={styles.tabcontent1} style={{display: activeTab === 'Editar' ?  'block' : 'none'}}>
-                    <form 
-            className={styles.body}
-        >
+                    <h2> <span className={styles.backhead} onClick={() => openCity('London')}>Configuracion de perfil</span> / Editar</h2>
+                    <button onClick={() => openCity('London')} className={styles.back}><i className="fa-solid fa-arrow-left"></i> Regresar</button>
+                    
+                <hr></hr>
+                    <form className={styles.body}>
+            <p>Configuracion General</p>
             <div className={styles.field}>
                     <label htmlFor="">Tu Nombre</label>
                     <input 
@@ -76,9 +96,28 @@ const ModalProfile = () => {
                     />
                 </div>
                 <p>Cambiar contraseña</p>
-                
+                <div className={styles.field}>
+                    <label htmlFor="">Pon contraseña</label>
+                    <input 
+                        type="" 
+                        id="" 
+                        name="" 
+                        placeholder={`dominio.com`}
+            
+                    />
+                    <label htmlFor="">Pon Nueva contraseña</label>
+                    <input 
+                        type="" 
+                        id="" 
+                        name="" 
+                        placeholder={`dominio.com`}
+            
+                    />
+                </div>
+                <p>Avatar</p>
+                <button onClick={() => openCity('London')} className={styles.Buttonguardar}>Guardar cambios</button>
                 </form>
-                <button className={styles.linksettings} onClick={() => openCity('London')}>Guardar cambios</button>
+               
                     </div>
                     
                     </div>
