@@ -8,6 +8,7 @@ import styles from './inventory.module.css';
 
 // ******************** Hooks ********************
 import useAuth from '../../hooks/useAuth';
+import useApp from '../../hooks/useApp';
 
 // ******************** Helpers ********************
 import formatToMoney from '../../helpers/formatMoney';
@@ -17,9 +18,12 @@ import clients from '../../assets/img/inventory.png';
 import lunaAxImage from '../../assets/img/luna_ax.png';
 import GoTopBtn from '../../components/Btns/GoTopBtn';
 
+// ******************** Components ********************
+import FloatAlert from '../../components/Alert/FloatAlert';
 
 const Inventory = () => {
     const { auth } = useAuth();
+    const { alert } = useApp();
     const [editingRow, setEditingRow] = useState(null);
     const [data, setData] = useState([]);
     const [visible, setVisible] = useState('all');
@@ -82,6 +86,8 @@ const Inventory = () => {
             }
             try {
                 const { data } = await clientAxios(`/api/elements/${auth.websites[0].id}`, config);
+                const { data: inventoryData } = await clientAxios(`/api/inventories/${auth.websites[0].id}`, config);
+                setInventory(inventoryData);
                 setData(data);
                 setFilteredProducts(data);
             } catch (error) {
@@ -229,6 +235,7 @@ const Inventory = () => {
 
     return (
         <div className={styles["inventory-wrapper"]}>
+            {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
             <div className={styles.top}>
                 <div className={styles.topcontent}>
                     <h2 className={styles.heading}>Inventario</h2>
