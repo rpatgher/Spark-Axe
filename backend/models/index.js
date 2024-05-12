@@ -7,6 +7,7 @@ import Category from "./Category.js";
 import Subcategory from "./Subcategory.js";
 import ElementCategory from "./ElementCategory.js";
 import OrderElement from "./OrderElement.js";
+import Inventory from "./Inventory.js";
 
 
 User.hasMany(Website, { foreignKey: 'user_id' });
@@ -14,6 +15,8 @@ Website.belongsTo(User, { foreignKey: 'user_id' });
 Element.belongsTo(Website, { foreignKey: 'website_id' });
 Category.belongsTo(Website, { foreignKey: 'website_id' });
 Website.hasMany(Category, { foreignKey: 'website_id' });
+Website.hasOne(Inventory, { foreignKey: 'website_id' });
+Inventory.belongsTo(Website, { foreignKey: 'website_id' });
 Subcategory.belongsTo(Category, { foreignKey: 'category_id' });
 Category.hasMany(Subcategory, { foreignKey: 'category_id' });
 Subcategory.belongsToMany(Element, { through: ElementCategory });
@@ -30,4 +33,4 @@ Order.belongsTo(Customer, { foreignKey: 'customer_id' });
 
 //belongs to hace que alla una foreign key que hace para exportar los registros de muchas tabla
 //en tablas siempre va estar el uno en la tbla de muchos
-export { User, Website, Element, Customer, Order, Category, Subcategory, ElementCategory, OrderElement };
+export { User, Website, Element, Customer, Order, Category, Subcategory, ElementCategory, OrderElement, Inventory };

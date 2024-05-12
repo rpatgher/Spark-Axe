@@ -1,5 +1,5 @@
 // ************* Models *************
-import { Website } from '../models/index.js';
+import { Website, Inventory } from '../models/index.js';
 
 const getWebsite = async (req, res) => {
     const website = await Website.findByPk(req.params.id);
@@ -16,9 +16,12 @@ const getWebsite = async (req, res) => {
 
 const createWebsite = async (req, res) => {
     const website = Website.build(req.body);
+    const inventory = Inventory.build();
     website.user_id = req.user.id;
     try {
-        await website.save();
+        const websiteSaved = await website.save();
+        inventory.website_id = websiteSaved.id;
+        await inventory.save();
         res.json({ msg: 'Website created successfully' });
     } catch (error) {
         console.log(error);
