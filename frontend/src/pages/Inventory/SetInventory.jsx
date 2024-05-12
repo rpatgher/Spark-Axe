@@ -17,6 +17,7 @@ function SetInventory() {
             <div className={styles["go-back"]}>
             <Link to='/dashboard/inventory'><button onClick={() => openCity('London')}> <i className="fa-solid fa-arrow-left"  ></i> Regresar</button></Link>
             </div>
+            
             <form 
             className={styles.body}
         >
@@ -50,8 +51,10 @@ function SetInventory() {
             
                     />
                 </div>
-                </form>
+                <p style={{textAlign: "center", fontSize: "1.4rem"}}>Esta configuracion se aplicara para todos los productos y es para que tengas mas control sobre tu inventario</p>
                 <Link to='/dashboard/inventory'> <button className={styles.Buttonguardar}>Guardar cambios</button></Link>
+                </form>
+               
                 </div>
                 </div>
             </div>

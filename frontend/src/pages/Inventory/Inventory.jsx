@@ -207,7 +207,6 @@ const Inventory = () => {
                 <div className={styles.topcontent}>
                     <h2 className={styles.heading}>Inventario</h2>
                     <h4>Ten mas control sobre tu negocio</h4>
-                    <Link to='/dashboard/inventory/set'><button className={styles.configinventory}><i className="fa-solid fa-dolly"></i> Configurar inventario</button></Link>
                 </div>
                 <div className={styles.topimage}>
                     <img className={styles["back"]} src={clients} alt="Axolotl-Waiting" />
@@ -271,6 +270,7 @@ const Inventory = () => {
                         </div>
                     </div>
                 </div>
+                <Link to='/dashboard/inventory/set'><button className={styles.configinventory}><i className="fa-solid fa-dolly"></i> Configurar inventario</button></Link>
             </div>
             <div className={styles["Filtertabs"]}>
                 <div className={styles["radio-inputs"]}>

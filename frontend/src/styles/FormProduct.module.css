@@ -47,6 +47,7 @@
     box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1);
     /* Box shadow for depth */
     border-radius: 1rem;
+    height: auto;
 }
 
 .field-two-columns {
@@ -133,7 +134,7 @@
 }
 
 .preview p {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     margin: 0;
     padding: 0;
 }
@@ -170,6 +171,7 @@
     border-radius: 1rem;
     font-size: 1.6rem;
     text-align: center;
+    cursor: pointer;
 }
 
 .button:hover {
@@ -184,6 +186,8 @@
 .btn-publish {
     background-color: var(--green);
     width: 50%;
+    cursor: pointer;
+
 }
 
 .btn-publish:hover {
@@ -193,6 +197,8 @@
 .btn-unpublish {
     background-color: color-mix(in srgb, var(--yellow) 90%, #000);
     width: 50%;
+    cursor: pointer;
+
 }
 
 .btn-unpublish:hover {
@@ -242,6 +248,7 @@
 .input-subcategories {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    height: auto;
 }
 
 .input-subcategories-btn {
@@ -249,12 +256,15 @@
     gap: 1rem;
     align-items: center;
     position: relative;
+    cursor: pointer;
+
 }
 
 .input-subcategories input {
     padding: 1rem;
     font-size: 1.2rem;
     width: 100%;
+    height: auto;
 }
 
 .initial-subcategories {
@@ -388,9 +398,12 @@
 .field-images-done span:hover {
     background-color: color-mix(in srgb, var(--blue) 80%, #000);
 }
+
+
 input.empty-field, textarea.empty-field{
     border: 1px solid var(--red);
     background-color: color-mix(in srgb, var(--red) 30%, #fff);
+    height: auto;
 }
 .btn-disabled{
     opacity: .5;
@@ -408,3 +421,4 @@ input.empty-field, textarea.empty-field{
       color: #838383; /* Color opaco */
     }
 }
+

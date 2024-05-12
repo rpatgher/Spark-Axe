@@ -188,15 +188,21 @@ input{
 }
 .topcontent{
   flex:1;
+  margin-bottom: 0px;
    
 }
 .configinventory{
-    background-color: black;
+    float: right;
+    background-color:  #5a5a5a;
     color: white;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     border: none;
     cursor: pointer;
+    font-size: 1.7rem;
+}
+.configinventory:hover{
+    background-color: #000000;
 }
 .imgAX {
     height: 300px;
@@ -230,6 +236,7 @@ input{
     display: flex;
     justify-content: space-between;
     margin: 3rem 0;
+    align-items: center;
 }
 
 .Textfilter {
