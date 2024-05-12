@@ -154,33 +154,39 @@ const dataLength = data.length;
               <p><i className="fa-solid fa-basket-shopping"></i>  Ultimos pedidos</p>
             </div>
 
-            <table className={styles["anouncetable2"]}>
-              <tr>
-                <th>Fecha de pedido	</th>
+            {data.filter(product => product.stock < inventory.medium).length === 0 ? (
+              <div className={styles["Noinvent"]}>
+                 <img className={styles["happyax"]} src={happy} alt="Most sold product" />
+    <h2>¡Muy bien no hay inventario bajo!</h2>
+    </div>
+) : (
+    <table className={styles["anouncetable2"]}>
+        <thead>
+            <tr>
+                <th>Fecha de pedido</th>
                 <th>Estado</th>
                 <th>Total</th>
-              </tr>
-              <tr>
-                <td>3 de de mayo de 2024		</td>
-                <td>En proceso</td>
-                <td>$ 10000</td>
-              </tr>
-              <tr>
-                <td>3 de de mayo de 2024		</td>
-                <td>En proceso</td>
-                <td>$ 10000</td>
-              </tr>
-              <tr>
-                <td>3 de de mayo de 2024		</td>
-                <td>En proceso</td>
-                <td>$ 10000</td>
-              </tr>
-              <tr>
-                <td>3 de de mayo de 2024		</td>
-                <td>En proceso</td>
-                <td>$ 10000</td>
-              </tr>
-            </table>
+            </tr>
+        </thead>
+        <tbody>
+            {data.filter(product => product.stock < inventory.medium).map((item, index) => {
+                if (index < limit) {
+                    item.visible = true;
+                    return (
+                        <tr key={item.id}>
+                            <td>{item.name}</td>
+                            <td>{item.stock}</td>
+                            <td>{setStatus(item.stock, item)}</td>
+                        </tr>
+                    );
+                } else {
+                    item.visible = false;
+                    return null; // Si no se muestra, retornamos null
+                }
+            })}
+        </tbody>
+    </table>
+)}
           </div>
           <div className={styles["enviodiv"]}>
             <div className={styles.left}> <img className={styles["bustop"]} src={bustop} alt="Most sold product" /></div>
