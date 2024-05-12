@@ -80,38 +80,41 @@ const [visibleCount, setVisibleCount] = useState(0);
               <p><i className="fa-solid fa-dolly"></i>  Inventario bajo</p>
             </div>
             <table className={styles["anouncetable2"]}>
-                    
-                            <tr>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Estatus</th>
-                            </tr>
-                            {data.length === 0 ? (
-                                <tr>
-                                    <td colSpan="10" >
-                                        No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
-                                </tr>
-                            ):
-                                data.map((item, index) => {
-                                    if(index < limit){
-                                        item.visible = true;
-                                        return (
-                                            <tr 
-                                                key={item.id} 
-                                            >
-                                                <td>{item.name}</td>
-                                                <td>{(item.stock, "stock", index)}</td>
-                                                <td>{setStatus(item.stock, item)}</td>
-                                            </tr>
-                                        )
-                                    }else{
-                                        item.visible = false;
-                                      
-                                    }
-                                })
-                            }
-                        
-                    </table>
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Estatus</th>
+        </tr>
+    </thead>
+    <tbody>
+        {data.length === 0 ? (
+            <tr>
+                <td colSpan="3">
+                    No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link>
+                </td>
+            </tr>
+        ) : (
+            // Filtramos los datos antes de mapearlos
+            data.filter(product => product.stock < inventory.medium).map((item, index) => {
+                if (index < limit) {
+                    item.visible = true;
+                    return (
+                        <tr key={item.id}>
+                            <td>{item.name}</td>
+                            <td>{item.stock}</td>
+                            <td>{setStatus(item.stock, item)}</td>
+                        </tr>
+                    );
+                } else {
+                    item.visible = false;
+                    return null; // Si no se muestra, retornamos null
+                }
+            })
+        )}
+    </tbody>
+</table>
+
           </div>
         </div>
         <div className={styles["row"]}>
