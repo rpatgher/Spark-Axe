@@ -188,7 +188,6 @@ input{
 }
 .topcontent{
   flex:1;
-  margin-bottom: 0px;
    
 }
 .configinventory{
@@ -235,7 +234,8 @@ input{
 .filters {
     display: flex;
     justify-content: space-between;
-    margin: 3rem 0;
+    margin-bottom: 3rem;
+    margin-top: 1rem;
     align-items: center;
 }
 
