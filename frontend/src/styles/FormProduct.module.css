@@ -127,12 +127,30 @@
     background-color: var(--white);
     border-radius: 1rem;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
 .preview p {
     font-size: 1.4rem;
     margin: 0;
     padding: 0;
+}
+
+.content-preview{
+    display: flex;
+    flex-direction: column;
+}
+
+.status-published{
+    color: var(--green);
+    font-weight: var(--bold);
+}
+
+.status-unpublished{
+    color: var(--yellow);
+    font-weight: var(--bold);
 }
 
 .right {

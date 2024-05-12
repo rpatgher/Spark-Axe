@@ -12,6 +12,7 @@ import useApp from '../hooks/useApp';
 
 // ************** components *************
 import FloatAlert from './Alert/FloatAlert';
+import DynamicElement from './DynamicElement';
 
 const FormProduct = ({ initalProduct, setModalDelete }) => {
     const { auth } = useAuth();
@@ -51,6 +52,9 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             color: initalProduct?.color || '',
             image: '',
             image2: '',
+            initialImage: initalProduct?.image || '',
+            initialImage2: initalProduct?.image2 || '',
+            published: initalProduct?.published || false
         });
         setCategories(initalProduct?.categories || []);
     }, [initalProduct]);
@@ -525,7 +529,13 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                 </div>
                 <div className={styles.right}>
                     <div className={styles.preview}>
-                        <p>Vista Previa</p>
+                        <div className={styles["content-preview"]}>
+                            <p>Vista Previa</p>
+                            <DynamicElement
+                                element={product}
+                            />
+                        </div>
+                        <p>Estado del producto: <span className={`${product.published ? styles["status-published"] : styles["status-unpublished"] }`}>{product.published ? 'Publicado' : 'Archivado'}</span> </p>
                     </div>
                     <button
                         className={`${styles.button} ${savingProduct ? styles["btn-saving"] : ''} ${initalProduct && !initalProduct?.name ? styles["btn-disabled"] : ''}`}
