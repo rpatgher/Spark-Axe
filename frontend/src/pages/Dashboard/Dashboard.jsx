@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './Dashboard.module.css';
 // **************** Images ****************
 import lunaAxImage from '../../assets/img/TiendaM.png';
+import happy from '../../assets/img/axhappy.png';
 import Vape from '../../assets/img/vape.webp';
 import bustop from '../../assets/img/bustop.jpg';
 import useAuth from '../../hooks/useAuth';
@@ -79,7 +80,8 @@ const dataLength = data.length;
               <p><i className="fa-solid fa-dolly"></i>  Inventario bajo</p>
             </div>
             {data.filter(product => product.stock < inventory.medium).length === 0 ? (
-              <div>
+              <div className={styles["Noinvent"]}>
+                 <img className={styles["happyax"]} src={happy} alt="Most sold product" />
     <h2>¡Muy bien no hay inventario bajo!</h2>
     </div>
 ) : (

@@ -225,3 +225,14 @@
 .axwork {
     width: 200px;
 }
+.Noinvent{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.happyax{
+    width: 100px;
+}
