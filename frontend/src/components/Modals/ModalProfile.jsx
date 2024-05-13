@@ -64,7 +64,7 @@ const ModalProfile = () => {
                     
                 <hr></hr>
                     <form className={styles.body}>
-            <p>Configuracion General</p>
+            <p><strong>Configuracion General</strong></p>
             <div className={styles.field}>
                     <label htmlFor="">Tu Nombre</label>
                     <input 
@@ -95,7 +95,7 @@ const ModalProfile = () => {
             
                     />
                 </div>
-                <p>Cambiar contraseña</p>
+                <p><strong>Cambiar contraseña</strong></p>
                 <div className={styles.field}>
                     <label htmlFor="">Pon contraseña</label>
                     <input 
@@ -114,7 +114,7 @@ const ModalProfile = () => {
             
                     />
                 </div>
-                <p>Avatar</p>
+                <p><strong>Avatar</strong></p>
                 <button onClick={() => openCity('London')} className={styles.Buttonguardar}>Guardar cambios</button>
                 </form>
                

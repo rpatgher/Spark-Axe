@@ -2,7 +2,9 @@
 import styles from './About.module.css';
 
 import { Link } from "react-router-dom"
-
+import About1 from '../../assets/img/about1.jpg';
+import About2 from '../../assets/img/about2.jpg';
+import About3 from '../../assets/img/about3.jpg';
 
 const About = () => {
     return (
@@ -15,6 +17,11 @@ const About = () => {
             <Link to="/signup"><li className={styles.rightnavB}><a>Registrarse</a></li></Link>
             <Link to="/login"><li className={styles.rightnavB}><a>Iniciar Sesion</a></li></Link>
 </ul>
+            </div>
+            <div className={styles.imagecontainer}>
+            <img src={About1} alt="Image 1"/>
+            <img src={About2} alt="Image 2"/>
+            <img src={About3} alt="Image 3"/>
             </div>
             <h1 className={styles.head}>Conoce mas de nosotros</h1>
             <div className={styles.content}>

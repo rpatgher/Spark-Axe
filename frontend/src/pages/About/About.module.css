@@ -54,3 +54,17 @@
     text-align: justify;
 
   }
+  .imagecontainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 10px;
+}
+
+.imagecontainer img {
+    max-width: 100%; /* Limit the image width to its container */
+    max-height: 100%; /* Limit the image height to its container */
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Ensure the image maintains its aspect ratio */
+}
+
