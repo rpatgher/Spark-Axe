@@ -1,13 +1,16 @@
 import styles from '../styles/Home.module.css';
 import logo from '../assets/img/logo.png';
+import full_HDLogo from '../assets/img/full_HDLogo.png';
+import chalkLogo from '../assets/img/chalkLogo.png';
+import MosaicLogo from '../assets/img/MosaicLogo.png';
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 
 const Home = () => {
     const [logoIndex, setLogoIndex] = useState(0);
     const [fontIndex, setFontIndex] = useState(0);
-    const logos = [logo, logo, logo]; // Add your logo paths here
-    const fonts = ['arial', 'roboto', 'BrushScriptMT']; // Add your font class names here
+    const logos = [logo, full_HDLogo, chalkLogo, MosaicLogo]; // Add your logo paths here
+    const fonts = ['arial', 'roboto', 'BrushScriptMT', 'helvetica']; // Add your font class names here
 
     useEffect(() => {
         const interval = setInterval(() => {
