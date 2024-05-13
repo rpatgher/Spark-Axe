@@ -59,6 +59,8 @@ function Settings() {
       <div id="Paris" className={styles.tabcontent} style={{display: activeTab === 'Paris' ? 'block' : 'none'}}>
         <div id="Paris" className={styles.tabcontent2} style={{display: activeTab2 === 'Paris' ? 'block' : 'none'}}>
       <h2 className={styles.heading}>Configuración de Tienda</h2>
+      <p>Configura tu tienda a tu estilo</p>
+      <br></br>
       <p><strong>Nombre de Tienda</strong></p>
       <p>Elibaba</p>
       <p><strong>Tipo de sitio web</strong></p>
