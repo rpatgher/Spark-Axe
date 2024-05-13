@@ -89,11 +89,7 @@
     margin-right: 10px;
     
 }
-.infofloatr{
-    float: right;
-    margin-right: 10px;
-    font-weight: normal;
-}
+
 .infofloatrb{
     font-weight: bold ;
 }
@@ -105,17 +101,6 @@
    flex: 1;
    display: flex;
    flex-direction: column;
-}
-.STW{
-    border: none;
-    cursor: pointer;
-    color: white;
-    background-color: black;
-    padding: 5px;
-    font-size: 15px;
-    border-radius: 5px;
-   margin: 5px;
-    float: right;
 }
 
 
@@ -284,4 +269,28 @@
 }
 .cargar:hover{
     background-color: black;
+}
+.pedidofinal{
+    justify-content: center;
+    margin: auto;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.infofloatr{
+    margin-right: 10px;
+    font-weight: normal;
+}
+.STW{
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    margin: 5px;
+    margin-bottom: 10px;
+    float: right;
 }

@@ -100,18 +100,7 @@ const Orders = () => {
         setDetails(details === orderId ? '' : orderId);
     }
 
-    //Share to whatsapp pedidos
-    const shareArrayToWhatsApp = () => {
-        const message = "hello"; // Join array elements with new lines
-        shareToWhatsApp(message);
-    };
-    const shareToWhatsApp = (message) => {
-        const url = `whatsapp://send?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
-    };
-    //**********Acaba Share to whatsapp *///////////////
-
-
+ 
     const handleOrder = (e) => {
         setOrder(e.target.value);
         setFilteredOrders(sortedOrders);
@@ -305,9 +294,50 @@ const Orders = () => {
                                     No cuentas con pedidos aún.</td>
                             </tr>
                         ) :
+                        
                             filteredOrders.map((order, index) => {
                                 if(index < limit){
-                                    order.visible = true;
+                            order.visible = true;
+                            //Share to whatsapp pedidos
+                            const share = () => {
+                                const formatProductTable = (products) => {
+                            let table = "\n";
+                            table += "Producto\tCantidad\tPrecio\tSubtotal\n"
+                            products.forEach(product => {
+                                table += `${product.name}\t${product.quantity}\t${product.price}\t${product.price * product.quantity}\n`;
+                            });
+                            return table;
+                        };
+
+                        const shareToWhatsApp = (message) => {
+                            const url = `whatsapp://send?text=${encodeURIComponent(message)}`;
+                            window.open(url, '_blank');
+                        };
+
+                        const shareArrayToWhatsApp = (products) => {
+                            const message = `
+*ID de Pedido:* ${order.id}
+*Fecha de Pedido:* ${formatDate(order.createdAt)}
+*Cliente :* Issac Shakalo
+*Nota de pedido:* ${order.notes}
+*Destino:* ubicacion de entrega
+${formatProductTable(products)}
+*Total:* $${formatToMoney(parseFloat(order.total))}
+                            `;
+                            shareToWhatsApp(message);
+                        };
+
+                        // Example product array
+                        const products = [
+                            { name: "Producto 1", quantity: 2, price: 10 },
+                            { name: "Producto 2", quantity: 1, price: 20 }
+                        ];
+
+                        shareArrayToWhatsApp(products);
+
+                            };
+                            
+                          
                                     return (
                                         <Fragment key={`${order.id}-${order.website_id}`}>
                                             <tr className={`${details === order.id ? styles["details-active"] : ''}`}>
@@ -336,10 +366,10 @@ const Orders = () => {
                                                     onClick={() => toggleDetails(order.id)}
                                                 >Ver  <i className="fa-regular fa-eye"></i></td>
                                             </tr>
+                                            
                                             {details === order.id && (
                                                 <tr>
                                                     <td colSpan="8" className={styles.products23}>
-                                                        <button className={styles.STW} onClick={shareArrayToWhatsApp}>Compartir pedido <i className="fa-solid fa-share"></i></button>
                                                         <h1> Pedido: {String(order.id).padStart(10, '0')}</h1>
                                                         <div className={styles.Descriptioncontfather}>
                                                             <div className={styles.Descriptioncont}>
@@ -364,6 +394,7 @@ const Orders = () => {
                                                                         ))}
                                                                     </tbody>
                                                                 </table>
+                                                                
                                                             </div>
                                                             <div className={styles.Descriptioncont}>
                                                                 <h2> Ubicacion de entrega:</h2>
@@ -373,8 +404,15 @@ const Orders = () => {
 
                                                             </div>
                                                         </div>
+                                                        <div className={styles.pedidofinal}>
+                                                        <div>
                                                         <h2 className={styles.infofloatr}>Total de Pedido: <span className={styles.infofloatrb}>${formatToMoney(parseFloat(order.total))}</span></h2>
                                                         <h2 className={styles.infofloatr}>Status: <span className={styles.infofloatrb}>{(order.status)}</span></h2>
+                                                        
+                                                        </div>
+                                                        <button className={styles.STW} onClick={share}>Compartir pedido <i className="fa-solid fa-share"></i></button>
+                                                        </div>
+                                                        
                                                     </td>
 
                                                 </tr>
