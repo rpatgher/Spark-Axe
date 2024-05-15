@@ -54,7 +54,7 @@ function SetInventory() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(inventory.low === '' || inventory.medium === '' || inventory.high === ''){
+        if(inventory.low === '' || inventory.high === ''){
             handleAlert('Todos los campos son obligatorios', true);
         }
         const token = localStorage.getItem('token');
@@ -104,17 +104,6 @@ function SetInventory() {
                             />
                         </div>
                         <div className={styles.field}>
-                            <label htmlFor="medium">Menos de la cantidad mínima para ser considerado inventario Medio</label>
-                            <input
-                                type="number"
-                                id="medium"
-                                name="medium"
-                                placeholder={"Por defecto: 20"}
-                                onChange={handleChange}
-                                value={inventory.medium || ''}
-                            />
-                        </div>
-                        <div className={styles.field}>
                             <label htmlFor="high">Mas de la cantidad mínima para ser considerado inventario Alto</label>
                             <input
                                 type="number"
@@ -125,8 +114,9 @@ function SetInventory() {
                                 value={inventory.high || ''}
                             />
                         </div>
-                        <p className={styles.notes}>Esta configuracion se aplicara para todos los productos y es para que tengas mas control sobre tu inventario</p>
-                        <p className={styles.notes}>Por defecto: Bajo es 10, Medio es 20 y Alto es 30</p>
+                        <p className={styles.notes}>Esta configuracion se aplicara para todos los productos y es para que tengas mas control sobre tu inventario.</p>
+                        <p className={styles.notes}>NOTA: El inventario se considera medio, si la cantidad en existencia del producto se encuentra entre el valor del bajo y alto.</p>
+                        <p className={styles.notes}>Por defecto: Bajo es 10, y Alto es 30</p>
                         <button 
                             className={styles.Buttonguardar}
                             type="submit"

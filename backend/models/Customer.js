@@ -4,13 +4,11 @@ import db from "../config/db.js";
 
 const Customer = db.define('customer', {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER.ZEROFILL,
         primaryKey: true,
         allowNull: false,
-        defaultValue: DataTypes.UUIDV4 
+        autoIncrement: true
     },
-
-    // los uuid son string gigantes random unicos
     name: {
         type: DataTypes.STRING,
         allowNull: false
@@ -20,6 +18,10 @@ const Customer = db.define('customer', {
         allowNull: false
     },
     email: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    phone: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -45,7 +47,7 @@ const Customer = db.define('customer', {
     },
     scopes:{
         withoutPassword: {
-            attributes: { exclude: ['password', 'token', 'confirmed', 'createdAt', 'updatedAt'] }
+            attributes: { exclude: ['password', 'token', 'createdAt', 'updatedAt', 'website_id'] }
         }
     }
 });

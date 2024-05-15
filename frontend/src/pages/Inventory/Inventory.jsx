@@ -23,7 +23,7 @@ import FloatAlert from '../../components/Alert/FloatAlert';
 
 const Inventory = () => {
     const { auth } = useAuth();
-    const { alert } = useApp();
+    const { alert, handleAlert } = useApp();
     const [editingRow, setEditingRow] = useState(null);
     const [data, setData] = useState([]);
     const [visible, setVisible] = useState('all');
@@ -35,7 +35,6 @@ const Inventory = () => {
     const [currentElement, setCurrentElement] = useState({});
     const [inventory, setInventory] = useState({
         low: 10,
-        medium: 20,
         high: 30
     });
     const dataLength = data.length;
@@ -138,8 +137,10 @@ const Inventory = () => {
         try {
             await clientAxios.put(`/api/elements/stock/${currentElement.id}`, currentElement, config);
             filterProducts(search, visible);
+            handleAlert("Producto actualizado correctamente", false);
         } catch (error) {
             console.log(error);
+            handleAlert("Hubo un error al actualizar el producto", true);
         }
         setLoading(false);
         setEditingRow(null);
@@ -147,7 +148,7 @@ const Inventory = () => {
 
     const handleInputChange = (event, field, itemId) => {
         setCurrentElement({
-            currentElement,
+            ...currentElement,
             [field]: event.target.value
         });
         setData(data.map(product => {
@@ -180,7 +181,7 @@ const Inventory = () => {
         if (stock >= inventory.high) {
             item.status = "high";
             return (<p className={`${styles.status} ${styles["status-high"]}`}>Alto</p>);
-        } else if (stock >= inventory.medium) {
+        } else if (stock > inventory.low && stock < inventory.high) {
             item.status = "medium";
             return (<p className={`${styles.status} ${styles["status-medium"]}`}>Medio</p>);
         } else {
@@ -216,13 +217,13 @@ const Inventory = () => {
                 return product;
             }
             if (visible === 'high') {
-                return product.stock >= inventory.high;
+                return product.status === 'high';
             }
             if (visible === 'medium') {
-                return product.stock >= inventory.medium && product.stock < inventory.high;
+                return product.status === 'medium';
             }
             if (visible === 'low') {
-                return product.stock < inventory.medium;
+                return product.status === 'low';
             }
         });
         if (search === '') {

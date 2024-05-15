@@ -10,6 +10,7 @@ import ElementRouter from './routes/ElementRoutes.js';
 import CategoryRouter from './routes/CategoryRoutes.js';
 import OrderRouter from './routes/OrderRoutes.js';
 import InventoryRouter from './routes/InventoryRoutes.js';
+import CustomerRouter from './routes/CustomerRoutes.js';
 
 // Connect DB
 import db from './config/db.js';
@@ -48,7 +49,7 @@ app.use('/api/elements', ElementRouter);
 app.use('/api/categories', CategoryRouter);
 app.use('/api/orders', OrderRouter);
 app.use('/api/inventories', InventoryRouter);
-
+app.use('/api/customers', CustomerRouter);
 
 
 // Listen

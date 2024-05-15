@@ -24,7 +24,10 @@ Element.belongsToMany(Subcategory, { through: ElementCategory });
 Order.belongsTo(Website, { foreignKey: 'website_id' });
 Element.belongsToMany(Order, { through: OrderElement });
 Order.belongsToMany(Element, { through: OrderElement });
+Customer.hasMany(Order, { foreignKey: 'customer_id' });
 Order.belongsTo(Customer, { foreignKey: 'customer_id' });
+Website.hasMany(Customer, { foreignKey: 'website_id' });
+Customer.belongsTo(Website, { foreignKey: 'website_id' });
 
 //deliveries has one website
 //alrevez website.hasOne(deliveries)

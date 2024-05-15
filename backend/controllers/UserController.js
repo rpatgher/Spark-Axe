@@ -23,13 +23,13 @@ const register = async (req, res) => {
     }
     try {
         const user = User.build(req.body);
+        user.confirmed = false;
         // TODO: Generate Token
         await user.save();
         // TODO: Send confirmation email
         res.json({ msg: 'Registered succesfully' });
     } catch (error) {
         console.log(error);
-        // TODO: Define better error handling
         return res.status(400).json({ msg: 'An error ocurred' });
     }
 }
@@ -71,8 +71,7 @@ const profile = async (req,res) => {
             { model: Website }
         ]
     });
-    console.log(user);
-    res.json(user);
+    res.status(200).json(user);
 }
 
 export {

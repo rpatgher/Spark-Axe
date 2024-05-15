@@ -13,11 +13,6 @@ const Inventory = db.define('inventory', {
         allowNull: false,
         defaultValue: 10
     },
-    medium: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 20
-    },
     high: {
         type: DataTypes.INTEGER,
         allowNull: false,
