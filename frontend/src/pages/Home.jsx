@@ -23,15 +23,6 @@ const Home = () => {
 
     return (
         <div>
-            <div className={styles.nav}>
-                <ul className={styles.navbar}>
-                    <li className={styles.navB}><Link to="/">Inicio</Link></li>
-                    <li className={styles.navB}><Link to="/about">Sobre Nosotros</Link></li>
-                    <li className={styles.navB}><Link to="/contact">Contactanos</Link></li>
-                    <li className={styles.rightnavB}><Link to="/signup">Registrarse</Link></li>
-                    <li className={styles.rightnavB}><Link to="/login">Iniciar Sesion</Link></li>
-                </ul>
-            </div>
             <div className={styles.header}>
                 <img className={styles.logo} src={logos[logoIndex]} alt="Sparkaxe-logo" />
                 <h1 className={`${styles.head} ${styles[fonts[fontIndex]]}`}>

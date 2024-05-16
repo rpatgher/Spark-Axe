@@ -8,30 +8,21 @@ import error from '../../assets/img/marcar_error.png';
 const About = () => {
     return (
         <div>
-            <div className={styles.nav}>
-            <ul className={styles.navbar}>
-            <Link to="/"><li className={styles.navB}><a>Inicio</a></li></Link>
-            <Link to="/about"><li className={styles.navB}><a>Sobre Nosotros</a></li></Link>
-            <Link to="/contact"><li className={styles.navB}><a>Contactanos</a></li></Link>
-            <Link to="/signup"><li className={styles.rightnavB}><a>Registrarse</a></li></Link>
-            <Link to="/login"><li className={styles.rightnavB}><a>Iniciar Sesion</a></li></Link>
-</ul>
-            </div>
             <h1 className={styles.head}>Contactanos</h1>
             <div className={styles.background}> 
             <p className={styles.headp}>Ofrecemos Soporte Técnico 24/7 para optimizar tu experiencia en nuestro sitio web. ¡Confía en nuestros expertos para resolver cualquier inconveniente y garantizar un funcionamiento óptimo en todo momento!</p>
-            <div className={styles.enviocontent}>
-                <div>
+            <div className={styles.enviocontent0}>
+                <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
 
             <h3><span className={styles.headingother}>Soporte</span></h3>
             </div>
-            <div>
+            <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
 
             <h3><span className={styles.headingother}>Aplicar</span></h3>
             </div>
-            <div>
+            <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
 
             <h3><span className={styles.headingother}>Preguntas frequentes</span></h3>
@@ -39,7 +30,6 @@ const About = () => {
 
             </div>
             <div className={styles.enviocontent2}>
-            
             <div className={styles.marcarerrordivinfo}>
             <h2><span className={styles.heading}><i class="fa-solid fa-headset"></i></span></h2>
             <h2><span className={styles.heading}>Soporte dentro de tu cuenta sparkaxe</span></h2>

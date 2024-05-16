@@ -1,49 +1,7 @@
 body{
   background-color: var(--gray_dashboard);
 }
-.navbar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #fff9f95b;
-}
 
-.navB {
-  float: left;
-}
-
-.navB  a {
-  display: block;
-  color: var(--dark_gray);
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.navB a:hover {
-  background-color: #cfcdcd;
-}
-
-.active {
-  background-color: #04AA6D;
-}
-
-.rightnavB{
-  float: right;
-}
-
-.rightnavB a {
-  display: block;
-  color: var(--dark_gray);
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.rightnavB a:hover {
-  background-color: #cfcdcd;
-}
 .head{
   width: 80%;
   margin-left: 10%;
@@ -182,13 +140,16 @@ flex: 2;
 }
 
 .tabcontent1{
+  display: flex;
+  flex-direction: column;
   width:70%;
-  margin-left: 15%;
   margin-top: 20px;
 }
 
 
 .enviocontent{
+  flex:1;
+  display: flex;
   justify-content: center;
   background: rgba(255, 255, 255, 0.432);
   border-radius: 16px;
@@ -232,6 +193,7 @@ flex: 2;
 
 
 .enviocontent2{
+  flex:1;
   text-align: center;
   justify-content: center;
   background: rgba(255, 255, 255);
@@ -240,14 +202,14 @@ flex: 2;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.31);
-  width: 80%;
+  width: 60%;
   height: 80%;
   border-radius: 20px;
-  margin-left:10%;
   margin-top: 50px;
   padding: 20px;
   padding-left: 40px;
   padding-right: 40px;
+  margin-left:20%;
 }
 .marcarerrordivinfo{
   background: rgba(255, 255, 255);
@@ -278,4 +240,48 @@ flex: 2;
 }
 .background{
   padding-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.enviocontent0{
+  flex:1;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  text-align: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.432);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.31);
+  width: 60%;
+  height: 80%;
+  border-radius: 20px;
+  margin-left:20%;
+  margin-top: 50px;
+  padding-bottom: 20px;
+}
+
+.contactbuttons{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+
+}
+
+.contactbuttons:hover{
+  box-shadow: 0 6px 34px rgba(0, 0, 0, 0.322);
+  transition: 0.5s;
 }
