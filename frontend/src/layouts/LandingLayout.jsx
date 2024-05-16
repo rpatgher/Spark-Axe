@@ -1,13 +1,14 @@
-import { Outlet } from "react-router-dom"
+// ParentComponent.js
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
-
-const LandingLayout = () => {
+function Landinglayout() {
   return (
     <div>
-     
-      <Outlet />
+      <h2>Parent Component</h2>
+      <Outlet /> {/* This will render child routes here */}
     </div>
-  )
+  );
 }
 
-export default LandingLayout
+export default Landinglayout;

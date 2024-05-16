@@ -274,3 +274,19 @@ body{
   .background{
     padding-bottom: 100px;
   }
+
+  .goback {
+    all: unset;
+    font-size: 2rem;
+    cursor: pointer;
+    color:black;
+    opacity: 30%;
+    font-weight: bold;
+    border: none;
+    margin: 5px;
+    margin-bottom: 40px;
+    border: none;
+}
+.goback:hover{
+    opacity: 100%;
+}
