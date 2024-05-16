@@ -17,6 +17,8 @@ import lunaAxImage from '../../assets/img/luna_ax.png';
 
 // ******************** Components ********************
 import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
+import FloatAlert from '../../components/Alert/FloatAlert';
+import Modal from '../../components/Modals/GeneralModal';
 
 const Customers = () => {
     const { auth } = useAuth();
@@ -36,6 +38,11 @@ const Customers = () => {
     const [visibleCount, setVisibleCount] = useState(0);
     const [limit, setLimit] = useState(10);
     const [limitIncrement, setLimitIncrement] = useState(10);
+
+    const [modalDelete, setModalDelete] = useState(false);
+    const [modalDeleteOne, setModalDeleteOne] = useState(false);
+
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const count = filteredElements.filter(item => item.selected && item.visible).length;
@@ -109,23 +116,23 @@ const Customers = () => {
 
     const filterElements = (search, visible) => {
         setSelectAll(false);
-        setFilteredElements(filteredProducts.map(product => product.selected = false));
-        const visibleFiltered = products.filter(product => {
+        setFilteredElements(filteredElements.map(item => item.selected = false));
+        const visibleFiltered = data.filter(item => {
             if (visible === 'all') {
-                return product;
+                return item;
             }
-            if (visible === 'published') {
-                return product.published;
+            if (visible === 'confirmed') {
+                return item.confirmed;
             }
-            if (visible === 'unpublished') {
-                return !product.published;
+            if (visible === 'unconfirmed') {
+                return !item.confirmed;
             }
         });
         if (search === '') {
             setFilteredElements(visibleFiltered);
             return;
         }
-        const filtered = visibleFiltered.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
+        const filtered = visibleFiltered.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
         setFilteredElements(filtered);
     };
 
@@ -142,8 +149,33 @@ const Customers = () => {
         }));
     };
 
-    const handleSaveClick = (itemId) => {
+    const handleSaveClick = async (itemId) => {
+        const currentElement = data.find(item => item.id === itemId);
+        const { name, email, phone } = currentElement;
+        if (!name || !email || !phone) {
+            handleAlert("Todos los campos son necesarios", true);
+            return;
+        }
+        setLoading(true);
+        currentElement.selected = false;
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        try {
+            await clientAxios.put(`/api/customers/${currentElement.id}`, currentElement, config);
+            handleAlert("Cambios guardados correctamente", false);
+            filterElements(search, visible);
+        } catch (error) {
+            console.log(error);
+            handleAlert("Hubo un error al guardar los cambios", true);
+        }
         setEditingRow(null);
+        setLoading(false);
+
     };
 
     const handleInputChange = (event, field, itemId) => {
@@ -160,16 +192,15 @@ const Customers = () => {
     };
 
     const handleSelectAll = () => {
-        const newData = data.map(item => ({ ...item, selected: !selectAll }));
-        setData(newData);
+        const newData = data.map(item => (item.visible ? { ...item, selected: !selectAll } : item));
+        setFilteredElements(newData);
         setSelectAll(!selectAll);
     };
 
     const handleSelect = (index) => {
-        const newData = [...data];
+        const newData = [...filteredElements];
         newData[index].selected = !newData[index].selected; // Update selected property
-        console.log(newData[index].selected); // Log the updated selected value
-        setData(newData);
+        setFilteredElements(newData);
     };
 
     const renderTableCell = (value, field, itemId) => {
@@ -186,8 +217,56 @@ const Customers = () => {
         }
     };
 
+
+    const deleteSelected = async () => {
+        const selected = filteredElements.filter(item => item.selected);
+        const ids = selected.map(item => item.id);
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        try {
+            await clientAxios.post(`/api/customers/delete`, { ids }, config);
+            setData(data.filter(item => !ids.includes(item.id)));
+            setFilteredElements(filteredElements.filter(item => !ids.includes(item.id)));
+            handleAlert("Clientes eliminados correctamente", false);
+            setModalDelete(false);
+            // filterElements(search, visible);
+        } catch (error) {
+            console.log(error);
+            handleAlert("Hubo un error al eliminar los clientes", true);
+        }
+    }
+    
+    const deleteOne = async () => {
+        const currentElement = data.find(item => item.id === editingRow);
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        try {
+            await clientAxios.delete(`/api/customers/${currentElement.id}`, config);
+            setData(data.filter(item => item.id !== currentElement.id));
+            setFilteredElements(filteredElements.filter(item => item.id !== currentElement.id));
+            handleAlert("Cliente eliminado correctamente", false);
+            setModalDeleteOne(false);
+            // filterElements(search, visible);
+            setEditingRow(null);
+        } catch (error) {
+            console.log(error);
+            handleAlert("Hubo un error al eliminar el cliente", true);
+        }
+    }
+
     return (
-        <>
+        <div className={styles["customers-wrapper"]}>
+            {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
             <div className={styles.top}>
                 <div className={styles.topcontent}>
                     <HeadingsRuta
@@ -256,8 +335,8 @@ const Customers = () => {
                     <div className={styles["radio-inputs"]}>
                         <p className={styles.visibles}>Visibles: </p>
                         <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "all" ? styles.active : ''}`} data-value="all">Todos</button>
-                        <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "published" ? styles.active : ''}`} data-value="published">Confirmada</button>
-                        <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "unpublished" ? styles.active : ''}`} data-value="unpublished">Unonfirmada</button>
+                        <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "confirmed" ? styles.active : ''}`} data-value="confirmed">Confirmados</button>
+                        <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "unconfirmed" ? styles.active : ''}`} data-value="unconfirmed">No Confirmados</button>
                     </div>
                     {selectedCount > 0 &&
                         <div className={styles.selected}>
@@ -275,7 +354,11 @@ const Customers = () => {
                         <thead>
                             <tr>
                                 <th className={styles["cell-select"]}>
-                                    <input type="checkbox" onChange={handleSelectAll} checked={selectAll} />
+                                    <input 
+                                        type="checkbox" 
+                                        onChange={handleSelectAll} 
+                                        checked={selectAll} 
+                                    />
                                 </th>
                                 <th>Nombre</th>
                                 <th>Email</th>
@@ -287,7 +370,7 @@ const Customers = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.length === 0 ? (
+                            {filteredElements.length === 0 ? (
                                 <tr>
                                     <td colSpan="10" className={styles.noproducts}>
                                         <div>
@@ -296,16 +379,19 @@ const Customers = () => {
                                         No cuentas con clientes aún.</td>
                                 </tr>
                             ) :
-                                data.map((item, index) => {
+                                filteredElements.map((item, index) => {
                                     if (index < limit) {
                                         item.visible = true;
                                         return (
-                                            <tr key={item.id} className={item.selected ? styles.selectedRow : ''}>
+                                            <tr 
+                                                key={item.id} 
+                                                className={item.selected ? styles.selectedRow : ''}
+                                            >
                                                 <td className={styles["cell-select"]}>
                                                     <input
                                                         type="checkbox"
-                                                        onChange={() => handleSelect(item.id)}
-                                                        checked={item.selected}
+                                                        onChange={() => handleSelect(index)}
+                                                        checked={item.selected || false}
                                                     />
                                                 </td>
                                                 <td>{renderTableCell(item.name, "name", item.id)}</td>
@@ -326,22 +412,29 @@ const Customers = () => {
                                                 </td>
                                                 <td>
                                                     {editingRow === item.id ? (
-                                                        <div>
+                                                        <div className={styles["save-delete"]}>
                                                             <button
                                                                 onClick={() => handleSaveClick(item.id)}
-                                                                className={styles.guardar}
-                                                            >Guardar</button>
+                                                                className={`${styles.guardar} ${loading ? styles.loading : ""}`}
+                                                            >
+                                                                <i className="fa-solid fa-save"></i>
+                                                                {loading ? 'Guardando...' : 'Guardar'}
+                                                            </button>
                                                             <button
                                                                 className={styles.deletemini}
+                                                                onClick={() => setModalDeleteOne(true)}
                                                             >
                                                                 <i className="fa-solid fa-trash"></i>
                                                             </button>
                                                         </div>
                                                     ) : (
-                                                        <button
-                                                            onClick={() => handleEditClick(item.id)}
+                                                        <button 
+                                                            onClick={() => handleEditClick(item.id)} 
                                                             className={styles.editar}
-                                                        >Editar</button>
+                                                        >
+                                                            <i className="fa-solid fa-pen"></i>
+                                                            Editar
+                                                        </button>
                                                     )}
                                                 </td>
                                             </tr>
@@ -385,7 +478,25 @@ const Customers = () => {
                     </table>
                 </div>
             </div>
-        </>
+            {modalDelete && 
+                <Modal 
+                    modalActive={setModalDelete}
+                    text='¿Estás seguro de eliminar los productos seleccionados?'
+                    actionBtnText='Eliminar'
+                    actionBtnLoadingText='Eliminando...'
+                    actionModal={deleteSelected}
+                />
+            }
+            {modalDeleteOne && 
+                <Modal 
+                    modalActive={setModalDeleteOne}
+                    text='¿Estás seguro de eliminar este producto?'
+                    actionBtnText='Eliminar'
+                    actionBtnLoadingText='Eliminando...'
+                    actionModal={deleteOne}
+                />
+            }
+        </div>
     );
 }
 

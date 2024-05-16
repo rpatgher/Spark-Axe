@@ -1,7 +1,11 @@
-.heading{
-    font-size: 5.4rem;
-    margin: 2rem 0;
-    margin-top: 6rem;
+.customers-wrapper{
+    padding-bottom: 6rem;
+    padding-top: 6rem;
+}
+.topimage{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 .guardar{
     background-color: var(--blue);
@@ -9,8 +13,13 @@
     color: white;
     border: none;
     border-radius: 5px;
-    width: 80px;
+    width: 9.5rem;
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
 }
 .guardar:hover{
     background-color: rgb(42, 14, 143);
@@ -18,15 +27,31 @@
 
 .editar{
     background-color: var(--dark_gray);
-    padding: 5px;
+    padding: .5rem 0;
     color: white;
     border: none;
     border-radius: 5px;
-    width: 80px;
+    width: 8rem;
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 auto;
+}
+.editar i{
+    font-size: 1rem;
 }
 .editar:hover{
     background-color: black;
+}
+.save-delete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0 auto;
 }
 
 input{
@@ -87,34 +112,6 @@ input{
 .container {
     position: relative;
 }
-.selected {
-    display: flex; /* Make .selected a flex container */
-    align-items: center; /* Center items vertically */
-    position: absolute;
-    top: -60px;
-    right: 0px;
-    margin: 10px;
-    width: 200px;
-}
-
-.counter {
-    flex: 1; /* Take up remaining space */
-    margin-right: 10px; /* Add some space between counter and delete button */
-}
-
-.delete {
-    flex: 0 0 auto; /* Don't grow or shrink, keep its size */
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 15px;
-    padding: 5px;
-    font-weight: bold;
-}
-.delete:hover{
-    background-color: rgb(145, 12, 12);
-}
 .deletemini{
     flex: 0 0 auto; /* Don't grow or shrink, keep its size */
     background-color: red;
@@ -124,7 +121,6 @@ input{
     font-size: 15px;
     padding: 5px;
     font-weight: bold;
-    margin-left: 10px;
 }
 .deletemini:hover{
     background-color: rgb(145, 12, 12);
@@ -132,11 +128,8 @@ input{
 .selectedRow{
     border: #d1c5ff;
 }
-/* Override styles for table cells inside selected row */
 .selectedRow td {
     background-color: #eef1f3; /* Change this to the color you prefer */
- 
-    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
 }
 .back{
     height:200px;
@@ -211,6 +204,18 @@ input{
 
 .noproducts a {
     color: var(--blue);
+}
+.loading{
+    animation: pulse 2s infinite;
+    cursor: progress;
+}
+@keyframes pulse {
+    0%, 100% {
+      color: #fff; /* Color original */
+    }
+    50% {
+      color: #838383; /* Color opaco */
+    }
 }
 
 
@@ -345,7 +350,6 @@ input{
     margin: 1rem 1rem 1rem 0;
     padding: 0;
     background-color: transparent;
-
 }
 .visibles2{
     cursor: pointer;
@@ -383,3 +387,4 @@ input{
 .delete:hover{
     background-color: color-mix(in srgb, var(--red) 80%, #000000);
 }
+

@@ -64,15 +64,86 @@ const getCustomer = async (req, res) => {
 }
 
 const deleteCustomer = async (req, res) => {
-    res.json({ msg: 'Delete Customer' });
+    const { id } = req.params;
+    try {
+        const customer = await Customer.findByPk(id);
+        if(!customer){
+            const error = new Error('Customer not found');
+            return res.status(404).json({ msg: error.message });
+        }
+        const website = await Website.findByPk(customer.website_id);
+        if(!website){
+            const error = new Error('Website not found');
+            return res.status(404).json({ msg: error.message });
+        }
+        if(website.user_id !== req.user.id){
+            const error = new Error('Unauthorized');
+            return res.status(401).json({ msg: error.message });
+        }
+        await customer.destroy();
+        res.json({ msg: 'Customer deleted successfully' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
 }
 
 const deleteCustomers = async (req, res) => {
-    res.json({ msg: 'Delete Customers' });
+    try{
+        const customers = await Customer.findAll({
+            where: {
+                id: {
+                    [Op.in]: req.body.ids
+                }
+            }
+        });
+        customers.forEach(async customer => {
+            const website = await Website.findByPk(customer.website_id);
+            if(website.user_id !== req.user.id){
+                const error = new Error('Unauthorized');
+                return res.status(401).json({ msg: error.message });
+            }
+            await customer.destroy();
+        });
+        res.json({ msg: 'Customers deleted successfully' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
 }
 
 const updateCustomer = async (req, res) => {
-    res.json({ msg: 'Update Customer' });
+    const { id } = req.params;
+    const { name, lastname, email, phone } = req.body;
+    if(!name || !lastname || !email || !phone){
+        const error = new Error('Missing fields');
+        return res.status(400).json({ msg: error.message });
+    }
+    try {
+        const customer = await Customer.findByPk(id);
+        if(!customer){
+            const error = new Error('Customer not found');
+            return res.status(404).json({ msg: error.message });
+        }
+        const website = await Website.findByPk(customer.website_id);
+        if(!website){
+            const error = new Error('Website not found');
+            return res.status(404).json({ msg: error.message });
+        }
+        if(website.user_id !== req.user.id){
+            const error = new Error('Unauthorized');
+            return res.status(401).json({ msg: error.message });
+        }
+        customer.name = name;
+        customer.lastname = lastname;
+        customer.email = email;
+        customer.phone = phone;
+        await customer.save();
+        res.json({ msg: 'Customer updated successfully' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
 }
 
 export {

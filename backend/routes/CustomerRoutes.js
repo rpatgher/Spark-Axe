@@ -14,8 +14,10 @@ import checkAuth from "../middleware/checkAuth.js";
 const router = express.Router();
 
 router.route('/')
-    .post(checkAuth, createCustomer)
-    .delete(checkAuth, deleteCustomers);
+    .post(checkAuth, createCustomer);
+
+router.route('/delete')
+    .post(checkAuth, deleteCustomers);
 
 router.route('/all/:website_id')
     .get(checkAuth, getCustomers);
