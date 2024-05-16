@@ -95,8 +95,8 @@ Consejo:
             
                     />
                 </div>
-                </form>
                 <Link to='/dashboard/inventory'> <button className={styles.Buttonguardar}>Enviar</button></Link>
+                </form>
                 </div>
                 </div>
         </div>

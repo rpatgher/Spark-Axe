@@ -3,7 +3,10 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #fff9f95b;
+    background-color: #fff9f998;
+    position: fixed;   /* Make the navbar stick to the top */
+    top: 0;            /* Position it at the top of the viewport */
+    width: 100%;       /* Make it span the full width of the viewport */
   }
   
   .navB {

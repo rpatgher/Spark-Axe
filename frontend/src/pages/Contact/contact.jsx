@@ -12,16 +12,20 @@ const About = () => {
             <div className={styles.background}> 
             <p className={styles.headp}>Ofrecemos Soporte Técnico 24/7 para optimizar tu experiencia en nuestro sitio web. ¡Confía en nuestros expertos para resolver cualquier inconveniente y garantizar un funcionamiento óptimo en todo momento!</p>
             <div className={styles.enviocontent0}>
+            <Link to='/contact'>
                 <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
 
             <h3><span className={styles.headingother}>Soporte</span></h3>
             </div>
+            </Link>
+            <Link to='/support'>
             <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
 
             <h3><span className={styles.headingother}>Aplicar</span></h3>
             </div>
+            </Link>
             <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
 
@@ -88,8 +92,8 @@ const About = () => {
             
                     />
                 </div>
-                </form>
                 <Link to='/dashboard/inventory'> <button className={styles.Buttonguardar}>Enviar</button></Link>
+                </form>
                 </div>
                 </div>
             </div>
