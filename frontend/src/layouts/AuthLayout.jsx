@@ -1,5 +1,6 @@
 import { Outlet, Link } from 'react-router-dom'
 import styles from '../styles/AuthLayout.module.css'
+import Dashboard from '../assets/img/DashboardSS.png';
 
 const AuthLayout = () => {
     return (
@@ -16,6 +17,8 @@ const AuthLayout = () => {
                     >
                         <i className="fa-solid fa-xmark"></i>
                     </Link>
+                    <img className={styles.dashboard} src={Dashboard} alt="Dashboard" />
+                    <h2>Sparkaxe La mejor forma de manejar tu negocio a tu manera</h2>
                 </div>
             </div>
         </div>

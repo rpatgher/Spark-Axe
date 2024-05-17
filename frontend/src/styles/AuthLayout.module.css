@@ -52,6 +52,10 @@
     position: relative;
     flex: 1;
     /* background-color: darken($color: var(--gray), $amount: 1); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .exit{
     position: absolute;
@@ -63,4 +67,9 @@
     font-weight: 900;
     color: var(--dark_gray);
     cursor: pointer;
+}
+
+.dashboard{
+    border-radius: 5px;
+    width: 80%;
 }

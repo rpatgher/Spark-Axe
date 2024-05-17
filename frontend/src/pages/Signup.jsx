@@ -17,6 +17,7 @@ const Signup = () => {
                 <p className={styles.actions}>¿Ya tienes cuenta? <Link to="/login">Inicia Sesión</Link></p>
                 <FormSignup />
             </div>
+            
         </SignupProvider>
     )
 }
