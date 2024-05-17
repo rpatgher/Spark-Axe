@@ -17,7 +17,15 @@ const Home = () => {
     const [logoIndex, setLogoIndex] = useState(0);
     const [fontIndex, setFontIndex] = useState(0);
     const logos = [ HDLogo, chalkLogo, Graflogo, Shocklogo, Warplogo,  Normlogo, Wavelogo  ]; // Add your logo paths here         logo,
-    const fonts = ['arial', 'roboto', 'BrushScriptMT', 'helvetica']; // Add your font class names here
+    const fonts = [
+        'Montserrat',      // HDLogo
+        'Chalkduster',    // chalkLogo
+        'Bebas Neue',     // Graflogo
+        'Orbitron',       // Shocklogo
+        'Bungee',         // Warplogo
+        'Open Sans',      // Normlogo
+        'Quicksand'       // Wavelogo
+    ];
 
     useEffect(() => {
         const interval = setInterval(() => {
