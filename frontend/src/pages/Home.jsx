@@ -1,15 +1,22 @@
 import styles from '../styles/Home.module.css';
 import logo from '../assets/img/logo.png';
-import full_HDLogo from '../assets/img/full_HDLogo.png';
-import chalkLogo from '../assets/img/chalkLogo.png';
-import MosaicLogo from '../assets/img/MosaicLogo.png';
+import HDLogo from '../assets/img/logos/logohd.png';
+import chalkLogo from '../assets/img/logos/logochalk.png';
+import Graflogo from '../assets/img/logos/logografitti.png';
+import Normlogo from '../assets/img/logos/logonormal.png';
+import Shocklogo from '../assets/img/logos/logoshock.png';
+import Warplogo from '../assets/img/logos/logowarp.png';
+import Wavelogo from '../assets/img/logos/logowave.png';
+
+
+
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 
 const Home = () => {
     const [logoIndex, setLogoIndex] = useState(0);
     const [fontIndex, setFontIndex] = useState(0);
-    const logos = [logo, full_HDLogo, chalkLogo, MosaicLogo]; // Add your logo paths here
+    const logos = [ HDLogo, chalkLogo, Graflogo, Shocklogo, Warplogo,  Normlogo, Wavelogo  ]; // Add your logo paths here         logo,
     const fonts = ['arial', 'roboto', 'BrushScriptMT', 'helvetica']; // Add your font class names here
 
     useEffect(() => {
@@ -25,8 +32,9 @@ const Home = () => {
         <div>
             <div className={styles.header}>
                 <img className={styles.logo} src={logos[logoIndex]} alt="Sparkaxe-logo" />
-                <h1 className={`${styles.head} ${styles[fonts[fontIndex]]}`}>
-                    Sparkaxe La mejor forma de manejar tu negocio a tu manera
+                <h1 className={`${styles.head}`}>
+                    Sparkaxe <br></br> La mejor forma de manejar tu negocio<br></br><span className={`${styles[fonts[fontIndex]]}`}> a tu manera
+                    </span>
                 </h1>
             </div>
         </div>

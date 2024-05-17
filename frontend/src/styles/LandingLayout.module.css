@@ -3,10 +3,13 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #fff9f998;
+    background-color: #fff9f9d0;
     position: fixed;   /* Make the navbar stick to the top */
     top: 0;            /* Position it at the top of the viewport */
     width: 100%;       /* Make it span the full width of the viewport */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 100;      /* Make sure it appears above other elements */
   }
   .nav{
     margin-bottom: 80px;
