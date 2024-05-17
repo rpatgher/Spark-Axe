@@ -353,20 +353,28 @@ const Customers = () => {
                     <table className={styles["inventory-table"]}>
                         <thead>
                             <tr>
-                                <th className={styles["cell-select"]}>
+                                <th className={styles["col-select"]}>
                                     <input 
                                         type="checkbox" 
                                         onChange={handleSelectAll} 
                                         checked={selectAll} 
                                     />
                                 </th>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Numero</th>
-                                <th>ID</th>
-                                <th>Contacto</th>
-                                <th>Confirmado</th>
-                                <th>Editar</th>
+                                <th 
+                                    className={styles["col-name"]}
+                                    style={{
+                                        width: editingRow !== null ? "10%" : "20%"
+                                    }}
+                                >Nombre</th>
+                                {editingRow !== null && (
+                                    <th className={styles["col-lastname"]}>Apellido</th>
+                                )}
+                                <th className={styles["col-email"]}>Email</th>
+                                <th className={styles["col-number"]}>Numero</th>
+                                <th className={styles["col-id"]}>ID</th>
+                                <th className={styles["col-contact"]}>Contacto</th>
+                                <th className={styles["col-confirmed"]}>Confirmado</th>
+                                <th className={styles["col-edit"]}>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -394,7 +402,17 @@ const Customers = () => {
                                                         checked={item.selected || false}
                                                     />
                                                 </td>
-                                                <td>{renderTableCell(item.name, "name", item.id)}</td>
+                                                
+                                                {editingRow === item.id ? (
+                                                    <>
+                                                        <td>{renderTableCell(item.name, "name", item.id)}</td>
+                                                        <td>{renderTableCell(item.lastname, "lastname", item.id)}</td>
+                                                    </>
+                                                ) : (
+                                                    <td
+                                                        colSpan={editingRow !== null ? 2 : 1}
+                                                    >{renderTableCell(item.name + " " + item.lastname, "name", item.id)}</td>
+                                                )}
                                                 <td>{renderTableCell(item.email, "email", item.id)}</td>
                                                 <td>{renderTableCell(item.phone, "phone", item.id)}</td>
                                                 <td>{String(item.id).padStart(10, '0')}</td>
@@ -405,7 +423,7 @@ const Customers = () => {
                                                     </button>
                                                     <button className={styles.contactbtn} onClick={() => window.location.href = `mailto:${item.email}`}><i className="fa-solid fa-envelope"></i></button>
                                                 </td>
-                                                <td className={styles["col-confirmed"]}>
+                                                <td className={styles["cell-confirmed"]}>
                                                     <p className={`${styles.confirmed} ${item.confirmed ? styles["confirmed-yes"] : styles["confirmed-no"]}`}>
                                                         {item.confirmed ? "Sí" : "No"}
                                                     </p>

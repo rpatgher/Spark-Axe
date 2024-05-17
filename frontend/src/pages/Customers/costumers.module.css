@@ -54,6 +54,24 @@
     margin: 0 auto;
 }
 
+/* .col-name{
+    width: 20%;
+} */
+.col-number,
+.col-contact,
+.col-edit,
+.col-email{
+    width: 15%;
+}
+.col-lastname,
+.col-id {
+    width: 10%;
+}
+.col-confirmed,
+.col-select{
+    width: 5%;
+}
+
 input{
     border-radius: 5px;
     border: 1px solid rgb(167, 167, 163);
@@ -102,10 +120,10 @@ input{
     content: '✓';
     color: var(--white);
 }
-.col-confirmed{
+.cell-confirmed{
     text-align: center;
 }
-.col-confirmed p{
+.cell-confirmed p{
     margin: 0;
 }
 /* costumers.module.css */
