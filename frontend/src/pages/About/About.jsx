@@ -15,6 +15,7 @@ const About = () => {
             <img src={About3} alt="Image 3"/>
             </div>
             <h1 className={styles.head}>Conoce mas de nosotros</h1>
+            <div className={styles.about}>
             <div className={styles.content}>
             <p>
             Bienvenido a Sparkaxe, tu herramienta confiable en el control y gestión de sitios web. En un mundo digital en constante evolución, comprendemos la importancia de mantener la integridad y seguridad de tus activos en línea.
@@ -28,6 +29,7 @@ const About = () => {
             <p>
             Únete a nosotros y descubre cómo Sparkaxe puede ayudarte a llevar tus sitios web al siguiente nivel, con seguridad, confiabilidad y una experiencia de usuario excepcional. Tu éxito en línea es nuestra prioridad.
             </p>
+            </div>
             </div>
         </div>
     )

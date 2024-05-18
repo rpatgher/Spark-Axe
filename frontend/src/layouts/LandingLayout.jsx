@@ -17,6 +17,9 @@ function Landinglayout() {
 </ul>
             </div>
       <Outlet /> {/* This will render child routes here */}
+      <div className={styles.footer}>
+        Hello this is a footer
+      </div>
     </div>
   );
 }

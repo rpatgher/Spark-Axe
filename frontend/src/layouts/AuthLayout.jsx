@@ -17,8 +17,10 @@ const AuthLayout = () => {
                     >
                         <i className="fa-solid fa-xmark"></i>
                     </Link>
+                    <div className={styles.content}>
+                    <h2>Sparkaxe <span className={styles.grayT}>La mejor forma de manejar tu negocio a tu manera</span></h2>
                     <img className={styles.dashboard} src={Dashboard} alt="Dashboard" />
-                    <h2>Sparkaxe La mejor forma de manejar tu negocio a tu manera</h2>
+                    </div>
                 </div>
             </div>
         </div>

@@ -53,7 +53,6 @@
     flex: 1;
     /* background-color: darken($color: var(--gray), $amount: 1); */
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
@@ -70,6 +69,18 @@
 }
 
 .dashboard{
-    border-radius: 5px;
-    width: 80%;
+    border-radius: 10px;
+    width: 130%;
+    border: 5px solid black;
+    box-shadow: -50px -10px 35px rgba(0, 0, 0, 0.2);
+}
+.content{
+    margin-left: 20%;
+    margin-top: 20%;
+
+    flex: 1;
+    
+}
+.grayT{
+    color: var(--dark_gray);
 }
