@@ -12,6 +12,7 @@
     border-radius: 2rem;
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    animation: fadeIn 0.5s ease-in-out;
 }
 @media(min-width: 768px){
     .card{
@@ -48,6 +49,17 @@
         padding: 2rem 10rem;
     }
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
 .image{
     position: relative;
     flex: 1;
@@ -60,14 +72,20 @@
     position: absolute;
     top: 2rem;
     right: 2rem;
-    width: 6rem;
-    height: 6rem;
-    font-size: 6rem;
+    width: 4rem;
+    height: 4rem;
+    font-size: 4rem;
     font-weight: 900;
     color: var(--dark_gray);
     cursor: pointer;
+    transition: 0.5s;
+
 }
 
+.exit:hover{
+    color: black;
+    transition: 0.5s;
+}
 .dashboard{
     border-radius: 10px;
     width: 130%;

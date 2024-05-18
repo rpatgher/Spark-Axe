@@ -18,9 +18,9 @@ const Home = () => {
     const [fontIndex, setFontIndex] = useState(0);
     const logos = [ HDLogo, chalkLogo, Graflogo, Shocklogo, Warplogo,  Normlogo, Wavelogo  ]; // Add your logo paths here         logo,
     const fonts = [
-        'Montserrat',      // HDLogo
-        'Chalkduster',    // chalkLogo
-        'Bebas Neue',     // Graflogo
+        'HDLogoFont',      // HDLogo
+        'ChalkLogoFont',    // chalkLogo
+        'GraflogoFont',     // Graflogo
         'Orbitron',       // Shocklogo
         'Bungee',         // Warplogo
         'Open Sans',      // Normlogo

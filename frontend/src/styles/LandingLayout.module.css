@@ -50,3 +50,9 @@
   .rightnavB a:hover {
     background-color: #cfcdcd;
   }
+
+  .footer{
+    background-color: #fff9f9d0;
+    padding: 10px;
+    height: 250px;
+  }

@@ -1,3 +1,23 @@
+@font-face {
+  font-family: 'Cinzel';
+  src: url('../assets/Fonts/Cinzel/Cinzel-VariableFont_wght.ttf') format('truetype');
+  font-weight: 200 900; /* Assuming the font supports weights from 200 to 900 */
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Chalk';
+  src: url('../assets/Fonts/Chalk/Chalk-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Graffiti';
+  src: url('../assets/Fonts/docallisme_on_street/docallisme_on_street.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 .navbar {
   list-style-type: none;
   margin: 0;
@@ -57,3 +77,12 @@
   margin-top: 200px;
 }
 
+.HDLogoFont{
+  font-family: 'Cinzel', serif;
+}
+.ChalkLogoFont{
+  font-family: 'Chalk', serif;
+}
+.GraflogoFont{
+  font-family: 'Graffiti', serif;
+}
