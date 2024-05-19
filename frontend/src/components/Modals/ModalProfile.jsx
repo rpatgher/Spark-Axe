@@ -27,16 +27,16 @@ const ModalProfile = () => {
                 <div id="London" className={styles.tabcontent1} style={{display: activeTab === 'London' ?  'block' : 'none'}}>
                 <h2>Configuracion de perfil</h2>
                 <hr></hr>
-                <p><strong>Nombre</strong></p>
-                <p>Diego</p>
-                <p><strong>Correo</strong></p>
-                <p>correo2@correo.com</p>
-                <p><strong>Numero telefonico</strong></p>
-                <p>+5560890823</p>
-                <p><strong>Contraseña</strong></p>
-                <p>Cambiar contraseña</p>
-                <p><strong>Avatar</strong></p>
-                <p><strong>Websites</strong></p>
+                <p className={styles.p3}><strong>Nombre</strong></p>
+                <p className={styles.p2}>Diego</p>
+                <p className={styles.p3}><strong>Correo</strong></p>
+                <p className={styles.p2}>correo2@correo.com</p>
+                <p className={styles.p3}><strong>Numero telefonico</strong></p>
+                <p className={styles.p2}>+5560890823</p>
+                <p className={styles.p3}><strong>Contraseña</strong></p>
+                <p className={styles.p2}>Cambiar contraseña</p>
+                <p className={styles.p3}><strong>Avatar</strong></p>
+                <p className={styles.p3}><strong>Websites</strong></p>
                 <table>
                     <thead>
                         <tr>
@@ -91,7 +91,7 @@ const ModalProfile = () => {
                         type="" 
                         id="" 
                         name="" 
-                        placeholder={`dominio.com`}
+                        placeholder={`+55 5555 5555`}
             
                     />
                 </div>
@@ -102,7 +102,7 @@ const ModalProfile = () => {
                         type="" 
                         id="" 
                         name="" 
-                        placeholder={`dominio.com`}
+                        placeholder={`Contraseña actual`}
             
                     />
                     <label htmlFor="">Pon Nueva contraseña</label>
@@ -110,7 +110,7 @@ const ModalProfile = () => {
                         type="" 
                         id="" 
                         name="" 
-                        placeholder={`dominio.com`}
+                        placeholder={`Contraseña nueva`}
             
                     />
                 </div>
