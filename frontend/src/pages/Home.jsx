@@ -21,10 +21,10 @@ const Home = () => {
         'HDLogoFont',      // HDLogo
         'ChalkLogoFont',    // chalkLogo
         'GraflogoFont',     // Graflogo
-        'Orbitron',       // Shocklogo
-        'Bungee',         // Warplogo
+        'ShocklogoFont',       // Shocklogo
+        'WarplogoFont',         // Warplogo
         'Open Sans',      // Normlogo
-        'Quicksand'       // Wavelogo
+        'WavelogoFont'       // Wavelogo
     ];
 
     useEffect(() => {

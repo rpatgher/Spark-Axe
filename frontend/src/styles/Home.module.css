@@ -11,12 +11,22 @@
   font-style: normal;
 }
 @font-face {
-  font-family: 'Graffiti';
-  src: url('../assets/Fonts/docallisme_on_street/docallisme_on_street.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'DocallismeOnStreet';
+    src: url('../assets/Fonts/docallisme_on_street/DOCALLISME%20ON%20STREET.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'LightningBolt';
+  src: url('../assets/Fonts/lightning_bolt_2/Lightning%20Bolt.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'markbats_12';
+  src: url('../assets/Fonts/markbats_12/Markbats12-Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'aurora_pro';
+  src: url('../assets/Fonts/aurora_pro/AURORA-PRO.otf') format('opentype');
+}
 
 .navbar {
   list-style-type: none;
@@ -79,10 +89,25 @@
 
 .HDLogoFont{
   font-family: 'Cinzel', serif;
+  color: #ce9700;
+
 }
 .ChalkLogoFont{
   font-family: 'Chalk', serif;
 }
 .GraflogoFont{
-  font-family: 'Graffiti', serif;
+  font-family: 'DocallismeOnStreet', serif;
+  color: #bd0404;
+}
+.ShocklogoFont{
+  font-family: 'LightningBolt', serif;
+  color: #f1bc29;
+}
+.WarplogoFont{
+  font-family: 'markbats_12', serif;
+  color: #00268d;
+}
+.WavelogoFont{
+  font-family: 'aurora_pro', serif;
+  color: #0099f1;
 }
