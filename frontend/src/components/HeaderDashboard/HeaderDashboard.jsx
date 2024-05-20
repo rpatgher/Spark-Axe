@@ -20,7 +20,7 @@ const HeaderDashboard = () => {
                 <p>{websites[0].name}</p>
             </div>
             <div className={styles.main}>
-                <button 
+                {/* <button 
                     className={styles.darkmode}
                     onClick={handleToggleTheme}
                 
@@ -38,7 +38,7 @@ const HeaderDashboard = () => {
                         <p><strong><i className="fa-solid fa-bell"></i> Aviso 3</strong> shakalitos at work this is something alalalalala ohh yeha</p>
                     </div>
                     </div>
-                </div>
+                </div> */}
                 <div className={styles.profile}>
                     <div className={styles.image}>
 

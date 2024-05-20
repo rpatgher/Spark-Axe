@@ -35,7 +35,7 @@ const ModalProfile = () => {
                 <p className={styles.p2}>+5560890823</p>
                 <p className={styles.p3}><strong>Contraseña</strong></p>
                 <p className={styles.p2}>Cambiar contraseña</p>
-                <p className={styles.p3}><strong>Avatar</strong></p>
+                {/* <p className={styles.p3}><strong>Avatar</strong></p> */}
                 <p className={styles.p3}><strong>Websites</strong></p>
                 <table>
                     <thead>
@@ -114,7 +114,7 @@ const ModalProfile = () => {
             
                     />
                 </div>
-                <p><strong>Avatar</strong></p>
+                {/* <p><strong>Avatar</strong></p> */}
                 <button onClick={() => openCity('London')} className={styles.Buttonguardar}>Guardar cambios</button>
                 </form>
                

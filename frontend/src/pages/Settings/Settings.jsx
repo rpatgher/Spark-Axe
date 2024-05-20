@@ -33,13 +33,13 @@ function Settings() {
         <button className={styles.linkother} onClick={() => openCity('Paris')}><i className="fa-solid fa-store" ></i> Configurar Tienda</button>
         <button className={styles.linkother}><i className="fa-regular fa-credit-card"></i> Cambiar metodo de pago</button>
       </div>
-      <p><strong>¿Algun problema?</strong></p>
+      {/* <p><strong>¿Algun problema?</strong></p>
       <Link to="/contact">
       <button className={styles.linksettings}><i className="fa-solid fa-comments"></i> Contactanos</button></Link>
       <p></p>
       <Link to="/about"><button className={styles.linksettings}><i className="fa-solid fa-cloud"></i> Sobre Nosotros</button></Link>
       <p></p>
-      <button className={styles.linksettings}><i className="fa-solid fa-box"></i> Otro</button>
+      <button className={styles.linksettings}><i className="fa-solid fa-box"></i> Otro</button> */}
       </div>
       <div className={styles.rightdiv}>
       <div className={styles.rightcontent}>
@@ -73,7 +73,7 @@ function Settings() {
       <p>Elibaba.com</p>
       <p><strong>Tipo de divisa</strong></p>
       <p>$MXN</p>
-      <p><strong>Avatar</strong></p>
+      {/* <p><strong>Avatar</strong></p> */}
       <button className={styles.linksettings} onClick={() => openCity2('Editar')}>Editar Configuración de Tienda</button>
       
       </div>
