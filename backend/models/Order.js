@@ -8,9 +8,8 @@ const Order = db.define('order', {
         allowNull: false,
         autoIncrement: true
     },
-    deadline: {
-        type: DataTypes.DATE,
-        allowNull: false
+    delivery_date: {
+        type: DataTypes.DATE
     },
     status: {
         type: DataTypes.STRING,
@@ -23,6 +22,10 @@ const Order = db.define('order', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
+    address:{
+        type: DataTypes.STRING,
+        allowNull: false
+    }
 }, {});
 
 export default Order;

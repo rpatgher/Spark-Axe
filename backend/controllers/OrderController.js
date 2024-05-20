@@ -1,5 +1,5 @@
 // ************* Models *************
-import { OrderElement, Order, Website, Element } from '../models/index.js';
+import { OrderElement, Order, Website, Element,Customer } from '../models/index.js';
 
 const getOrders = async (req, res) => {
     const { website_id } = req.params;
@@ -12,13 +12,19 @@ const getOrders = async (req, res) => {
             where: {
                 website_id
             },
-            include: {
-                model: Element,
-                attributes: ['id', 'name', 'price'],
-                through: {
-                    attributes: ['quantity']
+            include: [
+                {
+                    model: Element,
+                    attributes: ['id', 'name', 'price'],
+                    through: {
+                        attributes: ['quantity']
+                    }
+                },
+                {
+                    model: Customer,
+                    attributes: ['id', 'name', 'lastname', 'email']
                 }
-            }
+            ]
         });
         res.status(200).json(orders);
     } catch (error) {
@@ -28,14 +34,21 @@ const getOrders = async (req, res) => {
 }
 
 const createOrder = async (req, res) => {
-    const { deadline, status, notes, elements } = req.body;
+    const { notes, elements, customer_id, address } = req.body;
     const { website_id } = req.params;
     const website = await Website.findByPk(website_id);
     if (!website) {
         return res.status(400).json({ msg: 'Website not found' });
     }
-    if (!deadline || !status || !elements || !website_id) {
+    if ( !elements || !website_id || !customer_id || !address) {
         return res.status(400).json({ msg: 'All fields are required' });
+    }
+    const customer = await Customer.findByPk(customer_id);
+    if (!customer) {
+        return res.status(400).json({ msg: 'Customer not found' });
+    }
+    if ( customer.website_id !== website.id) {
+        return res.status(400).json({ msg: 'Customer not found' });
     }
     const productsFromDB = await Element.findAll({
         where: {
@@ -64,11 +77,12 @@ const createOrder = async (req, res) => {
         return res.status(400).json({ msg: 'An error ocurred' });
     }
     const order = await Order.create({
-        deadline,
-        status,
+        status: 'IP',
         notes,
         total: products.reduce((acc, product) => acc + product.price * product.quantity, 0),
-        website_id
+        website_id,
+        address,
+        customer_id
     });
     products.forEach(async product => {
         await Element.decrement('stock', {
@@ -117,8 +131,17 @@ const updateOrderStatus = async (req, res) => {
     }
     try {
         order.status = status;
+        if(status === 'S'){
+            order.delivery_date = new Date();
+        }else{
+            order.delivery_date = null;
+        }
         await order.save();
-        res.status(200).json({ msg: 'Order updated successfully' });
+        res.status(200).json({ 
+            msg: 'Order updated successfully',
+            status: order.status,
+            delivery_date: order.delivery_date
+        });
     } catch (error) {
         console.log(error);
         res.status(400).json({ msg: error.message });

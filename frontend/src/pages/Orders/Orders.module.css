@@ -8,18 +8,82 @@
     padding: 1rem;
 }
 .col-id,
-.col-customer,
-.col-status,
 .col-total,
-.col-details{
+.col-customer,
+.col-details,
+.col-status {
     width: 10%;
 }
 .col-date,
-.col-deadline{
+.col-notes,
+.col-delivery_date{
     width: 15%;
 }
-.col-notes{
-    width: 20%;
+.col-select{
+    width: 5%;
+}
+.cell-name p{
+    margin: 0;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    width: 10rem;
+    overflow: hidden;
+    text-align: center;
+}
+.cell-select input,
+.col-select input {
+    appearance: none;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+    border-radius: .5rem;
+    border: 1px solid var(--dark_gray);
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+
+.cell-select input:checked,
+.col-select input:checked {
+    background-color: var(--dark_gray);
+    transition: all .3s ease-in-out;
+    position: relative;
+}
+
+.cell-select input:checked::after,
+.col-select input:checked::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '✓';
+    color: var(--white);
+}
+.selectedRow{
+    border: #d1c5ff;
+}
+.selectedRow td {
+    background-color: #eef1f3; /* Change this to the color you prefer */
+    /* box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); */
+}
+.selected {
+    display: flex; /* Make .selected a flex container */
+    align-items: center; /* Center items vertically */
+    gap: 2rem;
+}
+.counter{
+    margin: 0;
+}
+.share-seleted {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: .5rem 1rem;
+    cursor: pointer;
+}
+.share-seleted:hover{
+    background-color: color-mix(in srgb, var(--red) 80%, #000000);
 }
 .select{
     all: unset;
@@ -48,7 +112,7 @@
 }
 .details{
     cursor: pointer;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
 }
 .details-active td{
     background-color: var(--gray_dashboard);
@@ -75,9 +139,13 @@
     height: 300px;
     width: 400px;
 }
-.products23{
+td.products23{
     background-color: var(--gray_dashboard);
     position: relative;
+    padding: 3rem 6rem;
+}
+.products23 h2{
+    margin: 0;
 }
 .products23 td{
     background-color: var(--gray_dashboard);
@@ -101,6 +169,12 @@
    flex: 1;
    display: flex;
    flex-direction: column;
+}
+.Descriptioncont h3{
+    margin: 3rem 0 1rem 0;
+}
+.Descriptioncont p{
+    margin: 0;
 }
 
 
@@ -272,26 +346,28 @@
 }
 .pedidofinal{
     justify-content: center;
-    margin: auto;
-    width: 40%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
 
 .infofloatr{
-    margin-right: 10px;
+    margin-right: 1rem;
     font-weight: normal;
 }
 .STW{
     border: none;
     cursor: pointer;
     color: white;
+    width: 20rem;
+    margin: 0 auto;
     background-color: black;
     padding: 10px;
-    font-size: 15px;
+    font-size: 1.2rem;
     border-radius: 5px;
-    margin: 5px;
-    margin-bottom: 10px;
     float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
 }
-
