@@ -14,6 +14,12 @@ import clientAxios from '../../config/clientAxios';
 
 const Dashboard = () => {
 
+  const [orders, setOrders] = useState([]);
+  const [order, setOrder] = useState("asc"); // For sorting the orders
+  const [orderType, setOrderType] = useState("id");
+  const [filteredOrders, setFilteredOrders] = useState([]);
+
+  // Consigue los inevntarios de la base de datos
   useEffect(() => {
     const getElements = async () => {
         const token = localStorage.getItem('token');
@@ -33,6 +39,7 @@ const Dashboard = () => {
     return () => getElements();
 }, []);
 
+// Los categoriza
   const {auth} = useAuth();
   const [data, setData] = useState([]);
   const { name, lastname, websites, role } = auth;
@@ -56,6 +63,31 @@ const dataLength = data.length;
         return (<p className={`${styles.status} ${styles["status-low"]}`}>Bajo</p>);
     }
 };
+
+// Consigue los pedidos de la base de datos
+useEffect(() => {
+  // Get orders from the server
+  const getOrders = async () => {
+      const token = localStorage.getItem("token");
+      const config = {
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          },
+      };
+      try {
+          const { data } = await clientAxios.get(
+              `/api/orders/${auth.websites[0].id}`,
+              config
+          );
+          setOrders(data);
+          setFilteredOrders(data);
+      } catch (error) {
+          console.log(error);
+      }
+  };
+  return () => getOrders();
+}, []);
 
 
   return (
@@ -157,10 +189,10 @@ const dataLength = data.length;
             {data.filter(product => product.stock < inventory.medium).length === 0 ? (
               <div className={styles["Noinvent"]}>
                  <img className={styles["happyax"]} src={happy} alt="Most sold product" />
-    <h2>¡Muy bien no hay inventario bajo!</h2>
+    <h2>¡Todavia no hay pedidos!</h2>
     </div>
 ) : (
-    <table className={styles["anouncetable2"]}>
+    <table className={styles["anouncetable3"]}>
         <thead>
             <tr>
                 <th>Fecha de pedido</th>
@@ -169,18 +201,16 @@ const dataLength = data.length;
             </tr>
         </thead>
         <tbody>
-            {data.filter(product => product.stock < inventory.medium).map((item, index) => {
+            {orders.map((order, index) => {
                 if (index < limit) {
-                    item.visible = true;
                     return (
-                        <tr key={item.id}>
-                            <td>{item.name}</td>
-                            <td>{item.stock}</td>
-                            <td>{setStatus(item.stock, item)}</td>
+                        <tr key={order.id}>
+                            <td>{order.delivery_date}</td>
+                            <td>{order.status}</td>
+                            <td>{order.total}</td>
                         </tr>
                     );
                 } else {
-                    item.visible = false;
                     return null; // Si no se muestra, retornamos null
                 }
             })}

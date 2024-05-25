@@ -258,3 +258,27 @@
 .anouncetable2 thead{
     box-shadow: 0 6px 12px 0 rgba(31, 38, 135, 0.37);
 }
+
+
+.anouncetable3 {
+   
+    width: 96%;
+    border: none;
+    box-shadow: none;
+    margin: 2%;
+
+
+}
+.anouncetable3 td{
+    height: 10px;
+    padding: 1rem;
+    background-color: transparent;
+}
+.anouncetable3 th{
+    height: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0); 
+}
+.anouncetable3 thead{
+    box-shadow: 0 6px 12px 0 rgba(31, 38, 135, 0.37);
+}
