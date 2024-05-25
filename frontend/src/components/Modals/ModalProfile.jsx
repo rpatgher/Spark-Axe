@@ -130,7 +130,7 @@ const ModalProfile = () => {
                                 type="text"
                                 id="name"
                                 name="name"
-                                placeholder={`Nombre completo`}
+                                placeholder={`${name} ${lastname}`}
                             />
                         </div>
                         <div className={styles.field}>
