@@ -63,7 +63,13 @@ const dataLength = data.length;
         return (<p className={`${styles.status} ${styles["status-low"]}`}>Bajo</p>);
     }
 };
+const [visible, setVisible] = useState(false);
 
+useEffect(() => {
+  setTimeout(() => {
+    setVisible(true);
+  }, 100); // slight delay to ensure smooth transition
+}, []);
 // Consigue los pedidos de la base de datos
 useEffect(() => {
   // Get orders from the server
@@ -91,7 +97,7 @@ useEffect(() => {
 
 
   return (
-    <div className={styles["dashboard-container"]}>
+    <div className={`${styles.dashboardcontainer} ${visible ? styles.visible : ''}`}>
       <div className={styles["Dashboard"]}>
         <h1 className={styles["Homehead"]}>Sparkaxe+<span className={styles["Homehead-grey"]}> La mejor forma de manejar tu negocio a tu manera</span></h1>
         <div className={styles["row"]}>

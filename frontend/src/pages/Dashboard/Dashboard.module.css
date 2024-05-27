@@ -1,8 +1,18 @@
-.dashboard-container {
+.dashboardcontainer {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+ /* Initial position off-screen at the bottom */
+ opacity: 0%;
+ /* Apply transition */
+ transition:  opacity 0.7s ease-in-out;
+}
+
+/* Final position in view */
+.visible {
+ opacity: 100%;
+
 }
 .Dashboard {
     display: flex;
