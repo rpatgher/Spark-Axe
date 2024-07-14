@@ -13,7 +13,7 @@ const DynamicElement = ({element}) => {
     return (
         <div>
             <ProductComponent 
-                vape={element}
+                element={element}
             />
         </div>
     )

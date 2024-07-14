@@ -11,6 +11,7 @@ import CategoryRouter from './routes/CategoryRoutes.js';
 import OrderRouter from './routes/OrderRoutes.js';
 import InventoryRouter from './routes/InventoryRoutes.js';
 import CustomerRouter from './routes/CustomerRoutes.js';
+import ElibabaRouter from './routes/ElibabaRoutes.js';
 
 // Connect DB
 import db from './config/db.js';
@@ -30,7 +31,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Config CORS
-const whiteList = [process.env.FRONTEND_URL];
+const whiteList = process.env.FRONTEND_URLS.split(',');
 const corsOptions = {
     origin: (origin, callback) => {
         if(whiteList.includes(origin)){
@@ -50,6 +51,9 @@ app.use('/api/categories', CategoryRouter);
 app.use('/api/orders', OrderRouter);
 app.use('/api/inventories', InventoryRouter);
 app.use('/api/customers', CustomerRouter);
+
+// Routing for Elibaba
+app.use('/api/elibaba', ElibabaRouter);
 
 
 // Listen

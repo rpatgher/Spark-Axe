@@ -81,30 +81,33 @@ const EditProduct = () => {
     }
     
     return (
-        <div className={styles.form}>
-            <HeadingsRuta
-                currentHeading={`Editar Producto: ${product?.name || ''}`}
-                routes={[
-                    {name: "Productos", path: "/dashboard/products"},
-                ]}
-            />
-            <div className={styles["go-back"]}>
-                <Link to='/dashboard/products'>
-                    <i className="fa-solid fa-arrow-left"></i> Regresar
-                </Link>
+        <>
+            <div className={styles.form}>
+                <HeadingsRuta
+                    currentHeading={`Editar Producto: ${product?.name || ''}`}
+                    routes={[
+                        {name: "Productos", path: "/dashboard/products"},
+                    ]}
+                />
+                <div className={styles["go-back"]}>
+                    <Link to='/dashboard/products'>
+                        <i className="fa-solid fa-arrow-left"></i> Regresar
+                    </Link>
+                </div>
+                <FormProduct
+                    initalProduct={product}
+                    setModalDelete={setModalDelete}
+                />
             </div>
-            <FormProduct
-                initalProduct={product}
-                setModalDelete={setModalDelete}
-            />
             {modalDelete && (
                 <GeneralModal
                     modalActive={setModalDelete}
                     actionModal={deleteProduct}
+                    actionBtnText='Eliminar'
                     text='¿Estás seguro de eliminar este producto?'
                 />
             )}
-        </div>
+        </>
     )
 }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './VapeCard.css';
 
-const VapeCard = ({ vape }) => {
+const VapeCard = ({ element: vape }) => {
     const { name, price, image, color, initialImage } = vape;
     const [viewImage, setViewImage] = useState('');
 
