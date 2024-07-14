@@ -316,16 +316,17 @@
 }
 
 
-.field-images {
+.field-images, .field-images-done {
     display: flex;
     flex-direction: column;
-    padding: 2rem 4rem;
+    padding: 2rem 0;
     gap: 1rem;
     align-items: center;
+    justify-content: center;
 }
 
-.field-images p{
-    margin: .5rem 0;
+.field-images p, .field-images-done p {
+    margin: 0;
     font-size: 1.4rem;
 }
 
@@ -356,14 +357,15 @@
     gap: 5px;
 }
 
-.field-images span {
+.field-images span , .field-images-done span {
     background-color: rgb(82, 82, 82);
-    padding: 5px 15px;
+    padding: .5rem 1rem;
     margin-top: 1rem;
-    border-radius: 10px;
+    border-radius: 1rem;
     color: white;
     transition: all 0.3s;
     font-size: 1.4rem;
+    text-align: center;
 }
 
 .field-images span:hover {

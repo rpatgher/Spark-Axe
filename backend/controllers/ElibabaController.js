@@ -12,6 +12,7 @@ const getElements = async (req, res) => {
     let elements = await Element.findAll({
         where: {
             website_id: website.id,
+            published: true
         },
         include: [
             {

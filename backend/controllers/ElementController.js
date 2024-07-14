@@ -128,6 +128,10 @@ const getElements = async (req, res) => {
 
 const createElement = async (req, res) => {
     const { categories_id } = req.body;
+    if (!req.files || Object.keys(req.files).length === 0) {
+        const error = new Error('No files were uploaded.');
+        return res.status(400).json({ msg: error.message });
+    }
     const subcategories = JSON.parse(categories_id);
     // return res.status(200).json({ msg: 'ok'});
     const website = await Website.findByPk(req.body.website_id);

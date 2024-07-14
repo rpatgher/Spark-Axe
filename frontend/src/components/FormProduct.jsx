@@ -41,7 +41,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
 
 
     const [btnAddCategory, setBtnAddCategory] = useState(false);
-    const [btnAddSubcategory, setBtnAddSubcategory] = useState(false);
+    const [btnAddSubcategory, setBtnAddSubcategory] = useState('');
 
     useEffect(() => {
         setProduct({
@@ -109,7 +109,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         e.preventDefault();
         if ([product.name, product.description, product.price, product.stock].includes('')) {
             handleAlert("Todos los campos son obligatorios", true);
-            const objKeys = Object.keys(product).filter(key => key !== 'image2' && key !== 'color');
+            const objKeys = Object.keys(product).filter(key => key !== 'initialImage' && key !== 'image2' && key !== 'initialImage2' && key !== 'published' && key !== 'color');
             objKeys.forEach(key => {
                 if(product[key] === ''){
                     if(key === 'image'){
@@ -121,8 +121,11 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             });
             return;
         }
-        if (product.image === '' && initalProduct && !initalProduct.id) {
-            console.log('La imagen es obligatoria');
+        if (product.image === '' && !initalProduct?.id) {
+            handleAlert("La imagen es obligatoria", true);
+            console.log(document.getElementById('image-field'));
+            document.getElementById('image-field').classList.add(styles["empty-field-image"]);
+            return;
         }
         let msgAlert = '';
         if(e.nativeEvent.submitter.dataset.action === 'publish'){
@@ -285,7 +288,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
     const searchInitialSubCategories = (category, e) => {
         const search = e.target.value;
         if (search !== '') {
-            setBtnAddSubcategory(true);
+            setBtnAddSubcategory(category);
             setInitialCategories(initialCategories.map(item => {
                 if (item.name === category) {
                     return {
@@ -468,7 +471,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                                         </div>
                                         <div className={styles["input-subcategories"]}>
                                             <div className={styles["input-subcategories-btn"]}>
-                                                {btnAddSubcategory &&
+                                                {btnAddSubcategory === category.category  &&
                                                     <button
                                                         className={styles["btn-add-category"]}
                                                         type='button'
