@@ -3,7 +3,8 @@ import { createContext, useEffect, useState } from "react";
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-    const [theme, setTheme] = useState(false);
+    const [theme, setTheme] = useState('light');
+    // const [theme, setTheme] = useState(false);
     
     const [modalError, setModalError] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -15,12 +16,12 @@ const AppProvider = ({ children }) => {
         const userSetPreference = getUserSetPreference();
         const mediaQueryPreference = getMediaQueryPreference();
      
-        if (userSetPreference) {
-            setTheme(userSetPreference)
-        } else {
-            setTheme(mediaQueryPreference)
-        }
-     
+        // if (userSetPreference) {
+        //     setTheme(userSetPreference)
+        // } else {
+        //     setTheme(mediaQueryPreference)
+        // }   
+        // 
         document.body.dataset.theme = theme
     }, [theme]);
 
@@ -28,7 +29,7 @@ const AppProvider = ({ children }) => {
         const newTheme = theme === "light" ? "dark" : "light";
         setTheme(newTheme)
         storeUserSetPreference(newTheme);
-        document.body.dataset.theme = theme
+        document.body.dataset.theme = theme;
     };
 
     const storeUserSetPreference = (pref) => {

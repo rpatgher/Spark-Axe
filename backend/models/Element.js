@@ -35,6 +35,11 @@ const Element = db.define('element', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    main:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
     published: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

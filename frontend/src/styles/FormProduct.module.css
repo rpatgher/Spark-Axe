@@ -25,6 +25,32 @@
 .field label {
     font-size: 1.4rem;
 }
+.main{
+    flex-direction: row;
+    align-items: center;
+}
+.main input[type="checkbox"]{
+    all: unset;
+    cursor: pointer;
+    width: 1.7rem;
+    height: 1.7rem;
+    border: 1px solid var(--dark_gray);
+    border-radius: .5rem;
+}
+.main input[type="checkbox"]:checked{
+    background-color: var(--blue);
+    border: 1px solid var(--blue);
+    position: relative;
+}
+.main input[type="checkbox"]:checked::after{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '✓';
+    font-size: 1.4rem;
+    color: var(--white);
+}   
 .required{
     position: relative;
 }

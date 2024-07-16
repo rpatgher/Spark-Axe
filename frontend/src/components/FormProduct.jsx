@@ -26,6 +26,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         color: initalProduct?.color || '',
         image: '',
         image2: '',
+        main: initalProduct?.main || false,
         published: initalProduct?.published || false
     });
     const [categories, setCategories] = useState([]);
@@ -54,6 +55,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             image2: '',
             initialImage: initalProduct?.image || '',
             initialImage2: initalProduct?.image2 || '',
+            main: initalProduct?.main || false,
             published: initalProduct?.published || false
         });
         setCategories(initalProduct?.categories || []);
@@ -92,10 +94,17 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         if(Array.from(e.target.classList).includes(styles["empty-field"])){
             e.target.classList.remove(styles["empty-field"]);
         }
-        setProduct({
-            ...product,
-            [e.target.name]: e.target.value
-        });
+        if(e.target.name === 'main' ){
+            setProduct({
+                ...product,
+                [e.target.name]: e.target.checked
+            });
+        }else{
+            setProduct({
+                ...product,
+                [e.target.name]: e.target.value
+            });
+        }
     }
 
     const handleChangeFile = (e) => {
@@ -163,6 +172,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         data.append('color', product.color);
         data.append('image', product.image);
         data.append('image2', product.image2);
+        data.append('main', product.main);
         data.append('website_id', auth.websites[0].id);
         if(product.published !== undefined && product.published !== null){
             data.append('published', product.published);
@@ -413,6 +423,16 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                                 </label>
                             </div>
                         </div>
+                    </div>
+                    <div className={`${styles.field} ${styles.main}`}>
+                        <input
+                            type="checkbox"
+                            id="main"
+                            name="main"
+                            onChange={handleChange}
+                            checked={product.main}
+                        />
+                        <label htmlFor="category">Indica si el producto es principal</label>
                     </div>
                     <div className={styles.field}>
                         <label htmlFor="category">Agrega una nueva categoría</label>

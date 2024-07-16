@@ -346,7 +346,7 @@ const Products = () => {
                                                 <i className="fa-regular fa-note-sticky"></i>
                                             </button>
                                         </td>
-                                        <td>${formatToMoney(product.price)}</td>
+                                        <td>{formatToMoney(product.price)} MXN</td>
                                         <td className={styles["cell-color"]}><div style={{ backgroundColor: product.color }} ></div></td>
                                         <td>
                                             <button

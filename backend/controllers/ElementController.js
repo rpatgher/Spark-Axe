@@ -39,6 +39,7 @@ const getElement = async (req, res) => {
         price: elementFromDB.price,
         stock: elementFromDB.stock,
         color: elementFromDB.color,
+        main: elementFromDB.main,
         published: elementFromDB.published,
         categories: elementFromDB.subcategories.map(subcategory => {
             return {
@@ -99,6 +100,7 @@ const getElements = async (req, res) => {
             price: element.price,
             stock: element.stock,
             color: element.color,
+            main: element.main,
             published: element.published,
             categories: element.subcategories.map(subcategory => {
                 return {
