@@ -97,6 +97,7 @@ const Products = () => {
                 setDataLength(data.length);
             } catch (error) {
                 console.log(error);
+                handleAlert("Error al obtener los productos", true);
             }
         };
         return () => getProducts();
@@ -184,13 +185,14 @@ const Products = () => {
             setModalDelete(false);
         } catch (error) {
             console.log(error);
+            handleAlert("Error al eliminar los productos", true);
         }
 
     }
 
     return (
         <div className={styles["products-wrapper"]}>
-            {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
+            {/* {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />} */}
             <HeadingsRuta 
                 currentHeading="Productos"
                 routes={[]}

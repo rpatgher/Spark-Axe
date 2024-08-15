@@ -84,6 +84,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                 setFilteredInitialCategories(categories);
             } catch (error) {
                 console.log(error);
+                handleAlert('Hubo un error al cargar las categorías', true);
             }
         }
         getCategories();
@@ -132,7 +133,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         }
         if (product.image === '' && !initalProduct?.id) {
             handleAlert("La imagen es obligatoria", true);
-            console.log(document.getElementById('image-field'));
+            // console.log(document.getElementById('image-field'));
             document.getElementById('image-field').classList.add(styles["empty-field-image"]);
             return;
         }
@@ -162,6 +163,8 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             categories_id = dataCategories.subcategoriesIds;
         } catch (error) {
             console.log(error);
+            console.log(error.response);
+            handleAlert('Hubo un error al mandar las categorías', true);
         }
         // Send data to the server
         const data = new FormData();
@@ -199,6 +202,8 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             }
         } catch (error) {
             console.log(error);
+            console.log(error.response);
+            handleAlert('Hubo un error al mandar el formulario', true);
         } finally {
             setSavingProduct(false);
             setPublishingProduct(false);
@@ -323,7 +328,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
     }
     return (
         <>
-            {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
+            {/* {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />} */}
             <form
                 className={styles.body}
                 onSubmit={handleSubmit}
@@ -432,7 +437,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             onChange={handleChange}
                             checked={product.main}
                         />
-                        <label htmlFor="category">Indica si el producto es principal</label>
+                        <label htmlFor="main">Indica si el producto es principal</label>
                     </div>
                     <div className={styles.field}>
                         <label htmlFor="category">Agrega una nueva categoría</label>

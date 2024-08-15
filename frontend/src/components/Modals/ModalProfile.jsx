@@ -10,7 +10,7 @@ const ModalProfile = () => {
     const { auth, setProfileModal } = useAuth();
     const [activeTab, setActiveTab] = useState("London");
 
-    console.log(auth);
+    // console.log(auth);
 
     const { name, lastname, email, phone, websites } = auth;
 

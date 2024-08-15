@@ -31,6 +31,7 @@ const AuthProvider = ({ children }) => {
             } catch (error) {
                 setAuth({});
                 console.log(error);
+                
             } finally{
                 setLoading(false)
             }

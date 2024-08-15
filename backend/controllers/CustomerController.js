@@ -39,7 +39,7 @@ const createCustomer = async (req, res) => {
     }
 };
 
-const getCustomers = async (req, res) => {  
+const getCustomers = async (req, res) => { 
     const { website_id } = req.params;
     try {
         const website = await Website.findByPk(website_id);

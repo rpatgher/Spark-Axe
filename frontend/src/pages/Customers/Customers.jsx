@@ -86,7 +86,7 @@ const Customers = () => {
                 setDataLength(response.data.length);
             } catch (error) {
                 console.log(error);
-                handleAlert("error", "An error ocurred");
+                handleAlert("An error ocurred", true);
             }
         }
         return () => getCustomers();
@@ -266,7 +266,7 @@ const Customers = () => {
 
     return (
         <div className={styles["customers-wrapper"]}>
-            {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
+            {/* {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />} */}
             <div className={styles.top}>
                 <div className={styles.topcontent}>
                     <HeadingsRuta

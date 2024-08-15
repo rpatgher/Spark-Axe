@@ -91,6 +91,7 @@ const Inventory = () => {
                 setFilteredProducts(data);
             } catch (error) {
                 console.log(error);
+                handleAlert("Error al obtener los elementos", true);
             }
         };
         return () => getElements();
@@ -236,7 +237,7 @@ const Inventory = () => {
 
     return (
         <div className={styles["inventory-wrapper"]}>
-            {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
+            {/* {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />} */}
             <div className={styles.top}>
                 <div className={styles.topcontent}>
                     <h2 className={styles.heading}>Inventario</h2>

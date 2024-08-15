@@ -10,12 +10,14 @@ import styles from './NewProduct.module.css';
 import FormProduct from '../../components/FormProduct';
 import GeneralModal from '../../components/Modals/GeneralModal';
 import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
+import useApp from '../../hooks/useApp';
 
 
 const EditProduct = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [product, setProduct] = useState({});
+    const { alert, handleAlert } = useApp();
 
     const [modalDelete, setModalDelete] = useState(false);
 
@@ -35,6 +37,7 @@ const EditProduct = () => {
                 setProduct(response.data);
             } catch (error) {
                 console.log(error);
+                handleAlert('Error al obtener el producto', true);
             }
         }
         getElement();
@@ -55,6 +58,7 @@ const EditProduct = () => {
             navigate('/dashboard/products');
         } catch (error) {
             console.log(error);
+            handleAlert('Error al eliminar el producto', true);
         }
     }
 
@@ -77,6 +81,7 @@ const EditProduct = () => {
             }
         } catch (error) {
             console.log(error);
+            handleAlert('Error al publicar el producto', true);
         }
     }
     

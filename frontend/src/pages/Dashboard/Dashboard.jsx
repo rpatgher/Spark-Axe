@@ -9,11 +9,12 @@ import Vape from '../../assets/img/vape.webp';
 import bustop from '../../assets/img/bustop.jpg';
 import useAuth from '../../hooks/useAuth';
 import clientAxios from '../../config/clientAxios';
+import useApp from '../../hooks/useApp';
 
 
 
 const Dashboard = () => {
-
+  const { alert, handleAlert } = useApp();
   const [orders, setOrders] = useState([]);
   const [order, setOrder] = useState("asc"); // For sorting the orders
   const [orderType, setOrderType] = useState("id");
@@ -34,6 +35,7 @@ const Dashboard = () => {
             setData(data);
         } catch (error) {
             console.log(error);
+            handleAlert("Error al obtener los elementos", "error");
         }
     };
     return () => getElements();
@@ -90,6 +92,7 @@ useEffect(() => {
           setFilteredOrders(data);
       } catch (error) {
           console.log(error);
+          handleAlert("Error al obtener los pedidos", "error");
       }
   };
   return () => getOrders();
@@ -99,6 +102,7 @@ useEffect(() => {
   return (
     <div className={`${styles.dashboardcontainer} ${visible ? styles.visible : ''}`}>
       <div className={styles["Dashboard"]}>
+        {/* {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />} */}
         <h1 className={styles["Homehead"]}>Sparkaxe+<span className={styles["Homehead-grey"]}> La mejor forma de manejar tu negocio a tu manera</span></h1>
         <div className={styles["row"]}>
           <div className={styles["Profile"]}>

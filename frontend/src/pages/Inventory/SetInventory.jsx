@@ -40,6 +40,7 @@ function SetInventory() {
                 setInventory(data);
             } catch (error) {
                 console.log(error);
+                handleAlert("Error al obtener el inventario", true);
             }
         }
         return () => getInventory();
@@ -76,7 +77,7 @@ function SetInventory() {
 
     return (
         <div className={styles["inventory-wrapper"]}>
-            {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
+            {/* {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />} */}
             <div className={styles.enviocontent}>
                 <div id="London" className={styles.tabcontent1}>
                     <HeadingsRuta

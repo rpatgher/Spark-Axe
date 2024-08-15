@@ -9,6 +9,7 @@ import SidebarDashboard from '../components/SidebarDashboard/SidebarDashboard'
 import HeaderDashboard from '../components/HeaderDashboard/HeaderDashboard'
 import ModalError from "../components/Modals/ModalError";
 import ModalProfile from "../components/Modals/ModalProfile";
+import FloatAlert from '../components/Alert/FloatAlert';
 
 // **************** Hooks ****************
 import useApp from '../hooks/useApp';
@@ -17,6 +18,7 @@ import useAuth from "../hooks/useAuth";
 const DashboardLayout = () => {
     const { darkmode, openModalError, modalError, setScreenshotImage } = useApp();
     const { auth, profileModal } = useAuth();
+    const { alert } = useApp();
 
 
     const takeScreenshot = async () => {
@@ -48,6 +50,7 @@ const DashboardLayout = () => {
             <div className={styles.body}>
                 <HeaderDashboard />
                 <main className={styles.main}>
+                    {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
                     <Outlet />
                     <div className={styles["red-box"]} onClick={takeScreenshot}>
                         <p>Marcar error</p>

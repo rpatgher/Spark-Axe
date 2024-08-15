@@ -99,6 +99,7 @@ const Orders = () => {
                 setFilteredOrders(data);
             } catch (error) {
                 console.log(error);
+                handleAlert("Error al obtener los pedidos", true);
             }
         };
         return () => getOrders();
@@ -202,6 +203,7 @@ const Orders = () => {
             }
         } catch (error) {
             console.log(error);
+            handleAlert("Hubo un error al actualizar el estatus", true);
         } finally {
             document.body.style.cursor = "default";
         }
@@ -238,7 +240,7 @@ const Orders = () => {
 
     return (
         <div className={styles["orders-wrapper"]}>
-            {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
+            {/* {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />} */}
             <HeadingsRuta currentHeading="Pedidos de Productos" routes={[]} />
             <h4>Administra tus pedidos</h4>
             <div className={`${styles.filters} `}>
