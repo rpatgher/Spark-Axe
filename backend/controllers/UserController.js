@@ -2,6 +2,8 @@ import { Op } from 'sequelize';
 
 // ************* Helpers *************
 import generateJWT from '../helpers/generateJWT.js';
+import generateToken from '../helpers/generateToken.js';
+import sendEmail from '../helpers/sendEmail.js';
 
 // ************* Models *************
 import { User, Website } from '../models/index.js';
@@ -58,8 +60,49 @@ const login = async (req, res) => {
             role: user.role,
             token: generateJWT(user.id),
             websites: user.websites
-            // TODO: Return token
         });
+    }
+}
+
+const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+    const user = await User.findOne({ 
+        where: { email },
+        include: [ Website ]
+    });
+    if(!user){
+        const error = new Error('User not found');
+        return res.status(404).json({ msg: error.message });
+    }
+    const token = generateToken();
+    user.resetPasswordToken = token;
+    await user.save();
+    // TODO: Send email with token
+    sendEmail({
+        name: `${user.name} ${user.lastname}`,
+        email: user.email,
+        url: `${user.websites[0].url_address}/reset-password/${token}`,
+        subject: 'Reset your password',
+        file: 'reset-password'
+    });
+    return res.status(200).json({ msg: 'Email sent successfully' });
+}
+
+const resetPassword = async (req, res) => {
+    const { token, password } = req.body;
+    try {
+        const user = await User.findOne({ where: { resetPasswordToken: token }});
+        if(!user){
+            const error = new Error('Invalid token');
+            return res.status(400).json({ msg: error.message });
+        }
+        user.password = password;
+        user.resetPasswordToken = null;
+        await user.save();
+        return res.status(200).json({ msg: 'Password updated successfully' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });   
     }
 }
 
@@ -77,5 +120,7 @@ const profile = async (req,res) => {
 export {
     register,
     login,
-    profile
+    profile,
+    forgotPassword,
+    resetPassword
 }

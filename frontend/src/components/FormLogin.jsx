@@ -12,7 +12,7 @@ import Alert from './Alert/Alert';
 
 
 const FormLogin = () => {
-    const { user, handleChange, hidePassword, handleHidePassword, submitLogin, alert } = useLogin();
+    const { user, handleChange, hidePassword, handleHidePassword, submitLogin, alert, loading } = useLogin();
     
     return (
         <form
@@ -59,9 +59,10 @@ const FormLogin = () => {
             </div>
             
             <input 
-                className={styles.submit}
+                className={`${styles.submit} ${loading ? styles.loading : ''}`}
                 type="submit" 
                 value="Iniciar Sesión"
+                disabled={loading}
             />
 
         </form>

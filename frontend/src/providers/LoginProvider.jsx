@@ -15,6 +15,7 @@ const LoginProvider = ({ children }) => {
         remember: false
         // TODO: Add remember me functionality
     });
+    const [loading, setLoading] = useState(false);
 
     const [hidePassword, setHidePassword] = useState(true);
     const [alert, setAlert] = useState({
@@ -37,6 +38,7 @@ const LoginProvider = ({ children }) => {
 
     const submitLogin = async (e) => {
         e.preventDefault();
+        setLoading(true);
         if(Object.values(user).includes('')){
             setAlert({
                 msg: 'Todos los campos son obligatorios',
@@ -45,6 +47,7 @@ const LoginProvider = ({ children }) => {
             setTimeout(() => {
                 setAlert({});
             }, 3000);
+            setLoading(false);
             return;
         }
         setAlert({});
@@ -71,6 +74,8 @@ const LoginProvider = ({ children }) => {
                 msg: msg,
                 error: true
             });
+        } finally{
+            setLoading(false);
         }
     }
 
@@ -81,7 +86,8 @@ const LoginProvider = ({ children }) => {
             hidePassword,
             handleHidePassword,
             submitLogin,
-            alert
+            alert,
+            loading
         }}>
             {children}
         </LoginContext.Provider>

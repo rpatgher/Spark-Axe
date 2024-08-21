@@ -36,6 +36,9 @@ const User = db.define('user', {
     token: {
         type: DataTypes.STRING
     },
+    resetPasswordToken: {
+        type: DataTypes.STRING
+    },
     confirmed: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

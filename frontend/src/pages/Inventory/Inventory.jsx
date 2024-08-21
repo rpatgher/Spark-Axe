@@ -172,7 +172,7 @@ const Inventory = () => {
             );
         } else {
             if(field === "price"){
-                return `$${formatToMoney(value)}`;
+                return `${formatToMoney(value)} MXN`;
             }
             return value;
         }

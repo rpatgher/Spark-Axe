@@ -13,7 +13,7 @@ import BtnNext from '../Btns/BtnNext';
 import verifyImage from '../../assets/img/verify-tel.png';
 
 const SignupStepThree = () => {
-    const { prevStep, continueBtn3, setContinueBtn3, validCode, setValidcode } = useSignup();
+    const { prevStep, continueBtn3, setContinueBtn3, validCode, setValidcode, user } = useSignup();
     const [digit, setDigit] = useState(0);
     const [code, setCode] = useState('');
 
@@ -72,7 +72,7 @@ const SignupStepThree = () => {
                 </div>
                 <button>Volver a mandar el código</button>
             </div>
-            <p className={styles["verify-instructions"]}>Ingresa el código de 4 dígitos que se te ha enviado al celular <span>+XX XXXX XXXX</span></p>
+            <p className={styles["verify-instructions"]}>Ingresa el código de 4 dígitos que se te ha enviado al celular <span>{user.phone}</span></p>
             <button onClick={prevStep} className={styles["change-number"]}>Cambiar número de teléfono</button>
             <BtnNext
                 disabled={!continueBtn3}

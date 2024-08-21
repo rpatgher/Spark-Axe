@@ -86,7 +86,7 @@
 .field input{
     border: 2px solid color-mix(in xyz-d50, var(--gray) 95%, #000);
     border-radius: 1rem;
-    padding: 1rem;
+    padding: 2rem 1rem;
     font-size: 1.6rem;
     background-color: transparent;
 }
@@ -255,11 +255,12 @@
 }
 .verify-inputs input{
     width: 3rem;
-    font-size: 3rem;
+    font-size: 2.6rem;
     text-align: center;
     border: 2px solid color-mix(in xyz-d50, var(--gray) 95%, #000);
     border-radius: .5rem;
     padding: .5rem 0;
+    height: auto;
 }
 .verify-instructions{
     text-align: center;
@@ -281,8 +282,8 @@
     border: none;
     border-radius: 1rem;
     cursor: pointer;
-    padding: 1.5rem;
-    font-size: 1.8rem;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
     background-color: var(--dark_blue);
     color: #FFFFFF;
     transition: background-color 0.2s ease;
