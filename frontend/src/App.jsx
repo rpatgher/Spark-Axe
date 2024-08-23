@@ -13,6 +13,7 @@ import Contact from './pages/Contact/contact';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import Forgot from './pages/Forgot';
+import AccountConfirmation from './pages/AccountConfirmation';
 import Reset from './pages/Reset';
 
 import Support from './pages/Support/Support';
@@ -54,6 +55,7 @@ function App() {
               <Route path="signup" element={<Signup />} />
               <Route path="forgot-password" element={<Forgot />} />
               <Route path="reset-password/:token" element={<Reset />} />
+              <Route path="confirm-account/:token" element={<AccountConfirmation />} />
             </Route>
 
 

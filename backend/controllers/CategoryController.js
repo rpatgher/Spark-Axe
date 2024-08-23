@@ -7,7 +7,8 @@ import { Category, Subcategory } from '../models/index.js';
 
 const createCategory = async (req, res) => {
     const { website_id, categories: categoriesBody } = req.body;
-    if(!website_id || !categoriesBody){
+    console.log(categoriesBody);
+    if(!website_id || !categoriesBody || categoriesBody.length === 0){
         return res.status(400).json({msg: 'Website id and categories are required'});
     }
     if(categoriesBody.some(category => !category.category) || categoriesBody.some(category => category.category === '')){

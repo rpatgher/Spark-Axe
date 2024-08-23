@@ -11,6 +11,7 @@ import Alert from '../components/Alert/Alert';
 
 const Reset = () => {
     const navigate = useNavigate();
+    const { token } = useParams();
     const [alert, setAlert] = useState('');
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({
@@ -31,7 +32,6 @@ const Reset = () => {
     const [validToken, setValidToken] = useState(false);
 
 
-    const { token } = useParams();
 
     
     useEffect(() => {

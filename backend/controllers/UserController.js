@@ -26,10 +26,18 @@ const register = async (req, res) => {
     try {
         const user = User.build(req.body);
         user.confirmed = false;
-        // TODO: Generate Token
+        const token = generateToken();
+        user.confirmationToken = token;
         await user.save();
         // TODO: Send confirmation email
-        res.json({ msg: 'Registered succesfully' });
+        sendEmail({
+            name: `${user.name} ${user.lastname}`,
+            email: user.email,
+            url: `${process.env.FRONTEND_URLS.split(',')[0]}/confirm-account/${token}`,
+            subject: 'Confirm your account',
+            file: 'confirm-account'
+        });
+        res.status(201).json({ msg: 'Registered succesfully' });
     } catch (error) {
         console.log(error);
         return res.status(400).json({ msg: 'An error ocurred' });
@@ -77,11 +85,10 @@ const forgotPassword = async (req, res) => {
     const token = generateToken();
     user.resetPasswordToken = token;
     await user.save();
-    // TODO: Send email with token
     sendEmail({
         name: `${user.name} ${user.lastname}`,
         email: user.email,
-        url: `${user.websites[0].url_address}/reset-password/${token}`,
+        url: `${process.env.FRONTEND_URLS.split(',')[0]}/reset-password/${token}`,
         subject: 'Reset your password',
         file: 'reset-password'
     });
@@ -106,6 +113,24 @@ const resetPassword = async (req, res) => {
     }
 }
 
+const confirmUser = async (req, res) => {
+    const { token } = req.body;
+    try {
+        const user = await User.findOne({ where: { confirmationToken: token }});
+        if(!user){
+            const error = new Error('Invalid token');
+            return res.status(400).json({ msg: error.message });
+        }
+        user.confirmed = true;
+        user.confirmationToken = null;
+        await user.save();
+        return res.status(200).json({ msg: 'User confirmed successfully' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
+}
+
 const profile = async (req,res) => {
     const { id } = req.user;
     const user = await User.findOne({
@@ -122,5 +147,6 @@ export {
     login,
     profile,
     forgotPassword,
+    confirmUser,
     resetPassword
 }

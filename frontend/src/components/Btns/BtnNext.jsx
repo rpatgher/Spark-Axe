@@ -5,15 +5,14 @@ import useSignup from '../../hooks/useSignup';
 import styles from './BtnNext.module.css';
 
 
-const BtnPrevNext = ({disabled}) => {
-    const { nextStep } = useSignup();
+const BtnPrevNext = ({disabled, msg, action}) => {
     return (
         <button
             className={`${styles['btn-next']} ${disabled ? styles.disabled : ''}`}
-            onClick={nextStep}
+            onClick={action}
             disabled={disabled}
         >
-            Continuar
+            {msg}
         </button>
     )
 }

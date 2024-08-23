@@ -164,7 +164,17 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         } catch (error) {
             console.log(error);
             console.log(error.response);
-            handleAlert('Hubo un error al mandar las categorías', true);
+            if(error.response.data.msg === 'Website id and categories are required'){
+                handleAlert('Las categorías son obligatorias', true);
+            }else if(error.response.data.msg === 'Subcategories of all categories are required'){
+                handleAlert('Las categorías deben tener al menos una subcategoría', true);
+            
+            }else{
+                handleAlert('Hubo un error al mandar las categorías', true);
+            }
+            setSavingProduct(false);
+            setPublishingProduct(false);
+            return;
         }
         // Send data to the server
         const data = new FormData();

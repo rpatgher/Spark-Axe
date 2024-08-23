@@ -15,7 +15,7 @@ import google from '../../assets/img/google.png'
 
 
 const SignupStepOne = () => {
-    const { user, handleChange, continueBtn1,  setContinueBtn1} = useSignup();
+    const { user, handleChange, continueBtn1,  setContinueBtn1, nextStep} = useSignup();
 
     useEffect(() => {
         const validEmail =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
@@ -28,12 +28,12 @@ const SignupStepOne = () => {
 
     return (
         <>
-            <div className={styles["google-btn"]}>
+            {/* <div className={styles["google-btn"]}>
                 <div className={styles["google-icon"]}>
                     <img src={google} alt="Logo Google" />
                 </div>
                 <p>Registrarme con Google</p>
-            </div>
+            </div> */}
             <div className={styles.field}>
                 <label htmlFor="name">Nombre(s)</label>
                 <input 
@@ -70,6 +70,8 @@ const SignupStepOne = () => {
             </div>
             <BtnNext
                 disabled={!continueBtn1}
+                msg='Continuar'
+                action={nextStep}
             />
         </> 
     )

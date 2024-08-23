@@ -4,7 +4,8 @@ import {
     login,
     forgotPassword,
     resetPassword,
-    profile
+    profile,
+    confirmUser
 } from '../controllers/UserController.js';
 
 import checkAuth from "../middleware/checkAuth.js";
@@ -17,6 +18,7 @@ router.post('/', register);
 router.post('/login', login);
 router.post('/forgot', forgotPassword);
 router.post('/reset', resetPassword);
+router.post('/confirmation', confirmUser);
 router.get('/profile', checkAuth, profile);
 
 

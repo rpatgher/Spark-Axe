@@ -25,7 +25,9 @@ const SignupStepTwo = () => {
         continueBtn2,
         setContinueBtn2,
         hidePassword,
-        handleHidePassword
+        handleHidePassword,
+        handleSubmit,
+        loading
     } = useSignup();
 
 
@@ -116,7 +118,9 @@ const SignupStepTwo = () => {
                 />
             </div>
             <BtnNext
-                disabled={!continueBtn2}
+                disabled={!continueBtn2 || loading}
+                msg={loading ? 'Registrando...' : 'Registrarme'}
+                action={handleSubmit}
             />
         </>
     )

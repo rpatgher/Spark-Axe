@@ -17,7 +17,7 @@ import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
     const { darkmode, openModalError, modalError, setScreenshotImage } = useApp();
-    const { auth, profileModal } = useAuth();
+    const { auth, profileModal, logoutAuth } = useAuth();
     const { alert } = useApp();
 
 
@@ -39,10 +39,17 @@ const DashboardLayout = () => {
         // fakeLink.remove();
     }
 
-    if(auth.websites.length === 0) return <div className={styles.Noweb}>
-        <h1>No websites</h1>
-        <Link to="/contact"> <button>Contact us</button></Link>
+    if(auth.websites.length === 0) return (
+        <div className={styles.Noweb}>
+            <h1>No websites</h1>
+            <Link to="/contact">
+                <button>Contact us</button>
+            </Link>
+            <button
+                onClick={logoutAuth}
+            ><i className="fa-solid fa-right-from-bracket"></i>Cerrar Sesión</button>
         </div>
+    )
     
     return (
         <div className={styles.dashboard}>

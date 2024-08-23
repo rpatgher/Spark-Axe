@@ -31,9 +31,13 @@ const User = db.define('user', {
     },
     role: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 'Admin'
     },
     token: {
+        type: DataTypes.STRING
+    },
+    confirmationToken: {
         type: DataTypes.STRING
     },
     resetPasswordToken: {

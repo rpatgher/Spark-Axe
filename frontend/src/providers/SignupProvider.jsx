@@ -1,9 +1,12 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import clientAxios from "../config/clientAxios";
+
 
 const SignupContext = createContext();
 
 const SignupProvider = ({ children }) => {
-
+    const navigate = useNavigate();
     const [step, setStep] = useState(1);
     const [user, setUser] = useState({
         name: '',
@@ -12,7 +15,7 @@ const SignupProvider = ({ children }) => {
         password: '',
         password2: '',
         phone: '',
-        role: ''
+        // role: ''
     });
     const [validCode, setValidCode] = useState(false);
 
@@ -31,6 +34,13 @@ const SignupProvider = ({ children }) => {
     const [continueBtn2, setContinueBtn2] = useState(false);
     const [continueBtn3, setContinueBtn3] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+
+    const [alert, setAlert] = useState({
+        msg: '',
+        error: true
+    });
+
     const nextStep = () => {
         setStep(step + 1);
     }
@@ -48,16 +58,16 @@ const SignupProvider = ({ children }) => {
                     setStep(step);
                 }
                 break;
-            case 3:
-                if(continueBtn2){
-                    setStep(step);
-                }
-                break;
-            case 4:
-                if(continueBtn3){
-                    setStep(step);
-                }
-                break;
+            // case 3:
+            //     if(continueBtn2){
+            //         setStep(step);
+            //     }
+            //     break;
+            // case 4:
+            //     if(continueBtn3){
+            //         setStep(step);
+            //     }
+            //     break;
             default:
                 break;
         }
@@ -140,6 +150,58 @@ const SignupProvider = ({ children }) => {
         setHidePassword(!hidePassword);
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        if(Object.values(user).includes('')){
+            setAlert({
+                msg: 'Todos los campos son obligatorios',
+                error: true
+            });
+            setTimeout(() => {
+                setAlert({});
+            }, 3000);
+            setLoading(false);
+            return;
+        }
+        setAlert({});
+        try {
+            const response = await clientAxios.post('/api/users', user);
+            if(response.status === 201){
+                setUser({});
+                setContinueBtn1(false);
+                setContinueBtn2(false);
+                setContinueBtn3(false);
+                setBarPercentage(0);
+                setCharacters(false);
+                setNumber(false);
+                setUppercase(false);
+                setLowercase(false);
+                setSpecial(false);
+                setPasswordsCheck(true);
+                setHidePassword(true);
+                setValidCode(false);
+                setStep(5);
+            }
+        } catch (error) {
+            console.log(error);
+            let msg;
+            if(error.response){
+                if(msg = error.response.data.msg === 'User already exists'){
+                    msg = 'El usuario ya existe';
+                }
+            }else{
+                msg = 'An error ocurred';
+            }
+            setAlert({
+                msg: msg,
+                error: true
+            });
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return (
         <SignupContext.Provider value={{
             step,
@@ -167,7 +229,10 @@ const SignupProvider = ({ children }) => {
             continueBtn3,
             setContinueBtn3,
             hidePassword,
-            handleHidePassword
+            handleHidePassword,
+            handleSubmit,
+            loading,
+            alert
         }}>
             {children}
         </SignupContext.Provider>
@@ -175,4 +240,4 @@ const SignupProvider = ({ children }) => {
 }
 
 export { SignupProvider };
-export default SignupContext;
+export default SignupContext;   

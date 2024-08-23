@@ -1,0 +1,18 @@
+.heading{
+    font-size: 3rem;
+    font-weight: 400;
+}
+@media (min-width: 1450px){
+    .heading{
+        font-size: 4rem;
+    }
+}
+.description{
+    font-size: 1.6rem;
+    color: var(--dark_gray);
+}
+@media (min-width: 1450px){
+    .description{
+        font-size: 2.1rem;
+    }
+}
