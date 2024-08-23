@@ -6,7 +6,7 @@ import generateToken from '../helpers/generateToken.js';
 import sendEmail from '../helpers/sendEmail.js';
 
 // ************* Models *************
-import { User, Website } from '../models/index.js';
+import { Feature, User, Website } from '../models/index.js';
 
 
 const register = async (req, res) => {
@@ -136,8 +136,16 @@ const profile = async (req,res) => {
     const user = await User.findOne({
         where: { id },
         include: [
-            { model: Website }
-        ]
+            {
+                model: Website,
+                include: {
+                    model: Feature,
+                    attributes: ['id', 'name', 'description', 'url']
+                },
+                attributes: ['id', 'name', 'url_address', 'phone', 'email', 'type', 'currency', 'slogan', 'language']
+            }
+        ],
+        attributes: ['id', 'name', 'lastname', 'email', 'phone', 'role']
     });
     res.status(200).json(user);
 }

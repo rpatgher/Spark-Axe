@@ -32,6 +32,8 @@ import Promotions from './pages/Promotions/Promotions';
 import Delivery from './pages/Delivery/Delivery';
 import Settings from './pages/Settings/Settings';
 
+import NotFound from './pages/NotFound/NotFound';
+
 // ***************** Providers *****************
 import { AppProvider } from './providers/AppProvider';
 import { AuthProvider } from './providers/AuthProvider';
@@ -76,7 +78,13 @@ function App() {
                 <Route path="delivery" element={<Delivery />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
+
+              {/* Ruta 404 */}
+              <Route path="*" element={<NotFound />} />
             </Route>
+
+            
+
           </Routes>
         </BrowserRouter>
       </AppProvider>

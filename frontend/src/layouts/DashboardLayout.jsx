@@ -1,4 +1,5 @@
-import { Link, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import html2canvas from 'html2canvas';
 
 // **************** Styles ****************
@@ -10,15 +11,33 @@ import HeaderDashboard from '../components/HeaderDashboard/HeaderDashboard'
 import ModalError from "../components/Modals/ModalError";
 import ModalProfile from "../components/Modals/ModalProfile";
 import FloatAlert from '../components/Alert/FloatAlert';
+import NotFound from "../pages/NotFound/NotFound";
 
 // **************** Hooks ****************
 import useApp from '../hooks/useApp';
 import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
+    const location = useLocation();
     const { darkmode, openModalError, modalError, setScreenshotImage } = useApp();
     const { auth, profileModal, logoutAuth } = useAuth();
     const { alert } = useApp();
+
+    const [validURL, setValidURL] = useState(false);
+
+    useEffect(() => {
+        const validateURL = () => {
+            const features = auth.websites[0].features.map(feature => feature.url);
+            if(location.pathname === '/dashboard' || location.pathname === '/dashboard/') {
+                setValidURL(true);
+            } else{
+                setValidURL(features.some(feature => {
+                    if(location.pathname.includes(feature)) return true;
+                }));
+            }
+        }
+        return () => validateURL();
+    }, [location]);
 
 
     const takeScreenshot = async () => {
@@ -50,6 +69,12 @@ const DashboardLayout = () => {
             ><i className="fa-solid fa-right-from-bracket"></i>Cerrar Sesión</button>
         </div>
     )
+
+
+    if(!validURL) return (
+        <NotFound />
+    )
+
     
     return (
         <div className={styles.dashboard}>

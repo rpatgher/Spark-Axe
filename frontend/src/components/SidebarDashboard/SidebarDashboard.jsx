@@ -20,6 +20,29 @@ const SidebarDashboard = () => {
     const website = websites[0];
 
     const [menuActive, setMenuActive] = useState(false);
+
+    const setIconFeature = (feature) => {
+        if(feature === 'Pedidos'){
+            return 'fa-solid fa-basket-shopping';
+        } else if (feature === 'Productos') {
+            return 'fa-solid fa-tags';
+        } else if (feature === 'Inventario') {
+            return 'fa-solid fa-dolly';
+        } else if (feature === 'Clientes') {
+            return 'fa-solid fa-users';
+        } else if (feature === 'Estadísticas Generales') {
+            return 'fa-solid fa-square-poll-vertical';
+        } else if (feature === 'Cupones') {
+            return 'fa-solid fa-ticket-simple';
+        } else if (feature === 'Promociones') {
+            return 'fa-solid fa-gifts';
+        } else if (feature === 'Envío') {
+            return 'fa-solid fa-truck-fast';
+        } else {
+            return 'fa-solid fa-cube';
+        }
+    }
+
     return (
         <aside className={styles.sidebar}>
             <header className={styles["sidebar-header"]}>
@@ -47,40 +70,12 @@ const SidebarDashboard = () => {
                         <i className="fa-solid fa-house"></i>
                         <p>Inicio</p>
                     </Link>
-                    <Link to='/dashboard/orders' className={`${styles.item} ${location.pathname === '/dashboard/orders' ? styles.item_active : ''}`}>
-                    <i className="fa-solid fa-basket-shopping"></i>
-                        <p>Pedidos</p>
-                    </Link>
-                    <Link to='/dashboard/products' className={`${styles.item} ${location.pathname === '/dashboard/products' ? styles.item_active : ''}`}>
-                    <i className="fa-solid fa-tags"></i>
-                        <p>Productos</p>
-                    </Link>
-                    <Link to='/dashboard/inventory' className={`${styles.item} ${location.pathname === '/dashboard/inventory' ? styles.item_active : ''}`}>
-                    <i className="fa-solid fa-dolly"></i>
-                        <p>Inventario</p>
-                    </Link>
-                    <Link to='/dashboard/customers' className={`${styles.item} ${location.pathname === '/dashboard/customers' ? styles.item_active : ''}`}>
-                    <i className="fa-solid fa-users"></i>
-                        <p>Clientes</p>
-                    </Link>
-{/*
-                    <Link to='/dashboard/stats' className={`${styles.item} ${location.pathname === '/dashboard/stats' ? styles.item_active : ''}`}>
-                    <i className="fa-solid fa-square-poll-vertical"></i>
-                        <p>Estadísticas Generales</p>
-                    </Link>
-                    <Link to='/dashboard/coupons' className={`${styles.item} ${location.pathname === '/dashboard/coupons' ? styles.item_active : ''}`}>
-                    <i className="fa-solid fa-ticket-simple"></i>
-                        <p>Cupones</p>
-                    </Link>
-                    <Link to='/dashboard/promotions' className={`${styles.item} ${location.pathname === '/dashboard/promotions' ? styles.item_active : ''}`}>
-                    <i className="fa-solid fa-gifts"></i>
-                        <p>Promociones</p>
-                    </Link>
-                    */}
-                    <Link to='/dashboard/delivery' className={`${styles.item} ${location.pathname === '/dashboard/delivery' ? styles.item_active : ''}`}>
-                    <i className="fa-solid fa-truck-fast"></i>
-                        <p>Envío</p>
-                    </Link>
+                    {website.features.map(feature => (
+                        <Link key={feature.id} to={`/dashboard/${feature.url}`} className={`${styles.item} ${location.pathname === `/dashboard/${feature.url}` ? styles.item_active : ''}`}>
+                            <i className={setIconFeature(feature.name)}></i>
+                            <p>{feature.name}</p>
+                        </Link>
+                    ))}
                 </div>
                 <div className={styles["setting-menu"]}>
                     <Link to='/dashboard/settings' className={`${styles.item} ${location.pathname === '/dashboard/settings' ? styles.item_active : ''}`}>
