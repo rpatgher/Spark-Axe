@@ -4,30 +4,15 @@ import styles from "./Big.module.css";
 // ***************** Images *****************
 import happy from "../../../assets/img/axhappy.png";
 
-const Big = ({data, inventory, limit}) => {
+const Big = ({elements, inventory}) => {
 
-    const setStatus = (stock, item) => {
+    const setStatus = (stock) => {
         if (stock >= inventory.high) {
-            item.status = "high";
-            return (
-                <p className={`${styles.status} ${styles["status-high"]}`}>
-                    Alto
-                </p>
-            );
-        } else if (stock >= inventory.medium) {
-            item.status = "medium";
-            return (
-                <p className={`${styles.status} ${styles["status-medium"]}`}>
-                    Medio
-                </p>
-            );
+            return (<p className={`${styles.status} ${styles["status-high"]}`}>Alto</p>);
+        } else if (stock > inventory.low && stock < inventory.high) {
+            return (<p className={`${styles.status} ${styles["status-medium"]}`}>Medio</p>);
         } else {
-            item.status = "low";
-            return (
-                <p className={`${styles.status} ${styles["status-low"]}`}>
-                    Bajo
-                </p>
-            );
+            return (<p className={`${styles.status} ${styles["status-low"]}`}>Bajo</p>);
         }
     };
 
@@ -38,8 +23,7 @@ const Big = ({data, inventory, limit}) => {
                     <i className="fa-solid fa-dolly"></i> Inventario bajo
                 </p>
             </div>
-            {data.filter((product) => product.stock < inventory.medium)
-                .length === 0 ? (
+            {elements.length === 0 ? (
                 <div className={styles["Noinvent"]}>
                     <img
                         className={styles["happyax"]}
@@ -49,7 +33,7 @@ const Big = ({data, inventory, limit}) => {
                     <h2>¡Muy bien no hay inventario bajo!</h2>
                 </div>
             ) : (
-                <table className={styles["anouncetable2"]}>
+                <table className={styles["anouncetable"]}>
                     <thead>
                         <tr>
                             <th>Producto</th>
@@ -58,27 +42,15 @@ const Big = ({data, inventory, limit}) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data
-                            .filter(
-                                (product) => product.stock < inventory.medium
-                            )
-                            .map((item, index) => {
-                                if (index < limit) {
-                                    item.visible = true;
-                                    return (
-                                        <tr key={item.id}>
-                                            <td>{item.name}</td>
-                                            <td>{item.stock}</td>
-                                            <td>
-                                                {setStatus(item.stock, item)}
-                                            </td>
-                                        </tr>
-                                    );
-                                } else {
-                                    item.visible = false;
-                                    return null; // Si no se muestra, retornamos null
-                                }
-                            })}
+                        {elements.map(item => (
+                            <tr key={item.id}>
+                                <td>{item.name}</td>
+                                <td>{item.stock}</td>
+                                <td>
+                                    {setStatus(item.stock)}
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             )}

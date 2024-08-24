@@ -363,7 +363,7 @@ const Inventory = () => {
                                                                 {loading ? 'Guardando...' : 'Guardar'}
                                                             </button>
                                                         </div>
-                                                    ) : (
+                                                    ) : editingRow === null ? (
                                                         <button 
                                                             onClick={() => handleEditClick(item.id)} 
                                                             className={styles.editar}
@@ -371,6 +371,8 @@ const Inventory = () => {
                                                             <i className="fa-solid fa-pen"></i>
                                                             Editar
                                                         </button>
+                                                    ) : (
+                                                        <p></p>
                                                     )}
                                                 </td>
                                             </tr>

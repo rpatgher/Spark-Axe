@@ -49,6 +49,7 @@
     color: #fff;
     font-size: 3.4rem;
     font-weight: bold;
+    flex: 1;
 }
 .Menu i{
     font-size: 8rem;

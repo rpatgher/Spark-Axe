@@ -23,17 +23,11 @@ const Dashboard = () => {
     const { auth } = useAuth();
     const { handleAlert } = useApp();
     const [orders, setOrders] = useState([]);
-    
-    // Los categoriza
-    const [data, setData] = useState([]);
-    const { name, websites, role } = auth;
-    const [inventory, setInventory] = useState({
-        low: 10,
-        medium: 20,
-        high: 30,
-    });
-    const [limit, setLimit] = useState(5);
+    const [elements, setElements] = useState([]);
+    const { name, websites } = auth;
     const [visible, setVisible] = useState(false);
+    const [inventory, setInventory] = useState({});
+    const [mostSold, setMostSold] = useState([]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -41,9 +35,8 @@ const Dashboard = () => {
         }, 100); // slight delay to ensure smooth transition
     }, []);
 
-    // Consigue los inevntarios de la base de datos
     useEffect(() => {
-        const getElements = async () => {
+        const getInfo = async () => {
             const token = localStorage.getItem("token");
             const config = {
                 headers: {
@@ -52,42 +45,18 @@ const Dashboard = () => {
                 },
             };
             try {
-                const { data } = await clientAxios(
-                    `/api/elements/${auth.websites[0].id}`,
-                    config
-                );
-                setData(data);
+                const response = await clientAxios.get(`/api/websites/${auth.websites[0].id}/main-info`, config);
+                const { elements, orders, inventory, mostSoldProduct } = response.data;
+                setElements(elements);
+                setOrders(orders);
+                setInventory(inventory);
+                setMostSold(mostSoldProduct);
             } catch (error) {
                 console.log(error);
-                handleAlert("Error al obtener los elementos", "error");
+                handleAlert("Error al obtener la información", "error");
             }
-        };
-        return () => getElements();
-    }, []);
-
-    // Consigue los pedidos de la base de datos
-    useEffect(() => {
-        // Get orders from the server
-        const getOrders = async () => {
-            const token = localStorage.getItem("token");
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            };
-            try {
-                const { data } = await clientAxios.get(
-                    `/api/orders/${auth.websites[0].id}`,
-                    config
-                );
-                setOrders(data);
-            } catch (error) {
-                console.log(error);
-                handleAlert("Error al obtener los pedidos", "error");
-            }
-        };
-        return () => getOrders();
+        }
+        return () => getInfo();
     }, []);
 
     return (
@@ -107,20 +76,20 @@ const Dashboard = () => {
                 </h1>
                 <div className={styles["row"]}>
                     <Profile name={name} websites={websites} />
-                    <Most />
-                    <Big data={data} inventory={inventory} limit={limit} />
+                    <Most mostSold={mostSold} />
+                    <Big elements={elements} inventory={inventory} />
                 </div>
                 <div className={styles["row"]}>
-                    <BigUpdates />
-                    <ProfileCard />
-                </div>
-                <div className={styles["row"]}>
-                    <BigOrders data={data} orders={orders} inventory={inventory} limit={limit} />
-                    <Delivery />
+                    <BigOrders orders={orders} />
+                    {/* <Delivery /> */}
                     <div className={styles["Menu"]}>
                         <i className="fa-solid fa-person-digging"></i>
                         <p>Trabajando para mejorar sparkaxe</p>
                     </div>
+                </div>
+                <div className={styles["row"]}>
+                    {/* <BigUpdates /> */}
+                    <ProfileCard />
                 </div>
             </div>
         </div>

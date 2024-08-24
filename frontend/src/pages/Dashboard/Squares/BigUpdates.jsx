@@ -9,9 +9,9 @@ const BigUpdates = () => {
                     <i className="fa-solid fa-bell"></i> Avisos
                 </p>
             </div>
-            <table className={styles["anouncetable"]}>
+            <table className={styles["updates"]}>
                <tbody>
-                <tr>
+                    <tr>
                         <th>Update version 1.4</th>
                         <td>
                             Update a funcionalidades de agregacion de

@@ -378,6 +378,10 @@ const Customers = () => {
                                         type="checkbox" 
                                         onChange={handleSelectAll} 
                                         checked={selectAll} 
+                                        disabled={editingRow !== null}
+                                        style={{
+                                            cursor: editingRow !== null ? "not-allowed" : "pointer"
+                                        }}
                                     />
                                 </th>
                                 <th 
@@ -420,6 +424,10 @@ const Customers = () => {
                                                         type="checkbox"
                                                         onChange={() => handleSelect(index)}
                                                         checked={item.selected || false}
+                                                        disabled={editingRow !== null}
+                                                        style={{
+                                                            cursor: editingRow !== null ? "not-allowed" : "pointer"
+                                                        }}
                                                     />
                                                 </td>
                                                 
@@ -465,7 +473,7 @@ const Customers = () => {
                                                                 <i className="fa-solid fa-trash"></i>
                                                             </button>
                                                         </div>
-                                                    ) : (
+                                                    ) : editingRow === null ? (
                                                         <button 
                                                             onClick={() => handleEditClick(item.id)} 
                                                             className={styles.editar}
@@ -473,6 +481,8 @@ const Customers = () => {
                                                             <i className="fa-solid fa-pen"></i>
                                                             Editar
                                                         </button>
+                                                    ) : (
+                                                        <p></p>
                                                     )}
                                                 </td>
                                             </tr>

@@ -18,8 +18,6 @@ import zeroFill from "../../helpers/zeroFill";
 import lunaAxImage from "../../assets/img/luna_ax.png";
 import HeadingsRuta from "../../components/HeadingsRuta/HeadingsRuta";
 
-// **************** Images ****************
-import FloatAlert from "../../components/Alert/FloatAlert";
 
 const Orders = () => {
     const { auth } = useAuth();
@@ -52,7 +50,7 @@ const Orders = () => {
     const sortedOrders = orders.sort((a, b) => {
         if (order === "asc") {
             if (orderType === "id") {
-                return a.id - b.id;
+                return a.index - b.index;
             }
             if (orderType === "date") {
                 return new Date(a.createdAt) - new Date(b.createdAt);
@@ -66,7 +64,7 @@ const Orders = () => {
         }
         if (order === "desc") {
             if (orderType === "id") {
-                return b.id - a.id;
+                return b.index - a.index;
             }
             if (orderType === "date") {
                 return new Date(b.createdAt) - new Date(a.createdAt);
@@ -157,7 +155,7 @@ const Orders = () => {
             return;
         }
         const filtered = visibleFiltered.filter((order) =>
-            zeroFill(order.id, 10).toLowerCase().includes(search.toLowerCase())
+            zeroFill(order.index, 10).toLowerCase().includes(search.toLowerCase())
         );
         setFilteredOrders(filtered);
     };
@@ -181,7 +179,7 @@ const Orders = () => {
             if (response.status === 200 || response.status === 202) {
                 setFilteredOrders(
                     filteredOrders.map((order) => {
-                        if (order.id === parseInt(e.target.dataset.id)) {
+                        if (order.id === e.target.dataset.id) {
                             order.status = status;
                         }
                         return order;
@@ -189,7 +187,7 @@ const Orders = () => {
                 );
                 setOrders(
                     orders.map((order) => {
-                        if (order.id === parseInt(e.target.dataset.id)) {
+                        if (order.id === e.target.dataset.id) {
                             order.status = response.data.status;
                             order.delivery_date = response.data.delivery_date;
                         }
@@ -468,7 +466,7 @@ const Orders = () => {
                                             products
                                         ) => {
                                             const message = `
-*ID de Pedido:* ${order.id}
+*ID de Pedido:* ${order.index}
 *Fecha de Pedido:* ${formatDate(order.createdAt)}
 *Cliente :* Issac Shakalo
 *Nota de pedido:* ${order.notes}
@@ -591,10 +589,9 @@ ${formatProductTable(products)}
                                                 </td>
                                                 <td>{order.notes}</td>
                                                 <td>
-                                                    $
                                                     {formatToMoney(
                                                         parseFloat(order.total)
-                                                    )}
+                                                    )} MXN
                                                 </td>
                                                 <td
                                                     className={styles.details}
@@ -616,7 +613,7 @@ ${formatProductTable(products)}
                                                         }
                                                     >
                                                         <h2>
-                                                            Pedido: {String(order.id).padStart(10, "0")}
+                                                            Pedido: {String(order.index).padStart(10, "0")}
                                                         </h2>
                                                         <div
                                                             className={
@@ -679,19 +676,17 @@ ${formatProductTable(products)}
                                                                                         }
                                                                                     </td>
                                                                                     <td>
-                                                                                        $
                                                                                         {formatToMoney(
                                                                                             element.price
-                                                                                        )}
+                                                                                        )} MXN
                                                                                     </td>
                                                                                     <td>
-                                                                                        $
                                                                                         {formatToMoney(
                                                                                             element.price *
                                                                                                 element
                                                                                                     .order_element
                                                                                                     .quantity
-                                                                                        )}
+                                                                                        )} MXN
                                                                                     </td>
                                                                                 </tr>
                                                                             )
@@ -742,7 +737,7 @@ ${formatProductTable(products)}
                                                                             styles.infofloatrb
                                                                         }
                                                                     >
-                                                                        ${formatToMoney(parseFloat(order.total))}
+                                                                        {formatToMoney(parseFloat(order.total))} MXN
                                                                     </span>
                                                                 </h3>
                                                                 <h3

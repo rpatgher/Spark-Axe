@@ -1,12 +1,31 @@
 // ***************** Styles *****************
 import styles from "./Big.module.css";
 
-
 // ***************** Images *****************
 import happy from "../../../assets/img/axhappy.png";
 
+// ******************** Helpers ********************
+import formatDate from "../../../helpers/formatDate";
+import formatMoney from "../../../helpers/formatMoney";
 
-const BigOrders = ({data, orders, inventory, limit}) => {
+
+const BigOrders = ({ orders }) => {
+    
+    const setStatus = (status) => {
+        switch (status) {
+            case "IP":
+                return (<p className={`${styles.select} ${styles["select-IP"]}`}>En proceso</p>);
+            case "C":
+                return (<p className={`${styles.select} ${styles["select-C"]}`}>Cerrado</p>);
+            case "S":
+                return (<p className={`${styles.select} ${styles["select-S"]}`}>Enviado</p>);
+            case "CA":
+                return (<p className={`${styles.select} ${styles["select-CA"]}`}>Cancelado</p>);
+            default:
+                return "Error";
+        }
+    };
+
     return (
         <div className={styles["big"]}>
             <div className={styles["bigtop"]}>
@@ -16,8 +35,7 @@ const BigOrders = ({data, orders, inventory, limit}) => {
                 </p>
             </div>
 
-            {data.filter((product) => product.stock < inventory.medium)
-                .length === 0 ? (
+            {orders.length === 0 ? (
                 <div className={styles["Noinvent"]}>
                     <img
                         className={styles["happyax"]}
@@ -27,7 +45,7 @@ const BigOrders = ({data, orders, inventory, limit}) => {
                     <h2>¡Todavia no hay pedidos!</h2>
                 </div>
             ) : (
-                <table className={styles["anouncetable3"]}>
+                <table className={styles["anouncetable"]}>
                     <thead>
                         <tr>
                             <th>Fecha de pedido</th>
@@ -36,19 +54,13 @@ const BigOrders = ({data, orders, inventory, limit}) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map((order, index) => {
-                            if (index < limit) {
-                                return (
-                                    <tr key={order.id}>
-                                        <td>{order.delivery_date}</td>
-                                        <td>{order.status}</td>
-                                        <td>{order.total}</td>
-                                    </tr>
-                                );
-                            } else {
-                                return null; // Si no se muestra, retornamos null
-                            }
-                        })}
+                        {orders.map(order => (
+                            <tr key={order.id}>
+                                <td>{formatDate(order.createdAt)}</td>
+                                <td>{setStatus(order.status)}</td>
+                                <td>{formatMoney(order.total)} MXN</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             )}

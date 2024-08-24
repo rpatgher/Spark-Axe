@@ -3,6 +3,8 @@
     background-color: #fff;
     width: 50%;
     box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3);
+    display: flex;
+    flex-direction: column;
 }
 .big:hover {
     box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37);
@@ -13,69 +15,84 @@
 .bigtop {
     background-color: rgba(171, 185, 197, 0.445);
     backdrop-filter: blur(8px);
-    /* Blur the background color */
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
-    height: 60px;
-    padding: 5px;
-    padding-left: 15px;
+    padding: .5rem 2rem;
 }
 .Noinvent{
     justify-content: center;
     text-align: center;
     align-items: center;
-    height: 100%;
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
 .happyax{
     width: 100px;
 }
-.anouncetable {
+.updates {
     border: none;
-    box-shadow: none;
-}
-.anouncetable2 {
-   
-    width: 96%;
-    border: none;
-    box-shadow: none;
-    margin: 2%;
-
-
-}
-.anouncetable2 td{
-    height: 10px;
-    padding: 0px;
     background-color: transparent;
-}
-.anouncetable2 th{
-    height: 10px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0); 
-}
-.anouncetable2 thead{
-    box-shadow: 0 6px 12px 0 rgba(31, 38, 135, 0.37);
-}
-.anouncetable3 {
-   
-    width: 96%;
-    border: none;
+    border-radius: 0;
     box-shadow: none;
-    margin: 2%;
-
-
 }
-.anouncetable3 td{
-    height: 10px;
+.anouncetable {
+    /* width: 95%;
+    margin: 1rem auto; */
+    border: none;
+    border-radius: 0;
+}
+.anouncetable th{
+    padding: 1rem;
+}
+.anouncetable td{
     padding: 1rem;
     background-color: transparent;
 }
-.anouncetable3 th{
-    height: 10px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0); 
+.status{
+    padding: .5rem 0;
+    margin: 0;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 4rem;
+    display: inline-block;
+    margin: 0 auto;
 }
-.anouncetable3 thead{
-    box-shadow: 0 6px 12px 0 rgba(31, 38, 135, 0.37);
+.status-high{
+    background-color: color-mix(in srgb, var(--green) 30%, #fff);
+    color: color-mix(in srgb, var(--green) 80%, #000000);
+}
+.status-medium{
+    background-color: color-mix(in srgb, var(--yellow) 30%, #fff);
+    color: color-mix(in srgb, var(--yellow) 80%, #000000);
+}
+.status-low{
+    background-color: color-mix(in srgb, var(--red) 30%, #fff);
+    color: color-mix(in srgb, var(--red) 80%, #000000);
+}
+.select{
+    all: unset;
+    width: 100%;
+    padding: .5rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+.select-IP{
+    background-color: color-mix(in srgb, var(--yellow) 20%, #fff);
+    color: color-mix(in srgb, var(--yellow) 80%, #000);
+}
+.select-S{
+    background-color: color-mix(in srgb, var(--green) 20%, #fff);
+    color: color-mix(in srgb, var(--green) 80%, #000);
+}
+.select-C{
+    background-color: color-mix(in srgb, var(--blue) 20%, #fff);
+    color: color-mix(in srgb, var(--blue) 80%, #000);
+}
+.select-CA{
+    background-color: color-mix(in srgb, var(--red) 20%, #fff);
+    color: color-mix(in srgb, var(--red) 80%, #000);
 }

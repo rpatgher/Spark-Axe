@@ -1,12 +1,31 @@
 .profilecard {
     background-image: url('../../../assets/img/backgroundcard.jpg');
+    background: blur(14px);
     background-blend-mode: color;
     background-position: center;
     border-radius: 15px;
-    width: 50%;
-    padding: 20px;
+    flex: 1;
+    padding: 2rem 4rem;
     box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3);
-    color: #DD9A05;
+    color: color-mix(in srgb, var(--yellow) 90%, #fff);
+    position: relative;
+}
+.profilecard::after {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    border-radius: 15px;
+}
+.profilecard > * {
+    position: relative;
+    z-index: 2;
 }
 .profilecard:hover {
     box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37);
@@ -14,19 +33,19 @@
     transform: scale(1.02);
 }
 .profilecard h3 {
-    font-size: 50px;
+    font-size: 5rem;
+    margin: 3rem 0;
 }
 .linkother {
     align-items: left;
     text-align: left;
     border: none;
-    color: #b8a38f;
+    color: color-mix(in srgb, var(--yellow) 20%, #fff);
     background-color: transparent;
     cursor: pointer;
-    margin: 5px;
     font-size: 20px;
 }
 
 .linkother:hover {
-    color: #DD9A05;
+    color: color-mix(in srgb, var(--yellow) 90%, #fff);
 }
