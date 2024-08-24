@@ -54,7 +54,7 @@ const Customers = () => {
     const sortedElements = data.sort((a, b) => {
         if (order === 'asc') {
             if (orderType === 'id') {
-                return a.id - b.id;
+                return a.index - b.index;
             }
             if (orderType === 'name') {
                 return a.name.localeCompare(b.name);
@@ -62,7 +62,7 @@ const Customers = () => {
         }
         if (order === 'desc') {
             if (orderType === 'id') {
-                return b.id - a.id;
+                return b.index - a.index;
             }
             if (orderType === 'name') {
                 return b.name.localeCompare(a.name);

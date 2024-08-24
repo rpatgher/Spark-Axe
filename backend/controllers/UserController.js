@@ -78,6 +78,7 @@ const login = async (req, res) => {
             lastname: user.lastname,
             email: user.email,
             role: user.role,
+            phone: user.phone,
             token: generateJWT(user.id),
             websites: user.websites
         });
