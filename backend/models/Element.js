@@ -3,10 +3,14 @@ import db from "../config/db.js";
 
 const Element = db.define('element', {
     id: {
-        type: DataTypes.INTEGER.ZEROFILL,
+        type: DataTypes.UUID,
         primaryKey: true,
         allowNull: false,
-        autoIncrement: true
+        defaultValue: DataTypes.UUIDV4 
+    },
+    index: {
+        type: DataTypes.INTEGER.ZEROFILL,
+        allowNull: false,
     },
     name: {
         type: DataTypes.STRING,

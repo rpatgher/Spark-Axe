@@ -3,7 +3,7 @@ import fs from 'fs';
 import { Op } from 'sequelize';
 
 // ************* Models *************
-import { Element, Website, ElementCategory, Category, Subcategory } from '../models/index.js';
+import { Element, Website, ElementCategory, Category, Subcategory, Order, OrderElement } from '../models/index.js';
 
 const getElement = async (req, res) => {
     const elementFromDB = await Element.findOne({
@@ -32,6 +32,7 @@ const getElement = async (req, res) => {
     }
     const element = {
         id: elementFromDB.id,
+        index: elementFromDB.index,
         name: elementFromDB.name,
         description: elementFromDB.description,
         image: elementFromDB.image,
@@ -93,6 +94,7 @@ const getElements = async (req, res) => {
     elements = elements.map(element => {
         const newElement = {
             id: element.id,
+            index: element.index,
             name: element.name,
             description: element.description,
             image: element.image,
@@ -145,7 +147,9 @@ const createElement = async (req, res) => {
         const error = new Error('Unauthorized');
         return res.status(401).json({ msg: error.message });
     }
+    const numElements = await Element.count({where: {website_id: website.id}});
     const element = Element.build(req.body);
+    element.index = numElements + 1;
     element.website_id = website.id;
     element.image = req.files.image[0].filename;
     if(req.files.image2){
@@ -271,8 +275,11 @@ const deleteElement = async (req, res) => {
         res.json({ msg: 'Element deleted successfully' });
     } catch (error) {
         console.log(error);
-        res.status(400).json({ msg: error.message });
-    }
+        if(error?.original?.code === 'ER_ROW_IS_REFERENCED_2'){
+            return res.status(400).json({ msg: 'Cannot delete this element' });
+        }
+        return res.status(400).json({ msg: error.message });
+    } 
 }
 
 const deleteElements = async (req, res) => {
@@ -284,6 +291,31 @@ const deleteElements = async (req, res) => {
                 }
             }
         });
+        console.log(elements);
+        // Check if the user is authorized to delete the elements
+        const website = await Website.findOne({
+            where: {
+                id: {
+                    [Op.in]: elements.map(element => element.website_id)
+                },
+                user_id: req.user.id
+            }
+        });
+        if(!website){
+            const error = new Error('Unauthorized');
+            return res.status(401).json({ msg: error.message });
+        }
+        // Check if the elements are associated with orders
+        const orders = await OrderElement.findAll({
+            where: {
+                elementId: {
+                    [Op.in]: elements.map(element => element.id)
+                }
+            }
+        });
+        if(orders.length > 0){
+            return res.status(400).json({ msg: 'Cannot delete elements' });
+        }
         elements.forEach(async element => {
             await Element.destroy({
                 where: {
@@ -297,10 +329,13 @@ const deleteElements = async (req, res) => {
                 fs.unlinkSync(`public/uploads/elements/${element.image_hover}`);
             }
         });
-        res.json({ msg: 'Elements deleted successfully' });
+        return res.json({ msg: 'Elements deleted successfully' });
     } catch (error) {
         console.log(error);
-        res.status(400).json({ msg: error.message });
+        if(error?.original?.code === 'ER_ROW_IS_REFERENCED_2'){
+            return res.status(400).json({ msg: 'Cannot delete elements' });
+        }
+        return res.status(400).json({ msg: error.message });
     }
 }
 

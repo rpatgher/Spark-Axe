@@ -8,6 +8,10 @@ const Category = db.define('category', {
         allowNull: false,
         defaultValue: DataTypes.UUIDV4 
     },
+    index: {
+        type: DataTypes.INTEGER.ZEROFILL,
+        allowNull: false,
+    },
     name: {
         type: DataTypes.STRING,
         allowNull: false

@@ -3,10 +3,14 @@ import db from "../config/db.js";
 
 const Order = db.define('order', {
     id: {
-        type: DataTypes.INTEGER.ZEROFILL,
+        type: DataTypes.UUID,
         primaryKey: true,
         allowNull: false,
-        autoIncrement: true
+        defaultValue: DataTypes.UUIDV4 
+    },
+    index: {
+        type: DataTypes.INTEGER.ZEROFILL,
+        allowNull: false,
     },
     delivery_date: {
         type: DataTypes.DATE

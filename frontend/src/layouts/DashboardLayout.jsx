@@ -27,7 +27,7 @@ const DashboardLayout = () => {
 
     useEffect(() => {
         const validateURL = () => {
-            const features = auth.websites[0].features.map(feature => feature.url);
+            const features = auth.websites[0]?.features.map(feature => feature.url);
             if(location.pathname === '/dashboard' || location.pathname === '/dashboard/') {
                 setValidURL(true);
             } else{

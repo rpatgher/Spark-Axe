@@ -226,7 +226,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             setCategories([
                 ...categories,
                 {
-                    category,
+                    category: category[0].toUpperCase() + category.slice(1).toLowerCase(),
                     subcategories: []
                 }
             ]);
@@ -255,7 +255,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                     ...item,
                     subcategories: [
                         ...item.subcategories,
-                        subcategory
+                        subcategory[0].toUpperCase() + subcategory.slice(1).toLowerCase()
                     ]
                 }
             }

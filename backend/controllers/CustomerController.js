@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 
 // ************* Models *************
-import {  Customer, Website } from '../models/index.js';
+import {  Customer, Website, Order } from '../models/index.js';
 
 const createCustomer = async (req, res) => {
     const { name, lastname, email, phone, password, website_id } = req.body;
@@ -27,7 +27,9 @@ const createCustomer = async (req, res) => {
         return res.status(404).json({ msg: error.message });
     }
     try {
+        const numCustomer = await Customer.count({ where: { website_id } });
         const customer = Customer.build(req.body);
+        customer.index = numCustomer + 1;
         customer.confirmed = false;
         // TODO: Generate Token
         await customer.save();
@@ -84,6 +86,9 @@ const deleteCustomer = async (req, res) => {
         res.json({ msg: 'Customer deleted successfully' });
     } catch (error) {
         console.log(error);
+        if(error?.original?.code === 'ER_ROW_IS_REFERENCED_2'){
+            return res.status(400).json({ msg: 'Cannot delete this customer' });
+        }
         return res.status(400).json({ msg: 'An error ocurred' });
     }
 }
@@ -97,6 +102,31 @@ const deleteCustomers = async (req, res) => {
                 }
             }
         });
+        // Check if all customers belong to the same website
+        const website = await Website.findOne({
+            where: {
+                [Op.and]: [
+                    { id: 
+                        { [Op.in]: customers.map(customer => customer.website_id) }
+                     },
+                    { user_id: req.user.id }
+                ]
+            }
+        });
+        if(!website){
+            const error = new Error('Website not found');
+            return res.status(404).json({ msg: error.message });
+        }
+        const orders = await Order.findAll({
+            where: {
+                customer_id: {
+                    [Op.in]: customers.map(customer => customer.id)
+                }
+            }
+        });
+        if(orders.length > 0){
+            return res.status(400).json({ msg: 'Cannot delete customers' });
+        }
         customers.forEach(async customer => {
             const website = await Website.findByPk(customer.website_id);
             if(website.user_id !== req.user.id){

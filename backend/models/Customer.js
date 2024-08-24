@@ -4,10 +4,14 @@ import db from "../config/db.js";
 
 const Customer = db.define('customer', {
     id: {
-        type: DataTypes.INTEGER.ZEROFILL,
+        type: DataTypes.UUID,
         primaryKey: true,
         allowNull: false,
-        autoIncrement: true
+        defaultValue: DataTypes.UUIDV4 
+    },
+    index: {
+        type: DataTypes.INTEGER.ZEROFILL,
+        allowNull: false,
     },
     name: {
         type: DataTypes.STRING,

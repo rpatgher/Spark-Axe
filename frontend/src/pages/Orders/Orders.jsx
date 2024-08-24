@@ -530,7 +530,7 @@ ${formatProductTable(products)}
                                                     />
                                                 </td>
                                                 <td>
-                                                    {String(order.id).padStart(
+                                                    {String(order.index).padStart(
                                                         10,
                                                         "0"
                                                     )}

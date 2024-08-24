@@ -185,7 +185,17 @@ const Products = () => {
             setModalDelete(false);
         } catch (error) {
             console.log(error);
-            handleAlert("Error al eliminar los productos", true);
+            if(error?.response?.data?.msg === 'Cannot delete elements'){
+                handleAlert('No puedes eliminar estos productos, porque alguno está asociado a otro elemento', true);
+            }else{
+                handleAlert("Error al eliminar los productos", true);
+            }
+        } finally {
+            setSelectAll(false);
+            setModalDelete(false);
+            const newData = [...filteredProducts];
+            newData.map(item => item.selected = false);
+            setFilteredProducts(newData);
         }
 
     }
@@ -358,7 +368,7 @@ const Products = () => {
                                                 <i className="fa-solid fa-layer-group"></i>
                                             </button>
                                         </td>
-                                        <td className={styles["cell-id"]}>{String(product.id).padStart(10, '0')}</td>
+                                        <td className={styles["cell-id"]}>{String(product.index).padStart(10, '0')}</td>
                                         <td className={styles["cell-published"]}><div className={`${product.published ? styles.published : styles.unpublished}`}>{product.published ? 'Publicado' : 'Archivado'}</div></td>
                                         <td 
                                             className={styles["cell-actions"]}

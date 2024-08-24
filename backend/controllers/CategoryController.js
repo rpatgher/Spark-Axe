@@ -7,7 +7,7 @@ import { Category, Subcategory } from '../models/index.js';
 
 const createCategory = async (req, res) => {
     const { website_id, categories: categoriesBody } = req.body;
-    console.log(categoriesBody);
+    // console.log(categoriesBody);
     if(!website_id || !categoriesBody || categoriesBody.length === 0){
         return res.status(400).json({msg: 'Website id and categories are required'});
     }
@@ -22,6 +22,7 @@ const createCategory = async (req, res) => {
             website_id
         }
     });
+    const numCurrentCategories = currentCategories.length;
     let categories = [];
     let subcategories = [];
     if(categoriesBody){
@@ -36,6 +37,9 @@ const createCategory = async (req, res) => {
         });
     }
     categories = categories.filter(category => category !== null);
+    categories.map((category, i) => {
+        category.index = numCurrentCategories + i + 1;
+    });
     try{
         let categoriesCreated = null;
         if(categories.length > 0){
@@ -55,10 +59,18 @@ const createCategory = async (req, res) => {
                 }
             }
         });
+        const numSubcategories = categoriesElement.map(category => {
+            return {
+                name: category.name, 
+                id: category.id, 
+                subcategoriesCount: categoriesBody.find(categoryBody => categoryBody.category === category.name).subcategories.length
+            }
+        });
+        console.log(numSubcategories);
         if(categoriesElement){
             subcategories = categoriesBody.map(category => {
                 const categoryId = categoriesElement.find(createdCategory => createdCategory.name === category.category).id;
-                return category.subcategories.map(subcategory => {
+                return category.subcategories.map((subcategory, i) => {
                     if(currentSubcategories.find(currentSubcategory => currentSubcategory.name === subcategory)){
                         return null;
                     }
@@ -69,7 +81,12 @@ const createCategory = async (req, res) => {
                 });
             });
         }
-        subcategories = subcategories.flat().filter(subcategory => subcategory !== null);
+        subcategories = subcategories.flat();
+        subcategories = subcategories.filter(subcategory => subcategory !== null);
+        subcategories.map((subcategory, i) => {
+            subcategory.index = numSubcategories.find(category => category.name === categoriesElement.find(category => category.id === subcategory.category_id).name).subcategoriesCount + i;
+        });
+        console.log(subcategories);
         if(subcategories.length > 0){
             await Subcategory.bulkCreate(subcategories);
         }

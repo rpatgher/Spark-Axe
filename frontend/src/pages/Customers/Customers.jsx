@@ -237,7 +237,17 @@ const Customers = () => {
             // filterElements(search, visible);
         } catch (error) {
             console.log(error);
-            handleAlert("Hubo un error al eliminar los clientes", true);
+            if(error?.response?.data?.msg === 'Cannot delete customers'){
+                handleAlert('No puedes eliminar estos clientes, porque alguno está asociado a un pedido', true);
+            }else{
+                handleAlert("Hubo un error al eliminar los clientes", true);
+            }
+        } finally {
+            setSelectAll(false);
+            setModalDelete(false);
+            const newData = [...filteredElements];
+            newData.forEach(item => item.selected = false);
+            setFilteredElements(newData);
         }
     }
     
@@ -260,7 +270,17 @@ const Customers = () => {
             setEditingRow(null);
         } catch (error) {
             console.log(error);
-            handleAlert("Hubo un error al eliminar el cliente", true);
+            if(error?.response?.data?.msg === 'Cannot delete this customer'){
+                handleAlert('No puedes eliminar este cliente, porque está asociado a un pedido', true);
+            }else{
+                handleAlert("Hubo un error al eliminar el cliente", true);
+            }
+        } finally {
+            setEditingRow(null);
+            setModalDeleteOne(false);
+            const newData = [...filteredElements];
+            newData.forEach(item => item.selected = false);
+            setFilteredElements(newData);
         }
     }
 
@@ -370,7 +390,7 @@ const Customers = () => {
                                     <th className={styles["col-lastname"]}>Apellido</th>
                                 )}
                                 <th className={styles["col-email"]}>Email</th>
-                                <th className={styles["col-number"]}>Numero</th>
+                                <th className={styles["col-number"]}>Número</th>
                                 <th className={styles["col-id"]}>ID</th>
                                 <th className={styles["col-contact"]}>Contacto</th>
                                 <th className={styles["col-confirmed"]}>Confirmado</th>
@@ -415,7 +435,7 @@ const Customers = () => {
                                                 )}
                                                 <td>{renderTableCell(item.email, "email", item.id)}</td>
                                                 <td>{renderTableCell(item.phone, "phone", item.id)}</td>
-                                                <td>{String(item.id).padStart(10, '0')}</td>
+                                                <td>{String(item.index).padStart(10, '0')}</td>
                                                 <td>
                                                     <button className={styles.contactbtn} onClick={() => window.location.href = `https://api.whatsapp.com/send?phone=${item.numero}`}><i className="fab fa-whatsapp"></i></button>
                                                     <button className={styles.contactbtnt} onClick={() => window.location.href = `tel:${item.numero}`}>

@@ -46,7 +46,19 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { email }, include: [ Website ]});
+    const user = await User.findOne({ 
+        where: { email },
+        include: [
+            {
+                model: Website,
+                include: {
+                    model: Feature,
+                    attributes: ['id', 'name', 'description', 'url']
+                },
+                attributes: ['id', 'name', 'url_address', 'phone', 'email', 'type', 'currency', 'slogan', 'language']
+            }
+        ]
+    });
     if(!user){
         const error = new Error('User not found');
         return res.status(404).json({ msg: error.message });

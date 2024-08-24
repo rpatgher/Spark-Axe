@@ -76,7 +76,13 @@ const createOrder = async (req, res) => {
     if (!isValid) {
         return res.status(400).json({ msg: 'An error ocurred' });
     }
+    const numOrders = await Order.count({
+        where: {
+            website_id
+        }
+    });
     const order = await Order.create({
+        index: numOrders + 1,
         status: 'IP',
         notes,
         total: products.reduce((acc, product) => acc + product.price * product.quantity, 0),

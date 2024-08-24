@@ -58,7 +58,13 @@ const EditProduct = () => {
             navigate('/dashboard/products');
         } catch (error) {
             console.log(error);
-            handleAlert('Error al eliminar el producto', true);
+            if(error?.response?.data?.msg === 'Cannot delete this element'){
+                handleAlert('No puedes eliminar este producto, porque está asociado a otro elemento', true);
+            }else{
+                handleAlert('Error al eliminar el producto', true);
+            }
+        } finally{
+            setModalDelete(false);
         }
     }
 
