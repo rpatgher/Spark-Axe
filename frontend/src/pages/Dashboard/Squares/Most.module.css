@@ -1,0 +1,21 @@
+.Most {
+    border-radius: 14px;
+    background-color: rgb(255, 255, 255);
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3);
+}
+.Most:hover {
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37);
+    transition: 0.4s;
+    transform: scale(1.02);
+}
+.Most h4 {
+    margin: 10px;
+}
+.Mostproduct {
+    width: 250px;
+    filter: drop-shadow(10px 10px 10px grey);
+}

@@ -1,0 +1,81 @@
+.big {
+    border-radius: 14px;
+    background-color: #fff;
+    width: 50%;
+    box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3);
+}
+.big:hover {
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37);
+    transition: 0.4s;
+    transform: scale(1.02);
+}
+
+.bigtop {
+    background-color: rgba(171, 185, 197, 0.445);
+    backdrop-filter: blur(8px);
+    /* Blur the background color */
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    height: 60px;
+    padding: 5px;
+    padding-left: 15px;
+}
+.Noinvent{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.happyax{
+    width: 100px;
+}
+.anouncetable {
+    border: none;
+    box-shadow: none;
+}
+.anouncetable2 {
+   
+    width: 96%;
+    border: none;
+    box-shadow: none;
+    margin: 2%;
+
+
+}
+.anouncetable2 td{
+    height: 10px;
+    padding: 0px;
+    background-color: transparent;
+}
+.anouncetable2 th{
+    height: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0); 
+}
+.anouncetable2 thead{
+    box-shadow: 0 6px 12px 0 rgba(31, 38, 135, 0.37);
+}
+.anouncetable3 {
+   
+    width: 96%;
+    border: none;
+    box-shadow: none;
+    margin: 2%;
+
+
+}
+.anouncetable3 td{
+    height: 10px;
+    padding: 1rem;
+    background-color: transparent;
+}
+.anouncetable3 th{
+    height: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0); 
+}
+.anouncetable3 thead{
+    box-shadow: 0 6px 12px 0 rgba(31, 38, 135, 0.37);
+}
