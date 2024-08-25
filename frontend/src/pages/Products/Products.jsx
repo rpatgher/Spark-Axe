@@ -473,6 +473,7 @@ const Products = () => {
                 <ModalEditCategories 
                     closeModal={() => setModalEditCategories(false)}
                     categories={categories}
+                    setCategories={setCategories}
                 />
             }
         </div>

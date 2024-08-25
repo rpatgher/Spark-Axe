@@ -2,7 +2,7 @@
 
 import { Op } from 'sequelize';
 // ************* Models *************
-import { Category, Subcategory } from '../models/index.js';
+import { Category, Subcategory, Website } from '../models/index.js';
 
 
 const createCategory = async (req, res) => {
@@ -137,7 +137,87 @@ const getCategories = async (req, res) => {
 }
 
 
+const editSubcategory = async (req, res) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    if(!id){
+        return res.status(400).json({msg: 'Category id is required'});
+    }
+    if(!name || name === ''){
+        return res.status(400).json({msg: 'Category name is required'});
+    }
+    const subcategory = await Subcategory.findByPk(id, {
+        include: {
+            model: Category,
+            as: 'category',
+            attributes: ['id', 'name', 'website_id'],
+            include: {
+                model: Website,
+                as: 'website',
+                attributes: ['id', 'name', 'user_id']
+            },
+        },
+        attributes: ['id', 'name', 'category_id'],
+    });
+    if(subcategory.category.website.user_id.toString() !== req.user.id.toString()){
+        return res.status(401).json({msg: 'Unauthorized'});
+    }
+    if(!subcategory){
+        return res.status(404).json({msg: 'Subcategory not found'});
+    }
+    subcategory.name = name;
+    try{
+        await subcategory.save();
+        return res.json({msg: 'Subcategory updated successfully'});
+    }
+    catch(error){
+        console.error(error);
+        return res.status(500).json({msg: error.message});
+    }
+}
+
+
+
+const deleteSubcategory = async (req, res) => {
+    const { id } = req.params;
+    if(!id){
+        return res.status(400).json({msg: 'Subcategory id is required'});
+    }
+    const subcategory = await Subcategory.findByPk(id, {
+        include: {
+            model: Category,
+            as: 'category',
+            attributes: ['id', 'name', 'website_id'],
+            include: {
+                model: Website,
+                as: 'website',
+                attributes: ['id', 'name', 'user_id']
+            },
+        },
+        attributes: ['id', 'name', 'category_id'],
+    });
+    if(subcategory.category.website.user_id.toString() !== req.user.id.toString()){
+        return res.status(401).json({msg: 'Unauthorized'});
+    }
+    if(!subcategory){
+        return res.status(404).json({msg: 'Category not found'});
+    }
+    try{
+        await subcategory.destroy();
+        return res.json({msg: 'Subcategory deleted successfully'});
+    }catch(error){
+        console.error(error);
+        if(error.name === 'SequelizeForeignKeyConstraintError'){
+            return res.status(400).json({msg: 'Subcategory cannot be deleted because it is being used'});
+        }
+        return res.status(500).json({msg: error.message});
+    }
+}
+
+
 export {
     createCategory,
-    getCategories
+    getCategories,
+    editSubcategory,
+    deleteSubcategory
 }
