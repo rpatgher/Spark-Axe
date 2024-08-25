@@ -1,0 +1,110 @@
+.modal-wrapper{
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal{
+    background-color: var(--white);
+    position: relative;
+    border-radius: 1rem;
+    padding: 2rem;
+    min-width: 40rem;
+    min-height: 40rem;
+}
+.close-modal {
+    all: unset;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    border-radius: 10rem;
+    width: 4rem;
+    font-size: 3rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.close-modal:hover {
+    background-color: var(--gray);
+}
+h2{
+    font-size: 2rem;  
+}
+hr{
+    border-bottom: 1px solid var(--blue);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.categories{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+.category{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: .5rem;
+}
+.category:hover{
+    background-color: var(--gray);
+    cursor: pointer;
+}
+.category h3{
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: var(--normal);
+}
+.backhead {
+    color: #858383;
+    cursor: pointer;
+}
+.subcategories{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: scroll;
+}
+.subcategory{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+}
+.buttons{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.subcategory button{
+    all: unset;
+    cursor: pointer;
+    border-radius: 10rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subcategory button:hover{
+    background-color: var(--gray);
+}
+.subcategory h3{
+    font-size: 1.6rem;
+    margin: 0;
+    font-weight: var(--normal);
+}

@@ -11,6 +11,7 @@ import FloatAlert from '../../components/Alert/FloatAlert';
 import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 import Modal from '../../components/Modals/GeneralModal';
 import ModalCategories from '../../components/Modals/ModalCategories';
+import ModalEditCategories from '../../components/Modals/ModalEditCategories';
 import GoTopBtn from '../../components/Btns/GoTopBtn';
 
 // ******************** Hooks ********************
@@ -47,6 +48,9 @@ const Products = () => {
     
     const [productDescription, setProductDescription] = useState({});
     const [modalCategories, setModalCategories] = useState([]);
+
+    const [modalEditCategories, setModalEditCategories] = useState(false);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         const count = filteredProducts.filter(item => item.selected && item.visible).length;
@@ -92,6 +96,9 @@ const Products = () => {
             }
             try {
                 const { data } = await clientAxios(`/api/elements/${auth.websites[0].id}`, config);
+                const response = await clientAxios(`/api/categories/${auth.websites[0].id}`, config); 
+                const categories = response.data;
+                setCategories(categories);
                 setProducts(data);
                 setFilteredProducts(data);
                 setDataLength(data.length);
@@ -273,14 +280,23 @@ const Products = () => {
                         </div>
                     </div>
                 </div>
-                <Link to='/dashboard/products/new'>
+                <div className={styles.buttons}>
                     <button
-                        className={styles["btn-new-product"]}
+                        className={styles["btn-edit-categories"]}
+                        onClick={() => setModalEditCategories(true)}
                     >
-                        <i className="fa-solid fa-plus"></i>
-                        <p>Agregar Producto</p>
+                        <i className="fa-solid fa-layer-group"></i>
+                        <p>Editar Categorías</p>
                     </button>
-                </Link>
+                    <Link to='/dashboard/products/new'>
+                        <button
+                            className={styles["btn-new-product"]}
+                        >
+                            <i className="fa-solid fa-plus"></i>
+                            <p>Agregar Producto</p>
+                        </button>
+                    </Link>
+                </div>
             </div>
             <div className={styles["Filtertabs"]}>
                 <div className={styles["radio-inputs"]}>
@@ -451,6 +467,12 @@ const Products = () => {
                 <ModalCategories 
                     categories={modalCategories}
                     closeModal={() => setModalCategories([])}
+                />
+            }
+            {modalEditCategories && 
+                <ModalEditCategories 
+                    closeModal={() => setModalEditCategories(false)}
+                    categories={categories}
                 />
             }
         </div>

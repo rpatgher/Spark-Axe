@@ -37,12 +37,16 @@
     font-size: 1.2rem;
     color: var(--dark_gray);
 }
-
-.btn-new-product {
+.buttons{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.btn-new-product, .btn-edit-categories {
     all: unset;
     cursor: pointer;
     color: #ffffff;
-    background-color: #5a5a5a;
+    
     padding: 1rem 1rem;
     border-radius: .5rem;
     display: flex;
@@ -53,6 +57,13 @@
     justify-content: end;
     font-weight: bold;
 }
+.btn-new-product{
+    background-color: var(--dark_gray);
+}
+.btn-edit-categories{
+    background-color: var(--yellow);
+    color: color-mix(in srgb, var(--yellow) 50%, #000);
+}
 
 .btn-new-product:hover {
 
@@ -61,7 +72,7 @@
 
 }
 
-.btn-new-product p {
+.btn-new-product p, .btn-edit-categories p {
     margin: 0;
 }
 
