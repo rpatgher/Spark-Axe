@@ -16,8 +16,8 @@ function Landinglayout() {
       <div className={styles.nav}>
             <ul className={styles.navbar}>
             <li className={styles.navB}><Link to="/">Inicio</Link></li>
-            {/* <Link to="/about"><li className={styles.navB}><a>Sobre Nosotros</a></li></Link>
-            <Link to="/contact"><li className={styles.navB}><a>Contactanos</a></li></Link> */}
+            <Link to="/about"><li className={styles.navB}><a>Sobre Nosotros</a></li></Link>
+            <Link to="/contact"><li className={styles.navB}><a>Contactanos</a></li></Link>
             {auth.id ? (
                 <li className={styles.rightnavB}><Link to="/dashboard">Dashboard</Link></li>
             ) : (
