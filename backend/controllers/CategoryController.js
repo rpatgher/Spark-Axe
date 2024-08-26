@@ -215,9 +215,76 @@ const deleteSubcategory = async (req, res) => {
 }
 
 
+const editCategory = async (req, res) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    if(!id){
+        return res.status(400).json({msg: 'Category id is required'});
+    }
+    if(!name || name === ''){
+        return res.status(400).json({msg: 'Category name is required'});
+    }
+    const category = await Category.findByPk(id, {
+        include: {
+            model: Website,
+            as: 'website',
+            attributes: ['id', 'name', 'user_id']
+        },
+        attributes: ['id', 'name', 'website_id'],
+    });
+    if(category.website.user_id.toString() !== req.user.id.toString()){
+        return res.status(401).json({msg: 'Unauthorized'});
+    }
+    if(!category){
+        return res.status(404).json({msg: 'Category not found'});
+    }
+    category.name = name;
+    try{
+        await category.save();
+        return res.status(200).json({msg: 'Category updated successfully'});
+    }
+    catch(error){
+        console.error(error);
+        return res.status(500).json({msg: error.message});
+    }
+}
+
+const deleteCategory = async (req, res) => {
+    const { id } = req.params;
+    if(!id){
+        return res.status(400).json({msg: 'Category id is required'});
+    }
+    const category = await Category.findByPk(id, {
+        include: {
+            model: Website,
+            as: 'website',
+            attributes: ['id', 'name', 'user_id']
+        },
+        attributes: ['id', 'name', 'website_id'],
+    });
+    if(category.website.user_id.toString() !== req.user.id.toString()){
+        return res.status(401).json({msg: 'Unauthorized'});
+    }
+    if(!category){
+        return res.status(404).json({msg: 'Category not found'});
+    }
+    try{
+        await category.destroy();
+        return res.json({msg: 'Category deleted successfully'});
+    }catch(error){
+        console.error(error);
+        if(error.name === 'SequelizeForeignKeyConstraintError'){
+            return res.status(400).json({msg: 'Category cannot be deleted because it is being used'});
+        }
+        return res.status(500).json({msg: error.message});
+    }
+}
+
 export {
     createCategory,
     getCategories,
     editSubcategory,
-    deleteSubcategory
+    deleteSubcategory,
+    editCategory,
+    deleteCategory
 }

@@ -4,7 +4,9 @@ import {
     createCategory,
     getCategories,
     editSubcategory,
-    deleteSubcategory
+    deleteSubcategory,
+    editCategory,
+    deleteCategory
 } from '../controllers/CategoryController.js';
 
 import checkAuth from "../middleware/checkAuth.js";
@@ -15,7 +17,9 @@ router.route('/')
     .post(checkAuth, createCategory)
 
 router.route('/:id')
-    .get(checkAuth, getCategories);
+    .get(checkAuth, getCategories)
+    .put(checkAuth, editCategory)
+    .delete(checkAuth, deleteCategory);
 
 router.route('/sub/:id')
     .put(checkAuth, editSubcategory)

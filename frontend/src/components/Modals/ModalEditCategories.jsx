@@ -15,20 +15,22 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
     const [subcategories, setSubcategories] = useState(null);
     const [currentCategory, setCurrentCategory] = useState(null);
 
+    const [editCategory, setEditCategory] = useState(false);
+    const [editingCategory, setEditingCategory] = useState(null);
     const [editingSubcategory, setEditingSubcategory] = useState(null);
 
 
     const [loading, setLoading] = useState(false);
 
 
-    const handleEditCategory = (e) => {
+    const handleEditSubcategory = (e) => {
         setEditingSubcategory({
             ...editingSubcategory,
             name: e.target.value
         });
     }
 
-    const editCategory = async (e) => {
+    const editSubcategoryFunc = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
         const config = {
@@ -92,7 +94,6 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
             setLoading(true);
             document.body.style.cursor = "wait";
             const response = await clientAxios.delete(`/api/categories/sub/${id}`, config);
-            console.log(response.data);
             if(response.status === 200 || response.status === 201){
                 handleAlert('Subcategoría eliminada correctamente', false);
                 setSubcategories(subcategories.filter(subcategory => subcategory.id !== id));
@@ -108,7 +109,6 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
             }
         } catch (error) {
             console.log(error);
-            console.log(error.response.data);
             if(error.response.data.msg === 'Subcategory cannot be deleted because it is being used'){
                 handleAlert('La subcategoría no puede ser eliminada porque está siendo utilizada', true);
             } else {
@@ -117,6 +117,72 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
         } finally {
             setLoading(false);
             setEditingSubcategory(null);
+            document.body.style.cursor = "default";
+        }
+    }
+
+
+    const editCategoryFunc = async (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+        try {
+            setLoading(true);
+            document.body.style.cursor = "wait";
+            const response = await clientAxios.put(`/api/categories/${editingCategory.id}`, {name: editingCategory.name}, config);
+            if(response.status === 200 || response.status === 201){
+                handleAlert('Categoría editada correctamente', false);
+                setCategories(categories.map(category => {
+                    if(category.id === editingCategory.id){
+                        return {
+                            ...category,
+                            name: editingCategory.name
+                        }
+                    }
+                    return category;
+                }));
+            }
+        } catch (error) {
+            console.log(error);
+            handleAlert('Hubo un error al editar la categoría', true);
+        } finally {
+            setLoading(false);
+            setEditingCategory(null);
+            document.body.style.cursor = "default";
+        }
+    }
+
+    const deleteCategoryFunc = async (id) => {
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+        try {
+            setLoading(true);
+            document.body.style.cursor = "wait";
+            const response = await clientAxios.delete(`/api/categories/${id}`, config);
+            if(response.status === 200 || response.status === 201){
+                handleAlert('Categoría eliminada correctamente', false);
+                setCategories(categories.filter(category => category.id !== id));
+            }
+        } catch (error) {
+            console.log(error);
+            if(error.response.data.msg === 'Category cannot be deleted because it is being used'){
+                handleAlert('La categoría no puede ser eliminada porque está siendo utilizada', true);
+            } else {
+                handleAlert('Hubo un error al eliminar la categoría', true);
+            }
+        } finally {
+            setLoading(false);
+            setEditingCategory(null);
             document.body.style.cursor = "default";
         }
     }
@@ -163,23 +229,37 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                         <input
                                             type="text"
                                             value={editingSubcategory.name}
-                                            onChange={handleEditCategory}
+                                            onChange={handleEditSubcategory}
                                         />
                                     ) : (
                                         <h3>{subcategory.name}</h3>
                                     )}
                                     <div className={styles.buttons}>
                                         {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
-                                            <button
-                                                onClick={editCategory}
-                                                style={{
-                                                    opacity: loading ? 0.5 : 1,
-                                                    cursor: loading ? "wait" : "pointer"
-                                                }}
-                                                disabled={loading}
-                                            >
-                                                <i className="fa-solid fa-floppy-disk"></i>
-                                            </button>
+                                            <>
+                                                <button
+                                                    onClick={editSubcategoryFunc}
+                                                    style={{
+                                                        opacity: loading ? 0.5 : 1,
+                                                        cursor: loading ? "wait" : "pointer"
+                                                    }}
+                                                    disabled={loading}
+                                                >
+                                                    <i className="fa-solid fa-floppy-disk"></i>
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        setEditingSubcategory(null);
+                                                    }}
+                                                    style={{
+                                                        opacity: loading ? 0.5 : 1,
+                                                        cursor: loading ? "wait" : "pointer"
+                                                    }}
+                                                    disabled={loading}
+                                                >
+                                                    <i className="fa-solid fa-times"></i>
+                                                </button>
+                                            </>
                                         ) : editingSubcategory === null ? (
                                                 <button
                                                     onClick={() => {
@@ -210,7 +290,25 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                     </Fragment>
                 ) : (
                     <Fragment>
-                        <h2>Categorías</h2>
+                        <div className={styles.header}>
+                            <h2>Categorías</h2>
+                            <button
+                                onClick={() => {
+                                    setEditCategory(!editCategory);
+                                }}
+                            >
+                                
+                                {editCategory ? (
+                                    <>
+                                        <i className="fa-solid fa-times"></i> Cancelar
+                                    </>
+                                ) : (
+                                    <>
+                                        <i className="fa-solid fa-pencil"></i> Editar
+                                    </>
+                                )}
+                            </button>
+                        </div>
                         <hr></hr>
                         <div
                             className={styles.categories}
@@ -220,14 +318,90 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                             ) : categories.map(category => (
                                 <div 
                                     key={category.id}
-                                    className={styles.category}
+                                    className={`${styles.category} ${!editCategory ? styles["category-hover"] : ''}`}
                                     onClick={() => {
-                                        setSubcategories(category.subcategories)
-                                        setCurrentCategory(category.name)
+                                        if(!editCategory){
+                                            setSubcategories(category.subcategories)
+                                            setCurrentCategory(category.name)
+                                        }
                                     }}
                                 >
-                                    <h3>{category.name}</h3>
-                                    <i className="fa-solid fa-chevron-right"></i>
+                                    <div className={styles.title}>
+                                        {editingCategory !== null && editingCategory.id === category.id ? (
+                                            <input
+                                                type="text"
+                                                name='name'
+                                                value={editingCategory.name}
+                                                onChange={(e) => {
+                                                    setEditingCategory({
+                                                        ...editingCategory,
+                                                        name: e.target.value
+                                                    });
+                                                }}
+                                            />
+                                        ) : (
+                                            <h3>{category.name}</h3>
+                                        )}
+                                        {editCategory && editingCategory ===  null ? (
+                                            <button
+                                                className={styles.rename}
+                                                onClick={() => {
+                                                    setEditingCategory(category);
+                                                }}
+                                            >
+                                                <i className="fa-regular fa-pen-to-square"></i>
+                                            </button>
+                                        ) : (
+                                            null
+                                        )}
+                                        {editingCategory !== null && editingCategory.id === category.id ? (
+                                            <div className={styles.actions}>
+                                                <button
+                                                    style={{
+                                                        opacity: loading ? 0.5 : 1,
+                                                        cursor: loading ? "wait" : "pointer"
+                                                    }}
+                                                    disabled={loading}
+                                                    onClick={editCategoryFunc}
+                                                    className={styles.save}
+                                                >
+                                                    <i className="fa-solid fa-floppy-disk"></i>
+                                                </button>
+                                                <button
+                                                    style={{
+                                                        opacity: loading ? 0.5 : 1,
+                                                        cursor: loading ? "wait" : "pointer"
+                                                    }}
+                                                    disabled={loading}
+                                                    onClick={() => {
+                                                        setEditingCategory(null);
+                                                    }}
+                                                    className={styles.cancel}
+                                                >
+                                                    <i className="fa-solid fa-times"></i>
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <></>
+                                        )}
+                                    </div>
+                                    {editCategory ? (
+                                        <button
+                                            style={{
+                                                opacity: loading ? 0.5 : 1,
+                                                cursor: loading ? "wait" : "pointer"
+                                            }}
+                                            disabled={loading}
+                                            onClick={() => {
+                                                deleteCategoryFunc(category.id);   
+                                            }}
+                                            className={styles.deleteCat}
+                                        >
+                                            <i className="fa-solid fa-trash"></i>
+                                        </button>
+                                    ) : (
+                                        <i className="fa-solid fa-chevron-right"></i>
+                                    )}
                                 </div>
                             ))}
                         </div>
