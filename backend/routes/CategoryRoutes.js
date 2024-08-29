@@ -1,12 +1,14 @@
 import express from 'express';
 
 import {
-    createCategory,
+    createCategories,
     getCategories,
     editSubcategory,
     deleteSubcategory,
     editCategory,
-    deleteCategory
+    deleteCategory,
+    createOneCategory,
+    createOneSubcategory
 } from '../controllers/CategoryController.js';
 
 import checkAuth from "../middleware/checkAuth.js";
@@ -14,7 +16,13 @@ import checkAuth from "../middleware/checkAuth.js";
 const router = express.Router();
 
 router.route('/')
-    .post(checkAuth, createCategory)
+    .post(checkAuth, createCategories);
+
+router.route('/one')
+    .post(checkAuth, createOneCategory);
+
+router.route('/sub/one')
+    .post(checkAuth, createOneSubcategory);
 
 router.route('/:id')
     .get(checkAuth, getCategories)

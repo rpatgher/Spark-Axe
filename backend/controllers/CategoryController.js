@@ -5,9 +5,8 @@ import { Op } from 'sequelize';
 import { Category, Subcategory, Website } from '../models/index.js';
 
 
-const createCategory = async (req, res) => {
+const createCategories = async (req, res) => {
     const { website_id, categories: categoriesBody } = req.body;
-    // console.log(categoriesBody);
     if(!website_id || !categoriesBody || categoriesBody.length === 0){
         return res.status(400).json({msg: 'Website id and categories are required'});
     }
@@ -280,11 +279,101 @@ const deleteCategory = async (req, res) => {
     }
 }
 
+const createOneCategory = async (req, res) => {
+    const { website_id, category } = req.body;
+    if(!website_id || !category || category === ''){
+        return res.status(400).json({msg: 'Website id and category name are required'});
+    }
+    const website = await Website.findByPk(website_id);
+    if(!website){
+        return res.status(404).json({msg: 'Website not found'});
+    }
+    if(website.user_id.toString() !== req.user.id.toString()){
+        return res.status(401).json({msg: 'Unauthorized'});
+    }
+    const currentCategories = await Category.findAll({
+        where: {
+            website_id
+        }
+    });
+    const numCurrentCategories = currentCategories.length;
+    let categories = [];
+    if(!currentCategories.find(currentCategory => currentCategory.name === category)){
+        categories.push({
+            name: category,
+            website_id,
+            index: numCurrentCategories + 1
+        });
+    }else{
+        return res.status(400).json({msg: 'Category already exists'});
+    }
+    try{
+        let categoriesCreated = null;
+        if(categories.length > 0){
+            categoriesCreated = await Category.bulkCreate(categories);
+        }
+        return res.status(200).json(categoriesCreated);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({msg: error.message});
+    }
+}
+
+const createOneSubcategory = async (req, res) => {
+    const { category_id, subcategory } = req.body;
+    if(!category_id || !subcategory || subcategory === ''){
+        return res.status(400).json({msg: 'Category id and subcategory name are required'});
+    }
+    const category = await Category.findByPk(category_id, {
+        include: {
+            model: Website,
+            as: 'website',
+            attributes: ['id', 'name', 'user_id']
+        },
+        attributes: ['id', 'name', 'website_id'],
+    });
+    if(!category){
+        return res.status(404).json({msg: 'Category not found'});
+    }
+    if(category.website.user_id.toString() !== req.user.id.toString()){
+        return res.status(401).json({msg: 'Unauthorized'});
+    }
+    const currentSubcategories = await Subcategory.findAll({
+        where: {
+            category_id
+        }
+    });
+    const numCurrentSubcategories = currentSubcategories.length;
+    let subcategories = [];
+    if(!currentSubcategories.find(currentSubcategory => currentSubcategory.name === subcategory)){
+        subcategories.push({
+            name: subcategory,
+            category_id,
+            index: numCurrentSubcategories + 1
+        });
+    } else {
+        return res.status(400).json({msg: 'Subcategory already exists'});
+    }
+    try{
+        let subcategoriesCreated = null;
+        if(subcategories.length > 0){
+            subcategoriesCreated = await Subcategory.bulkCreate(subcategories);
+        }
+        return res.status(200).json(subcategoriesCreated);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({msg: error.message});
+    }
+}
+
+
 export {
-    createCategory,
+    createCategories,
     getCategories,
     editSubcategory,
     deleteSubcategory,
     editCategory,
-    deleteCategory
+    deleteCategory,
+    createOneCategory,
+    createOneSubcategory
 }

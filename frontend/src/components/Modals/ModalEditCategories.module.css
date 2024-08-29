@@ -41,6 +41,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 3rem;
+    min-height: 2.8rem;
 }
 .header h2{
     font-size: 2rem; 
@@ -73,20 +74,48 @@
     overflow: scroll;
 }
 .category{
-    padding: 1rem;
+    padding: 1rem 0 1rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: .5rem;
+    min-height: 5rem;
+}
+.category-hover{
+    padding: 1rem;
 }
 .category-hover:hover{
     background-color: var(--gray);
     cursor: pointer;
 }
+.editing-category{
+    justify-content: flex-start;
+}
+.editing-category button.deleteCat{
+    font-weight: bold;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 10rem;
+    padding: 0;
+}
 .category h3{
     font-size: 1.8rem;
     margin: 0;
     font-weight: var(--normal);
+}
+.category .deleteCat{
+    font-weight: 400;
+    border-radius: .5rem;
+    width: auto;
+    height: auto;
+    padding: .5rem 1rem;
+    font-size: 1.5rem;
+    gap: .5rem;
+}
+.buttonsCat{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
 }
 .title{
     display: flex;
@@ -97,7 +126,7 @@
     display: flex;
     align-items: center;
 }
-.rename, .deleteCat, .save, .cancel{
+.rename, .deleteCat, .save, .cancel, .create{
     all: unset;
     cursor: pointer;
     border-radius: 10rem;
@@ -109,8 +138,41 @@
     justify-content: center;
     align-items: center;
 }
-.rename:hover, .deleteCat:hover, .save:hover, .cancel:hover{
-    background-color: var(--gray);
+button.save, button.save i{
+    color: color-mix(in srgb, var(--green) 70%, #000);
+}
+button.cancel, button.cancel i{
+    color: color-mix(in srgb, var(--yellow) 60%, #000);
+}
+button.deleteCat, button.deleteCat i{
+    color: color-mix(in srgb, var(--red) 70%, #000);
+}
+button.rename, button.rename i{
+    color: color-mix(in srgb, var(--blue) 70%, #000);
+}
+button.edit, button.edit i{
+    color: color-mix(in srgb, var(--blue) 70%, #000);
+}
+button.create, button .create i{
+    color: color-mix(in srgb, var(--green) 70%, #000);
+}
+button.save:hover{
+    background-color: color-mix(in srgb, var(--green) 50%, #fff);
+}
+button.cancel:hover{
+    background-color: color-mix(in srgb, var(--yellow) 50%, #fff);
+}
+button.deleteCat:hover{
+    background-color: color-mix(in srgb, var(--red) 50%, #fff);
+}
+button.rename:hover{
+    background-color: color-mix(in srgb, var(--blue) 50%, #fff);
+}
+button.edit:hover{
+    background-color: color-mix(in srgb, var(--blue) 50%, #fff);
+}
+button.create:hover{
+    background-color: color-mix(in srgb, var(--green) 50%, #fff);
 }
 .backhead {
     color: #858383;
@@ -119,7 +181,6 @@
 .subcategories{
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     overflow: scroll;
 }
@@ -129,6 +190,8 @@
     align-items: center;
     padding: 1rem;
     width: 100%;
+    min-height: 5rem;
+    font-size: 1.5rem;
 }
 .buttons{
     display: flex;
@@ -147,11 +210,40 @@
     justify-content: center;
     align-items: center;
 }
-.subcategory button:hover{
-    background-color: var(--gray);
+.buttons .editBtn{
+    font-size: 1.5rem;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    width: auto;
+    height: auto;
+    border-radius: .5rem;
+    padding: .5rem;
+    color: color-mix(in srgb, var(--blue) 60%, #000);
+}
+.buttons .editBtn:hover{
+    background-color: color-mix(in srgb, var(--blue) 40%, #fff);
 }
 .subcategory h3{
     font-size: 1.6rem;
     margin: 0;
     font-weight: var(--normal);
+}
+.subcategory input{
+    font-size: 1.6rem;
+    padding: .5rem;
+    border-radius: .5rem;
+    border: 1px solid var(--gray);
+}
+.newCat, .newSubcat{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+.buttonsNewCat, .buttonsNewSubcat{
+    display: flex;
+    align-items: center;
 }
