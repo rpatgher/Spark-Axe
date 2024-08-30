@@ -74,17 +74,17 @@
 .head{
   width: 80%;
   margin-left: 10%;
-  font-size: 7.4rem;
+  font-size: 5.4rem;
   text-align: center;
 }
 .logo{
   align-items: center;
-  width: 400px;
-  height: 400px;
+  width: 250px;
+  height: 250px;
 }
 .header{
   text-align: center;
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
 .HDLogoFont{
