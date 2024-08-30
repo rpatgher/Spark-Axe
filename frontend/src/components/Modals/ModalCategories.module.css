@@ -16,7 +16,8 @@
     position: relative;
     border-radius: 1rem;
     padding: 2rem;
-    min-width: 45rem;
+    min-width: 40rem;
+    min-height: 40rem;
 }
 .close-modal {
     all: unset;
@@ -39,21 +40,38 @@ h2{
     font-size: 2rem;
    
 }
+.category-container{
+    padding: 1rem;
+    border-radius: .5rem;
+}
+.category-container:hover{
+    background-color: var(--gray);
+    cursor: pointer;
+    transition: all .3s ease;
+}
 .category {
-    margin: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.category-active{
+    flex-direction: column;
+    background-color: var(--gray);
 }
 .category h3{
-    font-size: 1.6rem;
-    
-}
-.category ul{
-    list-style: none;
-    padding: 0;
+    font-size: 1.8rem;
     margin: 0;
-    color: rgb(99, 93, 93);
+    font-weight: 400;
 }
-.category ul li{
-    font-size: 1.4rem;
+.subcategories{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.subcategory{
+    color: rgb(99, 93, 93);
+    font-size: 1.6rem;
     margin: 0;
 }
 hr{

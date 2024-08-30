@@ -7,6 +7,8 @@ import Normlogo from '../assets/img/logos/logonormal.png';
 import Shocklogo from '../assets/img/logos/logoshock.png';
 import Warplogo from '../assets/img/logos/logowarp.png';
 import Wavelogo from '../assets/img/logos/logowave.png';
+import Carousel from '../components/LandingComponents/Carousel/Carousel';
+import EnseñarFunctions from '../components/LandingComponents/EnseñarFunctions/EnseñarFunctions';
 
 
 
@@ -44,7 +46,10 @@ const Home = () => {
                     Sparkaxe <br></br> La mejor forma de manejar tu negocio<br></br><span className={`${styles[fonts[fontIndex]]}`}> a tu manera
                     </span>
                 </h1>
+                
             </div>
+            <Carousel />
+            <EnseñarFunctions />
         </div>
     )
 }
