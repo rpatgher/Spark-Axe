@@ -38,6 +38,8 @@ const SidebarDashboard = () => {
             return 'fa-solid fa-gifts';
         } else if (feature === 'Envío') {
             return 'fa-solid fa-truck-fast';
+        } else if (feature === 'Anuncios') {
+            return 'fa-solid fa-rectangle-ad';
         } else {
             return 'fa-solid fa-cube';
         }
