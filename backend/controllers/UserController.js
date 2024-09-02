@@ -53,7 +53,7 @@ const login = async (req, res) => {
                 model: Website,
                 include: {
                     model: Feature,
-                    attributes: ['id', 'name', 'description', 'url']
+                    attributes: ['id', 'name', 'description', 'url', 'icon']
                 },
                 attributes: ['id', 'name', 'url_address', 'phone', 'email', 'type', 'currency', 'slogan', 'language']
             }
@@ -153,7 +153,7 @@ const profile = async (req,res) => {
                 model: Website,
                 include: {
                     model: Feature,
-                    attributes: ['id', 'name', 'description', 'url']
+                    attributes: ['id', 'name', 'description', 'url', 'icon']
                 },
                 attributes: ['id', 'name', 'url_address', 'phone', 'email', 'type', 'currency', 'slogan', 'language']
             }

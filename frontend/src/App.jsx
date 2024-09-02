@@ -9,7 +9,7 @@ import ProtectedLayout from './layouts/ProtectedLayout';
 // ***************** Pages *****************
 import Home from './pages/Home';
 import About from './pages/About/About';
-import Contact from './pages/Contact/contact';
+import ContactMain from './pages/ContactMain/ContactMain';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import Forgot from './pages/Forgot';
@@ -31,6 +31,8 @@ import Stats from './pages/Stats/Stats';
 import Coupons from './pages/Coupons/Coupons';
 import Promotions from './pages/Promotions/Promotions';
 import Delivery from './pages/Delivery/Delivery';
+import PointOfSale from './pages/PoS/PointOfSale';
+import Contact from './pages/Contact/Contact';
 import Settings from './pages/Settings/Settings';
 
 import NotFound from './pages/NotFound/NotFound';
@@ -49,7 +51,7 @@ function App() {
             <Route path="/" element={<LandingLayout />}>
               <Route index element={<Home />} />
               <Route path="about" element={<About />} />
-              <Route path="contact" element={<Contact />} />
+              <Route path="contact" element={<ContactMain />} />
               <Route path="support" element={<Support />} />
              
             </Route>
@@ -78,6 +80,8 @@ function App() {
                 <Route path="coupons" element={<Coupons />} />
                 <Route path="promotions" element={<Promotions />} />
                 <Route path="delivery" element={<Delivery />} />
+                <Route path="pos" element={<PointOfSale />} />
+                <Route path="contact" element={<Contact />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
 

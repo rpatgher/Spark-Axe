@@ -1,7 +1,9 @@
 import { exit } from 'node:process';
 import db from '../config/db.js';
 import users from './users.js';
-import User from '../models/User.js';
+import websites from './websites.js';
+import features from './features.js';
+import { User, Website, Inventory, Feature, WebsiteFeature } from '../models/index.js';
 
 const insertData = async () => {
     try {
@@ -9,8 +11,26 @@ const insertData = async () => {
         // Generate Collections
         await db.sync();
 
+        // Insert Features
+        await Feature.bulkCreate(features);
+
         // Insert Data
-        await User.bulkCreate(users);
+        await Promise.all(users.map(async (user, i) => {
+            const savedUser = await User.create(user);
+            const website = Website.build(websites[i]);
+            website.user_id = savedUser.id;
+            await website.save();
+            const inventory = Inventory.build();
+            inventory.website_id = website.id;
+            await inventory.save();
+            const websiteFeatures = websites[i].features.map(featureId => {
+                return {
+                    websiteId: website.id,
+                    featureId
+                }
+            });
+            await WebsiteFeature.bulkCreate(websiteFeatures);
+        }));
         console.log('Data inserted...');
         exit();
     } catch (error) {
@@ -21,8 +41,8 @@ const insertData = async () => {
 
 const deleteData = async () => {
     try {
-        // await User.destroy({where: {}, truncate: true})
-
+        await db.authenticate();
+        await db.drop();
         await db.sync({force: true});
         
         console.log('Data deleted...');

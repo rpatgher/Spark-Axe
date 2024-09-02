@@ -21,29 +21,29 @@ const SidebarDashboard = () => {
 
     const [menuActive, setMenuActive] = useState(false);
 
-    const setIconFeature = (feature) => {
-        if(feature === 'Pedidos'){
-            return 'fa-solid fa-basket-shopping';
-        } else if (feature === 'Productos') {
-            return 'fa-solid fa-tags';
-        } else if (feature === 'Inventario') {
-            return 'fa-solid fa-dolly';
-        } else if (feature === 'Clientes') {
-            return 'fa-solid fa-users';
-        } else if (feature === 'Estadísticas Generales') {
-            return 'fa-solid fa-square-poll-vertical';
-        } else if (feature === 'Cupones') {
-            return 'fa-solid fa-ticket-simple';
-        } else if (feature === 'Promociones') {
-            return 'fa-solid fa-gifts';
-        } else if (feature === 'Envío') {
-            return 'fa-solid fa-truck-fast';
-        } else if (feature === 'Anuncios') {
-            return 'fa-solid fa-rectangle-ad';
-        } else {
-            return 'fa-solid fa-cube';
-        }
-    }
+    // const setIconFeature = (feature) => {
+    //     if(feature === 'Pedidos'){
+    //         return 'fa-solid fa-basket-shopping';
+    //     } else if (feature === 'Productos') {
+    //         return 'fa-solid fa-tags';
+    //     } else if (feature === 'Inventario') {
+    //         return 'fa-solid fa-dolly';
+    //     } else if (feature === 'Clientes') {
+    //         return 'fa-solid fa-users';
+    //     } else if (feature === 'Estadísticas Generales') {
+    //         return 'fa-solid fa-square-poll-vertical';
+    //     } else if (feature === 'Cupones') {
+    //         return 'fa-solid fa-ticket-simple';
+    //     } else if (feature === 'Promociones') {
+    //         return 'fa-solid fa-gifts';
+    //     } else if (feature === 'Envío') {
+    //         return 'fa-solid fa-truck-fast';
+    //     } else if (feature === 'Anuncios') {
+    //         return 'fa-solid fa-rectangle-ad';
+    //     } else {
+    //         return 'fa-solid fa-cube';
+    //     }
+    // }
 
     return (
         <aside className={styles.sidebar}>
@@ -74,7 +74,7 @@ const SidebarDashboard = () => {
                     </Link>
                     {website.features.map(feature => (
                         <Link key={feature.id} to={`/dashboard/${feature.url}`} className={`${styles.item} ${location.pathname === `/dashboard/${feature.url}` ? styles.item_active : ''}`}>
-                            <i className={setIconFeature(feature.name)}></i>
+                            <i className={feature.icon || 'fa-solid fa-cube'}></i>
                             <p>{feature.name}</p>
                         </Link>
                     ))}
