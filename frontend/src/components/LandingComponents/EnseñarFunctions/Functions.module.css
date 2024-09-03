@@ -1,0 +1,53 @@
+/* Estilos generales */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f7f7f5; 
+    text-align: center;
+  }
+
+  .text-section {
+    flex: 1;
+    text-align: center;
+    padding-right: 20px;
+    color: #1d1d1f;
+  }
+  
+  .text-section h2 {
+    font-size: 2rem; 
+    margin-bottom: 0.5rem;
+  }
+  
+  .text-section h3 {
+    font-size: 1.5rem; 
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .text-section p {
+    font-size: 1rem; 
+    margin-bottom: 1.5rem;
+  }
+  
+  .learn-more {
+    font-size: 1rem;
+    color: #0071e3; 
+    text-decoration: none;
+  }
+  
+  .image-section {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .ipadImage {
+    width: 500px; 
+    height: 200px; 
+    border-radius: 10px; 
+    margin: 25px;
+  }
+  
+
+  
