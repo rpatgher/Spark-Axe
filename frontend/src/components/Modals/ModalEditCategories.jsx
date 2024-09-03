@@ -261,7 +261,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                             ...category,
                             subcategories: [
                                 ...category.subcategories,
-                                response.data
+                                response.data[0]
                             ]
                         }
                     }

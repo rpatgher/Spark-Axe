@@ -203,6 +203,16 @@ const deleteSubcategory = async (req, res) => {
     }
     try{
         await subcategory.destroy();
+        const subcategories = await Subcategory.findAll({
+            where: {
+                category_id: subcategory.category_id
+            },
+            order: [['index', 'ASC']]
+        });
+        await Promise.all(subcategories.map(async (subcategory, i) => {
+            subcategory.index = i + 1;
+            await subcategory.save();
+        }));
         return res.json({msg: 'Subcategory deleted successfully'});
     }catch(error){
         console.error(error);
@@ -269,6 +279,16 @@ const deleteCategory = async (req, res) => {
     }
     try{
         await category.destroy();
+        const categories = await Category.findAll({
+            where: {
+                website_id: category.website_id
+            },
+            order: [['index', 'ASC']]
+        });
+        await Promise.all(categories.map(async (category, i) => {
+            category.index = i + 1;
+            await category.save();
+        }));
         return res.json({msg: 'Category deleted successfully'});
     }catch(error){
         console.error(error);

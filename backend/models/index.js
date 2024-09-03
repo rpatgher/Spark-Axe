@@ -14,17 +14,24 @@ import WebsiteFeature from "./WebsiteFeature.js";
 
 User.hasMany(Website, { foreignKey: 'user_id', onDelete: 'RESTRICT' });
 Website.belongsTo(User, { foreignKey: 'user_id', onDelete: 'RESTRICT' });
-Element.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+Element.belongsTo(Website, { foreignKey: 'website_id'});
 Website.hasMany(Element, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
-Category.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+Category.belongsTo(Website, { foreignKey: 'website_id'});
 Website.hasMany(Category, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
-Website.hasOne(Inventory, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+Website.hasOne(Inventory, { foreignKey: 'website_id', onDelete: 'CASCADE' });
 Inventory.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
-Subcategory.belongsTo(Category, { foreignKey: 'category_id', onDelete: 'RESTRICT' });
-Category.hasMany(Subcategory, { foreignKey: 'category_id', onDelete: 'RESTRICT' });
+Category.hasMany(Subcategory, { foreignKey: 'category_id', onDelete: 'CASCADE' });
+Subcategory.belongsTo(Category, { foreignKey: 'category_id'});
+
+
 Subcategory.belongsToMany(Element, { through: ElementCategory, onDelete: 'RESTRICT' });
-Element.belongsToMany(Subcategory, { through: ElementCategory, onDelete: 'RESTRICT' });
-Order.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+Element.belongsToMany(Subcategory, { through: ElementCategory, onDelete: 'CASCADE' });
+
+ElementCategory.belongsTo(Subcategory, { foreignKey: 'subcategoryId' });
+ElementCategory.belongsTo(Element, { foreignKey: 'elementId' });
+
+
+Order.belongsTo(Website, { foreignKey: 'website_id' });
 Website.hasMany(Order, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 Element.belongsToMany(Order, { through: OrderElement, onDelete: 'RESTRICT' });
 Order.belongsToMany(Element, { through: OrderElement, onDelete: 'RESTRICT' });
@@ -33,9 +40,9 @@ OrderElement.belongsTo(Element, { foreignKey: 'elementId', onDelete: 'RESTRICT' 
 Customer.hasMany(Order, { foreignKey: 'customer_id', onDelete: 'RESTRICT' });
 Order.belongsTo(Customer, { foreignKey: 'customer_id', onDelete: 'RESTRICT' });
 Website.hasMany(Customer, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
-Customer.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+Customer.belongsTo(Website, { foreignKey: 'website_id' });
 Website.belongsToMany(Feature, { through: WebsiteFeature, onDelete: 'RESTRICT' });
-Feature.belongsToMany(Website, { through: WebsiteFeature, onDelete: 'RESTRICT' });
+Feature.belongsToMany(Website, { through: WebsiteFeature });
 
 //deliveries has one website
 //alrevez website.hasOne(deliveries)
