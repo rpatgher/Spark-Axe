@@ -10,10 +10,10 @@ const Advertisements = () => {
             <h4>Enseña tus anuncios</h4>
             <Link to='/dashboard/advertisements/new'>
                         <button
-                            className={styles["btn-new-product"]}
+                            className={styles["btn-new-ad"]}
                         >
                             <i className="fa-solid fa-plus"></i>
-                            <p>Agregar Producto</p>
+                            <p>Agregar Anuncio</p>
                         </button>
                         </Link>
         </div>
