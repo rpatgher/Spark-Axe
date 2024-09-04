@@ -9,6 +9,7 @@ import Warplogo from '../assets/img/logos/logowarp.png';
 import Wavelogo from '../assets/img/logos/logowave.png';
 import Carousel from '../components/LandingComponents/Carousel/Carousel';
 import EnseñarFunctions from '../components/LandingComponents/EnseñarFunctions/EnseñarFunctions';
+import AplicarFunction from '../components/LandingComponents/EnseñarFunctions/AplicarFunction';
 
 
 
@@ -50,6 +51,7 @@ const Home = () => {
             </div>
             <Carousel />
             <EnseñarFunctions />
+            <AplicarFunction />
         </div>
     )
 }
