@@ -1,35 +1,125 @@
 
-  .head{
-    width: 80%;
-    margin-left: 10%;
-    font-size: 7.4rem;
-    text-align: center;
-  }
-  .content{
-    width: 40%;
-    flex: 1;
-    font-size: 2.4rem;
-    text-align: justify;
-    padding-bottom: 100px;
+.head {
+  width: 80%;
+  margin: 0 auto; 
+  font-size: 7.4rem;
+  text-align: center;
+  margin-bottom: 40px; /* Espacio adicional entre el título y el contenido */
+}
 
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imagecontainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+  width: 80%;
+  margin: 20px auto; /* Centra y da espacio alrededor del contenedor de imágenes */
+}
+
+.imagecontainer img {
+  max-width: 100%; 
+  max-height: 100%; 
+  object-fit: contain; 
+}
+
+.content {
+  width: 60%;
+  font-size: 2.4rem;
+  text-align: justify;
+  padding-bottom: 100px;
+  line-height: 1.6; /* Mejora la legibilidad del texto */
+}
+
+@media (max-width: 800px) {
+  .head {
+      font-size: 5rem; /* Ajuste del tamaño de fuente para pantallas más pequeñas */
+  }
+  .content {
+      width: 90%; /* Ancho ajustado para móviles */
+      font-size: 2rem; /* Ajuste de la fuente para mejor legibilidad en pantallas pequeñas */
   }
   .imagecontainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 10px;
+    grid-gap: 20px;
+    width: 80%;
+    margin: 20px auto; /* Centra el contenedor de imágenes horizontalmente */
+    justify-items: center; /* Centra los elementos dentro de la cuadrícula */
 }
 
 .imagecontainer img {
-    max-width: 100%; /* Limit the image width to its container */
-    max-height: 100%; /* Limit the image height to its container */
-    width: auto;
-    height: auto;
-    object-fit: contain; /* Ensure the image maintains its aspect ratio */
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
+    display: block; /* Asegura que las imágenes se comporten como elementos de bloque */
+}
 }
 
-.about{
+
+.enviocontent0{
+  flex:1;
   display: flex;
+  flex-direction: row;
+  gap: 50px;
+  text-align: center;
   justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  background: rgba(255, 255, 255, 0.432);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.31);
+  width: 80%;
+  height: 90%;
+  border-radius: 20px;
+  margin-left:0%;
+  margin-top: 50px;
+  padding-bottom: 20px;
+  margin-bottom: 150px;
 }
+
+.contactbuttons{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+  color: black;
+
+}
+
+.contactbuttons:hover{
+  box-shadow: 0 6px 34px rgba(0, 0, 0, 0.322);
+  transition: 0.5s;
+}
+
+.axworker{
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px; 
+  justify-items: center;
+  align-items: center;
+  width: 80%; 
+  margin: 0 auto; 
+  padding: 20px; 
+  background: rgba(255, 255, 255, 0.432);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.432);
+}
+
