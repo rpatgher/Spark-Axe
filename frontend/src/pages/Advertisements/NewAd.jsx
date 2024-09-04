@@ -1,23 +1,22 @@
-import { Link } from 'react-router-dom';
+
 
 // ********************* Styles ********************
-import styles from './Advertisements.module.css';
+import styles from './NewAd.module.css';
 
-const Advertisements = () => {
+const NewAd = () => {
     return (
         <div>
             <h1>Anuncios</h1>
             <h4>Enseña tus anuncios</h4>
-            <Link to='/dashboard/advertisements/new'>
+            <Link to='/dashboard/products/new'>
                         <button
                             className={styles["btn-new-product"]}
                         >
                             <i className="fa-solid fa-plus"></i>
                             <p>Agregar Producto</p>
                         </button>
-                        </Link>
         </div>
     )
 }
 
-export default Advertisements
+export default NewAd
