@@ -33,10 +33,9 @@ const About = () => {
                 </p>
             </div>
 
+           
+
             <h1>Equipo SPARKAXE</h1>
-
-           <div className={styles.enviocontent0}>
-
            <div className={styles.contactGrid}>
     <Link to='/contact'>
         <div className={styles.contactbuttons}>
@@ -69,7 +68,7 @@ const About = () => {
 
             
 
-           </div>
+          
             
             </div>
 
