@@ -21,12 +21,11 @@ function Questions() {
         className={`${styles.accordion} ${activeIndex === 0 ? styles.active : ''}`}
         onClick={() => toggleAccordion(0)}
       >
-        Section 1
+       ¿Cómo funciona el dashboard de administración?
       </button>
       <div className={styles.panel} style={{ display: activeIndex === 0 ? 'block' : 'none' }}>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        El dashboard es una plataforma centralizada desde la cual puedes gestionar todo lo relacionado con tu tienda en línea, como inventario, clientes, productos y pedidos, de manera sencilla y eficiente.
         </p>
       </div>
 
@@ -34,12 +33,11 @@ function Questions() {
         className={`${styles.accordion} ${activeIndex === 1 ? styles.active : ''}`}
         onClick={() => toggleAccordion(1)}
       >
-        Section 2
+        ¿Qué puedo hacer desde el dashboard?
       </button>
       <div className={styles.panel} style={{ display: activeIndex === 1 ? 'block' : 'none' }}>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Puedes gestionar inventario, añadir o editar productos, monitorear pedidos, administrar información de clientes y generar reportes de ventas.
         </p>
       </div>
 
@@ -47,14 +45,79 @@ function Questions() {
         className={`${styles.accordion} ${activeIndex === 2 ? styles.active : ''}`}
         onClick={() => toggleAccordion(2)}
       >
-        Section 3
+       ¿Cómo actualizo mi inventario?
       </button>
       <div className={styles.panel} style={{ display: activeIndex === 2 ? 'block' : 'none' }}>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        En la sección de "Inventario" puedes ver, agregar, modificar o eliminar productos, así como ajustar cantidades de stock.
         </p>
       </div>
+
+      <button
+        className={`${styles.accordion} ${activeIndex === 3 ? styles.active : ''}`}
+        onClick={() => toggleAccordion(3)}
+      >
+       ¿Puedo gestionar mis pedidos desde el dashboard?
+      </button>
+      <div className={styles.panel} style={{ display: activeIndex === 3 ? 'block' : 'none' }}>
+        <p>
+        Sí, en la sección "Pedidos" puedes ver el estado de cada pedido y gestionar procesos como envíos, devoluciones o cancelaciones.
+        </p>
+      </div>
+
+      <button
+        className={`${styles.accordion} ${activeIndex === 4 ? styles.active : ''}`}
+        onClick={() => toggleAccordion(4)}
+      >
+       ¿Puedo ver reportes de ventas?
+      </button>
+      <div className={styles.panel} style={{ display: activeIndex === 4 ? 'block' : 'none' }}>
+        <p>
+        Sí, el dashboard te permite generar reportes detallados de ventas, analizar el rendimiento de productos y revisar las tendencias de compra de tus clientes.
+        </p>
+      </div>
+
+      <button
+        className={`${styles.accordion} ${activeIndex === 5 ? styles.active : ''}`}
+        onClick={() => toggleAccordion(5)}
+      >
+      ¿Es posible crear promociones o anuncios desde el dashboard?
+
+</button>
+      <div className={styles.panel} style={{ display: activeIndex === 5 ? 'block' : 'none' }}>
+        <p>
+        Claro, en la sección de "Anuncios" puedes crear y gestionar promociones, configurar descuentos y enviarlos a tus clientes o publicarlos en tu tienda.
+        </p>
+      </div>
+
+      <button
+        className={`${styles.accordion} ${activeIndex === 6 ? styles.active : ''}`}
+        onClick={() => toggleAccordion(6)}
+      >
+      ¿Necesito experiencia técnica para usar el dashboard?
+
+</button>
+      <div className={styles.panel} style={{ display: activeIndex === 6 ? 'block' : 'none' }}>
+        <p>
+        No es necesario tener experiencia técnica. El dashboard está diseñado para ser intuitivo y fácil de usar, con una interfaz amigable para cualquier usuario.
+        </p>
+      </div>
+
+      <button
+        className={`${styles.accordion} ${activeIndex === 7 ? styles.active : ''}`}
+        onClick={() => toggleAccordion(7)}
+      >
+      ¿Qué hago si tengo problemas con la plataforma?
+
+</button>
+      <div className={styles.panel} style={{ display: activeIndex === 7 ? 'block' : 'none' }}>
+        <p>
+        Si necesitas ayuda, puedes acceder a la sección de "Soporte" dentro de la pagina de inicio y contactar a nuestro equipo por chat o correo electrónico.
+        </p>
+      </div>
+
+     
+
     </div>
     </div>
   );
