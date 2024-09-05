@@ -112,3 +112,13 @@
   font-family: 'aurora_pro', serif;
   color: #0099f1;
 }
+.Trueheader{
+  padding: 0%;
+  margin: 0%;
+  top: 0px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 10%;
+  background-color: black;
+}

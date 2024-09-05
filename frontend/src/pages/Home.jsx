@@ -12,6 +12,7 @@ import EnseñarFunctions from '../components/LandingComponents/EnseñarFunctions
 import AplicarFunction from '../components/LandingComponents/EnseñarFunctions/AplicarFunction';
 import EnseñarFunction2 from '../components/LandingComponents/EnseñarFunctions/EnseñarFunction2';
 import EnseñarFunction3 from '../components/LandingComponents/EnseñarFunctions/EnseñarFunction3';
+import HeaderSparkaxe from '../assets/img/HeaderSparkaxe.jpg';
 
 
 
@@ -42,7 +43,8 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
+        <div className={styles.Trueheader}>
+        <img src={HeaderSparkaxe} alt="HeaderSparkaxe" className={styles.headerSparkaxe} />
             <div className={styles.header}>
                 <img className={styles.logo} src={logos[logoIndex]} alt="Sparkaxe-logo" />
                 <h1 className={`${styles.head}`}>
