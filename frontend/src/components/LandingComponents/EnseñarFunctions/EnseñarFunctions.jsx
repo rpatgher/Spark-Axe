@@ -7,10 +7,10 @@ const EnseñarFunctions = () => {
     <div className={styles.container}>
       {/* Sección de texto a la izquierda */}
       <div className={styles.textSection}>
-        <h2>Crea tu propias feau¿tures</h2>
-        <h3>Get 3 months free when you buy an iPad.</h3>
-        <p>From HIIT to Meditation, there's something for everyone.</p>
-        <a href="#" className={styles.learnMore}>Learn more &gt;</a>
+        <h2>Crea tu propias funciones</h2>
+        <h3>Escoje que necesita tener tu portal</h3>
+        <p>Tu llegas con la idea nosotros la convertimos realidad</p>
+        <a href="#" className={styles.learnMore}>Aplicar</a>
       </div>
 
       {/* Sección de imagen a la derecha */}

@@ -43,16 +43,15 @@ const Home = () => {
     }, []);
 
     return (
-        <div className={styles.Trueheader}>
-        <img src={HeaderSparkaxe} alt="HeaderSparkaxe" className={styles.headerSparkaxe} />
+        <div>
             <div className={styles.header}>
                 <img className={styles.logo} src={logos[logoIndex]} alt="Sparkaxe-logo" />
                 <h1 className={`${styles.head}`}>
                     Sparkaxe <br></br> La mejor forma de manejar tu negocio<br></br><span className={`${styles[fonts[fontIndex]]}`}> a tu manera
                     </span>
+                    
                 </h1>
-                
-            </div>
+                </div>
             <Carousel />
             <EnseñarFunctions />
             <EnseñarFunction2 />

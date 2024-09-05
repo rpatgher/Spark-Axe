@@ -1,6 +1,8 @@
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif; /* Añadido para una mejor tipografía base */}
+    font-family: 'Arial', sans-serif; /* Añadido para una mejor tipografía base */
+text-align: center; /* Añadido para centrar el contenido */
+}
 
 .carousel {
     overflow: hidden; 
