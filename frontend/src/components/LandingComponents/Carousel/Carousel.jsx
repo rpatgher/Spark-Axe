@@ -54,6 +54,8 @@ const Carousel = () => {
     ];
 
     return (
+        <div>
+            <h2>Empresas con las que hemos trabajado</h2>
         <div className={styles.carousel}>
             <div className={styles.carouselItems} ref={carouselRef}>
                 {images.concat(images).map((image, index) => (
@@ -68,6 +70,7 @@ const Carousel = () => {
                     </div>
                 ))}
             </div>
+        </div>
         </div>
     );
 };

@@ -12,7 +12,7 @@ body {
     display: flex;
     overflow-x: scroll;
     scroll-behavior: smooth; 
-    padding: 10px 0;
+    padding: 30px 0;
     gap: 15px; /* Reemplaza margin-right en los items, para espacio entre ellos */
 }
 
