@@ -17,6 +17,7 @@ import AccountConfirmation from './pages/AccountConfirmation';
 import Reset from './pages/Reset';
 
 import Support from './pages/Support/Support';
+import Questions from './pages/Support/Questions';
 
 import Dashboard from './pages/Dashboard/Dashboard';
 import Orders from './pages/Orders/Orders';
@@ -54,6 +55,7 @@ function App() {
               <Route path="about" element={<About />} />
               <Route path="contact" element={<ContactMain />} />
               <Route path="support" element={<Support />} />
+              <Route path="support/questions" element={<Questions />} />
              
             </Route>
             <Route path="/" element={<AuthLayout />}>

@@ -26,11 +26,13 @@ const About = () => {
             <h3><span className={styles.headingother}>Aplicar</span></h3>
             </div>
             </Link>
+            <Link to='/support/questions'>
             <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
 
             <h3><span className={styles.headingother}>Preguntas frequentes</span></h3>
             </div>
+            </Link>
 
             </div>
             <div className={styles.enviocontent2}>
