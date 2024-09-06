@@ -14,8 +14,6 @@ function Questions() {
 <div className={styles.States}>
 <h2>Accordion</h2>
 <div>
-  <button>Search</button>
-  <button>Filter</button>
 </div>
       <button
         className={`${styles.accordion} ${activeIndex === 0 ? styles.active : ''}`}
