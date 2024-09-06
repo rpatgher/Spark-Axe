@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // **************+ Styles +***************
 import styles from './ModalCategories.module.css';
@@ -6,12 +6,30 @@ import styles from './ModalCategories.module.css';
 const ModalCategories = ({categories, closeModal}) => {
     const [categoryActive, setCategoryActive] = useState(null);
 
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        const showModal = () => {
+            setTimeout(() => {
+                setShow(true);
+            }, 300);
+        }
+        return () => showModal();
+    }, []);
+
+    const unshowModal = () => {
+        setShow(false);
+        setTimeout(() => {
+            closeModal();
+        }, 300);
+    }
+
     return (
         <div className={styles["modal-wrapper"]}>
-            <div className={styles["modal"]}>
+            <div className={`${styles["modal"]} ${show ? styles.show : ''}`}>
                 <button 
                     className={styles["close-modal"]}
-                    onClick={closeModal}
+                    onClick={unshowModal}
                 >
                     <i className="fa-solid fa-times"></i>
                 </button>

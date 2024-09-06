@@ -1,11 +1,10 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import clientAxios from '../../config/clientAxios';
 
 
 // ****************** Styles ******************
 import styles from './ModalEditCategories.module.css'
-
 
 // ****************** Hooks ******************
 import useApp from '../../hooks/useApp';
@@ -14,6 +13,8 @@ import useAuth from '../../hooks/useAuth';
 const ModalEditCategories = ({closeModal, categories, setCategories}) => {
     const { alert, handleAlert } = useApp();
     const { auth } = useAuth();
+
+    const [show, setShow] = useState(false);
 
     
     const [subcategories, setSubcategories] = useState(null);
@@ -33,6 +34,22 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
 
     const [newSubcategory, setNewSubcategory] = useState(null);
     const [newSubcategoryActive, setNewSubcategoryActive] = useState(false);
+
+    useEffect(() => {
+        const showModal = () => {
+            setTimeout(() => {
+                setShow(true);
+            }, 300);
+        }
+        return () => showModal();
+    }, []);
+
+    const unshowModal = () => {
+        setShow(false);
+        setTimeout(() => {
+            closeModal();
+        }, 300);
+    }
 
 
     const handleEditSubcategory = (e) => {
@@ -284,11 +301,11 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
 
 
     return (
-        <div className={styles["modal-wrapper"]}>
-            <div className={styles["modal"]}>
+        <div className={`${styles["modal-wrapper"]}`}>
+            <div className={`${styles["modal"]} ${show ? styles.show : ''}`}>
                 <button 
                     className={styles["close-modal"]}
-                    onClick={closeModal}
+                    onClick={unshowModal}
                 >
                     <i className="fa-solid fa-times"></i>
                 </button>

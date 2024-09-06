@@ -16,17 +16,36 @@ const ModalProfile = () => {
 
     const { name, lastname, email, phone, websites } = auth;
 
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        const showModal = () => {
+            setTimeout(() => {
+                setShow(true);
+            }, 300);
+        }
+        return () => showModal();
+    }, []);
+
+    const unshowModal = () => {
+        setShow(false);
+        setTimeout(() => {
+            setProfileModal(false);
+        }, 300);
+    }
+
     const openCity = (cityName) => {
         setActiveTab(cityName);
     };
 
+
     
     return (
         <div className={styles["modal-wrapper"]}>
-            <div className={styles["modal-profile"]}>
+            <div className={`${styles["modal-profile"]} ${show ? styles.show : ''}`}>
                 <button
                     className={styles["close-modal"]}
-                    onClick={() => setProfileModal(false)}
+                    onClick={unshowModal}
                 >
                     <i className="fa-solid fa-times"></i>
                 </button>

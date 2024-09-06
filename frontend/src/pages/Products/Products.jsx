@@ -52,6 +52,21 @@ const Products = () => {
     const [modalEditCategories, setModalEditCategories] = useState(false);
     const [categories, setCategories] = useState([]);
 
+    const [show, setShow] = useState(false);
+
+    const showModal = () => {
+        setTimeout(() => {
+            setShow(true);
+        }, 300);
+    }
+
+    const unshowModal = () => {
+        setShow(false);
+        setTimeout(() => {
+            setProductDescription({});
+        }, 300);
+    }
+
     useEffect(() => {
         const count = filteredProducts.filter(item => item.selected && item.visible).length;
         const countVisible = filteredProducts.filter(item => item.visible).length;
@@ -369,7 +384,10 @@ const Products = () => {
                                         <td>{product.name}</td>
                                         <td className={styles["cell-description"]}>
                                             <button
-                                                onClick={() => showDescription(product)}
+                                                onClick={() => {
+                                                    showDescription(product)
+                                                    showModal();
+                                                }}
                                             >
                                                 <i className="fa-regular fa-note-sticky"></i>
                                             </button>
@@ -437,10 +455,10 @@ const Products = () => {
             </div>
             {productDescription.name &&
                 <div className={styles["modal-wrapper"]}>
-                    <div className={styles["modal-description"]}>
+                    <div className={`${styles["modal-description"]} ${show ? styles.show : ''}`}>
                         <button 
                             className={styles["close-modal"]}
-                            onClick={() => setProductDescription({})}
+                            onClick={unshowModal}
                         >
                             <i className="fa-solid fa-times"></i>
                         </button>

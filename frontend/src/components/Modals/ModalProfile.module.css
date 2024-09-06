@@ -18,8 +18,15 @@
   border-radius: 1rem;
   padding: 2rem;
   min-width: 45rem;
+  transform: translateY(-2rem);
+  transition: all .3s;
+  opacity: 0;
 }
-
+.show{
+  opacity: 1;
+  transform: translateY(0);
+  transition: all .3s;
+}
 .close-modal {
   all: unset;
   position: absolute;

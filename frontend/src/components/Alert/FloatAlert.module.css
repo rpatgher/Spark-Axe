@@ -6,12 +6,12 @@
     top: 10rem;
     border-radius: 1rem;
     z-index: 1000;
-    transform: translateY(-2rem);
+    transform: translate(-50%, -2rem);
     opacity: 0;
     transition: all .3s ease;
 }
 .animation{
-    transform: unset;
+    transform: translate(-50%, 0);
     transition: all .3s ease;
     opacity: 1;
 }
