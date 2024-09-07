@@ -1,0 +1,186 @@
+.Filtertabs {
+    border-top: 2px solid var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+.radio-inputs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0.25rem;
+    /* width: 40rem; */
+    font-size: 14px;
+}
+.radio-inputs button {
+    margin: 0;
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: 0.5rem;
+}
+.visibles {
+    border-radius: 0.5rem;
+    color: var(--dark_blue);
+    font-weight: var(--bold);
+    transition: all .15s ease-in-out;
+    margin: 1rem 1rem 1rem 0;
+    padding: 0;
+    background-color: transparent;
+}
+.visibles2{
+    cursor: pointer;
+    background-color: transparent;
+}
+.active {
+    background-color: #fff;
+    font-weight: 600;
+}
+.selected {
+    display: flex; /* Make .selected a flex container */
+    align-items: center; /* Center items vertically */
+    gap: 2rem;
+}
+.counter {
+    margin: 0;
+}
+.delete {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.delete:hover{
+    background-color: color-mix(in srgb, var(--red) 80%, #000000);
+}
+.share-seleted {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: .5rem 1rem;
+    cursor: pointer;
+}
+.share-seleted:hover{
+    background-color: color-mix(in srgb, var(--red) 80%, #000000);
+}
+
+
+
+
+.table-wrapper {
+    overflow-x: scroll, hidden;
+}
+.table-dash {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid var(--gray);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1);
+    /* Box shadow for depth */
+}
+
+@media (max-width: 768px) {
+    .table-dash {
+        width: 90rem;
+    }
+}
+
+.table-dash thead {
+    background-color: var(--gray);
+}
+
+.table-dash th {
+    padding: 1.5rem 0;
+    font-size: 1.4rem;
+}
+.table-dash th input[type="checkbox"] {
+    appearance: none;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+    border-radius: .5rem;
+    border: 1px solid var(--dark_gray);
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+.table-dash th input[type="checkbox"]:checked {
+    background-color: var(--dark_gray);
+    transition: all .3s ease-in-out;
+    position: relative;
+}
+.table-dash th input[type="checkbox"]:checked::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '✓';
+    color: var(--white);
+}
+
+.table-dash tr td {
+    text-align: center;
+    padding: .5rem 0;
+    border-bottom: 2px solid var(--gray);
+    font-size: 1.2rem;
+    background-color: var(--white);
+}
+
+.table-dash tr:last-of-type td {
+    border-bottom: none;
+}
+
+
+
+
+
+.table-dash td.noproducts {
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 2rem 0;
+}
+
+.table-dash td.noproducts a {
+    color: var(--blue);
+}
+.imgAX {
+    height: 300px;
+    width: 400px;
+}
+
+
+.table-dash tr.selectedRow{
+    border: #d1c5ff;
+}
+.table-dash tr.selectedRow td {
+    background-color: #eef1f3;
+}
+
+
+
+
+
+
+
+
+
+
+
+.cargar{
+    background-color: var(--dark_gray);
+    padding: 5px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 120px;
+    cursor: pointer;
+}
+.cargar:hover{
+    background-color: black;
+}

@@ -15,11 +15,12 @@ import formatToMoney from '../../helpers/formatMoney';
 
 // **************** Images ****************
 import clients from '../../assets/img/inventory.png';
-import lunaAxImage from '../../assets/img/luna_ax.png';
 import GoTopBtn from '../../components/Btns/GoTopBtn';
 
 // ******************** Components ********************
 import FloatAlert from '../../components/Alert/FloatAlert';
+import SearcherDashboard from '../../components/SearcherDashboard/SearcherDashboard';
+import TableDashboard from '../../components/TableDashboard/TableDashboard';
 
 const Inventory = () => {
     const { auth } = useAuth();
@@ -191,26 +192,6 @@ const Inventory = () => {
         }
     };
 
-    const handleOrder = (e) => {
-        setOrder(e.target.value);
-        setFilteredProducts(sortedProducts);
-    };
-
-    const handleOrderType = (e) => {
-        setOrderType(e.target.value);
-        setFilteredProducts(sortedProducts);
-    };
-
-    const handleSearch = (e) => {
-        setSearch(e.target.value);
-        filterProducts(e.target.value, visible);
-    };
-
-    const handleVisible = (e) => {
-        setVisible(e.target.dataset.value);
-        filterProducts(search, e.target.dataset.value);
-    };
-
     const filterProducts = (search, visible) => {
         setFilteredProducts(filteredProducts.map(product => product.selected = false));
         const visibleFiltered = data.filter(product => {
@@ -248,172 +229,93 @@ const Inventory = () => {
                 </div>
             </div>
             <div className={`${styles.filters} `}>
-                <div className={styles.searcher}>
-                    <input 
-                        type="text" 
-                        placeholder="Buscar productos" 
-                        onChange={handleSearch}
-                    />
-                    <i className={`fa-solid fa-search ${styles["search-icon"]}`}></i>
-                    <div className={styles.filterter}>
-                        <button className={`${styles["btn-filter"]}`}>
-                            <strong className={`${styles["Textfilter"]}`}>Filtrar</strong>
-                            <i className='fa-solid fa-sort'></i>
-                        </button>
-                        <div className={styles.dropdown}>
-                            <div className={styles.dropdownContent}>
-                                <button
-                                    className={`${orderType === 'name' ? styles.active : ''}`}
-                                    value={'name'}
-                                    onClick={handleOrderType}
-                                >
-                                    <i className="fa-solid fa-a"></i>
-                                    Nombre
-                                </button>
-                                <button
-                                    className={`${orderType === 'stock' ? styles.active : ''}`}
-                                    value={'stock'}
-                                    onClick={handleOrderType}
-                                >
-                                    <i className="fa-solid fa-box"></i>
-                                    Cantidad
-                                </button>
-                                <button
-                                    className={`${orderType === 'price' ? styles.active : ''}`}
-                                    value={'price'}
-                                    onClick={handleOrderType}
-                                >
-                                    <i className="fa-solid fa-money-check-dollar"></i>
-                                    Precio
-                                </button>
-                                <hr className={styles.divider} />
-                                <button
-                                    className={`${order === 'asc' ? styles.active : ''}`}
-                                    value={'asc'}
-                                    onClick={handleOrder}
-                                >
-                                    Ascendente
-                                </button>
-                                <button
-                                    className={`${order === 'desc' ? styles.active : ''}`}
-                                    value={'desc'}
-                                    onClick={handleOrder}
-                                >
-                                    Descendente
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <SearcherDashboard 
+                    setSearch={setSearch}
+                    filterList={filterProducts}
+                    visible={visible}
+                    setOrder={setOrder}
+                    order={order}
+                    setOrderType={setOrderType}
+                    orderType={orderType}
+                    sortedList={sortedProducts}
+                    setFilteredList={setFilteredProducts}
+                    options={[
+                        {name: 'Nombre', type: 'name'},
+                        {name: 'Cantidad', type: 'stock'},
+                        {name: 'Precio', type: 'price'}
+                    ]}
+                    listName='productos'
+                />
                 <Link to='/dashboard/inventory/set'><button className={styles.configinventory}><i className="fa-solid fa-dolly"></i> Configurar inventario</button></Link>
             </div>
-            <div className={styles["Filtertabs"]}>
-                <div className={styles["radio-inputs"]}>
-                    <p className={styles.visibles}>Visibles: </p>
-                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "all" ? styles.active : ''}`} data-value="all">Todos</button>
-                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "high" ? styles.active : ''}`} data-value="high">Alto</button>
-                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "medium" ? styles.active : ''}`} data-value="medium">Medio</button>
-                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "low" ? styles.active : ''}`} data-value="low">Bajo</button>
-                </div>
-            </div>
-            <div className={styles.container}>
-                <div className={styles["table-wrapper"]}>
-                    <table className={styles["inventory-table"]}>
-                        <thead>
-                            <tr>
-                                <th className={styles["col-product"]}>Producto</th>
-                                <th className={styles["col-stock"]}>Cantidad</th>
-                                <th className={styles["col-price"]}>Precio</th>
-                                <th className={styles["col-status"]}>Estatus</th>
-                                <th className={styles["col-edit"]}></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredProducts.length === 0 ? (
-                                <tr>
-                                    <td colSpan="10" className={styles.noproducts}>
-                                        <div>
-                                            <img className={styles["imgAX"]} src={lunaAxImage} alt="Axolotl-Waiting" />
-                                        </div>
-                                        No hay productos aún. <Link to="/dashboard/products/new">Crea uno.</Link></td>
-                                </tr>
-                            ):
-                                filteredProducts.map((item, index) => {
-                                    if(index < limit){
-                                        item.visible = true;
-                                        return (
-                                            <tr 
-                                                key={item.id} 
-                                                className={`${item.selected ? styles.selectedRow : ''}`}
-                                            >
-                                                
-                                                <td>{item.name}</td>
-                                                <td>{renderTableCell(item.stock, "stock", item.id)}</td>
-                                                <td>{renderTableCell(item.price, "price", item.id)}</td>
-                                                <td>{setStatus(item.stock, item)}</td>
+            <TableDashboard
+                columns={[
+                    {prop: 'Producto', width: '30%'},
+                    {prop: 'Cantidad', width: '10%'},
+                    {prop: 'Precio', width: '20%'},
+                    {prop: 'Estado', width: '10%'},
+                    {prop: 'actions', width: '20%'},
+                ]}
+                listLength={filteredProducts.length}
+                filterList={filterProducts}
+                search={search}
+                visibleCount={visibleCount}
+                limit={limit}
+                setLimit={setLimit}
+                visible={visible}
+                setVisible={setVisible}
+                visibleOptions={[
+                    {name: 'Alto', type: 'high'},
+                    {name: 'Medio', type: 'medium'},
+                    {name: 'Bajo', type: 'low'},
+                ]}
+                listName='productos'
+                createNew='/dashboard/products/new'
+            >
+                {filteredProducts.map((item, index) => {
+                    if(index < limit){
+                        item.visible = true;
+                        return (
+                            <tr 
+                                key={item.id} 
+                                className={`${item.selected ? styles.selectedRow : ''}`}
+                            >
+                                
+                                <td>{item.name}</td>
+                                <td>{renderTableCell(item.stock, "stock", item.id)}</td>
+                                <td>{renderTableCell(item.price, "price", item.id)}</td>
+                                <td>{setStatus(item.stock, item)}</td>
 
-                                                <td>
-                                                    {editingRow === item.id ? (
-                                                        <div>
-                                                            <button
-                                                                onClick={() => handleSaveClick(item.id)}
-                                                                className={`${styles.guardar} ${loading ? styles.loading : ""}`}
-                                                            >
-                                                                <i className="fa-solid fa-save"></i>
-                                                                {loading ? 'Guardando...' : 'Guardar'}
-                                                            </button>
-                                                        </div>
-                                                    ) : editingRow === null ? (
-                                                        <button 
-                                                            onClick={() => handleEditClick(item.id)} 
-                                                            className={styles.editar}
-                                                        >
-                                                            <i className="fa-solid fa-pen"></i>
-                                                            Editar
-                                                        </button>
-                                                    ) : (
-                                                        <p></p>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        )
-                                    }else{
-                                        item.visible = false;
-                                    }
-                                })
-                            }
-                            {dataLength > limitIncrement &&
-                                <tr className={styles.megarow}>
-                                    <td colSpan="2">
-                                        <strong>Inventario cargados: </strong>{visibleCount}
-                                    </td>
-                                    <td colSpan="1">
-                                        {dataLength > limit &&
-                                            <button 
-                                                className={styles.cargar}
-                                                type='button'
-                                                onClick={() => {
-                                                    setLimit(limit + limitIncrement);
-                                                }}
-                                            >Cargar más</button>
-                                        }
-                                    </td>
-                                    <td colSpan="1">
-                                        {limit > limitIncrement &&
-                                            <button 
-                                                className={styles.cargar}
-                                                type='button'
-                                                onClick={() => setLimit(limit - limitIncrement)}
-                                            >Cargar menos</button>
-                                        }
-                                    </td>
-                                    <td colSpan="2"></td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                                <td>
+                                    {editingRow === item.id ? (
+                                        <div>
+                                            <button
+                                                onClick={() => handleSaveClick(item.id)}
+                                                className={`${styles.guardar} ${loading ? styles.loading : ""}`}
+                                            >
+                                                <i className="fa-solid fa-save"></i>
+                                                {loading ? 'Guardando...' : 'Guardar'}
+                                            </button>
+                                        </div>
+                                    ) : editingRow === null ? (
+                                        <button 
+                                            onClick={() => handleEditClick(item.id)} 
+                                            className={styles.editar}
+                                        >
+                                            <i className="fa-solid fa-pen"></i>
+                                            Editar
+                                        </button>
+                                    ) : (
+                                        <p></p>
+                                    )}
+                                </td>
+                            </tr>
+                        )
+                    }else{
+                        item.visible = false;
+                    }
+                })}
+            </TableDashboard>
             <GoTopBtn />
         </div>
     );

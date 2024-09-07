@@ -1,26 +1,8 @@
 .orders-wrapper{
     padding: 6rem 0;
 }
-.table-wrapper{
-    overflow-x: scroll;
-}
-.orders-table td{
-    padding: 1rem;
-}
-.col-id,
-.col-total,
-.col-customer,
-.col-details,
-.col-status {
-    width: 10%;
-}
-.col-date,
-.col-notes,
-.col-delivery_date{
-    width: 15%;
-}
-.col-select{
-    width: 5%;
+.orders-row td{
+    padding: 1rem !important;
 }
 .cell-name p{
     margin: 0;
@@ -30,8 +12,7 @@
     overflow: hidden;
     text-align: center;
 }
-.cell-select input,
-.col-select input {
+.cell-select input {
     appearance: none;
     width: 2rem;
     height: 2rem;
@@ -42,15 +23,13 @@
     cursor: pointer;
 }
 
-.cell-select input:checked,
-.col-select input:checked {
+.cell-select input:checked {
     background-color: var(--dark_gray);
     transition: all .3s ease-in-out;
     position: relative;
 }
 
-.cell-select input:checked::after,
-.col-select input:checked::after {
+.cell-select input:checked::after {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -58,20 +37,11 @@
     content: '✓';
     color: var(--white);
 }
-.selectedRow{
-    border: #d1c5ff;
+tr.selectedRow{
+    border: #d1c5ff !important;
 }
-.selectedRow td {
-    background-color: #eef1f3; /* Change this to the color you prefer */
-    /* box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); */
-}
-.selected {
-    display: flex; /* Make .selected a flex container */
-    align-items: center; /* Center items vertically */
-    gap: 2rem;
-}
-.counter{
-    margin: 0;
+tr.selectedRow td {
+    background-color: #eef1f3 !important;
 }
 .share-seleted {
     background-color: black;
@@ -115,7 +85,7 @@
     font-size: 1.2rem;
 }
 .details-active td{
-    background-color: var(--gray_dashboard);
+    background-color: var(--gray_dashboard) !important;
 }
 .products-table{
     border-spacing: 0;
@@ -135,22 +105,18 @@
 .products-table tr:last-of-type td{
     border-bottom: none !important;
 }
-.imgAX {
-    height: 300px;
-    width: 400px;
-}
 td.products23{
-    background-color: var(--gray_dashboard);
-    position: relative;
-    padding: 3rem 6rem;
+    background-color: var(--gray_dashboard) !important;
+    position: relative !important;
+    padding: 3rem 6rem !important;
 }
 .products23 h2{
-    margin: 0;
+    margin: 0 !important;
 }
 .products23 td{
-    background-color: var(--gray_dashboard);
-    font-size: 12px;
-    position: relative;
+    background-color: var(--gray_dashboard) !important;
+    font-size: 12px !important;
+    position: relative !important;
 }
 .infofloatl{
     float: left;
@@ -188,162 +154,7 @@ td.products23{
     align-items: center;
 }
 
-.Textfilter {
-    margin-right: 10px;
-}
 
-.searcher {
-    position: relative;
-}
-
-.searcher input {
-    padding: .5rem .5rem .5rem 3rem;
-    width: 400px;
-    height: 40px;
-    border-radius: 1rem;
-    border: none;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    position: relative;
-    margin: 0;
-    background-color: var(--white);
-}
-
-.search-icon {
-    position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
-    left: 1rem;
-    font-size: 1.2rem;
-    color: var(--dark_gray);
-}
-.searcher {
-    display: flex;
-    align-items: center;
-}
-.btn-filter {
-    all: unset;
-    margin-left: 0rem;
-    cursor: pointer;
-    background-color: transparent;
-}
-
-.filterter {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 1rem;
-    position: relative;
-}
-
-.darkmode,
-.filterter {
-    cursor: pointer;
-    border-radius: 1rem;
-}
-
-
-.dropdown {
-    position: absolute;
-    display: none;
-    bottom: 0rem;
-    /* Position the dropdown content below the profile element */
-    transform: translateY(100%);
-    width: 12rem;
-    z-index: 1;
-}
-
-.dropdownContent {
-    background-color: var(--white);
-    flex-basis: 120px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 1rem;
-    font-size: 1.2rem;
-    width: 14rem;
-    overflow: hidden;
-}
-
-.dropdownContent button {
-    all: unset;
-    font-weight: var(--bold);
-    padding: 1rem 1.4rem;
-    border-radius: 0rem;
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    width: calc(100% - 2.8rem);
-}
-
-.dropdownContent button:hover,
-.dropdownContent .active {
-    background-color: var(--light_gray);
-}
-
-.divider {
-    border-top: 1px solid var(--gray);
-    margin: 0;
-}
-
-.filterter:hover .dropdown,
-.filterter .dropdown:hover {
-    display: block;
-}
-.radio-inputs {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 0.25rem;
-    width: 50rem;
-    font-size: 14px;
-}
-.radio-inputs button {
-    margin: 0;
-    border: none;
-    padding: .5rem 1rem;
-    border-radius: 0.5rem;
-}
-.visibles {
-    border-radius: 0.5rem;
-    color: var(--dark_blue);
-    font-weight: var(--bold);
-    transition: all .15s ease-in-out;
-    margin: 1rem 1rem 1rem 0;
-    padding: 0;
-    background-color: transparent;
-
-}
-.visibles2{
-    cursor: pointer;
-    background-color: transparent;
-}
-
-.active {
-    background-color: #fff;
-    font-weight: 600;
-}
-
-.Filtertabs {
-    border-top: 2px solid var(--gray);
-    display: flex;
-    align-items: center;
-    justify-content:space-between;
-}
-.counter{
-    margin: 0;
-}
-.cargar{
-    background-color: var(--dark_gray);
-    padding: 5px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    width: 120px;
-    cursor: pointer;
-}
-.cargar:hover{
-    background-color: black;
-}
 .pedidofinal{
     justify-content: center;
     margin: 0 auto;

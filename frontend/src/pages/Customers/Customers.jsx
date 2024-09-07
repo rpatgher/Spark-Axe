@@ -13,12 +13,13 @@ import useApp from '../../hooks/useApp';
 
 // ******************** Images ********************
 import clients from '../../assets/img/clients.png';
-import lunaAxImage from '../../assets/img/luna_ax.png';
 
 // ******************** Components ********************
 import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 import FloatAlert from '../../components/Alert/FloatAlert';
 import Modal from '../../components/Modals/GeneralModal';
+import SearcherDashboard from '../../components/SearcherDashboard/SearcherDashboard';
+import TableDashboard from '../../components/TableDashboard/TableDashboard';
 
 const Customers = () => {
     const { auth } = useAuth();
@@ -37,7 +38,6 @@ const Customers = () => {
     const [selectedCount, setSelectedCount] = useState(0);
     const [visibleCount, setVisibleCount] = useState(0);
     const [limit, setLimit] = useState(10);
-    const [limitIncrement, setLimitIncrement] = useState(10);
 
     const [modalDelete, setModalDelete] = useState(false);
     const [modalDeleteOne, setModalDeleteOne] = useState(false);
@@ -91,28 +91,6 @@ const Customers = () => {
         }
         return () => getCustomers();
     }, []);
-
-    const handleOrder = (e) => {
-        setSelectAll(false);
-        setOrder(e.target.value);
-        setFilteredElements(sortedElements);
-    };
-
-    const handleOrderType = (e) => {
-        setSelectAll(false);
-        setOrderType(e.target.value);
-        setFilteredElements(sortedElements);
-    };
-
-    const handleSearch = (e) => {
-        setSearch(e.target.value);
-        filterElements(e.target.value, visible);
-    };
-
-    const handleVisible = (e) => {
-        setVisible(e.target.dataset.value);
-        filterElements(search, e.target.dataset.value);
-    };
 
     const filterElements = (search, visible) => {
         setSelectAll(false);
@@ -301,230 +279,145 @@ const Customers = () => {
             </div>
             <div className={styles.container}>
                 <div className={`${styles.filters} `}>
-                    <div className={styles.searcher}>
-                        <input
-                            type="text"
-                            placeholder="Buscar productos"
-                            onChange={handleSearch}
-                        />
-                        <i className={`fa-solid fa-search ${styles["search-icon"]}`}></i>
-                        <div className={styles.filterter}>
-                            <button className={`${styles["btn-filter"]}`}>
-                                <strong className={`${styles["Textfilter"]}`}>Filtrar</strong>
-                                <i className='fa-solid fa-sort'></i>
-                            </button>
-                            <div className={styles.dropdown}>
-                                <div className={styles.dropdownContent}>
-                                    <button
-                                        className={`${orderType === 'id' ? styles.active : ''}`}
-                                        value={'id'}
-                                        onClick={handleOrderType}
-                                    >
-                                        <i className="fa-solid fa-hashtag"></i>
-                                        Numero de ID
-                                    </button>
-                                    <button
-                                        className={`${orderType === 'name' ? styles.active : ''}`}
-                                        value={'name'}
-                                        onClick={handleOrderType}
-                                    >
-                                        <i className="fa-solid fa-a"></i>
-                                        Nombre
-                                    </button>
-                                    <hr className={styles.divider} />
-                                    <button
-                                        className={`${order === 'asc' ? styles.active : ''}`}
-                                        value={'asc'}
-                                        onClick={handleOrder}
-                                    >
-                                        Ascendente
-                                    </button>
-                                    <button
-                                        className={`${order === 'desc' ? styles.active : ''}`}
-                                        value={'desc'}
-                                        onClick={handleOrder}
-                                    >
-                                        Descendente
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <SearcherDashboard 
+                        setSearch={setSearch}
+                        filterList={filterElements}
+                        visible={visible}
+                        setOrder={setOrder}
+                        order={order}
+                        setOrderType={setOrderType}
+                        orderType={orderType}
+                        sortedList={sortedElements}
+                        setFilteredList={setFilteredElements}
+                        setSelectAll={setSelectAll}
+                        options={[
+                            { name: 'Número de ID', type: 'id' },
+                            { name: 'Nombre', type: 'name' },
+                        ]}
+                        listName='clientes'
+                    />
                 </div>
-                <div className={styles["Filtertabs"]}>
-                    <div className={styles["radio-inputs"]}>
-                        <p className={styles.visibles}>Visibles: </p>
-                        <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "all" ? styles.active : ''}`} data-value="all">Todos</button>
-                        <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "confirmed" ? styles.active : ''}`} data-value="confirmed">Confirmados</button>
-                        <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "unconfirmed" ? styles.active : ''}`} data-value="unconfirmed">No Confirmados</button>
-                    </div>
-                    {selectedCount > 0 &&
-                        <div className={styles.selected}>
-                            <p className={styles.counter}><strong>Seleccionados:</strong> {selectedCount}</p>
-                            <button
-                                className={styles.delete}
-                                type='button'
-                                onClick={() => setModalDelete(true)}
-                            ><i className="fa-solid fa-trash"></i> Eliminar</button>
-                        </div>
-                    }
-                </div>
-                <div className={styles["table-wrapper"]}>
-                    <table className={styles["inventory-table"]}>
-                        <thead>
-                            <tr>
-                                <th className={styles["col-select"]}>
-                                    <input 
-                                        type="checkbox" 
-                                        onChange={handleSelectAll} 
-                                        checked={selectAll} 
-                                        disabled={editingRow !== null}
-                                        style={{
-                                            cursor: editingRow !== null ? "not-allowed" : "pointer"
-                                        }}
-                                    />
-                                </th>
-                                <th 
-                                    className={styles["col-name"]}
-                                    style={{
-                                        width: editingRow !== null ? "10%" : "20%"
-                                    }}
-                                >Nombre</th>
-                                {editingRow !== null && (
-                                    <th className={styles["col-lastname"]}>Apellido</th>
-                                )}
-                                <th className={styles["col-email"]}>Email</th>
-                                <th className={styles["col-number"]}>Número</th>
-                                <th className={styles["col-id"]}>ID</th>
-                                <th className={styles["col-contact"]}>Contacto</th>
-                                <th className={styles["col-confirmed"]}>Confirmado</th>
-                                <th className={styles["col-edit"]}>Editar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredElements.length === 0 ? (
-                                <tr>
-                                    <td colSpan="10" className={styles.noproducts}>
-                                        <div>
-                                            <img className={styles["imgAX"]} src={lunaAxImage} alt="Axolotl-Waiting" />
-                                        </div>
-                                        No cuentas con clientes aún.</td>
-                                </tr>
-                            ) :
-                                filteredElements.map((item, index) => {
-                                    if (index < limit) {
-                                        item.visible = true;
-                                        return (
-                                            <tr 
-                                                key={item.id} 
-                                                className={item.selected ? styles.selectedRow : ''}
+                <TableDashboard
+                    columns={editingRow !== null ? [
+                        { prop: 'checkbox', width: '5%' },
+                        { prop: 'Nombre', width: '10%' },
+                        { prop: 'Apellido', width: '10%' },
+                        { prop: 'Email', width: '15%' },
+                        { prop: 'Número', width: '15%' },
+                        { prop: 'ID', width: '10%' },
+                        { prop: 'Contacto', width: '15%' },
+                        { prop: 'Confirmado', width: '5%' },
+                        { prop: 'actions', width: '15%' },
+                    ] : [
+                        { prop: 'checkbox', width: '5%' },
+                        { prop: 'Nombre', width: '20%' },
+                        { prop: 'Email', width: '15%' },
+                        { prop: 'Número', width: '15%' },
+                        { prop: 'ID', width: '10%' },
+                        { prop: 'Contacto', width: '15%' },
+                        { prop: 'Confirmado', width: '5%' },
+                        { prop: 'actions', width: '15%' },
+                    ]}
+                    listLength={dataLength}
+                    filterList={filterElements}
+                    search={search}
+                    visibleCount={visibleCount}
+                    selectedCount={selectedCount}
+                    handleSelectAll={handleSelectAll}
+                    setSelectAll={setSelectAll}
+                    selectAll={selectAll}
+                    limit={limit}
+                    setLimit={setLimit}
+                    visible={visible}
+                    setVisible={setVisible}
+                    visibleOptions={[
+                        { name: 'Confirmados', type: 'confirmed' },
+                        { name: 'No Confirmados', type: 'unconfirmed' },
+                    ]}
+                    setModalDelete={setModalDelete}
+                >
+                    {filteredElements.map((item, index) => {
+                        if (index < limit) {
+                            item.visible = true;
+                            return (
+                                <tr 
+                                    key={item.id} 
+                                    className={item.selected ? styles.selectedRow : ''}
+                                >
+                                    <td className={styles["cell-select"]}>
+                                        <input
+                                            type="checkbox"
+                                            onChange={() => handleSelect(index)}
+                                            checked={item.selected || false}
+                                            disabled={editingRow !== null}
+                                            style={{
+                                                cursor: editingRow !== null ? "not-allowed" : "pointer"
+                                            }}
+                                        />
+                                    </td>
+                                    
+                                    {editingRow === item.id ? (
+                                        <>
+                                            <td>{renderTableCell(item.name, "name", item.id)}</td>
+                                            <td>{renderTableCell(item.lastname, "lastname", item.id)}</td>
+                                        </>
+                                    ) : (
+                                        <td
+                                            colSpan={editingRow !== null ? 2 : 1}
+                                        >{renderTableCell(item.name + " " + item.lastname, "name", item.id)}</td>
+                                    )}
+                                    <td>{renderTableCell(item.email, "email", item.id)}</td>
+                                    <td>{renderTableCell(item.phone, "phone", item.id)}</td>
+                                    <td>{String(item.index).padStart(10, '0')}</td>
+                                    <td>
+                                        <button className={styles.contactbtn} onClick={() => window.location.href = `https://api.whatsapp.com/send?phone=${item.numero}`}><i className="fab fa-whatsapp"></i></button>
+                                        <button className={styles.contactbtnt} onClick={() => window.location.href = `tel:${item.numero}`}>
+                                            <i className="fas fa-phone-alt"></i>
+                                        </button>
+                                        <button className={styles.contactbtn} onClick={() => window.location.href = `mailto:${item.email}`}><i className="fa-solid fa-envelope"></i></button>
+                                    </td>
+                                    <td className={styles["cell-confirmed"]}>
+                                        <p className={`${styles.confirmed} ${item.confirmed ? styles["confirmed-yes"] : styles["confirmed-no"]}`}>
+                                            {item.confirmed ? "Sí" : "No"}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        {editingRow === item.id ? (
+                                            <div className={styles["save-delete"]}>
+                                                <button
+                                                    onClick={() => handleSaveClick(item.id)}
+                                                    className={`${styles.guardar} ${loading ? styles.loading : ""}`}
+                                                >
+                                                    <i className="fa-solid fa-save"></i>
+                                                    {loading ? 'Guardando...' : 'Guardar'}
+                                                </button>
+                                                <button
+                                                    className={styles.deletemini}
+                                                    onClick={() => setModalDeleteOne(true)}
+                                                >
+                                                    <i className="fa-solid fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        ) : editingRow === null ? (
+                                            <button 
+                                                onClick={() => handleEditClick(item.id)} 
+                                                className={styles.editar}
                                             >
-                                                <td className={styles["cell-select"]}>
-                                                    <input
-                                                        type="checkbox"
-                                                        onChange={() => handleSelect(index)}
-                                                        checked={item.selected || false}
-                                                        disabled={editingRow !== null}
-                                                        style={{
-                                                            cursor: editingRow !== null ? "not-allowed" : "pointer"
-                                                        }}
-                                                    />
-                                                </td>
-                                                
-                                                {editingRow === item.id ? (
-                                                    <>
-                                                        <td>{renderTableCell(item.name, "name", item.id)}</td>
-                                                        <td>{renderTableCell(item.lastname, "lastname", item.id)}</td>
-                                                    </>
-                                                ) : (
-                                                    <td
-                                                        colSpan={editingRow !== null ? 2 : 1}
-                                                    >{renderTableCell(item.name + " " + item.lastname, "name", item.id)}</td>
-                                                )}
-                                                <td>{renderTableCell(item.email, "email", item.id)}</td>
-                                                <td>{renderTableCell(item.phone, "phone", item.id)}</td>
-                                                <td>{String(item.index).padStart(10, '0')}</td>
-                                                <td>
-                                                    <button className={styles.contactbtn} onClick={() => window.location.href = `https://api.whatsapp.com/send?phone=${item.numero}`}><i className="fab fa-whatsapp"></i></button>
-                                                    <button className={styles.contactbtnt} onClick={() => window.location.href = `tel:${item.numero}`}>
-                                                        <i className="fas fa-phone-alt"></i>
-                                                    </button>
-                                                    <button className={styles.contactbtn} onClick={() => window.location.href = `mailto:${item.email}`}><i className="fa-solid fa-envelope"></i></button>
-                                                </td>
-                                                <td className={styles["cell-confirmed"]}>
-                                                    <p className={`${styles.confirmed} ${item.confirmed ? styles["confirmed-yes"] : styles["confirmed-no"]}`}>
-                                                        {item.confirmed ? "Sí" : "No"}
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    {editingRow === item.id ? (
-                                                        <div className={styles["save-delete"]}>
-                                                            <button
-                                                                onClick={() => handleSaveClick(item.id)}
-                                                                className={`${styles.guardar} ${loading ? styles.loading : ""}`}
-                                                            >
-                                                                <i className="fa-solid fa-save"></i>
-                                                                {loading ? 'Guardando...' : 'Guardar'}
-                                                            </button>
-                                                            <button
-                                                                className={styles.deletemini}
-                                                                onClick={() => setModalDeleteOne(true)}
-                                                            >
-                                                                <i className="fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </div>
-                                                    ) : editingRow === null ? (
-                                                        <button 
-                                                            onClick={() => handleEditClick(item.id)} 
-                                                            className={styles.editar}
-                                                        >
-                                                            <i className="fa-solid fa-pen"></i>
-                                                            Editar
-                                                        </button>
-                                                    ) : (
-                                                        <p></p>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        )
-                                    } else {
-                                        item.visible = false;
-                                        item.selected = false;
-                                    }
-                                })}
-                            {dataLength > limitIncrement &&
-                                <tr className={styles.megarow}>
-                                    <td colSpan="4"></td>
-                                    <td colSpan="1">
-                                        <strong>Clientes cargados: </strong>{visibleCount}
+                                                <i className="fa-solid fa-pen"></i>
+                                                Editar
+                                            </button>
+                                        ) : (
+                                            <p></p>
+                                        )}
                                     </td>
-                                    <td colSpan="1">
-                                        {dataLength > limit &&
-                                            <button
-                                                className={styles.cargar}
-                                                type='button'
-                                                onClick={() => {
-                                                    setSelectAll(false);
-                                                    setLimit(limit + limitIncrement);
-                                                }}
-                                            >Cargar más</button>
-                                        }
-                                    </td>
-                                    <td colSpan="1">
-                                        {limit > limitIncrement &&
-                                            <button
-                                                className={styles.cargar}
-                                                type='button'
-                                                onClick={() => setLimit(limit - limitIncrement)}
-                                            >Cargar menos</button>
-                                        }
-                                    </td>
-                                    <td colSpan="3"></td>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                            )
+                        } else {
+                            item.visible = false;
+                            item.selected = false;
+                        }
+                    })}
+                </TableDashboard>
             </div>
             {modalDelete && 
                 <Modal 

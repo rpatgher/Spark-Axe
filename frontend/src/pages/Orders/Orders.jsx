@@ -15,9 +15,9 @@ import formatDate from "../../helpers/formatDate";
 import zeroFill from "../../helpers/zeroFill";
 
 // **************** Images ****************
-import lunaAxImage from "../../assets/img/luna_ax.png";
 import HeadingsRuta from "../../components/HeadingsRuta/HeadingsRuta";
-
+import SearcherDashboard from "../../components/SearcherDashboard/SearcherDashboard";
+import TableDashboard from "../../components/TableDashboard/TableDashboard";
 
 const Orders = () => {
     const { auth } = useAuth();
@@ -29,12 +29,10 @@ const Orders = () => {
     const [visible, setVisible] = useState("all");
     const [search, setSearch] = useState("");
 
-    const dataLength = orders.length;
     const [visibleCount, setVisibleCount] = useState(0);
     const [selectedCount, setSelectedCount] = useState(0);
     const [selectAll, setSelectAll] = useState(false);
     const [limit, setLimit] = useState(10);
-    const [limitIncrement, setLimitIncrement] = useState(10);
 
     useEffect(() => {
         const count = filteredOrders.filter(
@@ -109,26 +107,6 @@ const Orders = () => {
         setDetails(details === orderId ? "" : orderId);
     };
 
-    const handleOrder = (e) => {
-        setOrder(e.target.value);
-        setFilteredOrders(sortedOrders);
-    };
-
-    const handleOrderType = (e) => {
-        setOrderType(e.target.value);
-        setFilteredOrders(sortedOrders);
-    };
-
-    const handleSearch = (e) => {
-        setSearch(e.target.value);
-        filterOrders(e.target.value, visible);
-    };
-
-    const handleVisible = (e) => {
-        setVisible(e.target.dataset.value);
-        filterOrders(search, e.target.dataset.value);
-    };
-
     const filterOrders = (search, visible) => {
         setFilteredOrders(
             filteredOrders.map((order) => (order.selected = false))
@@ -155,7 +133,9 @@ const Orders = () => {
             return;
         }
         const filtered = visibleFiltered.filter((order) =>
-            zeroFill(order.index, 10).toLowerCase().includes(search.toLowerCase())
+            zeroFill(order.index, 10)
+                .toLowerCase()
+                .includes(search.toLowerCase())
         );
         setFilteredOrders(filtered);
     };
@@ -242,230 +222,86 @@ const Orders = () => {
             <HeadingsRuta currentHeading="Pedidos de Productos" routes={[]} />
             <h4>Administra tus pedidos</h4>
             <div className={`${styles.filters} `}>
-                <div className={styles.searcher}>
-                    <input
-                        type="text"
-                        placeholder="Buscar pedidos"
-                        onChange={handleSearch}
-                    />
-                    <i
-                        className={`fa-solid fa-search ${styles["search-icon"]}`}
-                    ></i>
-                    <div className={styles.filterter}>
-                        <button className={`${styles["btn-filter"]}`}>
-                            <strong className={`${styles["Textfilter"]}`}>
-                                Filtrar
-                            </strong>
-                            <i className="fa-solid fa-sort"></i>
-                        </button>
-                        <div className={styles.dropdown}>
-                            <div className={styles.dropdownContent}>
-                                <button
-                                    className={`${
-                                        orderType === "id" ? styles.active : ""
-                                    }`}
-                                    value={"id"}
-                                    onClick={handleOrderType}
-                                >
-                                    <i className="fa-solid fa-hashtag"></i>
-                                    Número
-                                </button>
-                                <button
-                                    className={`${
-                                        orderType === "date"
-                                            ? styles.active
-                                            : ""
-                                    }`}
-                                    value={"date"}
-                                    onClick={handleOrderType}
-                                >
-                                    <i className="fa-solid fa-calendar"></i>
-                                    Fecha de pedido
-                                </button>
-                                <button
-                                    className={`${
-                                        orderType === "due-date"
-                                            ? styles.active
-                                            : ""
-                                    }`}
-                                    value={"due-date"}
-                                    onClick={handleOrderType}
-                                >
-                                    <i className="fa-regular fa-calendar-days"></i>
-                                    Fecha de Entrega
-                                </button>
-                                <button
-                                    className={`${
-                                        orderType === "total"
-                                            ? styles.active
-                                            : ""
-                                    }`}
-                                    value={"total"}
-                                    onClick={handleOrderType}
-                                >
-                                    <i className="fa-solid fa-dollar-sign"></i>
-                                    Total
-                                </button>
-                                <hr className={styles.divider} />
-                                <button
-                                    className={`${
-                                        order === "asc" ? styles.active : ""
-                                    }`}
-                                    value={"asc"}
-                                    onClick={handleOrder}
-                                >
-                                    Ascendente
-                                </button>
-                                <button
-                                    className={`${
-                                        order === "desc" ? styles.active : ""
-                                    }`}
-                                    value={"desc"}
-                                    onClick={handleOrder}
-                                >
-                                    Descendente
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <SearcherDashboard
+                    setSearch={setSearch}
+                    filterList={filterOrders}
+                    visible={visible}
+                    setOrder={setOrder}
+                    order={order}
+                    setOrderType={setOrderType}
+                    orderType={orderType}
+                    sortedList={sortedOrders}
+                    setFilteredList={setFilteredOrders}
+                    setSelectAll={setSelectAll}
+                    listName="pedidos"
+                    options={[
+                        { name: "Número", type: "id" },
+                        { name: "Fecha de pedido", type: "date" },
+                        { name: "Fecha de entrega", type: "due-date" },
+                        { name: "Total", type: "total" },
+                    ]}
+                />
             </div>
-            <div className={styles["Filtertabs"]}>
-                <div className={styles["radio-inputs"]}>
-                    <p className={styles.visibles}>Visibles: </p>
-                    <button
-                        onClick={handleVisible}
-                        className={`${styles.visibles2} ${
-                            visible === "all" ? styles.active : ""
-                        }`}
-                        data-value="all"
-                    >
-                        Todos
-                    </button>
-                    <button
-                        onClick={handleVisible}
-                        className={`${styles.visibles2} ${
-                            visible === "send" ? styles.active : ""
-                        }`}
-                        data-value="send"
-                    >
-                        Enviados
-                    </button>
-                    <button
-                        onClick={handleVisible}
-                        className={`${styles.visibles2} ${
-                            visible === "progress" ? styles.active : ""
-                        }`}
-                        data-value="progress"
-                    >
-                        En progreso
-                    </button>
-                    <button
-                        onClick={handleVisible}
-                        className={`${styles.visibles2} ${
-                            visible === "closed" ? styles.active : ""
-                        }`}
-                        data-value="closed"
-                    >
-                        Cerrados
-                    </button>
-                    <button
-                        onClick={handleVisible}
-                        className={`${styles.visibles2} ${
-                            visible === "canceled" ? styles.active : ""
-                        }`}
-                        data-value="canceled"
-                    >
-                        Cancelados
-                    </button>
-                </div>
-                {selectedCount > 0 && (
-                    <div className={styles.selected}>
-                        <p className={styles.counter}>
-                            <strong>Seleccionados:</strong> {selectedCount}
-                        </p>
-                        <button
-                            className={styles["share-seleted"]}
-                            type="button"
-                        >
-                            Compartir <i className="fa-solid fa-share"></i>
-                        </button>
-                    </div>
-                )}
-            </div>
-            <div className={styles["table-wrapper"]}>
-                <table className={styles["orders-table"]}>
-                    <thead>
-                        <tr>
-                            <th className={styles["col-select"]}>
-                                <input
-                                    type="checkbox"
-                                    onChange={handleSelectAll}
-                                    checked={selectAll}
-                                />
-                            </th>
-                            <th className={styles["col-id"]}>Número</th>
-                            <th className={styles["col-date"]}>
-                                Fecha de pedido
-                            </th>
-                            <th className={styles["col-delivery_date"]}>
-                                Fecha de entrega
-                            </th>
-                            <th className={styles["col-customer"]}>Cliente</th>
-                            <th className={styles["col-status"]}>Estado</th>
-                            <th className={styles["col-notes"]}>Nota</th>
-                            <th className={styles["col-total"]}>Total</th>
-                            <th className={styles["col-details"]}>Detalles</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredOrders.length === 0 ? (
-                            <tr>
-                                <td colSpan="10" className={styles.noproducts}>
-                                    <div>
-                                        <img
-                                            className={styles["imgAX"]}
-                                            src={lunaAxImage}
-                                            alt="Axolotl-Waiting"
-                                        />
-                                    </div>
-                                    No cuentas con pedidos aún.
-                                </td>
-                            </tr>
-                        ) : (
-                            filteredOrders.map((order, index) => {
-                                if (index < limit) {
-                                    order.visible = true;
-                                    //Share to whatsapp pedidos
-                                    const share = () => {
-                                        const formatProductTable = (
-                                            products
-                                        ) => {
-                                            let table = "\n";
-                                            table +=
-                                                "Producto\tCantidad\tPrecio\tSubtotal\n";
-                                            products.forEach((product) => {
-                                                table += `${product.name}\t${
-                                                    product.quantity
-                                                }\t${product.price}\t${
-                                                    product.price *
-                                                    product.quantity
-                                                }\n`;
-                                            });
-                                            return table;
-                                        };
+            <TableDashboard
+                columns={[
+                    { prop: "checkbox", width: "5%" },
+                    { prop: "Número", width: "10%" },
+                    { prop: "Fecha de pedido", width: "15%" },
+                    { prop: "Fecha de entrega", width: "15%" },
+                    { prop: "Cliente", width: "10%" },
+                    { prop: "Estado", width: "10%" },
+                    { prop: "Nota", width: "15%" },
+                    { prop: "Total", width: "10%" },
+                    { prop: "Detalles", width: "10%" },
+                ]}
+                listLength={filteredOrders.length}
+                filterList={filterOrders}
+                search={search}
+                visibleCount={visibleCount}
+                selectedCount={selectedCount}
+                handleSelectAll={handleSelectAll}
+                setSelectAll={setSelectAll}
+                selectAll={selectAll}
+                limit={limit}
+                setLimit={setLimit}
+                visible={visible}
+                setVisible={setVisible}
+                visibleOptions={[
+                    { type: "send", name: "Enviados" },
+                    { type: "progress", name: "En progreso" },
+                    { type: "closed", name: "Cerrados" },
+                    { type: "canceled", name: "Cancelados" },
+                ]}
+                listName="pedidos"
+            >
+                {filteredOrders.map((order, index) => {
+                    if (index < limit) {
+                        order.visible = true;
+                        //Share to whatsapp pedidos
+                        const share = () => {
+                            const formatProductTable = (products) => {
+                                let table = "\n";
+                                table +=
+                                    "Producto\tCantidad\tPrecio\tSubtotal\n";
+                                products.forEach((product) => {
+                                    table += `${product.name}\t${
+                                        product.quantity
+                                    }\t${product.price}\t${
+                                        product.price * product.quantity
+                                    }\n`;
+                                });
+                                return table;
+                            };
 
-                                        const shareToWhatsApp = (message) => {
-                                            const url = `whatsapp://send?text=${encodeURIComponent(
-                                                message
-                                            )}`;
-                                            window.open(url, "_blank");
-                                        };
+                            const shareToWhatsApp = (message) => {
+                                const url = `whatsapp://send?text=${encodeURIComponent(
+                                    message
+                                )}`;
+                                window.open(url, "_blank");
+                            };
 
-                                        const shareArrayToWhatsApp = (
-                                            products
-                                        ) => {
-                                            const message = `
+                            const shareArrayToWhatsApp = (products) => {
+                                const message = `
 *ID de Pedido:* ${order.index}
 *Fecha de Pedido:* ${formatDate(order.createdAt)}
 *Cliente :* Issac Shakalo
@@ -474,349 +310,252 @@ const Orders = () => {
 ${formatProductTable(products)}
 *Total:* $${formatToMoney(parseFloat(order.total))}
                             `;
-                                            shareToWhatsApp(message);
-                                        };
+                                shareToWhatsApp(message);
+                            };
 
-                                        // Example product array
-                                        const products = [
-                                            {
-                                                name: "Producto 1",
-                                                quantity: 2,
-                                                price: 10,
-                                            },
-                                            {
-                                                name: "Producto 2",
-                                                quantity: 1,
-                                                price: 20,
-                                            },
-                                        ];
+                            // Example product array
+                            const products = [
+                                {
+                                    name: "Producto 1",
+                                    quantity: 2,
+                                    price: 10,
+                                },
+                                {
+                                    name: "Producto 2",
+                                    quantity: 1,
+                                    price: 20,
+                                },
+                            ];
 
-                                        shareArrayToWhatsApp(products);
-                                    };
+                            shareArrayToWhatsApp(products);
+                        };
 
-                                    return (
-                                        <Fragment
-                                            key={`${order.id}-${order.website_id}`}
+                        return (
+                            <Fragment key={`${order.id}-${order.website_id}`}>
+                                <tr
+                                    className={`${
+                                        details === order.id
+                                            ? styles["details-active"]
+                                            : ""
+                                    } ${
+                                        order.selected ? styles.selectedRow : ""
+                                    } ${styles["orders-row"]}`}
+                                >
+                                    <td className={styles["cell-select"]}>
+                                        <input
+                                            type="checkbox"
+                                            onChange={() => handleSelect(index)}
+                                            checked={order.selected || false}
+                                        />
+                                    </td>
+                                    <td>
+                                        {String(order.index).padStart(10, "0")}
+                                    </td>
+                                    <td>{formatDate(order.createdAt)}</td>
+                                    <td>
+                                        {order.delivery_date
+                                            ? formatDate(order.delivery_date)
+                                            : "----"}
+                                    </td>
+                                    <td className={styles["cell-name"]}>
+                                        <p>
+                                            {order.customer.name}{" "}
+                                            {order.customer.lastname}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <select
+                                            className={`${styles.select} ${
+                                                styles[`select-${order.status}`]
+                                            }`}
+                                            value={order.status}
+                                            data-id={order.id}
+                                            onChange={handleChangeStatus}
                                         >
-                                            <tr
-                                                className={`${
-                                                    details === order.id
-                                                        ? styles[
-                                                              "details-active"
-                                                          ]
-                                                        : ""
-                                                } ${
-                                                    order.selected
-                                                        ? styles.selectedRow
-                                                        : ""
-                                                }`}
+                                            <option value="IP">
+                                                En proceso
+                                            </option>
+                                            <option value="S">Enviado</option>
+                                            <option value="C">Cerrado</option>
+                                            <option value="CA">
+                                                Cancelado
+                                            </option>
+                                        </select>
+                                    </td>
+                                    <td>{order.notes}</td>
+                                    <td>
+                                        {formatToMoney(parseFloat(order.total))}{" "}
+                                        MXN
+                                    </td>
+                                    <td
+                                        className={styles.details}
+                                        onClick={() => toggleDetails(order.id)}
+                                    >
+                                        Ver{" "}
+                                        <i className="fa-regular fa-eye"></i>
+                                    </td>
+                                </tr>
+
+                                {details === order.id && (
+                                    <tr>
+                                        <td
+                                            colSpan="9"
+                                            className={styles.products23}
+                                        >
+                                            <h2>
+                                                Pedido:{" "}
+                                                {String(order.index).padStart(
+                                                    10,
+                                                    "0"
+                                                )}
+                                            </h2>
+                                            <div
+                                                className={
+                                                    styles.Descriptioncontfather
+                                                }
                                             >
-                                                <td
+                                                <div
                                                     className={
-                                                        styles["cell-select"]
+                                                        styles.Descriptioncont
                                                     }
                                                 >
-                                                    <input
-                                                        type="checkbox"
-                                                        onChange={() =>
-                                                            handleSelect(index)
-                                                        }
-                                                        checked={
-                                                            order.selected ||
-                                                            false
-                                                        }
-                                                    />
-                                                </td>
-                                                <td>
-                                                    {String(order.index).padStart(
-                                                        10,
-                                                        "0"
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {formatDate(
-                                                        order.createdAt
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {order.delivery_date
-                                                        ? formatDate(
-                                                              order.delivery_date
-                                                          )
-                                                        : "----"}
-                                                </td>
-                                                <td
-                                                    className={
-                                                        styles["cell-name"]
-                                                    }
-                                                >
-                                                    <p>
-                                                        {order.customer.name}{" "}
-                                                        {
-                                                            order.customer
-                                                                .lastname
-                                                        }
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <select
-                                                        className={`${
-                                                            styles.select
-                                                        } ${
-                                                            styles[
-                                                                `select-${order.status}`
-                                                            ]
-                                                        }`}
-                                                        value={order.status}
-                                                        data-id={order.id}
-                                                        onChange={
-                                                            handleChangeStatus
-                                                        }
-                                                    >
-                                                        <option value="IP">
-                                                            En proceso
-                                                        </option>
-                                                        <option value="S">
-                                                            Enviado
-                                                        </option>
-                                                        <option value="C">
-                                                            Cerrado
-                                                        </option>
-                                                        <option value="CA">
-                                                            Cancelado
-                                                        </option>
-                                                    </select>
-                                                </td>
-                                                <td>{order.notes}</td>
-                                                <td>
-                                                    {formatToMoney(
-                                                        parseFloat(order.total)
-                                                    )} MXN
-                                                </td>
-                                                <td
-                                                    className={styles.details}
-                                                    onClick={() =>
-                                                        toggleDetails(order.id)
-                                                    }
-                                                >
-                                                    Ver{" "}
-                                                    <i className="fa-regular fa-eye"></i>
-                                                </td>
-                                            </tr>
-
-                                            {details === order.id && (
-                                                <tr>
-                                                    <td
-                                                        colSpan="9"
+                                                    <h3
                                                         className={
-                                                            styles.products23
+                                                            styles.infofloatl
                                                         }
                                                     >
-                                                        <h2>
-                                                            Pedido: {String(order.index).padStart(10, "0")}
-                                                        </h2>
-                                                        <div
-                                                            className={
-                                                                styles.Descriptioncontfather
-                                                            }
-                                                        >
-                                                            <div
-                                                                className={
-                                                                    styles.Descriptioncont
-                                                                }
-                                                            >
-                                                                <h3
-                                                                    className={
-                                                                        styles.infofloatl
-                                                                    }
-                                                                >
-                                                                    Productos en el pedido:
-                                                                </h3>
-                                                                <table
-                                                                    className={
-                                                                        styles[
-                                                                            "products-table"
-                                                                        ]
-                                                                    }
-                                                                >
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>
-                                                                                Producto
-                                                                            </th>
-                                                                            <th>
-                                                                                Cantidad
-                                                                            </th>
-                                                                            <th>
-                                                                                Precio
-                                                                            </th>
-                                                                            <th>
-                                                                                Subtotal
-                                                                            </th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        {order.elements.map(
-                                                                            (
+                                                        Productos en el pedido:
+                                                    </h3>
+                                                    <table
+                                                        className={
+                                                            styles[
+                                                                "products-table"
+                                                            ]
+                                                        }
+                                                    >
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    Producto
+                                                                </th>
+                                                                <th>
+                                                                    Cantidad
+                                                                </th>
+                                                                <th>Precio</th>
+                                                                <th>
+                                                                    Subtotal
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {order.elements.map(
+                                                                (element) => (
+                                                                    <tr
+                                                                        key={`${element.name}-${order.id}`}
+                                                                    >
+                                                                        <td>
+                                                                            {
+                                                                                element.name
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
                                                                                 element
-                                                                            ) => (
-                                                                                <tr
-                                                                                    key={`${element.name}-${order.id}`}
-                                                                                >
-                                                                                    <td>
-                                                                                        {
-                                                                                            element.name
-                                                                                        }
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        {
-                                                                                            element
-                                                                                                .order_element
-                                                                                                .quantity
-                                                                                        }
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        {formatToMoney(
-                                                                                            element.price
-                                                                                        )} MXN
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        {formatToMoney(
-                                                                                            element.price *
-                                                                                                element
-                                                                                                    .order_element
-                                                                                                    .quantity
-                                                                                        )} MXN
-                                                                                    </td>
-                                                                                </tr>
-                                                                            )
-                                                                        )}
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <div
-                                                                className={
-                                                                    styles.Descriptioncont
-                                                                }
-                                                            >
-                                                                <h3>
-                                                                    {" "}
-                                                                    Ubicacion de
-                                                                    entrega:
-                                                                </h3>
-                                                                <p>
-                                                                    {
-                                                                        order.address
-                                                                    }
-                                                                </p>
-                                                                <h3>
-                                                                    Nota de
-                                                                    pedido
-                                                                </h3>
-                                                                <p>
-                                                                    {
-                                                                        order.notes
-                                                                    }
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div
+                                                                                    .order_element
+                                                                                    .quantity
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {formatToMoney(
+                                                                                element.price
+                                                                            )}{" "}
+                                                                            MXN
+                                                                        </td>
+                                                                        <td>
+                                                                            {formatToMoney(
+                                                                                element.price *
+                                                                                    element
+                                                                                        .order_element
+                                                                                        .quantity
+                                                                            )}{" "}
+                                                                            MXN
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            )}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        styles.Descriptioncont
+                                                    }
+                                                >
+                                                    <h3>
+                                                        {" "}
+                                                        Ubicacion de entrega:
+                                                    </h3>
+                                                    <p>{order.address}</p>
+                                                    <h3>Nota de pedido</h3>
+                                                    <p>{order.notes}</p>
+                                                </div>
+                                            </div>
+                                            <div className={styles.pedidofinal}>
+                                                <div>
+                                                    <h3
+                                                        className={
+                                                            styles.infofloatr
+                                                        }
+                                                    >
+                                                        Total de Pedido:{" "}
+                                                        <span
                                                             className={
-                                                                styles.pedidofinal
+                                                                styles.infofloatrb
                                                             }
                                                         >
-                                                            <div>
-                                                                <h3
-                                                                    className={
-                                                                        styles.infofloatr
-                                                                    }
-                                                                >
-                                                                    Total de Pedido:{" "}
-                                                                    <span
-                                                                        className={
-                                                                            styles.infofloatrb
-                                                                        }
-                                                                    >
-                                                                        {formatToMoney(parseFloat(order.total))} MXN
-                                                                    </span>
-                                                                </h3>
-                                                                <h3
-                                                                    className={
-                                                                        styles.infofloatr
-                                                                    }
-                                                                >
-                                                                    Status:{" "}
-                                                                    <span
-                                                                        className={
-                                                                            styles.infofloatrb
-                                                                        }
-                                                                    >
-                                                                        {formatStatus(
-                                                                            order.status
-                                                                        )}
-                                                                    </span>
-                                                                </h3>
-                                                            </div>
-                                                            <button
-                                                                className={
-                                                                    styles.STW
-                                                                }
-                                                                onClick={share}
-                                                            >
-                                                                Compartir pedido{" "}
-                                                                <i className="fa-solid fa-share"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            )}
-                                        </Fragment>
-                                    );
-                                } else {
-                                    order.visible = false;
-                                }
-                            })
-                        )}
-                        {dataLength > limitIncrement && (
-                            <tr className={styles.megarow}>
-                                <td colSpan="3">
-                                    <strong>Pedidos cargados: </strong>
-                                    {visibleCount}
-                                </td>
-                                <td colSpan="1">
-                                    {dataLength > limit && (
-                                        <button
-                                            className={styles.cargar}
-                                            type="button"
-                                            onClick={() => {
-                                                setLimit(
-                                                    limit + limitIncrement
-                                                );
-                                            }}
-                                        >
-                                            Cargar más
-                                        </button>
-                                    )}
-                                </td>
-                                <td colSpan="1">
-                                    {limit > limitIncrement && (
-                                        <button
-                                            className={styles.cargar}
-                                            type="button"
-                                            onClick={() =>
-                                                setLimit(limit - limitIncrement)
-                                            }
-                                        >
-                                            Cargar menos
-                                        </button>
-                                    )}
-                                </td>
-                                <td colSpan="3"></td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-            </div>
+                                                            {formatToMoney(
+                                                                parseFloat(
+                                                                    order.total
+                                                                )
+                                                            )}{" "}
+                                                            MXN
+                                                        </span>
+                                                    </h3>
+                                                    <h3
+                                                        className={
+                                                            styles.infofloatr
+                                                        }
+                                                    >
+                                                        Status:{" "}
+                                                        <span
+                                                            className={
+                                                                styles.infofloatrb
+                                                            }
+                                                        >
+                                                            {formatStatus(
+                                                                order.status
+                                                            )}
+                                                        </span>
+                                                    </h3>
+                                                </div>
+                                                <button
+                                                    className={styles.STW}
+                                                    onClick={share}
+                                                >
+                                                    Compartir pedido{" "}
+                                                    <i className="fa-solid fa-share"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
+                            </Fragment>
+                        );
+                    } else {
+                        order.visible = false;
+                    }
+                })}
+            </TableDashboard>
         </div>
     );
 };

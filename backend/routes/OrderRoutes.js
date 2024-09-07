@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.route('/:website_id')
     .get(checkAuth, getOrders)
-    .post(checkAuth, createOrder);
+    .post(createOrder);
 
 router.route('/status/:website_id/:order_id')
     .put(checkAuth, updateOrderStatus);
