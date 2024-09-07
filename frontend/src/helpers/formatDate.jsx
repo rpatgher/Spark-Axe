@@ -1,5 +1,5 @@
 function formatDate (date) {
-  return new Date(date).toLocaleString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }).replace(' ', ' de ');
+  return new Date(date).toLocaleString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
 export default formatDate;
