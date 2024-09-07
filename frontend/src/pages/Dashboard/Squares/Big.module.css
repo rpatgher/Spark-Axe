@@ -37,17 +37,29 @@
     box-shadow: none;
 }
 .anouncetable {
-    /* width: 95%;
-    margin: 1rem auto; */
     border: none;
     border-radius: 0;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
+.anouncetable thead{
+    background-color: var(--gray);
 }
 .anouncetable th{
     padding: 1rem;
+    font-size: 1.4rem;
 }
 .anouncetable td{
     padding: 1rem;
     background-color: transparent;
+    text-align: center;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--gray);
+}
+.anouncetable tr:last-of-type td{
+    border-bottom: none;
 }
 .status{
     padding: .5rem 0;

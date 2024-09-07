@@ -1,21 +1,21 @@
 import { Link } from 'react-router-dom';
 
+// ********************* Components ********************
+import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
+
+
 // ********************* Styles ********************
 import styles from './Advertisements.module.css';
 
+
 const Advertisements = () => {
     return (
-        <div>
-            <h1>Anuncios</h1>
-            <h4>Enseña tus anuncios</h4>
-            <Link to='/dashboard/advertisements/new'>
-                        <button
-                            className={styles["btn-new-ad"]}
-                        >
-                            <i className="fa-solid fa-plus"></i>
-                            <p>Agregar Anuncio</p>
-                        </button>
-                        </Link>
+        <div className={styles['adverts-wrapper']}>
+            <HeadingsRuta 
+                currentHeading="Anuncios"
+                routes={[]}
+            />
+            <h4>Publica tus anuncios</h4>
         </div>
     )
 }
