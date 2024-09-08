@@ -8,7 +8,9 @@ import {
     editCategory,
     deleteCategory,
     createOneCategory,
-    createOneSubcategory
+    createOneSubcategory,
+    changeCategoryIndex,
+    changeSubcategoryIndex
 } from '../controllers/CategoryController.js';
 
 import checkAuth from "../middleware/checkAuth.js";
@@ -20,6 +22,12 @@ router.route('/')
 
 router.route('/one')
     .post(checkAuth, createOneCategory);
+
+router.route('/index')
+    .put(checkAuth, changeCategoryIndex);
+
+router.route('/index/sub')
+    .put(checkAuth, changeSubcategoryIndex);
 
 router.route('/sub/one')
     .post(checkAuth, createOneSubcategory);

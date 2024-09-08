@@ -2,6 +2,10 @@ import { Fragment, useEffect, useState } from 'react';
 
 import clientAxios from '../../config/clientAxios';
 
+import { DndContext } from '@dnd-kit/core';
+import { SortableContext } from '@dnd-kit/sortable';
+import { restrictToFirstScrollableAncestor, restrictToVerticalAxis, restrictToWindowEdges } from '@dnd-kit/modifiers';
+
 
 // ****************** Styles ******************
 import styles from './ModalEditCategories.module.css'
@@ -9,6 +13,10 @@ import styles from './ModalEditCategories.module.css'
 // ****************** Hooks ******************
 import useApp from '../../hooks/useApp';
 import useAuth from '../../hooks/useAuth';
+
+// ****************** Components ******************
+import SortableItem from './SortableItem';
+
 
 const ModalEditCategories = ({closeModal, categories, setCategories}) => {
     const { alert, handleAlert } = useApp();
@@ -297,7 +305,109 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
 
     }
 
+    const handleDragEndSubcategories = async ({active, over}) => {
+        if (active?.id !== over?.id) {
+            const activeIndex = subcategories.findIndex(subcategory => subcategory.id === active.id);
+            const overIndex = subcategories.findIndex(subcategory => subcategory.id === over.id);
 
+            // console.log(subcategories);
+            const oldSubcategories = [...subcategories];
+
+            const newSubcategories = [...subcategories];
+            newSubcategories.splice(activeIndex, 1);
+            newSubcategories.splice(overIndex, 0, subcategories[activeIndex]);
+
+            newSubcategories.map((subcategory, index) => {
+                subcategory.index = index + 1;
+            });
+
+            // console.log(newSubcategories);
+
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            try {
+                setSubcategories(newSubcategories);
+                setCategories(categories.map(category => {
+                    if(category.name === currentCategory.name){
+                        return {
+                            ...category,
+                            subcategories: newSubcategories
+                        }
+                    }
+                    return category;
+                }));
+                setLoading(true);
+                document.body.style.cursor = "wait";
+                const response = await clientAxios.put(`/api/categories/index/sub`, {subcategories: newSubcategories}, config);
+                if(response.status === 200 || response.status === 201){
+                    handleAlert('Subcategorías reordenadas correctamente', false);
+                }
+            } catch (error) {
+                console.log(error);
+                handleAlert('Hubo un error al reordenar las subcategorías', true);
+                setSubcategories(oldSubcategories);
+                setCategories(categories.map(category => {
+                    if(category.name === currentCategory.name){
+                        return {
+                            ...category,
+                            subcategories: oldSubcategories
+                        }
+                    }
+                    return category;
+                }));
+            }
+            finally {
+                setLoading(false);
+                document.body.style.cursor = "default";
+            }
+        }
+    }
+
+    const handleDragEndCategories = async ({active, over}) => {
+        if (active?.id !== over?.id) {
+            const activeIndex = categories.findIndex(category => category.id === active.id);
+            const overIndex = categories.findIndex(category => category.id === over.id);
+
+            const oldCategories = [...categories];
+
+            const newCategories = [...categories];
+            newCategories.splice(activeIndex, 1);
+            newCategories.splice(overIndex, 0, categories[activeIndex]);
+
+            newCategories.map((category, index) => {
+                category.index = index + 1;
+            });
+
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            try {
+                setCategories(newCategories);
+                setLoading(true);
+                document.body.style.cursor = "wait";
+                const response = await clientAxios.put(`/api/categories/index`, {categories: newCategories}, config);
+                if(response.status === 200 || response.status === 201){
+                    handleAlert('Categorías reordenadas correctamente', false);
+                }
+            } catch (error) {
+                console.log(error);
+                handleAlert('Hubo un error al reordenar las categorías', true);
+                setCategories(oldCategories);
+            } finally {
+                setLoading(false);
+                document.body.style.cursor = "default";
+            }
+        }
+    }
 
 
     return (
@@ -330,6 +440,11 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                             {newSubcategoryActive === false && (
                                 <button
                                     className={styles.create}
+                                    style={{
+                                        opacity: loading ? 0.5 : 1,
+                                        cursor: loading ? "wait" : "pointer"
+                                    }}
+                                    disabled={loading}
                                     onClick={() => {
                                         setNewSubcategoryActive(true);
                                     }}
@@ -344,76 +459,97 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                         >
                             {subcategories.length === 0 && !newSubcategoryActive ? (
                                 <p className={styles.nocategories}>No hay subcategorías</p>
-                            ) : subcategories.map(subcategory => (
-                                <div 
-                                    key={subcategory.id}
-                                    className={styles.subcategory}
+                            ) : (
+                                <DndContext
+                                    onDragEnd={handleDragEndSubcategories}
+                                    modifiers={[restrictToVerticalAxis, restrictToWindowEdges, restrictToFirstScrollableAncestor]}
                                 >
-                                    {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
-                                        <input
-                                            type="text"
-                                            value={editingSubcategory.name}
-                                            onChange={handleEditSubcategory}
-                                        />
-                                    ) : (
-                                        <h3>{subcategory.name}</h3>
-                                    )}
-                                    <div className={styles.buttons}>
-                                        {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
-                                            <>
-                                                <button
-                                                    onClick={editSubcategoryFunc}
-                                                    style={{
-                                                        opacity: loading ? 0.5 : 1,
-                                                        cursor: loading ? "wait" : "pointer"
-                                                    }}
-                                                    disabled={loading}
-                                                    className={styles.save}
-                                                >
-                                                    <i className="fa-solid fa-floppy-disk"></i>
-                                                </button>
-                                                <button
-                                                    onClick={() => {
-                                                        setEditingSubcategory(null);
-                                                    }}
-                                                    style={{
-                                                        opacity: loading ? 0.5 : 1,
-                                                        cursor: loading ? "wait" : "pointer"
-                                                    }}
-                                                    disabled={loading}
-                                                    className={styles.cancel}
-                                                >
-                                                    <i className="fa-solid fa-times"></i>
-                                                </button>
-                                            </>
-                                        ) : editingSubcategory === null ? !newSubcategoryActive && (
-                                            <button
-                                                onClick={() => {
-                                                    setEditingSubcategory(subcategory);
-                                                }}
-                                                className={styles.editBtn}
+                                    <SortableContext 
+                                        items={subcategories}
+                                    >
+                                        {subcategories.map(subcategory => (
+                                            <SortableItem
+                                                key={subcategory.id}
+                                                id={subcategory.id}
+                                                handleActive={true}
                                             >
-                                                <i className="fa-solid fa-pencil"></i> Editar
-                                            </button>
-                                        ) : null}
-                                        {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
-                                            <button
-                                                style={{
-                                                    opacity: loading ? 0.5 : 1,
-                                                    cursor: loading ? "wait" : "pointer"
-                                                }}
-                                                disabled={loading}
-                                                onClick={() => {
-                                                    deleteSubcategory(subcategory.id);
-                                                }}
-                                                className={styles.deleteCat}
-                                            >
-                                                <i className="fa-solid fa-trash"></i>
-                                            </button>
-                                        ) : null}
-                                    </div>
-                                </div>
-                            ))}
+                                                <div 
+                                                    className={styles.subcategory}
+                                                >
+                                                    {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
+                                                        <input
+                                                            type="text"
+                                                            value={editingSubcategory.name}
+                                                            onChange={handleEditSubcategory}
+                                                        />
+                                                    ) : (
+                                                        <h3>{subcategory.name}</h3>
+                                                    )}
+                                                    <div className={styles.buttons}>
+                                                        {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
+                                                            <>
+                                                                <button
+                                                                    onClick={editSubcategoryFunc}
+                                                                    style={{
+                                                                        opacity: loading ? 0.5 : 1,
+                                                                        cursor: loading ? "wait" : "pointer"
+                                                                    }}
+                                                                    disabled={loading}
+                                                                    className={styles.save}
+                                                                >
+                                                                    <i className="fa-solid fa-floppy-disk"></i>
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setEditingSubcategory(null);
+                                                                    }}
+                                                                    style={{
+                                                                        opacity: loading ? 0.5 : 1,
+                                                                        cursor: loading ? "wait" : "pointer"
+                                                                    }}
+                                                                    disabled={loading}
+                                                                    className={styles.cancel}
+                                                                >
+                                                                    <i className="fa-solid fa-times"></i>
+                                                                </button>
+                                                            </>
+                                                        ) : editingSubcategory === null ? !newSubcategoryActive && (
+                                                            <button
+                                                                onClick={() => {
+                                                                    setEditingSubcategory(subcategory);
+                                                                }}
+                                                                style={{
+                                                                    opacity: loading ? 0.5 : 1,
+                                                                    cursor: loading ? "wait" : "pointer"
+                                                                }}
+                                                                disabled={loading}
+                                                                className={styles.editBtn}
+                                                            >
+                                                                <i className="fa-solid fa-pencil"></i> Editar
+                                                            </button>
+                                                        ) : null}
+                                                        {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
+                                                            <button
+                                                                style={{
+                                                                    opacity: loading ? 0.5 : 1,
+                                                                    cursor: loading ? "wait" : "pointer"
+                                                                }}
+                                                                disabled={loading}
+                                                                onClick={() => {
+                                                                    deleteSubcategory(subcategory.id);
+                                                                }}
+                                                                className={styles.deleteCat}
+                                                            >
+                                                                <i className="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        ) : null}
+                                                    </div>
+                                                </div>
+                                            </SortableItem>
+                                        ))}
+                                    </SortableContext>
+                                </DndContext>
+                            )}
                             {newSubcategoryActive &&
                                 <div className={styles.newSubcat}>
                                     <input
@@ -475,6 +611,11 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                             setEditCategory(!editCategory);
                                             setEditingCategory(null);
                                         }}
+                                        style={{
+                                            opacity: loading ? 0.5 : 1,
+                                            cursor: loading ? "wait" : "pointer"
+                                        }}
+                                        disabled={loading}
                                         className={`${editCategory ? styles.cancel : styles.edit}`}
                                     >
                                         
@@ -497,97 +638,114 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                         >
                             {categories.length === 0 && !newCategoryActive ? (
                                 <p className={styles.nocategories}>No hay categorías</p>
-                            ) : categories.map(category => (
-                                <div 
-                                    key={category.id}
-                                    className={`${styles.category} ${!editCategory ? styles["category-hover"] : ''} ${editingCategory !== null ? styles['editing-category'] : ''}
-                                    `}
-                                    onClick={() => {
-                                        if(!editCategory && newCategoryActive === false){
-                                            setSubcategories(category.subcategories)
-                                            setCurrentCategory(category)
-                                        }
-                                    }}
+                            ) : (
+                                <DndContext
+                                    onDragEnd={handleDragEndCategories}
+                                    modifiers={[restrictToVerticalAxis, restrictToWindowEdges, restrictToFirstScrollableAncestor]}
                                 >
-                                    <div className={styles.title}>
-                                        {editingCategory !== null && editingCategory.id === category.id ? (
-                                            <input
-                                                type="text"
-                                                name='name'
-                                                value={editingCategory.name}
-                                                onChange={(e) => {
-                                                    setEditingCategory({
-                                                        ...editingCategory,
-                                                        name: e.target.value
-                                                    });
-                                                }}
-                                            />
-                                        ) : (
-                                            <h3>{category.name}</h3>
-                                        )}
-                                        {editCategory && editingCategory ===  null ? (
-                                            <button
-                                                className={styles.rename}
-                                                onClick={() => {
-                                                    setEditingCategory(category);
-                                                }}
+                                    <SortableContext 
+                                        items={categories}
+                                    >
+                                        {categories.map(category => (
+                                            <SortableItem
+                                                key={category.id}
+                                                id={category.id}
+                                                handleActive={editCategory}
                                             >
-                                                <i className="fa-regular fa-pen-to-square"></i>
-                                            </button>
-                                        ) : (
-                                            null
-                                        )}
-                                        {editingCategory !== null && editingCategory.id === category.id ? (
-                                            <div className={styles.actions}>
-                                                <button
-                                                    style={{
-                                                        opacity: loading ? 0.5 : 1,
-                                                        cursor: loading ? "wait" : "pointer"
-                                                    }}
-                                                    disabled={loading}
-                                                    onClick={editCategoryFunc}
-                                                    className={styles.save}
-                                                >
-                                                    <i className="fa-solid fa-floppy-disk"></i>
-                                                </button>
-                                                <button
-                                                    style={{
-                                                        opacity: loading ? 0.5 : 1,
-                                                        cursor: loading ? "wait" : "pointer"
-                                                    }}
-                                                    disabled={loading}
+                                                <div 
+                                                    key={category.id}
+                                                    className={`${styles.category} ${!editCategory ? styles["category-hover"] : ''} ${editingCategory !== null ? styles['editing-category'] : ''}
+                                                    `}
                                                     onClick={() => {
-                                                        setEditingCategory(null);
+                                                        if(!editCategory && newCategoryActive === false){
+                                                            setSubcategories(category.subcategories)
+                                                            setCurrentCategory(category)
+                                                        }
                                                     }}
-                                                    className={styles.cancel}
                                                 >
-                                                    <i className="fa-solid fa-times"></i>
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <></>
-                                        )}
-                                    </div>
-                                    {editCategory ? (
-                                        <button
-                                            style={{
-                                                opacity: loading ? 0.5 : 1,
-                                                cursor: loading ? "wait" : "pointer"
-                                            }}
-                                            disabled={loading}
-                                            onClick={() => {
-                                                setDeletingCategory(category);
-                                                deleteCategoryFunc(category.id);
-                                            }}
-                                            className={styles.deleteCat}
-                                        >
-                                            <i className="fa-solid fa-trash"></i> {editingCategory === null ? loading && deletingCategory.id === category.id ? 'Eliminando...' : 'Eliminar' : ''}
-                                        </button>
-                                    ) : newCategoryActive === false && (
-                                        <i className="fa-solid fa-chevron-right"></i>
-                                    )}
-                                </div>
-                            ))}
+                                                    <div className={styles.title}>
+                                                        {editingCategory !== null && editingCategory.id === category.id ? (
+                                                            <input
+                                                                type="text"
+                                                                name='name'
+                                                                value={editingCategory.name}
+                                                                onChange={(e) => {
+                                                                    setEditingCategory({
+                                                                        ...editingCategory,
+                                                                        name: e.target.value
+                                                                    });
+                                                                }}
+                                                            />
+                                                        ) : (
+                                                            <h3>{category.name}</h3>
+                                                        )}
+                                                        {editCategory && editingCategory ===  null ? (
+                                                            <button
+                                                                className={styles.rename}
+                                                                onClick={() => {
+                                                                    setEditingCategory(category);
+                                                                }}
+                                                            >
+                                                                <i className="fa-regular fa-pen-to-square"></i>
+                                                            </button>
+                                                        ) : (
+                                                            null
+                                                        )}
+                                                        {editingCategory !== null && editingCategory.id === category.id ? (
+                                                            <div className={styles.actions}>
+                                                                <button
+                                                                    style={{
+                                                                        opacity: loading ? 0.5 : 1,
+                                                                        cursor: loading ? "wait" : "pointer"
+                                                                    }}
+                                                                    disabled={loading}
+                                                                    onClick={editCategoryFunc}
+                                                                    className={styles.save}
+                                                                >
+                                                                    <i className="fa-solid fa-floppy-disk"></i>
+                                                                </button>
+                                                                <button
+                                                                    style={{
+                                                                        opacity: loading ? 0.5 : 1,
+                                                                        cursor: loading ? "wait" : "pointer"
+                                                                    }}
+                                                                    disabled={loading}
+                                                                    onClick={() => {
+                                                                        setEditingCategory(null);
+                                                                    }}
+                                                                    className={styles.cancel}
+                                                                >
+                                                                    <i className="fa-solid fa-times"></i>
+                                                                </button>
+                                                            </div>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </div>
+                                                    {editCategory ? (
+                                                        <button
+                                                            style={{
+                                                                opacity: loading ? 0.5 : 1,
+                                                                cursor: loading ? "wait" : "pointer"
+                                                            }}
+                                                            disabled={loading}
+                                                            onClick={() => {
+                                                                setDeletingCategory(category);
+                                                                deleteCategoryFunc(category.id);
+                                                            }}
+                                                            className={styles.deleteCat}
+                                                        >
+                                                            <i className="fa-solid fa-trash"></i> {editingCategory === null ? loading && deletingCategory?.id === category.id ? 'Eliminando...' : 'Eliminar' : ''}
+                                                        </button>
+                                                    ) : newCategoryActive === false && (
+                                                        <i className="fa-solid fa-chevron-right"></i>
+                                                    )}
+                                                </div>
+                                            </SortableItem>
+                                        ))}
+                                    </SortableContext>
+                                </DndContext>
+                            )}
                             {newCategoryActive && 
                                 <div className={styles.newCat}>
                                     <input

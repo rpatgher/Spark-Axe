@@ -88,6 +88,7 @@
     align-items: center;
     border-radius: .5rem;
     min-height: 5rem;
+    flex: 1;
 }
 .category-hover{
     padding: 1rem;
