@@ -136,10 +136,6 @@
     border-bottom: none;
 }
 
-
-
-
-
 .table-dash td.noproducts {
     text-align: center;
     font-size: 1.4rem;
@@ -160,6 +156,11 @@
 }
 .table-dash tr.selectedRow td {
     background-color: #eef1f3;
+}
+
+.megarow td:first-of-type{
+    text-align: left;
+    padding-left: 3rem;
 }
 
 

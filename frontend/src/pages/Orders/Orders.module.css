@@ -1,5 +1,12 @@
 .orders-wrapper{
-    padding: 6rem 0;
+    padding-bottom: 6rem;
+    padding-top: 2rem;
+}
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    align-items: center;
 }
 .orders-row td{
     padding: 1rem !important;
@@ -141,17 +148,6 @@ td.products23{
 }
 .Descriptioncont p{
     margin: 0;
-}
-
-
-
-
-.filters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 3rem;
-    margin-top: 1rem;
-    align-items: center;
 }
 
 

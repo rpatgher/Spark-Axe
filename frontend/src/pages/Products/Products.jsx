@@ -8,11 +8,13 @@ import styles from './Products.module.css';
 
 // ******************** Components ********************
 import FloatAlert from '../../components/Alert/FloatAlert';
-import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 import Modal from '../../components/Modals/GeneralModal';
 import ModalCategories from '../../components/Modals/ModalCategories';
 import ModalEditCategories from '../../components/Modals/ModalEditCategories';
 import GoTopBtn from '../../components/Btns/GoTopBtn';
+import TableDashboard from '../../components/TableDashboard/TableDashboard';
+import SearcherDashboard from '../../components/SearcherDashboard/SearcherDashboard';
+import PageHeaderDash from '../../components/PageHeaderDash/PageHeaderDash';
 
 // ******************** Hooks ********************
 import useAuth from '../../hooks/useAuth';
@@ -22,8 +24,7 @@ import useApp from '../../hooks/useApp';
 import formatToMoney from '../../helpers/formatMoney';
 
 // **************** Images ****************
-import TableDashboard from '../../components/TableDashboard/TableDashboard';
-import SearcherDashboard from '../../components/SearcherDashboard/SearcherDashboard';
+import clients from '../../assets/img/clients.png';
 
 
 
@@ -201,11 +202,11 @@ const Products = () => {
     return (
         <div className={styles["products-wrapper"]}>
             {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />}
-            <HeadingsRuta 
-                currentHeading="Productos"
-                routes={[]}
+            <PageHeaderDash 
+                title={'Productos'}
+                description={'Crea y edita tus productos'}
+                image={clients}
             />
-            <h4>Crea y edita tus productos</h4>
             <div className={`${styles.filters} `}>
                 <SearcherDashboard
                     setSearch={setSearch}
@@ -275,6 +276,7 @@ const Products = () => {
                 setModalDelete={setModalDelete}
                 listName='productos'
                 createNew="/dashboard/products/new"
+                colspan={[6,2,2]}
             >
                 {filteredProducts.map((product, index) => {
                     if(index < limit){

@@ -9,15 +9,19 @@ import styles from "./Orders.module.css";
 import useAuth from "../../hooks/useAuth";
 import useApp from "../../hooks/useApp";
 
+
+// ******************** Images ********************
+import clients from '../../assets/img/clients.png';
+
 // ******************** Helpers ********************
 import formatToMoney from "../../helpers/formatMoney";
 import formatDate from "../../helpers/formatDate";
 import zeroFill from "../../helpers/zeroFill";
 
 // **************** Images ****************
-import HeadingsRuta from "../../components/HeadingsRuta/HeadingsRuta";
 import SearcherDashboard from "../../components/SearcherDashboard/SearcherDashboard";
 import TableDashboard from "../../components/TableDashboard/TableDashboard";
+import PageHeaderDash from '../../components/PageHeaderDash/PageHeaderDash';
 
 const Orders = () => {
     const { auth } = useAuth();
@@ -219,8 +223,11 @@ const Orders = () => {
     return (
         <div className={styles["orders-wrapper"]}>
             {/* {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />} */}
-            <HeadingsRuta currentHeading="Pedidos de Productos" routes={[]} />
-            <h4>Administra tus pedidos</h4>
+            <PageHeaderDash 
+                title={'Pedidos de Productos'}
+                description={'Administra tus pedidos'}
+                image={clients}
+            />
             <div className={`${styles.filters} `}>
                 <SearcherDashboard
                     setSearch={setSearch}
@@ -273,6 +280,7 @@ const Orders = () => {
                     { type: "canceled", name: "Cancelados" },
                 ]}
                 listName="pedidos"
+                colspan={[3,3,3]}
             >
                 {filteredOrders.map((order, index) => {
                     if (index < limit) {

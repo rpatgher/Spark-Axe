@@ -1,19 +1,22 @@
 
 
-// ********************* Components ********************
-import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
+// ******************** Images ********************
+import clients from '../../assets/img/clients.png';
 
 // *************** Styles ***************
 import styles from './PointOfSale.module.css';
 
+// ********************* Components ********************
+import PageHeaderDash from '../../components/PageHeaderDash/PageHeaderDash';
+
 const PointOfSale = () => {
     return (
         <div className={styles['pos-wrapper']}>
-            <HeadingsRuta 
-                currentHeading="Puntos de Venta / Sucursales"
-                routes={[]}
+            <PageHeaderDash 
+                title={'Puntos de Venta'}
+                description={'Maneja el acesso de tus productos físicos'}
+                image={clients}
             />
-            <h4>Maneja el acesso de tus productos fisicos</h4>
         </div>
     )
 }

@@ -1,11 +1,12 @@
 .customers-wrapper{
     padding-bottom: 6rem;
-    padding-top: 6rem;
+    padding-top: 2rem;
 }
-.topimage{
+.filters {
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    align-items: center;
 }
 .guardar{
     background-color: var(--blue);
@@ -119,16 +120,6 @@ tr.selectedRow{
 .selectedRow td {
     background-color: #eef1f3 !important;
 }
-.back{
-    height:200px;
-    width: 1000px;
-}
-.top{
-    display: flex;
-}
-.topcontent{
-  flex:1;  
-}
 .contactbtn{
     font-size: 15px;
     color: white;
@@ -191,13 +182,4 @@ tr.selectedRow{
     50% {
       color: #838383; /* Color opaco */
     }
-}
-
-
-.filters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 3rem;
-    margin-top: 1rem;
-    align-items: center;
 }
