@@ -227,6 +227,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
 
 
     const newCategoryFunc = async (e) => {
+        e.preventDefault();
         const token = localStorage.getItem('token');
         const config = {
             headers: {
@@ -260,6 +261,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
     }
 
     const newSubcategoryFunc = async (e) => {
+        e.preventDefault();
         const token = localStorage.getItem('token');
         const config = {
             headers: {
@@ -453,7 +455,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                 </button>
                             )}
                         </div>
-                        <hr></hr>
+                        <hr className={styles.divider}></hr>
                         <div
                             className={styles.subcategories}
                         >
@@ -552,40 +554,46 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                             )}
                             {newSubcategoryActive &&
                                 <div className={styles.newSubcat}>
-                                    <input
-                                        type="text"
-                                        value={newSubcategory || ''}
-                                        onChange={(e) => {
-                                            setNewSubcategory(e.target.value);
-                                        }}
-                                    />
-                                    <div className={styles.buttonsNewSubcat}>
-                                        <button
-                                            onClick={newSubcategoryFunc}
-                                            style={{
-                                                opacity: loading ? 0.5 : 1,
-                                                cursor: loading ? "wait" : "pointer"
+                                    <form
+                                        onSubmit={newSubcategoryFunc}
+                                    >
+                                        <input
+                                            type="text"
+                                            value={newSubcategory || ''}
+                                            onChange={(e) => {
+                                                setNewSubcategory(e.target.value);
                                             }}
-                                            disabled={loading}
-                                            className={styles.save}
-                                        >
-                                            <i className="fa-solid fa-floppy-disk"></i>
-                                        </button>
-                                        <button
-                                            onClick={() => {
-                                                setNewSubcategory(null);
-                                                setNewSubcategoryActive(false);
-                                            }}
-                                            style={{
-                                                opacity: loading ? 0.5 : 1,
-                                                cursor: loading ? "wait" : "pointer"
-                                            }}
-                                            disabled={loading}
-                                            className={styles.cancel}
-                                        >
-                                            <i className="fa-solid fa-times"></i>
-                                        </button>
-                                    </div>
+                                            id='newSubcategoryInput'
+                                            autoFocus={true}
+                                        />
+                                        <div className={styles.buttonsNewSubcat}>
+                                            <button
+                                                style={{
+                                                    opacity: loading ? 0.5 : 1,
+                                                    cursor: loading ? "wait" : "pointer"
+                                                }}
+                                                disabled={loading}
+                                                className={styles.save}
+                                                type='submit'
+                                            >
+                                                <i className="fa-solid fa-floppy-disk"></i>
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    setNewSubcategory(null);
+                                                    setNewSubcategoryActive(false);
+                                                }}
+                                                style={{
+                                                    opacity: loading ? 0.5 : 1,
+                                                    cursor: loading ? "wait" : "pointer"
+                                                }}
+                                                disabled={loading}
+                                                className={styles.cancel}
+                                            >
+                                                <i className="fa-solid fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             }
                         </div>
@@ -632,7 +640,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                 </div>
                             )}
                         </div>
-                        <hr></hr>
+                        <hr className={styles.divider}></hr>
                         <div
                             className={styles.categories}
                         >
@@ -748,40 +756,46 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                             )}
                             {newCategoryActive && 
                                 <div className={styles.newCat}>
-                                    <input
-                                        type="text"
-                                        value={newCategory || ''}
-                                        onChange={(e) => {
-                                            setNewCategory(e.target.value);
-                                        }}
-                                    />
-                                    <div className={styles.buttonsNewCat}>
-                                        <button
-                                            onClick={newCategoryFunc}
-                                            style={{
-                                                opacity: loading ? 0.5 : 1,
-                                                cursor: loading ? "wait" : "pointer"
+                                    <form
+                                        onSubmit={newCategoryFunc}
+                                    >
+                                        <input
+                                            type="text"
+                                            value={newCategory || ''}
+                                            onChange={(e) => {
+                                                setNewCategory(e.target.value);
                                             }}
-                                            disabled={loading}
-                                            className={styles.save}
-                                        >
-                                            <i className="fa-solid fa-floppy-disk"></i>
-                                        </button>
-                                        <button
-                                            onClick={() => {
-                                                setNewCategory(null);
-                                                setNewCategoryActive(false);
-                                            }}
-                                            style={{
-                                                opacity: loading ? 0.5 : 1,
-                                                cursor: loading ? "wait" : "pointer"
-                                            }}
-                                            disabled={loading}
-                                            className={styles.cancel}
-                                        >
-                                            <i className="fa-solid fa-times"></i>
-                                        </button>
-                                    </div>
+                                            id='newCategoryInput'
+                                            autoFocus={true}
+                                        />
+                                        <div className={styles.buttonsNewCat}>
+                                            <button
+                                                style={{
+                                                    opacity: loading ? 0.5 : 1,
+                                                    cursor: loading ? "wait" : "pointer"
+                                                }}
+                                                disabled={loading}
+                                                className={styles.save}
+                                                type='submit'
+                                            >
+                                                <i className="fa-solid fa-floppy-disk"></i>
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    setNewCategory(null);
+                                                    setNewCategoryActive(false);
+                                                }}
+                                                style={{
+                                                    opacity: loading ? 0.5 : 1,
+                                                    cursor: loading ? "wait" : "pointer"
+                                                }}
+                                                disabled={loading}
+                                                className={styles.cancel}
+                                            >
+                                                <i className="fa-solid fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             }
                         </div>
