@@ -14,7 +14,7 @@ import useApp from '../../hooks/useApp';
 import formatToMoney from '../../helpers/formatMoney';
 
 // **************** Images ****************
-import clients from '../../assets/img/inventory.png';
+import Inventoryimg from '../../assets/img/Illustrations/Inventory.png';
 
 // ******************** Components ********************
 import FloatAlert from '../../components/Alert/FloatAlert';
@@ -223,7 +223,7 @@ const Inventory = () => {
             <PageHeaderDash 
                 title={'Inventario'}
                 description={'Ten mas control sobre tu negocio'}
-                image={clients}
+                image={Inventoryimg}
             />
             <div className={`${styles.filters} `}>
                 <SearcherDashboard 

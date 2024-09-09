@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import clientAxios from '../../config/clientAxios';
 
 // ******************** Images ********************
-import clients from '../../assets/img/clients.png';
+import Adsimg from '../../assets/img/Illustrations/Anuncios.png';
 
 // ********************* Styles ********************
 import styles from './Advertisements.module.css';
@@ -126,7 +126,7 @@ const Advertisements = () => {
             <PageHeaderDash 
                 title={'Anuncios'}
                 description={'Publica tus anuncios'}
-                image={clients}
+                image={Adsimg}
             />
             <div className={`${styles.filters}`}>
                 <SearcherDashboard

@@ -1,6 +1,6 @@
 
 // ******************** Images ********************
-import clients from '../../assets/img/clients.png';
+import Contactimg from '../../assets/img/Illustrations/Contact.png';
 
 // **************** Styles ****************
 import styles from './Contact.module.css';
@@ -14,7 +14,7 @@ const Contact = () => {
         <PageHeaderDash 
                 title={'Contacto'}
                 description={'Mantente en contacto con tus clientes'}
-                image={clients}
+                image={Contactimg}
             />
     </div>
     )
