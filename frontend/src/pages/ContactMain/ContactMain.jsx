@@ -4,10 +4,14 @@ import styles from './ContactMain.module.css';
 import { Link } from "react-router-dom"
 import logo from '../../assets/img/axolotl worker.png';
 import error from '../../assets/img/marcar_error.png';
+import HeadContact from '../../assets/img/HeadContact.png';
 
 const About = () => {
     return (
         <div>
+            <div className={styles.HeadContact}>
+            <img className={styles.HeadContactimg} src={HeadContact} alt="HeadContact" />
+            </div>
             <h1 className={styles.head}>Contactanos</h1>
             <div className={styles.background}> 
             <p className={styles.headp}>Ofrecemos Soporte Técnico 24/7 para optimizar tu experiencia en nuestro sitio web. ¡Confía en nuestros expertos para resolver cualquier inconveniente y garantizar un funcionamiento óptimo en todo momento!</p>
