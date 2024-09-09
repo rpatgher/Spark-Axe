@@ -8,6 +8,8 @@ import UserRouter from './routes/UserRoutes.js';
 import WebsiteRouter from './routes/WebsiteRoutes.js';
 import ElementRouter from './routes/ElementRoutes.js';
 import CategoryRouter from './routes/CategoryRoutes.js';
+import AdvertisementRouter from './routes/AdvertisementRoutes.js';
+import SectionRouter from './routes/SectionRoutes.js';
 import OrderRouter from './routes/OrderRoutes.js';
 import InventoryRouter from './routes/InventoryRoutes.js';
 import CustomerRouter from './routes/CustomerRoutes.js';
@@ -47,6 +49,8 @@ app.use(cors(corsOptions));
 app.use('/api/users', UserRouter);
 app.use('/api/websites', WebsiteRouter);
 app.use('/api/elements', ElementRouter);
+app.use('/api/advertisements', AdvertisementRouter)
+app.use('/api/sections', SectionRouter);
 app.use('/api/categories', CategoryRouter);
 app.use('/api/orders', OrderRouter);
 app.use('/api/inventories', InventoryRouter);

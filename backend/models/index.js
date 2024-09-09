@@ -10,6 +10,8 @@ import OrderElement from "./OrderElement.js";
 import Inventory from "./Inventory.js";
 import Feature from "./Feature.js";
 import WebsiteFeature from "./WebsiteFeature.js";
+import Section from "./Section.js";
+import Advertisement from "./Advertisement.js";
 
 
 User.hasMany(Website, { foreignKey: 'user_id', onDelete: 'RESTRICT' });
@@ -44,6 +46,13 @@ Customer.belongsTo(Website, { foreignKey: 'website_id' });
 Website.belongsToMany(Feature, { through: WebsiteFeature, onDelete: 'RESTRICT' });
 Feature.belongsToMany(Website, { through: WebsiteFeature });
 
+
+Website.hasMany(Section, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+Section.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+Section.hasMany(Advertisement, { foreignKey: 'section_id', onDelete: 'RESTRICT' });
+Advertisement.belongsTo(Section, { foreignKey: 'section_id', onDelete: 'RESTRICT' });
+
+
 //deliveries has one website
 //alrevez website.hasOne(deliveries)
 
@@ -51,4 +60,20 @@ Feature.belongsToMany(Website, { through: WebsiteFeature });
 
 //belongs to hace que alla una foreign key que hace para exportar los registros de muchas tabla
 //en tablas siempre va estar el uno en la tbla de muchos
-export { User, Website, Element, Customer, Order, Category, Subcategory, ElementCategory, OrderElement, Inventory, Feature, WebsiteFeature };
+
+export { 
+    User, 
+    Website, 
+    Element, 
+    Customer, 
+    Order, 
+    Category, 
+    Subcategory, 
+    ElementCategory, 
+    OrderElement, 
+    Inventory, 
+    Feature, 
+    WebsiteFeature, 
+    Section, 
+    Advertisement 
+};

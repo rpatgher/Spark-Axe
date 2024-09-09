@@ -10,6 +10,8 @@ import styles from './NewProduct.module.css';
 import FormProduct from '../../components/FormProduct';
 import GeneralModal from '../../components/Modals/GeneralModal';
 import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
+
+// ************** Hooks *************
 import useApp from '../../hooks/useApp';
 
 

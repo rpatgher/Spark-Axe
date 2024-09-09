@@ -27,7 +27,8 @@ import EditProduct from './pages/Products/EditProduct';
 import Inventory from './pages/Inventory/Inventory';
 import SetInventory from './pages/Inventory/SetInventory';
 import Advertisements from './pages/Advertisements/Advertisements';
-import NewAd from './pages/Advertisements/NewAd';
+import NewAdvertisement from './pages/Advertisements/NewAdvertisement';
+import EditAdvertisement from './pages/Advertisements/EditAdvertisement';
 import Customers from './pages/Customers/Customers';
 import Stats from './pages/Stats/Stats';
 import Coupons from './pages/Coupons/Coupons';
@@ -78,7 +79,8 @@ function App() {
                 <Route path="inventory" element={<Inventory />} />
                 <Route path="inventory/set" element={<SetInventory />} />
                 <Route path="advertisements" element={<Advertisements />} />
-                <Route path="advertisements/new" element={<NewAd />} />
+                <Route path="advertisements/new" element={<NewAdvertisement />} />
+                <Route path="advertisements/edit/:id" element={<EditAdvertisement />} />
                 <Route path="customers" element={<Customers />} />
                 <Route path="stats" element={<Stats />} />
                 <Route path="coupons" element={<Coupons />} />

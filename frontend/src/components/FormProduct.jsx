@@ -206,7 +206,6 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                 response = await clientAxios.put(`/api/elements/${initalProduct.id}`, data, config);
             }
             if (response.status === 200) {
-
                 handleAlert(msgAlert, false);
                 navigate('/dashboard/products');
             }
@@ -402,7 +401,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                         </div>
                     </div>
                     <div className={styles["field-two-columns"]}>
-                    <div id="image-field" className={`${styles["field-images"]} ${product.image ? styles["field-images-done"] : ''}`}>
+                        <div id="image-field" className={`${styles["field-images"]} ${product.image ? styles["field-images-done"] : ''}`}>
                             <p className={styles.required}>{product.image ? 'Imagen Subida' : 'Sube Primera Imagen'}</p>
                             <div>
                                 <label htmlFor="image">

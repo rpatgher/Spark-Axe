@@ -35,10 +35,8 @@
     color: color-mix(in srgb, var(--yellow) 50%, #000);
 }
 .btn-new-product:hover {
-
     color: #ffffff;
     background-color: #000000;
-
 }
 
 .btn-new-product p, .btn-edit-categories p {

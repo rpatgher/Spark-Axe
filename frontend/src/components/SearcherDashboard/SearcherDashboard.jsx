@@ -56,6 +56,10 @@ const SearcherDashboard = ({
                 return 'fa-solid fa-dollar-sign';
             case 'stock':
                 return 'fa-solid fa-box';
+            case 'title':
+                return 'fa-solid fa-heading';
+            case 'section':
+                return 'fa-solid fa-puzzle-piece';
             default:
                 return 'fa-sort';
         }

@@ -8,7 +8,13 @@ const websites = [
         currency: "Pesos Mexicanos",
         slogan: "La mejor tienda online de México",
         language: "Español",
-        features: [1,2,3,4,5]
+        features: [1,2,3,4,5],
+        sections: [
+            {name: 'Homepage'},
+            {name: 'About us'},
+            {name: 'Products'},
+            {name: 'Contact'}
+        ]
     },
     {
         name: "Elibaba",
@@ -19,7 +25,13 @@ const websites = [
         currency: "Dolares Americanos",
         slogan: "La mejor tienda online de China",
         language: "Español",
-        features: [1,2,3,4,5,10,11]
+        features: [1,2,3,4,5,10,11],
+        sections: [
+            {name: 'Homepage'},
+            {name: 'About us'},
+            {name: 'Products'},
+            {name: 'Contact'}
+        ]
     },
     {
         name: "Oral Peace",
@@ -30,7 +42,13 @@ const websites = [
         currency: "Pesos Mexicanos",
         slogan: "La mejor tienda online de México",
         language: "Español",
-        features: [1,2,3,4,5,10,11]
+        features: [1,2,3,4,5,10,11],
+        sections: [
+            {name: 'Homepage'},
+            {name: 'About us'},
+            {name: 'Products'},
+            {name: 'Contact'}
+        ]
     }
 ];
 

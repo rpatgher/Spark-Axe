@@ -6,12 +6,20 @@ import slug from "slug";
 const upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
-            cb(null, './public/uploads/elements');
+            cb(null, `./public/uploads/${req.originalUrl.split('/')[2]}`);
         },
         filename: (req, file, cb) => {
             const extension = file.mimetype.split('/')[1];
-            const name = slug(`${req.body.name} ${shortid.generate()}`);
-            cb(null, `${name}.${extension}`);
+            if(req.originalUrl.split('/')[2] === 'elements'){
+                const name = slug(`${req.body.name} ${shortid.generate()}`);
+                return cb(null, `${name}.${extension}`);
+            }else if(req.originalUrl.split('/')[2] === 'advertisements'){
+                const name = slug(`${req.body.title} ${shortid.generate()}`);
+                return cb(null, `${name}.${extension}`);
+            }else{
+                const name = slug(`${shortid.generate()}`);
+                return cb(null, `${name}.${extension}`);
+            }
         }
     }),
     fileFilter: (req, file, cb) => {

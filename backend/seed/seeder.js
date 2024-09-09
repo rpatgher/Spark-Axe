@@ -3,7 +3,14 @@ import db from '../config/db.js';
 import users from './users.js';
 import websites from './websites.js';
 import features from './features.js';
-import { User, Website, Inventory, Feature, WebsiteFeature } from '../models/index.js';
+import { 
+    User, 
+    Website, 
+    Inventory, 
+    Feature, 
+    WebsiteFeature,
+    Section,
+} from '../models/index.js';
 
 const insertData = async () => {
     try {
@@ -30,6 +37,12 @@ const insertData = async () => {
                 }
             });
             await WebsiteFeature.bulkCreate(websiteFeatures);
+            await Section.bulkCreate(websites[i].sections.map(section => {
+                return {
+                    website_id: website.id,
+                    name: section.name
+                }
+            }));
         }));
         console.log('Data inserted...');
         exit();
