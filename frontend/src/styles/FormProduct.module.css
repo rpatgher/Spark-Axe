@@ -197,6 +197,11 @@
     font-size: 1.6rem;
     text-align: center;
     cursor: pointer;
+
+
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
 }
 
 .button:hover {

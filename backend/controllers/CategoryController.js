@@ -124,9 +124,13 @@ const getCategories = async (req, res) => {
             include: {
                 model: Subcategory,
                 as: 'subcategories',
-                attributes: ['id', 'name']
+                attributes: ['index', 'id', 'name']
             },
-            attributes: ['id', 'name'],
+            attributes: ['index', 'id', 'name'],
+            order: [
+                ['index', 'ASC'],
+                ['subcategories', 'index', 'ASC']
+            ],
         });
         return res.json(categories);
     }catch(error){
@@ -386,6 +390,100 @@ const createOneSubcategory = async (req, res) => {
     }
 }
 
+const changeCategoryIndex = async (req, res) => {
+    const { categories } = req.body;
+    if(!categories || categories.length === 0){
+        return res.status(400).json({msg: 'Categories are required'});
+    }
+    const categoriesIds = categories.map(category => category.id);
+    const categoriesDB = await Category.findAll({
+        where: {
+            id: {
+                [Op.or]: categoriesIds
+            }
+        },
+        include: {
+            model: Website,
+            as: 'website',
+            attributes: ['id', 'name', 'user_id']
+        },
+        attributes: ['id', 'name', 'website_id', 'index'],
+    });
+    categoriesDB.some(categoryDB => {
+        if(categoryDB.website.user_id.toString() !== req.user.id.toString()){
+            return res.status(401).json({msg: 'Unauthorized'});
+        }
+    });
+    if(categoriesDB.length !== categoriesIds.length){
+        return res.status(404).json({msg: 'Categories not found'});
+    }
+    const orderedCategories = categories.map(category => {
+        const categoryDB = categoriesDB.find(categoryDB => categoryDB.id === category.id);
+        categoryDB.index = category.index;
+        return categoryDB;
+    });
+    try{
+        await Promise.all(orderedCategories.map(async category => {
+            await category.save();
+        }));
+        return res.json({msg: 'Categories index changed successfully'});
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({msg: error.message});
+    }
+}
+
+
+const changeSubcategoryIndex = async (req, res) => {
+    const { subcategories } = req.body;
+    if(!subcategories || subcategories.length === 0){
+        return res.status(400).json({msg: 'Subcategories are required'});
+    }
+    const subcategoriesIds = subcategories.map(subcategory => subcategory.id);
+    const subcategoriesDB = await Subcategory.findAll({
+        where: {
+            id: {
+                [Op.or]: subcategoriesIds
+            }
+        },
+        include: {
+            model: Category,
+            as: 'category',
+            attributes: ['id', 'name', 'website_id'],
+            include: {
+                model: Website,
+                as: 'website',
+                attributes: ['id', 'name', 'user_id']
+            },
+        },
+        attributes: ['id', 'name', 'category_id', 'index'],
+    });
+    subcategoriesDB.some(subcategoryDB => {
+        if(subcategoryDB.category.website.user_id.toString() !== req.user.id.toString()){
+            return res.status(401).json({msg: 'Unauthorized'});
+        }
+    });
+    if(subcategoriesDB.length !== subcategoriesIds.length){
+        return res.status(404).json({msg: 'Subcategories not found'});
+    }
+    const orderedSubcategories = subcategories.map(subcategory => {
+        const subcategoryDB = subcategoriesDB.find(subcategoryDB => subcategoryDB.id === subcategory.id);
+        subcategoryDB.index = subcategory.index;
+        return subcategoryDB;
+    });
+    try{
+        await Promise.all(orderedSubcategories.map(async subcategory => {
+            await subcategory.save();
+        }));
+        return res.json({msg: 'Subcategories index changed successfully'});
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({msg: error.message});
+    }
+}
+
 
 export {
     createCategories,
@@ -395,5 +493,7 @@ export {
     editCategory,
     deleteCategory,
     createOneCategory,
-    createOneSubcategory
+    createOneSubcategory,
+    changeCategoryIndex,
+    changeSubcategoryIndex
 }

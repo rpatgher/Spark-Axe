@@ -1,6 +1,6 @@
 .products-wrapper{
-    padding-top: 6rem;
     padding-bottom: 6rem;
+    padding-top: 2rem;
 }
 .filters {
     display: flex;

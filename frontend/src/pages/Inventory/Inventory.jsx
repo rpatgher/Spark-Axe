@@ -15,12 +15,13 @@ import formatToMoney from '../../helpers/formatMoney';
 
 // **************** Images ****************
 import clients from '../../assets/img/inventory.png';
-import GoTopBtn from '../../components/Btns/GoTopBtn';
 
 // ******************** Components ********************
 import FloatAlert from '../../components/Alert/FloatAlert';
 import SearcherDashboard from '../../components/SearcherDashboard/SearcherDashboard';
 import TableDashboard from '../../components/TableDashboard/TableDashboard';
+import GoTopBtn from '../../components/Btns/GoTopBtn';
+import PageHeaderDash from '../../components/PageHeaderDash/PageHeaderDash';
 
 const Inventory = () => {
     const { auth } = useAuth();
@@ -219,15 +220,11 @@ const Inventory = () => {
     return (
         <div className={styles["inventory-wrapper"]}>
             {/* {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />} */}
-            <div className={styles.top}>
-                <div className={styles.topcontent}>
-                    <h2 className={styles.heading}>Inventario</h2>
-                    <h4>Ten mas control sobre tu negocio</h4>
-                </div>
-                <div className={styles.topimage}>
-                    <img className={styles["back"]} src={clients} alt="Axolotl-Waiting" />
-                </div>
-            </div>
+            <PageHeaderDash 
+                title={'Inventario'}
+                description={'Ten mas control sobre tu negocio'}
+                image={clients}
+            />
             <div className={`${styles.filters} `}>
                 <SearcherDashboard 
                     setSearch={setSearch}
@@ -271,6 +268,7 @@ const Inventory = () => {
                 ]}
                 listName='productos'
                 createNew='/dashboard/products/new'
+                colspan={[3,1,1]}
             >
                 {filteredProducts.map((item, index) => {
                     if(index < limit){

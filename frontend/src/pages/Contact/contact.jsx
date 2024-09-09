@@ -1,20 +1,21 @@
 
-
-
-// ********************* Components ********************
-import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
+// ******************** Images ********************
+import clients from '../../assets/img/clients.png';
 
 // **************** Styles ****************
 import styles from './Contact.module.css';
 
+// ********************* Components ********************
+import PageHeaderDash from '../../components/PageHeaderDash/PageHeaderDash';
+
 const Contact = () => {
     return (
         <div className={styles['contact-wrapper']}>
-        <HeadingsRuta 
-            currentHeading="Contacto"
-            routes={[]}
-        />
-        <h4>Mantente en contacto con tus clientes</h4>
+        <PageHeaderDash 
+                title={'Contacto'}
+                description={'Mantente en contacto con tus clientes'}
+                image={clients}
+            />
     </div>
     )
 }

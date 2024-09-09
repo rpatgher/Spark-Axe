@@ -38,6 +38,7 @@ Como _props_ se le deben pasar:
 - `setModalDelete`: Es una setter para activar el modal de eliminar muchos elementos de la lista al mismo tiempo.
 - `listName`: Es variable dice qué tipo de proudcutos son los que se están listando en la tabla.
 - `createNew`: Es una variable que pasa el endpoint para crear un nuevo elemento que debería haber para cuando la tabla no contiene ningún elemento.
+- `colspan`: Es arreglo de 3 dígitos que determina cómo serán distribuida la fila de hasta abajo en el número de columnas que hay en una tabla
 
 ### Ejemplo:
 
@@ -60,6 +61,7 @@ Como _props_ se le deben pasar:
     setModalDelete={}
     listName={}
     createNew={}
+    colspan={}
 >
     <tr>
         <td></td>

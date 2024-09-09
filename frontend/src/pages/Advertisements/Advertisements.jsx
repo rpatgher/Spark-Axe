@@ -1,22 +1,25 @@
 import { Link } from 'react-router-dom';
 
-// ********************* Components ********************
-import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
-
+// ******************** Images ********************
+import clients from '../../assets/img/clients.png';
 
 // ********************* Styles ********************
 import styles from './Advertisements.module.css';
+
+// ********************* Components ********************
+import PageHeaderDash from '../../components/PageHeaderDash/PageHeaderDash';
 
 
 const Advertisements = () => {
     return (
         <div className={styles['adverts-wrapper']}>
-            <HeadingsRuta 
-                currentHeading="Anuncios"
-                routes={[]}
+            <PageHeaderDash 
+                title={'Anuncios'}
+                description={'Publica tus anuncios'}
+                image={clients}
             />
-            <h4>Publica tus anuncios</h4>
         </div>
+        
     )
 }
 

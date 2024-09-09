@@ -26,7 +26,8 @@ const TableDashboard = ({
     visibleOptions,
     setModalDelete,
     listName,
-    createNew
+    createNew,
+    colspan
 }) => {
     const [limitIncrement, setLimitIncrement] = useState(10);
 
@@ -118,11 +119,10 @@ const TableDashboard = ({
                         )}
                         {listLength > limitIncrement &&
                                 <tr className={styles.megarow}>
-                                    <td colSpan="2"></td>
-                                    <td colSpan="2">
+                                    <td colSpan={colspan[0]}>
                                         <strong>Productos cargados: </strong>{visibleCount}
                                     </td>
-                                    <td colSpan="2">
+                                    <td colSpan={colspan[1]}>
                                         {listLength > limit &&
                                             <button 
                                                 className={styles.cargar}
@@ -136,7 +136,7 @@ const TableDashboard = ({
                                             >Cargar más</button>
                                         }
                                     </td>
-                                    <td colSpan="2">
+                                    <td colSpan={colspan[2]}>
                                         {limit > limitIncrement &&
                                             <button 
                                                 className={styles.cargar}
@@ -145,7 +145,6 @@ const TableDashboard = ({
                                             >Cargar menos</button>
                                         }
                                     </td>
-                                    <td colSpan="2"></td>
                                 </tr>
                             }
                     </tbody>

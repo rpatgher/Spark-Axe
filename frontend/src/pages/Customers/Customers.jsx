@@ -15,11 +15,11 @@ import useApp from '../../hooks/useApp';
 import clients from '../../assets/img/clients.png';
 
 // ******************** Components ********************
-import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 import FloatAlert from '../../components/Alert/FloatAlert';
 import Modal from '../../components/Modals/GeneralModal';
 import SearcherDashboard from '../../components/SearcherDashboard/SearcherDashboard';
 import TableDashboard from '../../components/TableDashboard/TableDashboard';
+import PageHeaderDash from '../../components/PageHeaderDash/PageHeaderDash';
 
 const Customers = () => {
     const { auth } = useAuth();
@@ -265,18 +265,11 @@ const Customers = () => {
     return (
         <div className={styles["customers-wrapper"]}>
             {/* {alert.msg && <FloatAlert msg={alert.msg} error={alert.error} />} */}
-            <div className={styles.top}>
-                <div className={styles.topcontent}>
-                    <HeadingsRuta
-                        currentHeading="Clientes"
-                        routes={[]}
-                    />
-                    <h4>Acercate mas a tus clientes</h4>
-                </div>
-                <div className={styles.topimage}>
-                    <img className={styles["back"]} src={clients} alt="Axolotl-Waiting" />
-                </div>
-            </div>
+            <PageHeaderDash 
+                title={'Clientes'}
+                description={'Acercate mas a tus clientes'}
+                image={clients}
+            />
             <div className={styles.container}>
                 <div className={`${styles.filters} `}>
                     <SearcherDashboard 
@@ -335,6 +328,8 @@ const Customers = () => {
                         { name: 'No Confirmados', type: 'unconfirmed' },
                     ]}
                     setModalDelete={setModalDelete}
+                    listName='clientes'
+                    colspan={editingRow !== null ? [4,4,4] : [3,3,3]}
                 >
                     {filteredElements.map((item, index) => {
                         if (index < limit) {

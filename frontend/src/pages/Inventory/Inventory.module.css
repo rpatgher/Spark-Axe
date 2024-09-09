@@ -1,22 +1,18 @@
 .inventory-wrapper{
     padding-bottom: 6rem;
+    padding-top: 2rem;
 }
-.heading{
-    font-size: 5.4rem;
-    margin: 2rem 0;
-    margin-top: 6rem;
-}
-.topimage{
+.filters {
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    align-items: center;
 }
 .input-stock{
     width: 5rem;
     text-align: center;
 
 }
-
 .guardar{
     background-color: var(--blue);
     padding: 5px;
@@ -118,17 +114,6 @@ tr.selectedRow{
 tr.selectedRow td {
     background-color: #eef1f3 !important;
 }
-.back{
-    height:200px;
-    width: 1000px;
-}
-.top{
-    display: flex;
-}
-.topcontent{
-  flex:1;
-   
-}
 .configinventory{
     float: right;
     background-color:  #5a5a5a;
@@ -153,14 +138,4 @@ tr.selectedRow td {
     50% {
       color: #838383; /* Color opaco */
     }
-}
-
-
-
-.filters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 3rem;
-    margin-top: 1rem;
-    align-items: center;
 }

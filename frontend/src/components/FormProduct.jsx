@@ -581,6 +581,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                         data-action='save'
                         disabled={savingProduct || (initalProduct && !initalProduct?.name)}
                     >
+                        <i className="fa-solid fa-save"></i>
                         {savingProduct ? 'Guardando...' : 'Guardar Producto'}
                     </button>
                     <div className={styles["delete-publish"]}>
@@ -592,7 +593,8 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                                 width: !initalProduct ? '100%' : '50%'
                             }}
                             disabled={initalProduct && !initalProduct?.name}
-                            >
+                        >
+                            {initalProduct?.published ? (<i className="fa-solid fa-box-archive"></i>) : (<i className="fa-solid fa-upload"></i>)}
                             {initalProduct?.published ? !publishingProduct ? 'Archivar Producto' : 'Archivando...' : !publishingProduct ? 'Publicar Producto' : 'Publicando...'}
                         </button>
                         {initalProduct && (
@@ -602,6 +604,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                                 onClick={() => setModalDelete(true)}
                                 disabled={!initalProduct.name}
                             >
+                                <i className="fa-solid fa-trash"></i>
                                 Borrar Producto
                             </button>
                         )}

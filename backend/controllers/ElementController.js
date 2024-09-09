@@ -127,7 +127,7 @@ const getElements = async (req, res) => {
         newElement.categories = categories;
         return newElement;
     });
-    res.json(elements);
+    return res.status(200).json(elements);
 }
 
 const createElement = async (req, res) => {
