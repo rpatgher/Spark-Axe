@@ -1,7 +1,7 @@
 
 
 // ******************** Images ********************
-import clients from '../../assets/img/clients.png';
+import POSimg from '../../assets/img/Illustrations/POS.png';
 
 // *************** Styles ***************
 import styles from './PointOfSale.module.css';
@@ -15,7 +15,7 @@ const PointOfSale = () => {
             <PageHeaderDash 
                 title={'Puntos de Venta'}
                 description={'Maneja el acesso de tus productos físicos'}
-                image={clients}
+                image={POSimg}
             />
         </div>
     )
