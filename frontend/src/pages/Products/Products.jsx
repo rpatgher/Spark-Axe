@@ -24,7 +24,7 @@ import useApp from '../../hooks/useApp';
 import formatToMoney from '../../helpers/formatMoney';
 
 // **************** Images ****************
-import clients from '../../assets/img/clients.png';
+import Prodcutsimg from '../../assets/img/Illustrations/Productos.png';
 
 
 
@@ -205,7 +205,7 @@ const Products = () => {
             <PageHeaderDash 
                 title={'Productos'}
                 description={'Crea y edita tus productos'}
-                image={clients}
+                image={Prodcutsimg}
             />
             <div className={`${styles.filters} `}>
                 <SearcherDashboard

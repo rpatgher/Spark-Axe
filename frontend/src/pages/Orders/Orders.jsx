@@ -11,7 +11,7 @@ import useApp from "../../hooks/useApp";
 
 
 // ******************** Images ********************
-import clients from '../../assets/img/clients.png';
+import Ordersimg from '../../assets/img/Illustrations/Pedidos.png';
 
 // ******************** Helpers ********************
 import formatToMoney from "../../helpers/formatMoney";
@@ -226,7 +226,7 @@ const Orders = () => {
             <PageHeaderDash 
                 title={'Pedidos de Productos'}
                 description={'Administra tus pedidos'}
-                image={clients}
+                image={Ordersimg}
             />
             <div className={`${styles.filters} `}>
                 <SearcherDashboard
