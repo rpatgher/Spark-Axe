@@ -11,7 +11,11 @@ import logo from '../../assets/img/axolotl worker.png';
 const About = () => {
     return (
         <div>
-        <h1 className={styles.head}>Conoce más de nosotros</h1>
+            <div className={styles.header}>
+            <h1 className={styles.head}>Descubre quiénes somos: <span>Dedicados a transformar tus ideas en realidad</span></h1>            </div>
+            <div className={styles.imgdiv}>
+            <img className={styles.aboutimg} src={About1} alt="About1" />
+            </div>
         <div className={styles.about}>
             <div className={styles.content}>
                 <p>
@@ -30,7 +34,9 @@ const About = () => {
 
            
 
-            <h1>Equipo SPARKAXE</h1>
+           
+            <div className={styles.contactSec}>
+            <h1>Directivos de Sparkaxe</h1>
            <div className={styles.contactGrid}>
     <Link to='/contact'>
         <div className={styles.contactbuttons}>
@@ -59,6 +65,7 @@ const About = () => {
             <h3><span className={styles.headingother}>Isaac</span></h3>
         </div>
     </Link>
+</div>
 </div>
 
             
