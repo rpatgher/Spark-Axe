@@ -1,6 +1,6 @@
 import styles from './Functions.module.css'; 
 import Spark from "../../../assets/img/Spark.png";
-
+import SSAD from "../../../assets/img/Landing/SSAD.png";
 
 const EnseñarFunctions = () => {
   return (
@@ -10,7 +10,7 @@ const EnseñarFunctions = () => {
       {/* Sección de imagen a la derecha */}
       <div className={styles.imageSection}>
         <img 
-          src={Spark}
+          src={SSAD}
           alt="Apple Fitness on iPad" 
           className ={styles.ipadImage}
         />
