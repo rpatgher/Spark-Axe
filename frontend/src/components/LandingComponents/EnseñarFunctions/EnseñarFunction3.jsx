@@ -2,6 +2,7 @@ import styles from './Functions.module.css';
 import Spark from "../../../assets/img/Spark.png";
 
 
+
 const EnseñarFunctions = () => {
   return (
     <div className={styles.container}>
