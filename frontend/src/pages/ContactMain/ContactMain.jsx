@@ -3,7 +3,7 @@ import styles from './ContactMain.module.css';
 
 import { Link } from "react-router-dom"
 import logo from '../../assets/img/axolotl worker.png';
-import error from '../../assets/img/marcar_error.png';
+import Marcarerror from '../../assets/img/Marcarerror.png';
 import HeadContact from '../../assets/img/HeadContact.png';
 
 const About = () => {
@@ -45,9 +45,7 @@ const About = () => {
             <h2><span className={styles.heading}>Soporte dentro de tu cuenta sparkaxe</span></h2>
             <p>En tu panel de control, en la esquina inferior derecha, encontrarás un botón rojo etiquetado como "Marcar error". Si necesitas soporte de cualquier tipo, simplemente haz clic en él. Se tomará una captura de pantalla de tu pantalla y se te proporcionará un formulario para que describas el error ocurrido. Nuestro equipo de soporte te contestará lo antes posible para ayudarte, contando con especialistas en la materia para resolver tu inconveniente.</p>
             </div>
-          <div className={styles.marcarerrordiv}>
-            <button className={styles.marcarerror}>Marcar error</button>
-            </div>
+            <img className={styles.marcarerrorimg} src={Marcarerror} alt="Marcarerror" />
             </div>
         <div className={styles.enviocontent}>
         <div className={styles.tabcontent1}>
