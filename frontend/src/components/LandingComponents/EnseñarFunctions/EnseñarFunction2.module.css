@@ -5,12 +5,18 @@
     justify-content: center;
     padding: 20px;
     text-align: center;
+    display: flex;
+    margin: 0 auto; 
+    background: rgba(255, 255, 255, 0.432);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.432);
+    width: 80%;
+    margin-bottom: 20px;
   }
   
   .textSection {
     flex: 1;
     text-align: center;
-    padding-right: 20px;
     color: #1d1d1f;
   }
   
@@ -40,16 +46,18 @@
     .imageSection {
       flex: 1;
       text-align: center;
-      padding-right: 50px;
-    }
+      padding: 5%;
+  }
     
-    .ipadImage {
-      padding: 0%;
-      width: 500px; 
-      height: 200px; 
+  .ipadImage {
+      width: 90%; 
+      height: auto; 
       border-radius: 10px; 
-      margin: 0px;
-    }
+      margin: 10%;
+      box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+
+      
+  }
     
   
     

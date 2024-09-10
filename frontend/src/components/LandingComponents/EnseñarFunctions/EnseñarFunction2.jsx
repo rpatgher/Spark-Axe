@@ -1,4 +1,4 @@
-import styles from './Functions.module.css'; 
+import styles from './EnseñarFunction2.module.css'; 
 import Spark from "../../../assets/img/Spark.png";
 import SSAD from "../../../assets/img/Landing/SSAD.png";
 
@@ -18,10 +18,10 @@ const EnseñarFunctions = () => {
 
       {/* Sección de texto a la izquierda */}
       <div className={styles.textSection}>
-        <h2>Fitness+</h2>
-        <h3>Get 3 months free when you buy an iPad.</h3>
-        <p>From HIIT to Meditation, there's something for everyone.</p>
-        <a href="#" className={styles.learnMore}>Learn more &gt;</a>
+        <h2>Funcionalidades de Anuncios</h2>
+        <h3>Administracion de anuncios en tu sitio web</h3>
+        <p>Publica anuncios de nuevos productos y haz tu empresa crecer</p>
+        <a href="#" className={styles.learnMore}>Aplicar</a>
       </div>
     </div>
   );

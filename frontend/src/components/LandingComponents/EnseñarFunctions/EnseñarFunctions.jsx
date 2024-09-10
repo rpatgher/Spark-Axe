@@ -1,5 +1,5 @@
 import styles from './Functions.module.css'; 
-import Spark from "../../../assets/img/Spark.png";
+import SSPROD from "../../../assets/img/Landing/SSPROD.png";
 
 
 const EnseñarFunctions = () => {
@@ -8,15 +8,15 @@ const EnseñarFunctions = () => {
       {/* Sección de texto a la izquierda */}
       <div className={styles.textSection}>
         <h2>Crea tu propias funciones</h2>
-        <h3>Escoje que necesita tener tu portal</h3>
-        <p>Tu llegas con la idea nosotros la convertimos realidad</p>
+        <h3>Como gestion de tus productos</h3>
+        <p>Donde puedes subir, editar y ver tus productos</p>
         <a href="#" className={styles.learnMore}>Aplicar</a>
       </div>
 
       {/* Sección de imagen a la derecha */}
       <div className={styles.imageSection}>
         <img 
-          src={Spark}
+          src={SSPROD}
           alt="Apple Fitness on iPad" 
           className ={styles.ipadImage}
         />
