@@ -10,6 +10,9 @@ import styles from './FormAdvertisement.module.css';
 import useAuth from '../../hooks/useAuth';
 import useApp from '../../hooks/useApp';
 
+// ************** components *************
+import DynamicAdvertisement from '../DynamicAdvertisement';
+
 const FormAdvertisement = ({ initialAdvertisment, setModalDelete }) => {
     const { auth } = useAuth();
     const { alert, handleAlert } = useApp();
@@ -209,6 +212,10 @@ const FormAdvertisement = ({ initialAdvertisment, setModalDelete }) => {
                 <div className={styles.preview}>
                     <div className={styles["content-preview"]}>
                         <p>Vista Previa</p>
+                        <DynamicAdvertisement 
+                            advertisement={advertisment}
+                            userSiteType={auth.websites[0].name}
+                        />
                     </div>
                     <p>Estado del Anuincio: <span className={`${advertisment.published ? styles["status-published"] : styles["status-unpublished"] }`}>{advertisment.published ? 'Publicado' : 'Archivado'}</span> </p>
                 </div>
