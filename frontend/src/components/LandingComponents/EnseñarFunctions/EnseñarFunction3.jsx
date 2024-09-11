@@ -8,9 +8,9 @@ const EnseñarFunctions = () => {
     <div className={styles.container}>
       {/* Sección de texto a la izquierda */}
       <div className={styles.textSection}>
-        <h2>Fitness+</h2>
-        <h3>Get 3 months free when you buy an iPad.</h3>
-        <p>From HIIT to Meditation, there's something for everyone.</p>
+      <h2>Sparkaxe</h2>
+        <h3>La mejor forma de manejar tu negocio a tu manera</h3>
+        <p>Aplica hoy para crear tu sitio personalizado con su dahsboard personalizado</p>
         <a href="#" className={styles.learnMore}>Learn more &gt;</a>
       </div>
 

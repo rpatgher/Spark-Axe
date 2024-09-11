@@ -9,7 +9,6 @@ import Warplogo from '../assets/img/logos/logowarp.png';
 import Wavelogo from '../assets/img/logos/logowave.png';
 import Carousel from '../components/LandingComponents/Carousel/Carousel';
 import EnseñarFunctions from '../components/LandingComponents/EnseñarFunctions/EnseñarFunctions';
-import AplicarFunction from '../components/LandingComponents/EnseñarFunctions/AplicarFunction';
 import EnseñarFunction2 from '../components/LandingComponents/EnseñarFunctions/EnseñarFunction2';
 import EnseñarFunction3 from '../components/LandingComponents/EnseñarFunctions/EnseñarFunction3';
 import HeaderSparkaxe from '../assets/img/HeaderSparkaxe.jpg';
@@ -57,7 +56,6 @@ const Home = () => {
             <EnseñarFunctions />
             <EnseñarFunction2 />
             <EnseñarFunction3 />
-            <AplicarFunction />
        
         </div>
     )
