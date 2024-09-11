@@ -3,6 +3,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styles from '../styles/LandingLayout.module.css';
+import Logo from '../assets/img/Landing/Logo.png';
 
 import useAuth from '../hooks/useAuth';
 
@@ -29,9 +30,29 @@ function Landinglayout() {
 </ul>
             </div>
       <Outlet /> {/* This will render child routes here */}
-      {/* <div className={styles.footer}>
+      <div className={styles.footer}>
+        <div className={styles.footerimgdiv}>
+          <img className={styles.footerimg} src={Logo} alt="Logo" />
+          <p>Sparkaxe</p>
+        </div>
+        <div className={styles.footermenu}>
         Hello this is a footer
-      </div> */}
+        <Link to="/">Inicio</Link>
+        <Link to="/about"><a>Sobre Nosotros</a></Link>
+        <Link to="/contact"><a>Contactanos</a></Link>
+        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/signup">Registrarse</Link>
+        <Link to="/login">Iniciar Sesion</Link>
+        </div>
+        <div className={styles.footermenu}>
+          Aplicar y contacto
+          <button>Aplicar</button>
+          Tienes alguna pregunta?
+          <button>Ve las preguntas frquentes</button>
+          Necesitas ayuda?
+          <button>Contactanos</button>
+        </div>
+      </div> 
     </div>
   );
 }

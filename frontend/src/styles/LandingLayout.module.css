@@ -52,7 +52,45 @@
   }
 
   .footer{
-    background-color: #fff9f9d0;
+    background-color: #ffffffd0;
     padding: 10px;
     height: 250px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    max-height: 100px;
+    
   }
+
+  .footermenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid rgba(22, 21, 21, 0.432);
+    background-color: #ffffffd0;
+ 
+  }
+
+  .footerimg{
+    background-color: #ffffffd0;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    border-radius: 20px; 
+    box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+    transition: ease-out 0.3s;
+    
+    }
+
+.footerimg:hover{
+  box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.321);
+}
+.footerimgdiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffffd0;
+    padding: 10px;
+ 
+}
