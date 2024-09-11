@@ -570,6 +570,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             <p>Vista Previa</p>
                             <DynamicElement
                                 element={product}
+                                userSiteType={auth.websites[0].name}
                             />
                         </div>
                         <p>Estado del producto: <span className={`${product.published ? styles["status-published"] : styles["status-unpublished"] }`}>{product.published ? 'Publicado' : 'Archivado'}</span> </p>
