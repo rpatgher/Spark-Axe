@@ -9,6 +9,7 @@ import WebsiteRouter from './routes/WebsiteRoutes.js';
 import ElementRouter from './routes/ElementRoutes.js';
 import CategoryRouter from './routes/CategoryRoutes.js';
 import AdvertisementRouter from './routes/AdvertisementRoutes.js';
+import ContactRouter from './routes/ContactRoutes.js';
 import SectionRouter from './routes/SectionRoutes.js';
 import OrderRouter from './routes/OrderRoutes.js';
 import InventoryRouter from './routes/InventoryRoutes.js';
@@ -50,6 +51,7 @@ app.use('/api/users', UserRouter);
 app.use('/api/websites', WebsiteRouter);
 app.use('/api/elements', ElementRouter);
 app.use('/api/advertisements', AdvertisementRouter)
+app.use('/api/contacts', ContactRouter);
 app.use('/api/sections', SectionRouter);
 app.use('/api/categories', CategoryRouter);
 app.use('/api/orders', OrderRouter);

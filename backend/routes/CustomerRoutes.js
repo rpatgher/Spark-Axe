@@ -6,15 +6,20 @@ import {
     getCustomer,
     deleteCustomer,
     deleteCustomers,
-    updateCustomer
+    updateCustomer,
+    login
 } from '../controllers/CustomerController.js';
 
 import checkAuth from "../middleware/checkAuth.js";
+import validateWebsite from '../middleware/validateWebsite.js';
 
 const router = express.Router();
 
+router.route('/login')
+    .post(validateWebsite, login);
+
 router.route('/')
-    .post(createCustomer);
+    .post(validateWebsite, createCustomer);
 
 router.route('/delete')
     .post(checkAuth, deleteCustomers);

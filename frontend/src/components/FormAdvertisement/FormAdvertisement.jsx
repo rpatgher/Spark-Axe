@@ -100,14 +100,14 @@ const FormAdvertisement = ({ initialAdvertisment, setModalDelete }) => {
         if(e.nativeEvent.submitter.dataset.action === 'publish'){
             advertisment.published = true; 
             setPublishingAdvertisment(true);
-            msgAlert = 'Producto publicado exitosamente';
+            msgAlert = 'Anuncio publicado exitosamente';
         }else if (e.nativeEvent.submitter.dataset.action === 'unpublish'){
             advertisment.published = false; 
             setPublishingAdvertisment(true);
-            msgAlert = 'Producto archivado exitosamente';
+            msgAlert = 'Anuncio archivado exitosamente';
         }else{
             setSavingAdvertisment(true);
-            msgAlert = 'Producto guardado exitosamente';
+            msgAlert = 'Anuncio guardado exitosamente';
         }
         const token = localStorage.getItem('token');
         const config = {
