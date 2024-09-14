@@ -44,6 +44,7 @@ const getElement = async (req, res) => {
         published: elementFromDB.published,
         categories: elementFromDB.subcategories.map(subcategory => {
             return {
+                id: subcategory.id,
                 category: subcategory.category.name,
                 subcategory: subcategory.name,
             }
