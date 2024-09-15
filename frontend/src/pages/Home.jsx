@@ -8,7 +8,7 @@ import Shocklogo from '../assets/img/logos/logoshock.png';
 import Warplogo from '../assets/img/logos/logowarp.png';
 import Wavelogo from '../assets/img/logos/logowave.png';
 import Carousel from '../components/LandingComponents/Carousel/Carousel';
-import EnseñarFunctions from '../components/LandingComponents/EnseñarFunctions/EnseñarFunctions';
+import EnseñarFunction1 from '../components/LandingComponents/EnseñarFunctions/EnseñarFunction1';
 import EnseñarFunction2 from '../components/LandingComponents/EnseñarFunctions/EnseñarFunction2';
 import EnseñarFunction3 from '../components/LandingComponents/EnseñarFunctions/EnseñarFunction3';
 import HeaderSparkaxe from '../assets/img/HeaderSparkaxe.jpg';
@@ -53,7 +53,7 @@ const Home = () => {
                 </h1>
                 </div>
             <Carousel />
-            <EnseñarFunctions />
+            <EnseñarFunction1 />
             <EnseñarFunction2 />
             <EnseñarFunction3 />
        

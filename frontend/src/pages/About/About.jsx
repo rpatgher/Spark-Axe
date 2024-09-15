@@ -2,11 +2,11 @@
 import styles from './About.module.css';
 
 import { Link } from "react-router-dom"
+import DiegoSG from '../../assets/img/Team/DiegoSG.png';
+import Joseph from '../../assets/img/Team/Joseph.png';
+import Isaac from '../../assets/img/Team/Isaac.png';
+import Remy from '../../assets/img/Team/Remy.png';
 import About1 from '../../assets/img/about1.jpg';
-import About2 from '../../assets/img/about2.jpg';
-import About3 from '../../assets/img/about3.jpg';
-
-import logo from '../../assets/img/axolotl worker.png';
 
 const About = () => {
     return (
@@ -40,29 +40,30 @@ const About = () => {
            <div className={styles.contactGrid}>
     <Link to='/contact'>
         <div className={styles.contactbuttons}>
-            <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
+            <img className={styles["axworker"]} src={DiegoSG} alt="Sparkaxe-logo" />
             <h3><span className={styles.headingother}>Diego</span></h3>
         </div>
     </Link>
 
     <Link to='/support'>
         <div className={styles.contactbuttons}>
-            <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
-            <h3><span className={styles.headingother}>Joseph</span></h3>
+            <img className={styles["axworker"]} src={Isaac} alt="Sparkaxe-logo" />
+            <h3><span className={styles.headingother}>Isaac</span></h3>
         </div>
     </Link>
 
     <Link to='/support'>
         <div className={styles.contactbuttons}>
-            <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
+            <img className={styles["axworker"]} src={Remy} alt="Sparkaxe-logo" />
             <h3><span className={styles.headingother}>Remy</span></h3>
         </div>
     </Link>
 
+
     <Link to='/support'>
         <div className={styles.contactbuttons}>
-            <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
-            <h3><span className={styles.headingother}>Isaac</span></h3>
+            <img className={styles["axworker"]} src={Joseph} alt="Sparkaxe-logo" />
+            <h3><span className={styles.headingother}>Joseph</span></h3>
         </div>
     </Link>
 </div>

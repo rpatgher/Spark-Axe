@@ -46,11 +46,11 @@ function Landinglayout() {
         </div>
         <div className={styles.footermenu}>
           Aplicar y contacto
-          <button>Aplicar</button>
+          <button className={styles.learnMore}>Aplicar</button>
           Tienes alguna pregunta?
-          <button>Ve las preguntas frquentes</button>
+          <button className={styles.learnMore}>Ver</button>
           Necesitas ayuda?
-          <button>Contactanos</button>
+          <button className={styles.learnMore}>Contactanos</button>
         </div>
       </div> 
     </div>

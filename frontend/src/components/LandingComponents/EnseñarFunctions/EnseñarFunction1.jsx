@@ -1,5 +1,6 @@
-import styles from './Functions.module.css'; 
+import styles from './EnseñarFunction1.module.css'; 
 import SSPROD from "../../../assets/img/Landing/SSPROD.png";
+import  {	Link	}	from	"react-router-dom";
 
 
 const EnseñarFunctions = () => {
@@ -10,7 +11,7 @@ const EnseñarFunctions = () => {
         <h2>Crea tu propias funciones</h2>
         <h3>Como gestion de tus productos</h3>
         <p>Donde puedes subir, editar y ver tus productos</p>
-        <a href="#" className={styles.learnMore}>Aplicar</a>
+        <Link to="/support" className={styles.learnMore}>Aplicar</Link>
       </div>
 
       {/* Sección de imagen a la derecha */}
