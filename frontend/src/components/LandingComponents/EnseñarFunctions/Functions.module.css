@@ -35,15 +35,8 @@
 
 .textSection p {
   font-size: 1.5rem; 
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
 }
-
-.learnMore {
-  font-size: 2rem;
-  color: #124f8c; 
-  text-decoration: none;
-}
-
   
   .imageSection {
     flex: 1;
@@ -58,9 +51,30 @@
     border-radius: 10px; 
     margin: 10%;
     box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+    max-height: 400px;
+    max-width: 400px;
 
     
 }
-  
+
+.learnMore {
+  font-size: 2rem;
+  color: #124f8c; 
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Mejora en transición */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añadido sombra al botón */
+  padding: 10px 20px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 10px; /* Botón más redondeado */
+  cursor: pointer;
+}
+
+
+.learnMore:hover {
+  background-color: #8a96a2;
+}
+
 
   

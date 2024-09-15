@@ -54,11 +54,9 @@
   .footer{
     background-color: #ffffffd0;
     padding: 10px;
-    height: 250px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
-    max-height: 100px;
     
   }
 
@@ -93,4 +91,24 @@
     background-color: #ffffffd0;
     padding: 10px;
  
+}
+
+.learnMore {
+  font-size: 1.8rem;
+  color: #124f8c; 
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Mejora en transición */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añadido sombra al botón */
+  padding: 6px 10px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 10px; /* Botón más redondeado */
+  cursor: pointer;
+  width: 30%;
+}
+
+
+.learnMore:hover {
+  background-color: #8a96a2;
 }
