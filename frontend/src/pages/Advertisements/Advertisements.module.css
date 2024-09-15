@@ -33,6 +33,12 @@
     color: #ffffff;
     background-color: #000000;
 }
+tr.selectedRow{
+    border: #d1c5ff !important;
+}
+tr.selectedRow td {
+    background-color: #eef1f3 !important;
+}
 .cell-select input {
     appearance: none;
     width: 2rem;

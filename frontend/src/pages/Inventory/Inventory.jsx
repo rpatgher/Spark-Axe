@@ -286,13 +286,25 @@ const Inventory = () => {
 
                                 <td>
                                     {editingRow === item.id ? (
-                                        <div>
+                                        <div className={styles["save-cancel"]}>
                                             <button
                                                 onClick={() => handleSaveClick(item.id)}
                                                 className={`${styles.guardar} ${loading ? styles.loading : ""}`}
                                             >
                                                 <i className="fa-solid fa-save"></i>
                                                 {loading ? 'Guardando...' : 'Guardar'}
+                                            </button>
+                                            <button
+                                                className={styles.cancel}
+                                                onClick={() => {
+                                                    setEditingRow(null);
+                                                    setData(data.map(item => {
+                                                        item.selected = false;
+                                                        return item;
+                                                    }));
+                                                }}
+                                            >
+                                                <i className="fa-solid fa-times"></i>
                                             </button>
                                         </div>
                                     ) : editingRow === null ? (

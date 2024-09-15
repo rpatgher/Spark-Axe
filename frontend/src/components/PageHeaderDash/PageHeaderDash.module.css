@@ -19,4 +19,6 @@
 }
 .top-image img{
     width: 45rem;
+    aspect-ratio: 5/2;
+    object-fit: contain;
 }

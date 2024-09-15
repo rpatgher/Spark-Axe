@@ -40,7 +40,6 @@ const Customers = () => {
     const [limit, setLimit] = useState(10);
 
     const [modalDelete, setModalDelete] = useState(false);
-    const [modalDeleteOne, setModalDeleteOne] = useState(false);
 
     const [loading, setLoading] = useState(false);
 
@@ -170,7 +169,7 @@ const Customers = () => {
     };
 
     const handleSelectAll = () => {
-        const newData = data.map(item => (item.visible ? { ...item, selected: !selectAll } : item));
+        const newData = filteredElements.map(item => (item.visible ? { ...item, selected: !selectAll } : item));
         setFilteredElements(newData);
         setSelectAll(!selectAll);
     };
@@ -211,7 +210,6 @@ const Customers = () => {
             setData(data.filter(item => !ids.includes(item.id)));
             setFilteredElements(filteredElements.filter(item => !ids.includes(item.id)));
             handleAlert("Clientes eliminados correctamente", false);
-            setModalDelete(false);
             // filterElements(search, visible);
         } catch (error) {
             console.log(error);
@@ -223,39 +221,6 @@ const Customers = () => {
         } finally {
             setSelectAll(false);
             setModalDelete(false);
-            const newData = [...filteredElements];
-            newData.forEach(item => item.selected = false);
-            setFilteredElements(newData);
-        }
-    }
-    
-    const deleteOne = async () => {
-        const currentElement = data.find(item => item.id === editingRow);
-        const token = localStorage.getItem('token');
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            }
-        }
-        try {
-            await clientAxios.delete(`/api/customers/${currentElement.id}`, config);
-            setData(data.filter(item => item.id !== currentElement.id));
-            setFilteredElements(filteredElements.filter(item => item.id !== currentElement.id));
-            handleAlert("Cliente eliminado correctamente", false);
-            setModalDeleteOne(false);
-            // filterElements(search, visible);
-            setEditingRow(null);
-        } catch (error) {
-            console.log(error);
-            if(error?.response?.data?.msg === 'Cannot delete this customer'){
-                handleAlert('No puedes eliminar este cliente, porque está asociado a un pedido', true);
-            }else{
-                handleAlert("Hubo un error al eliminar el cliente", true);
-            }
-        } finally {
-            setEditingRow(null);
-            setModalDeleteOne(false);
             const newData = [...filteredElements];
             newData.forEach(item => item.selected = false);
             setFilteredElements(newData);
@@ -311,7 +276,7 @@ const Customers = () => {
                         { prop: 'Confirmado', width: '5%' },
                         { prop: 'actions', width: '15%' },
                     ]}
-                    listLength={dataLength}
+                    listLength={filteredElements.length}
                     filterList={filterElements}
                     search={search}
                     visibleCount={visibleCount}
@@ -378,7 +343,7 @@ const Customers = () => {
                                     </td>
                                     <td>
                                         {editingRow === item.id ? (
-                                            <div className={styles["save-delete"]}>
+                                            <div className={styles["save-cancel"]}>
                                                 <button
                                                     onClick={() => handleSaveClick(item.id)}
                                                     className={`${styles.guardar} ${loading ? styles.loading : ""}`}
@@ -387,10 +352,16 @@ const Customers = () => {
                                                     {loading ? 'Guardando...' : 'Guardar'}
                                                 </button>
                                                 <button
-                                                    className={styles.deletemini}
-                                                    onClick={() => setModalDeleteOne(true)}
+                                                    className={styles.cancel}
+                                                    onClick={() => {
+                                                        setEditingRow(null);
+                                                        setData(data.map(item => {
+                                                            item.selected = false;
+                                                            return item;
+                                                        }));
+                                                    }}
                                                 >
-                                                    <i className="fa-solid fa-trash"></i>
+                                                    <i className="fa-solid fa-times"></i>
                                                 </button>
                                             </div>
                                         ) : editingRow === null ? (
@@ -421,15 +392,6 @@ const Customers = () => {
                     actionBtnText='Eliminar'
                     actionBtnLoadingText='Eliminando...'
                     actionModal={deleteSelected}
-                />
-            }
-            {modalDeleteOne && 
-                <Modal 
-                    modalActive={setModalDeleteOne}
-                    text='¿Estás seguro de eliminar este producto?'
-                    actionBtnText='Eliminar'
-                    actionBtnLoadingText='Eliminando...'
-                    actionModal={deleteOne}
                 />
             }
         </div>

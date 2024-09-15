@@ -164,6 +164,7 @@ const deleteCustomers = async (req, res) => {
         if(orders.length > 0){
             return res.status(400).json({ msg: 'Cannot delete customers' });
         }
+        // TODO: This can be optimized by using Promise.all
         customers.forEach(async customer => {
             const website = await Website.findByPk(customer.website_id);
             if(website.user_id !== req.user.id){

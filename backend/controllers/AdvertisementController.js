@@ -1,4 +1,6 @@
+import { Op } from 'sequelize';
 import fs from 'fs';
+
 
 // ************* Models *************
 import { Advertisement, Section, Website } from '../models/index.js';
@@ -182,11 +184,54 @@ const deleteAdvertisement = async (req, res) => {
     }
 }
 
+const deleteAdvertisements = async (req, res) => {
+    try {
+        const advertisements = await Advertisement.findAll({
+            where: {
+                id: {
+                    [Op.in]: req.body.ids
+                }
+            },
+            include: {
+                model: Section,
+                as: 'section',
+                attributes: ['website_id'],
+            },
+            attributes: ['id', 'image'],
+        });
+        // Check if all advertisements belong to the same website
+        const website = await Website.findOne({
+            where: {
+                [Op.and]: [
+                    { id: 
+                        { [Op.in]: advertisements.map(advertisement => advertisement.section.website_id) }
+                    },
+                    { user_id: req.user.id }
+                ]
+            }
+        });
+        if(!website){
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+        await Promise.all(advertisements.map(async advertisement => {
+            await advertisement.destroy();
+            if(advertisement.image){
+                fs.unlinkSync(`./public/uploads/advertisements/${advertisement.image}`);
+            }
+        }));
+        return res.json({ msg: 'Advertisements deleted successfully' });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ msg: 'Internal Server Error' });
+    }
+}
+
 
 export {
     createAdvertisement,
     getAdvertisements,
     editAdvertisement,
     getAdvertisement,
-    deleteAdvertisement
+    deleteAdvertisement,
+    deleteAdvertisements
 }

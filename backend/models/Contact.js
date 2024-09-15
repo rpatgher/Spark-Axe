@@ -26,6 +26,11 @@ const Contact = db.define('contact', {
     message: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    completed: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 });
 

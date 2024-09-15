@@ -8,13 +8,11 @@
     margin-bottom: 3rem;
     align-items: center;
 }
-.guardar{
-    background-color: var(--blue);
+.guardar, .cancel{
     padding: 5px;
     color: white;
     border: none;
     border-radius: 5px;
-    width: 9.5rem;
     cursor: pointer;
 
     display: flex;
@@ -22,8 +20,19 @@
     align-items: center;
     gap: .5rem;
 }
+.guardar {
+    width: 9.5rem;
+    background-color: var(--blue);
+}
+.cancel{
+    width: 2.5rem;
+    background-color: var(--yellow);
+}
 .guardar:hover{
-    background-color: rgb(42, 14, 143);
+    background-color: color-mix(in srgb, var(--blue) 80%, #000);
+}
+.cancel:hover{
+    background-color: color-mix(in srgb, var(--yellow) 80%, #000);
 }
 
 .editar{
@@ -47,7 +56,7 @@
 .editar:hover{
     background-color: black;
 }
-.save-delete{
+.save-cancel{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,19 +110,7 @@ input{
 .container {
     position: relative;
 }
-.deletemini{
-    flex: 0 0 auto; /* Don't grow or shrink, keep its size */
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 15px;
-    padding: 5px;
-    font-weight: bold;
-}
-.deletemini:hover{
-    background-color: rgb(145, 12, 12);
-}
+
 tr.selectedRow{
     border: #d1c5ff !important;
 }

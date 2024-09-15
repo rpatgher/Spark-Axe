@@ -15,6 +15,7 @@ import useApp from '../../hooks/useApp';
 
 // ********************* Components ********************
 import PageHeaderDash from '../../components/PageHeaderDash/PageHeaderDash';
+import Modal from '../../components/Modals/GeneralModal';
 import TableDashboard from '../../components/TableDashboard/TableDashboard';
 import SearcherDashboard from '../../components/SearcherDashboard/SearcherDashboard';
 
@@ -36,6 +37,31 @@ const Advertisements = () => {
 
     const [modalDelete, setModalDelete] = useState(false);
 
+    useEffect(() => {
+        const count = filteredAdvertisements.filter(advertisement => advertisement.selected && advertisement.visible).length;
+        const countVisible = filteredAdvertisements.filter(advertisement => advertisement.visible).length;
+        setSelectedCount(count);
+        setVisibleCount(countVisible);
+    }, [filteredAdvertisements, limit]);
+
+    const sordedAdvertisements = advertisements.sort((a, b) => {
+        if(order === 'asc'){
+            if(orderType === 'title'){
+                return a.title.localeCompare(b.title);
+            }
+            if(orderType === 'section'){
+                return a.section.name.localeCompare(b.section.name);
+            }
+        }
+        if(order === 'desc'){
+            if(orderType === 'title'){
+                return b.title.localeCompare(a.title);
+            }
+            if(orderType === 'section'){
+                return b.section.name.localeCompare(a.section.name);
+            }
+        }
+    });
 
     useEffect(() => {
         const getAdvertisements = async () => {
@@ -59,32 +85,6 @@ const Advertisements = () => {
         return () => getAdvertisements();
     }, []);
 
-    useEffect(() => {
-        const count = filteredAdvertisements.filter(advertisement => advertisement.selected).length;
-        const countVisible = filteredAdvertisements.filter(advertisement => advertisement.visible).length;
-        setSelectedCount(count);
-        setVisibleCount(countVisible);
-    }, [filteredAdvertisements, limit]);
-
-    const sordedAdvertisements = filteredAdvertisements.sort((a, b) => {
-        if(order === 'asc'){
-            if(orderType === 'title'){
-                return a.title.localeCompare(b.title);
-            }
-            if(orderType === 'section'){
-                return a.section.name.localeCompare(b.section.name);
-            }
-        }
-        if(order === 'desc'){
-            if(orderType === 'title'){
-                return b.title.localeCompare(a.title);
-            }
-            if(orderType === 'section'){
-                return b.section.name.localeCompare(a.section.name);
-            }
-        }
-    });
-
     const filterAdvertisements = (search, visible) => {
         setSelectAll(false);
         setFilteredAdvertisements(filteredAdvertisements.map(advertisement => advertisement.selected = false));
@@ -100,11 +100,10 @@ const Advertisements = () => {
             }
         });
         if (search === '') {
-            return setFilteredAdvertisements(visibleAdvertisements);
+            setFilteredAdvertisements(visibleAdvertisements);
+            return;
         }
-        const searchAdvertisements = visibleAdvertisements.filter(advertisement => {
-            return advertisement.title.toLowerCase().includes(search.toLowerCase());
-        });
+        const searchAdvertisements = visibleAdvertisements.filter(advertisement => advertisement.title.toLowerCase().includes(search.toLowerCase()));
         setFilteredAdvertisements(searchAdvertisements);
     }
 
@@ -118,6 +117,33 @@ const Advertisements = () => {
         const newData = [...filteredAdvertisements];
         newData[index].selected = !newData[index].selected;
         setFilteredAdvertisements(newData);
+    }
+
+    const deleteSelected = async () => {
+        const selected = filteredAdvertisements.filter(advertisement => advertisement.selected);
+        const ids = selected.map(advertisement => advertisement.id);
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        try {
+            await clientAxios.post('/api/advertisements/delete', { ids }, config);
+            setAdvertisements(advertisements.filter(advertisement => !ids.includes(advertisement.id)));
+            setFilteredAdvertisements(filteredAdvertisements.filter(advertisement => !ids.includes(advertisement.id)));
+            handleAlert('Anuncios eliminados correctamente', false);
+        } catch (error) {
+            console.log(error);
+            handleAlert('Error al eliminar los anuncios', true);
+            const newData = [...filteredAdvertisements];
+            newData.map(advertisement => advertisement.selected = false);
+            setFilteredAdvertisements(newData);
+        } finally {
+            setSelectAll(false);
+            setModalDelete(false);
+        }
     }
 
     
@@ -182,16 +208,19 @@ const Advertisements = () => {
                     { type: 'published', name: 'Publicados' },
                     { type: 'unpublished', name: 'Archivados' },
                 ]}
-                setModalDelete={setModalDelete}
                 listName={'anuncios'}
-                createNew={'/dashboard/advertisements/new'}
                 colspan={[3,2,2]}
-
+                createNew={'/dashboard/advertisements/new'}
+                setModalDelete={setModalDelete}
             >
                 {filteredAdvertisements.map((advertisement, index) => {
                     if(index < limit){
+                        advertisement.visible = true;
                         return (
-                            <tr key={advertisement.id}>
+                            <tr 
+                                key={advertisement.id}
+                                className={`${advertisement.selected ? styles.selectedRow : ''}`}
+                            >
                                 <td className={styles["cell-select"]}>
                                     <input 
                                         type="checkbox"
@@ -222,8 +251,16 @@ const Advertisements = () => {
                 })}
 
             </TableDashboard>
+            {modalDelete && 
+                <Modal 
+                    modalActive={setModalDelete}
+                    text='¿Estás seguro de eliminar los anuncios seleccionados?'
+                    actionBtnText='Eliminar'
+                    actionBtnLoadingText='Eliminando...'
+                    actionModal={deleteSelected}
+                />
+            }
         </div>
-        
     )
 }
 

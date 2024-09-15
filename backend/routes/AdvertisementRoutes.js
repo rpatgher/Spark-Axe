@@ -5,7 +5,8 @@ import {
     createAdvertisement,
     editAdvertisement,
     getAdvertisement,
-    deleteAdvertisement
+    deleteAdvertisement,
+    deleteAdvertisements
 } from '../controllers/AdvertisementController.js';
 
 import checkAuth from '../middleware/checkAuth.js';
@@ -14,11 +15,14 @@ import uploadImage from '../middleware/uploadImage.js';
 const router = express.Router();
 
 router.route('/')
-.post(checkAuth, uploadImage, createAdvertisement);
+    .post(checkAuth, uploadImage, createAdvertisement);
 
 
 router.route('/all/:website_id')
     .get(checkAuth, getAdvertisements);
+
+router.route('/delete')
+    .post(checkAuth, deleteAdvertisements);
 
 
 router.route('/:id')

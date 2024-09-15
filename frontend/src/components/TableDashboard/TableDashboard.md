@@ -58,10 +58,10 @@ Como _props_ se le deben pasar:
     visible={}
     setVisible={}
     visibleOptions={}
-    setModalDelete={}
     listName={}
-    createNew={}
     colspan={}
+    createNew={}
+    setModalDelete={}
 >
     <tr>
         <td></td>

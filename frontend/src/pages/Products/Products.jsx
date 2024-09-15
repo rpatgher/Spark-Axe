@@ -192,9 +192,9 @@ const Products = () => {
         } finally {
             setSelectAll(false);
             setModalDelete(false);
-            const newData = [...filteredProducts];
-            newData.map(item => item.selected = false);
-            setFilteredProducts(newData);
+            // const newData = [...filteredProducts];
+            // newData.map(item => item.selected = false);
+            // setFilteredProducts(newData);
         }
 
     }
