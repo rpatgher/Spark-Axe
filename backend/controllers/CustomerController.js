@@ -1,11 +1,50 @@
 import { Op } from 'sequelize';
 
+// ************* Helpers *************
+import generateToken from '../helpers/generateToken.js';
+import generateJWT from '../helpers/generateJWT.js';
+
+
 // ************* Models *************
 import {  Customer, Website, Order } from '../models/index.js';
 
+const login = async (req, res) => {
+    const { email, password } = req.body;
+    const customer = await Customer.findOne({ 
+        where: { email }
+    });
+    if(!customer){
+        const error = new Error('Customer not found');
+        return res.status(404).json({ msg: error.message });
+    }
+    if(!customer.confirmed){
+        const error = new Error('Customer is not confirmed');
+        return res.status(401).json({ msg: error.message });
+    }
+    if(!customer.comparePassword(password)){
+        const error = new Error('Invalid password');
+        return res.status(401).json({ msg: error.message });
+    } else {
+        return res.json({
+            msg: 'Logged in successfully',
+            id: customer.id,
+            name: customer.name,
+            lastname: customer.lastname,
+            email: customer.email,
+            phone: customer.phone,
+            token: generateJWT(customer.id)
+        });
+    }
+}
+
 const createCustomer = async (req, res) => {
-    const { name, lastname, email, phone, password, website_id } = req.body;
-    if(!name || !lastname || !email || !phone || !password || !website_id){
+    const { website } = req;
+    if(!website){
+        const error = new Error('Website not found');
+        return res.status(404).json({ msg: error.message });
+    }
+    const { name, lastname, email, phone, password } = req.body;
+    if(!name || !lastname || !email || !phone || !password){
         const error = new Error('Missing fields');
         return res.status(400).json({ msg: error.message });
     }
@@ -21,17 +60,15 @@ const createCustomer = async (req, res) => {
         const error = new Error('Customer already exists');
         return res.status(400).json({ msg: error.message });
     }
-    const website = await Website.findByPk(website_id);
-    if(!website){
-        const error = new Error('Website not found');
-        return res.status(404).json({ msg: error.message });
-    }
     try {
-        const numCustomer = await Customer.count({ where: { website_id } });
+        const numCustomer = await Customer.count({ 
+            where: { website_id: website.id }
+        });
         const customer = Customer.build(req.body);
+        customer.website_id = website.id;
         customer.index = numCustomer + 1;
         customer.confirmed = false;
-        // TODO: Generate Token
+        customer.token = generateToken();
         await customer.save();
         // TODO: Send confirmation email
         res.json({ msg: 'Registered succesfully' });
@@ -178,6 +215,7 @@ const updateCustomer = async (req, res) => {
 
 export {
     createCustomer,
+    login,
     getCustomers,
     getCustomer,
     deleteCustomer,

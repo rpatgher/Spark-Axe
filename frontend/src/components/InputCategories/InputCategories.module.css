@@ -1,0 +1,153 @@
+.input-category {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+}
+
+.input-category input {
+    width: 95%;
+}
+
+.initial-categories {
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    transform: translateY(100%);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    width: 95%;
+    border-radius: 1rem;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    max-height: 12.209rem;
+    overflow: scroll;
+}
+
+.initial-categories button {
+    all: unset;
+    margin: 0;
+    padding: 1rem;
+}
+
+.initial-categories button:hover {
+    background-color: var(--blue);
+    border-radius: .5rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-add-category {
+    all: unset;
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--blue);
+    padding: .5rem;
+    border-radius: .5rem;
+    font-size: 1.6rem;
+    flex: 1;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.categories {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.label-delete {
+    display: flex;
+    gap: 1rem;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+
+.btn-delete-category {
+    all: unset;
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--red);
+    padding: .5rem;
+    border-radius: .5rem;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.input-subcategories {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+}
+
+.input-subcategories-btn {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+
+}
+
+.input-subcategories input {
+    padding: 1rem;
+    font-size: 1.2rem;
+    width: 100%;
+    height: auto;
+}
+
+.initial-subcategories {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    transform: translateY(100%);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    width: 90%;
+    border-radius: 1rem;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    max-height: 10.828rem;
+    overflow: scroll;
+}
+
+.initial-subcategories button {
+    all: unset;
+    margin: 0;
+    padding: 1rem;
+    font-size: 1.4rem;
+    border-radius: .5rem;
+}
+
+.initial-subcategories button:hover {
+    background-color: var(--blue);
+    color: #fff;
+    cursor: pointer;
+}
+
+.subcategories {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.subcategories p {
+    background-color: var(--blue);
+    color: #fff;
+    padding: .5rem;
+    border-radius: .5rem;
+    font-size: 1.2rem;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+}

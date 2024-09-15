@@ -4,6 +4,42 @@ import { Op } from 'sequelize';
 // ************* Models *************
 import { Category, Subcategory, Website } from '../models/index.js';
 
+const createCategoriesNew = async (req, res) => {
+    const { website_id, categories: categoriesBody } = req.body;
+    if(!website_id || !categoriesBody || categoriesBody.length === 0){
+        return res.status(400).json({msg: 'Website id and categories are required'});
+    }
+    if(categoriesBody.some(category => !category.category) || categoriesBody.some(category => category.category === '')){
+        return res.status(400).json({msg: 'Category name is required'});
+    }
+    if(categoriesBody.some(category => !category.subcategories) || categoriesBody.some(category => category.subcategories.length === 0)){
+        return res.status(400).json({msg: 'Subcategories of all categories are required'});
+    }
+    // Count all categories that already exist
+    const currentCategories = await Category.findAll({
+        where: {
+            website_id
+        }
+    });
+    const numCurrentCategories = currentCategories.length;
+
+    // Create an array of categories that do not exist
+    let categories = [];
+    if(categoriesBody){
+        categories = categoriesBody.map(category => {
+            if(currentCategories.find(currentCategory => currentCategory.id === category.id)){
+                return null;
+            }
+            return {
+                name: category.category,
+                website_id
+            }
+        });
+    }
+
+
+}
+
 
 const createCategories = async (req, res) => {
     const { website_id, categories: categoriesBody } = req.body;
@@ -24,9 +60,10 @@ const createCategories = async (req, res) => {
     const numCurrentCategories = currentCategories.length;
     let categories = [];
     let subcategories = [];
+    // if there are categories that already exist, they are not created
     if(categoriesBody){
         categories = categoriesBody.map(category => {
-            if(currentCategories.find(currentCategory => currentCategory.name === category.category)){
+            if(currentCategories.find(currentCategory => currentCategory.id === category.id)){
                 return null;
             }
             return {
@@ -35,15 +72,18 @@ const createCategories = async (req, res) => {
             }
         });
     }
+    // remove null values
     categories = categories.filter(category => category !== null);
     categories.map((category, i) => {
         category.index = numCurrentCategories + i + 1;
     });
     try{
         let categoriesCreated = null;
+        // if there are categories that do not exist, they are created
         if(categories.length > 0){
             categoriesCreated = await Category.bulkCreate(categories);
         }
+        // get all subcategories that already exist
         const currentSubcategories = await Subcategory.findAll({
             where: {
                 category_id: {
@@ -51,6 +91,8 @@ const createCategories = async (req, res) => {
                 }
             }
         });
+        console.log(categoriesBody);
+        // get the number of subcategories of each category
         const categoriesElement = await Category.findAll({
             where: {
                 name: {

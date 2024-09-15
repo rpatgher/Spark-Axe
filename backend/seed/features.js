@@ -74,6 +74,7 @@ const features = [
         name: "Contacto",
         description: "Mantente en contacto con tus clientes",
         url: "contact",
+        icon: 'fa-solid fa-address-card'
         
     }
 ];
