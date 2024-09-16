@@ -92,7 +92,7 @@ function App() {
                 <Route path="pos/new" element={<NewPointOfSale />} />
                 <Route path="pos/edit/:id" element={<EditPointOfSale />} />
                 <Route path="contact" element={<Contact />} />
-                <Route path="settings" element={<Settings />} />
+                {/* <Route path="settings" element={<Settings />} /> */}
               </Route>
 
               {/* Ruta 404 */}

@@ -1,6 +1,6 @@
 import { Op, Sequelize } from 'sequelize';
 // ************* Models *************
-import { Website, Inventory, Order, Element, OrderElement } from '../models/index.js';
+import { Website, Inventory, Order, Element, OrderElement, PoS, Customer } from '../models/index.js';
 
 const getWebsite = async (req, res) => {
     const website = await Website.findByPk(req.params.id);
@@ -94,12 +94,37 @@ const getWebsiteMainInfo = async (req, res) => {
             attributes: ['name', 'image']
           }]
     });
+    const totalElements = await Element.count({
+        where: {
+            website_id: website.id
+        }
+    });
+    const sales = await Order.count({
+        where: {
+            website_id: website.id,
+            status: 'C'
+        }
+    });
+    const totalPos = await PoS.count({
+        where: {
+            website_id: website.id
+        }
+    });
+    const totalCustomers = await Customer.count({
+        where: {
+            website_id: website.id
+        }
+    });
     const { orders, elements } = website;
     return res.status(200).json({ 
         orders,
         elements,
         inventory,
-        mostSoldProduct: mostSoldProduct[0]?.element || null
+        mostSoldProduct: mostSoldProduct[0]?.element || null,
+        totalElements,
+        sales,
+        totalPos,
+        totalCustomers
     });
 }
 

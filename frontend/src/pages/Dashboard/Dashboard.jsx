@@ -17,6 +17,7 @@ import Big from "./Squares/Big";
 import BigUpdates from "./Squares/BigUpdates";
 import ProfileCard from "./Squares/ProfileCard";
 import BigOrders from "./Squares/BigOrders";
+import FourSmall from "./Squares/FourSmall";
 import Delivery from "./Squares/Delivery";
 
 const Dashboard = () => {
@@ -28,6 +29,10 @@ const Dashboard = () => {
     const [visible, setVisible] = useState(false);
     const [inventory, setInventory] = useState({});
     const [mostSold, setMostSold] = useState([]);
+    const [totalElements, setTotalElements] = useState(0);
+    const [sales, setSales] = useState(0);
+    const [totalPos, setTotalPos] = useState(0);
+    const [totalCustomers, setTotalCustomers] = useState(0);
 
     useEffect(() => {
         setTimeout(() => {
@@ -46,11 +51,15 @@ const Dashboard = () => {
             };
             try {
                 const response = await clientAxios.get(`/api/websites/${auth.websites[0].id}/main-info`, config);
-                const { elements, orders, inventory, mostSoldProduct } = response.data;
+                const { elements, orders, inventory, mostSoldProduct, totalElements, sales, totalCustomers, totalPos } = response.data;
                 setElements(elements);
                 setOrders(orders);
                 setInventory(inventory);
                 setMostSold(mostSoldProduct);
+                setTotalElements(totalElements);
+                setSales(sales);
+                setTotalCustomers(totalCustomers);
+                setTotalPos(totalPos);
             } catch (error) {
                 console.log(error);
                 handleAlert("Error al obtener la información", "error");
@@ -80,8 +89,16 @@ const Dashboard = () => {
                     <Big elements={elements} inventory={inventory} />
                 </div>
                 <div className={styles["row"]}>
-                    <BigOrders orders={orders} />
                     {/* <Delivery /> */}
+                    <FourSmall 
+                        squares={[
+                            { title: "Productos", value: totalElements },
+                            { title: "Ventas", value: sales },
+                            { title: "Puntos de Venta", value: totalPos },
+                            { title: "Clientes", value: totalCustomers },
+                        ]}
+                    />
+                    <BigOrders orders={orders} />
                     <div className={styles["Menu"]}>
                         <i className="fa-solid fa-person-digging"></i>
                         <p>Trabajando para mejorar sparkaxe</p>

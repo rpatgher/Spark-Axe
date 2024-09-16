@@ -21,30 +21,6 @@ const SidebarDashboard = () => {
 
     const [menuActive, setMenuActive] = useState(false);
 
-    // const setIconFeature = (feature) => {
-    //     if(feature === 'Pedidos'){
-    //         return 'fa-solid fa-basket-shopping';
-    //     } else if (feature === 'Productos') {
-    //         return 'fa-solid fa-tags';
-    //     } else if (feature === 'Inventario') {
-    //         return 'fa-solid fa-dolly';
-    //     } else if (feature === 'Clientes') {
-    //         return 'fa-solid fa-users';
-    //     } else if (feature === 'Estadísticas Generales') {
-    //         return 'fa-solid fa-square-poll-vertical';
-    //     } else if (feature === 'Cupones') {
-    //         return 'fa-solid fa-ticket-simple';
-    //     } else if (feature === 'Promociones') {
-    //         return 'fa-solid fa-gifts';
-    //     } else if (feature === 'Envío') {
-    //         return 'fa-solid fa-truck-fast';
-    //     } else if (feature === 'Anuncios') {
-    //         return 'fa-solid fa-rectangle-ad';
-    //     } else {
-    //         return 'fa-solid fa-cube';
-    //     }
-    // }
-
     return (
         <aside className={styles.sidebar}>
             <header className={styles["sidebar-header"]}>
@@ -80,10 +56,10 @@ const SidebarDashboard = () => {
                     ))}
                 </div>
                 <div className={styles["setting-menu"]}>
-                    <Link to='/dashboard/settings' className={`${styles.item} ${location.pathname === '/dashboard/settings' ? styles.item_active : ''}`}>
+                    {/* <Link to='/dashboard/settings' className={`${styles.item} ${location.pathname === '/dashboard/settings' ? styles.item_active : ''}`}>
                     <i className="fa-solid fa-gear"></i>
                         <p>Configuración Tienda</p>
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
         </aside>    

@@ -155,15 +155,13 @@
 .dropdown{
     position: absolute;
     display: none;
-    bottom: 0; /* Position the dropdown content below the profile element */
+    bottom: 0;
     left: 0;
     transform: translateY(100%);
 }
 .dropdownContent {
     background-color: #f9f9f9;
-    flex-basis: 120px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
     border-radius: 1rem;
     font-size: 1.2rem;
     transform: translateY(1rem);
@@ -187,6 +185,7 @@
 
 .profile:hover .dropdown, .profile .dropdown:hover {
     display: block;
+    z-index: 100;
 }
 
 
