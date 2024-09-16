@@ -13,6 +13,7 @@ import WebsiteFeature from "./WebsiteFeature.js";
 import Section from "./Section.js";
 import Advertisement from "./Advertisement.js";
 import Contact from "./Contact.js";
+import PoS from "./PoS.js";
 
 
 User.hasMany(Website, { foreignKey: 'user_id', onDelete: 'RESTRICT' });
@@ -59,6 +60,9 @@ Contact.belongsTo(Customer, { foreignKey: 'customer_id', onDelete: 'RESTRICT' })
 Contact.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 Website.hasMany(Contact, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 
+PoS.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+Website.hasMany(PoS, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+
 
 //deliveries has one website
 //alrevez website.hasOne(deliveries)
@@ -83,5 +87,6 @@ export {
     WebsiteFeature, 
     Section, 
     Advertisement,
-    Contact
+    Contact,
+    PoS
 };

@@ -1,0 +1,237 @@
+.body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+    position: relative;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 2rem;
+    gap: 1rem;
+    border-radius: 1rem;
+}
+.field label {
+    font-size: 1.4rem;
+}
+.field textarea {
+    resize: none;
+}
+.field input,
+.field textarea,
+.field select {
+    font-size: 1.4rem;
+    padding: 1rem;
+    border: 1px solid var(--gray);
+    background-color: var(--white);
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1);
+    /* Box shadow for depth */
+    border-radius: 1rem;
+    height: auto;
+}
+.required{
+    position: relative;
+}
+.required::after {
+    position: absolute;
+    content: "*";
+    color: var(--red);
+}
+.address{
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.address span {
+    font-weight: normal;
+}
+.note{
+    font-size: 1.2rem;
+    color: var(--dark_gray);
+    margin: 0;
+}
+.map{
+    height: 400px;
+    /* width: 10rem; */
+    /* border-radius: 1rem;
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); */
+}
+.popup-restyling {
+    width: 20rem;
+}
+.popup-restyling p{
+    font-size: 1.2rem;
+    width: 100%;
+}
+.field-images, .field-images-done {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.field-images p, .field-images-done p {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.field-images input {
+    display: none;
+}
+
+.field-images svg {
+    height: 50px;
+    fill: rgb(82, 82, 82);
+    margin-bottom: 20px;
+}
+
+.field-images label {
+    cursor: pointer;
+    background-color: #ddd;
+    padding: 30px 50px;
+    border-radius: 40px;
+    border: 2px dashed rgb(82, 82, 82);
+    box-shadow: 0px 0px 200px -50px rgba(0, 0, 0, 0.719);
+}
+
+.field-images div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.field-images span , .field-images-done span {
+    background-color: rgb(82, 82, 82);
+    padding: .5rem 1rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    color: white;
+    transition: all 0.3s;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.field-images span:hover {
+    background-color: rgb(14, 14, 14);
+}
+
+.field-images-done svg {
+    fill: var(--blue);
+}
+
+.field-images-done label {
+    font-weight: bolder;
+    background-color: #c3c2fc;
+    border: 2px dashed var(--blue);
+}
+.field-images-done span {
+    background-color: var(--blue);
+}
+
+.empty-field-image label{
+    border: 2px dashed var(--red);
+    background-color: color-mix(in srgb, var(--red) 20%, #fff );
+}
+.empty-field-image svg {
+    fill: var(--red);
+}
+.empty-field-image span {
+    background-color: var(--red);
+}
+
+.field-images-done span:hover {
+    background-color: color-mix(in srgb, var(--blue) 80%, #000);
+}
+
+
+input.empty-field, textarea.empty-field, select.empty-field {
+    border: 1px solid var(--red);
+    background-color: color-mix(in srgb, var(--red) 30%, #fff);
+    height: auto;
+}
+
+.right {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 3rem;
+}
+.preview {
+    background-color: var(--white);
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.preview p {
+    font-size: 1.8rem;
+    margin: 0;
+    padding: 0;
+}
+
+.content-preview{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.button {
+    all: unset;
+    background-color: var(--blue);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 1.6rem;
+    text-align: center;
+    cursor: pointer;
+
+
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+}
+
+.button:hover {
+    background-color: var(--dark_blue);
+}
+
+.btn-delete {
+    background-color: var(--red);
+}
+
+.btn-delete:hover {
+    background-color: color-mix(in srgb, var(--red) 85%, #000);
+}
+
+
+.btn-disabled{
+    opacity: .5;
+    cursor: not-allowed;
+}
+.btn-saving{
+    animation: pulse 2s infinite;
+    cursor: progress;
+}
+@keyframes pulse {
+    0%, 100% {
+      color: #fff; /* Color original */
+    }
+    50% {
+      color: #838383; /* Color opaco */
+    }
+}

@@ -2,3 +2,113 @@
     padding-bottom: 6rem;
     padding-top: 2rem;
 }
+.filters{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    align-items: center;
+}
+.buttons{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.btn-new-add{
+    all: unset;
+    cursor: pointer;
+    color: #ffffff;
+    
+    padding: 1rem 1rem;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.5rem;
+    justify-content: end;
+    font-weight: bold;
+    background-color: var(--dark_gray);
+}
+.btn-new-add:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
+tr.selectedRow{
+    border: #d1c5ff !important;
+}
+tr.selectedRow td {
+    background-color: #eef1f3 !important;
+}
+.cell-select input {
+    appearance: none;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+    border-radius: .5rem;
+    border: 1px solid var(--dark_gray);
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+.cell-select input:checked {
+    background-color: var(--dark_gray);
+    transition: all .3s ease-in-out;
+    position: relative;
+}
+.cell-select input:checked::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '✓';
+    color: var(--white);
+}
+.cell-image img {
+    width: auto;
+    height: 4rem;
+    border-radius: .5rem;
+}
+.cell-name, .cell-address, .cell-phone, .cell-email {
+    font-size: 1.2rem;
+}
+.cell-actions {
+    text-align: center;
+}
+
+.cell-actions a {
+    all: unset;
+    cursor: pointer;
+}
+
+.cell-actions i {
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+.cell-actions {
+    font-size: 2.2rem;
+}
+.cell-actions:hover {
+    color: var(--dark_gray);
+    transition: all .1s ease-in-out;
+}
+a.editar{
+    background-color: var(--dark_gray);
+    padding: .5rem 0;
+    color: var(--white);
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    width: 8rem;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 auto;
+}
+a.editar i{
+    font-size: 1rem;
+}
+a.editar:hover{
+    background-color: black;
+}

@@ -1,0 +1,25 @@
+.form{
+    background: rgba(255, 255, 255, 0.432);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+   
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 50px;
+}
+.go-back{
+    margin: 3rem 0;
+}
+.go-back a{
+    all: unset;
+    font-size: 2rem;
+    cursor: pointer;
+    color:black;
+    opacity: 30%;
+    font-weight: bold;
+}
+.go-back a:hover{
+    opacity: 100%;
+}

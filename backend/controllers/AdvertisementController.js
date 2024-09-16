@@ -54,10 +54,6 @@ const editAdvertisement = async (req, res) => {
     }
     // console.log(req.file);
     // return res.status(400).json({ message: 'Test' });
-    // Delete old image from the server
-    if(req.file){
-        fs.unlinkSync(`./public/uploads/advertisements/${advertisementFromDB.image}`);
-    }
     const website = await Website.findByPk(website_id);
     if(!website){
         // Delete the current image from the server
@@ -72,6 +68,10 @@ const editAdvertisement = async (req, res) => {
             fs.unlinkSync(`public/uploads/advertisements/${req.file.filename}`);
         }
         return res.status(401).json({ message: 'Unauthorized' });
+    }
+    // Delete old image from the server
+    if(req.file){
+        fs.unlinkSync(`./public/uploads/advertisements/${advertisementFromDB.image}`);
     }
     const advertisement = req.body;
     if(req.file){

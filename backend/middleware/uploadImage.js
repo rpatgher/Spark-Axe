@@ -10,7 +10,7 @@ const upload = multer({
         },
         filename: (req, file, cb) => {
             const extension = file.mimetype.split('/')[1];
-            if(req.originalUrl.split('/')[2] === 'elements'){
+            if(req.originalUrl.split('/')[2] === 'elements' || req.originalUrl.split('/')[2] === 'pos'){
                 const name = slug(`${req.body.name} ${shortid.generate()}`);
                 return cb(null, `${name}.${extension}`);
             }else if(req.originalUrl.split('/')[2] === 'advertisements'){

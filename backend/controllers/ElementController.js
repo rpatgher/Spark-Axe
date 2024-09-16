@@ -191,13 +191,6 @@ const updateElement = async (req, res) => {
         const error = new Error('Element not found');
         return res.status(404).json({ msg: error.message });
     }
-    // Delete old images from the server
-    if(req.files.image){
-        fs.unlinkSync(`public/uploads/elements/${elementFromDB.image}`);
-    }
-    if(req.files.image2){
-        fs.unlinkSync(`public/uploads/elements/${elementFromDB.image_hover}`);
-    }
     const website = await Website.findByPk(elementFromDB.website_id);
     if(website.user_id.toString() !== req.user.id.toString()){
         // Delete the current images from the server
@@ -209,6 +202,13 @@ const updateElement = async (req, res) => {
         }
         const error = new Error('Unauthorized');
         return res.status(401).json({ msg: error.message });
+    }
+    // Delete old images from the server
+    if(req.files.image){
+        fs.unlinkSync(`public/uploads/elements/${elementFromDB.image}`);
+    }
+    if(req.files.image2){
+        fs.unlinkSync(`public/uploads/elements/${elementFromDB.image_hover}`);
     }
     const element = req.body;
     if(req.files.image){

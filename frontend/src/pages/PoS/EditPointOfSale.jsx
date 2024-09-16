@@ -3,8 +3,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 
 import clientAxios from '../../config/clientAxios';
 
-// ********************* Styles ********************
-import styles from './NewAdvertisement.module.css';
+// *************** Styles ***************
+import styles from './NewPointOfSale.module.css';
 
 // ************** Hooks *************
 import useApp from '../../hooks/useApp';
@@ -12,19 +12,20 @@ import useApp from '../../hooks/useApp';
 // ************** Components *************
 import HeadingsRuta from '../../components/HeadingsRuta/HeadingsRuta';
 import GeneralModal from '../../components/Modals/GeneralModal';
-import FormAdvertisement from '../../components/FormAdvertisement/FormAdvertisement';
+import FormPointOfSale from '../../components/FormPointOfSale/FormPointOfSale';
 
-const EditAdvertisement = () => {
+const EditPointOfSale = () => {
     const navigate = useNavigate();
     const { alert, handleAlert } = useApp();
     const { id } = useParams();
-    const [advertisement, setAdvertisement] = useState({});
+
+    const [pos, setPos] = useState({});
 
     const [modalDelete, setModalDelete] = useState(false);
 
     useEffect(() => {
-        const getAdvertisement = async () => {
-            // Fetch advertisement from API
+        const getPos = async () => {
+            // Fetch pos from API
             const token = localStorage.getItem('token');
             const config = {
                 headers: {
@@ -33,17 +34,17 @@ const EditAdvertisement = () => {
                 }
             }
             try {
-                const response = await clientAxios.get(`/api/advertisements/${id}`, config);
-                setAdvertisement(response.data);
+                const response = await clientAxios.get(`/api/pos/${id}`, config);
+                setPos(response.data);
             } catch (error) {
                 console.log(error);
-                handleAlert('Error al obtener el anuncio', true);
+                handleAlert('Error al obtener el punto de venta', true);
             }
-        }
-        getAdvertisement();
+        };
+        getPos();
     }, []);
 
-    const deleteAdvertisement = async () => {
+    const deletePos = async () => {
         const token = localStorage.getItem('token');
         const config = {
             headers: {
@@ -52,44 +53,41 @@ const EditAdvertisement = () => {
             }
         }
         try {
-            const response = await clientAxios.delete(`/api/advertisements/${id}`, config);
-            handleAlert('Anuncio eliminado correctamente', false);
-            navigate('/dashboard/advertisements');
+            const response = await clientAxios.delete(`/api/pos/${id}`, config);
+            handleAlert('Punto de venta eliminado correctamente', false);
+            navigate('/dashboard/pos');
         } catch (error) {
             console.log(error);
-            if(error?.response?.data?.msg === 'Cannot delete this advertisement'){
-                handleAlert('No se puede eliminar este anuncio, porque está asociado a otro elemento', true);    
-            }else{
-                handleAlert('Error al eliminar el anuncio', true);
-            }
-        } finally{
+            handleAlert('Error al eliminar el punto de venta', true);
+        } finally {
             setModalDelete(false);
         }
-    }
+    };
+
 
     return (
         <>
             <div className={styles.form}>
                 <HeadingsRuta 
-                    currentHeading={`Editar Anuncio: ${advertisement.title || ''}`}
+                    currentHeading={`Editar Punto de Venta: ${pos.name || ''}`}
                     routes={[
-                        {name: "Anuncios", path: "/dashboard/advertisements"},
+                        {name: "Puntos de Venta", path: "/dashboard/pos"},
                     ]}
                 />
                 <div className={styles["go-back"]}>
-                    <Link to='/dashboard/advertisements'>
+                    <Link to='/dashboard/pos'>
                         <i className="fa-solid fa-arrow-left"></i> Regresar
                     </Link>
                 </div>
-                <FormAdvertisement 
-                    initialAdvertisment={advertisement}
+                <FormPointOfSale 
+                    initialPoS={pos}
                     setModalDelete={setModalDelete}
                 />
             </div>
             {modalDelete && (
                 <GeneralModal
                     modalActive={setModalDelete}
-                    actionModal={deleteAdvertisement}
+                    actionModal={deletePos}
                     actionBtnText='Eliminar'
                     text='¿Estás seguro de eliminar este anuncio?'
                 />
@@ -98,4 +96,4 @@ const EditAdvertisement = () => {
     )
 }
 
-export default EditAdvertisement;
+export default EditPointOfSale;

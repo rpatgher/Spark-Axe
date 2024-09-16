@@ -35,6 +35,8 @@ import Coupons from './pages/Coupons/Coupons';
 import Promotions from './pages/Promotions/Promotions';
 import Delivery from './pages/Delivery/Delivery';
 import PointOfSale from './pages/PoS/PointOfSale';
+import NewPointOfSale from './pages/PoS/NewPointOfSale';
+import EditPointOfSale from './pages/PoS/EditPointOfSale';
 import Contact from './pages/Contact/Contact';
 import Settings from './pages/Settings/Settings';
 
@@ -87,6 +89,8 @@ function App() {
                 <Route path="promotions" element={<Promotions />} />
                 <Route path="delivery" element={<Delivery />} />
                 <Route path="pos" element={<PointOfSale />} />
+                <Route path="pos/new" element={<NewPointOfSale />} />
+                <Route path="pos/edit/:id" element={<EditPointOfSale />} />
                 <Route path="contact" element={<Contact />} />
                 <Route path="settings" element={<Settings />} />
               </Route>

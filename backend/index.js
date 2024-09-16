@@ -15,6 +15,7 @@ import OrderRouter from './routes/OrderRoutes.js';
 import InventoryRouter from './routes/InventoryRoutes.js';
 import CustomerRouter from './routes/CustomerRoutes.js';
 import ElibabaRouter from './routes/ElibabaRoutes.js';
+import PoSRouter from './routes/PoSRoutes.js';
 
 // Connect DB
 import db from './config/db.js';
@@ -57,6 +58,7 @@ app.use('/api/categories', CategoryRouter);
 app.use('/api/orders', OrderRouter);
 app.use('/api/inventories', InventoryRouter);
 app.use('/api/customers', CustomerRouter);
+app.use('/api/pos', PoSRouter);
 
 // Routing for Elibaba
 app.use('/api/elibaba', ElibabaRouter);

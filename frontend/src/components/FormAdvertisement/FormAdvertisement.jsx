@@ -217,7 +217,7 @@ const FormAdvertisement = ({ initialAdvertisment, setModalDelete }) => {
                             userSiteType={auth.websites[0].name}
                         />
                     </div>
-                    <p>Estado del Anuincio: <span className={`${advertisment.published ? styles["status-published"] : styles["status-unpublished"] }`}>{advertisment.published ? 'Publicado' : 'Archivado'}</span> </p>
+                    <p>Estado del Anuncio: <span className={`${advertisment.published ? styles["status-published"] : styles["status-unpublished"] }`}>{advertisment.published ? 'Publicado' : 'Archivado'}</span> </p>
                 </div>
                 <button
                     className={`${styles.button} ${savingAdvertisment ? styles["btn-saving"] : ''} ${initialAdvertisment && !initialAdvertisment?.title ? styles["btn-disabled"] : ''}`}

@@ -198,7 +198,7 @@ const Contact = () => {
         } catch (error) {
             console.log(error);
             handleAlert('Error al eliminar los contactos', true);
-            const newData = [...filteredContacts];
+            let newData = [...filteredContacts];
             newData = filteredContacts.map(contact => contact.selected = false);
             setFilteredContacts(newData);
         } finally {
