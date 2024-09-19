@@ -108,7 +108,7 @@ body{
  
   }
   .body{
-    align-items: center;
+  align-items: center;
   display: grid;
   grid-template-columns:1fr;
   gap: 2rem;
@@ -197,6 +197,7 @@ body{
     margin-left:20%;
     margin-top: 50px;
     padding-bottom: 20px;
+    margin-bottom: 90px;
   }
   .headp{
     text-align: center;

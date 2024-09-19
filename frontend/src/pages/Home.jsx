@@ -52,7 +52,6 @@ const Home = () => {
                     
                 </h1>
                 </div>
-            <Carousel />
             <EnseñarFunction1 />
             <EnseñarFunction2 />
             <EnseñarFunction3 />
