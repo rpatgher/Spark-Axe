@@ -104,10 +104,11 @@ const Dashboard = () => {
                         <p>Trabajando para mejorar sparkaxe</p>
                     </div>
                 </div>
-                <div className={styles["row"]}>
-                    {/* <BigUpdates /> */}
-                    <ProfileCard />
+                {/*<div className={styles["row"]}>
+                   <BigUpdates /> 
+                      <ProfileCard />
                 </div>
+                */}
             </div>
         </div>
     );
