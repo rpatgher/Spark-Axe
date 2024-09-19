@@ -38,21 +38,21 @@ const About = () => {
             <div className={styles.contactSec}>
             <h1>Directivos de Sparkaxe</h1>
            <div className={styles.contactGrid}>
-    <Link to='/contact'>
+           <Link to=''>
         <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={DiegoSG} alt="Sparkaxe-logo" />
             <h3><span className={styles.headingother}>Diego</span></h3>
         </div>
     </Link>
 
-    <Link to='/support'>
+    <Link to=''>
         <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={Isaac} alt="Sparkaxe-logo" />
             <h3><span className={styles.headingother}>Isaac</span></h3>
         </div>
     </Link>
 
-    <Link to='/support'>
+    <Link to=''>
         <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={Remy} alt="Sparkaxe-logo" />
             <h3><span className={styles.headingother}>Remy</span></h3>
@@ -60,7 +60,7 @@ const About = () => {
     </Link>
 
 
-    <Link to='/support'>
+    <Link to=''>
         <div className={styles.contactbuttons}>
             <img className={styles["axworker"]} src={Joseph} alt="Sparkaxe-logo" />
             <h3><span className={styles.headingother}>Joseph</span></h3>

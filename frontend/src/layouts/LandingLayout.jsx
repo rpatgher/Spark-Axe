@@ -31,18 +31,19 @@ function Landinglayout() {
             </div>
       <Outlet /> {/* This will render child routes here */}
       <div className={styles.footer}>
+        <div className={styles.footertop}>
         <div className={styles.footerimgdiv}>
           <img className={styles.footerimg} src={Logo} alt="Logo" />
           <p>Sparkaxe</p>
         </div>
         <div className={styles.footermenu}>
-        Hello this is a footer
-        <Link to="/">Inicio</Link>
-        <Link to="/about"><a>Sobre Nosotros</a></Link>
-        <Link to="/contact"><a>Contactanos</a></Link>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/signup">Registrarse</Link>
-        <Link to="/login">Iniciar Sesion</Link>
+        <h3>Menu</h3>
+        <Link to="/" className={styles.link}>Inicio</Link>
+        <Link to="/about" className={styles.link}><a>Sobre Nosotros</a></Link>
+        <Link to="/contact " className={styles.link}><a>Contactanos</a></Link>
+        <Link to="/dashboard" className={styles.link}>Dashboard</Link>
+        <Link to="/signup" className={styles.link}>Registrarse</Link>
+        <Link to="/login" className={styles.link}>Iniciar Sesion</Link>
         </div>
         <div className={styles.footermenu}>
           Aplicar y contacto
@@ -50,15 +51,19 @@ function Landinglayout() {
           <button className={styles.learnMore}>Aplicar</button>
           </Link>
           Tienes alguna pregunta?
-          <Link to="/support">
+          <Link to="/support/questions">
           <button className={styles.learnMore}>Ver</button>
           </Link>
           Necesitas ayuda?
-          <Link to="/support">
+          <Link to="/contact">
           <button className={styles.learnMore}>Contactanos</button>
           </Link>
         </div>
       </div> 
+      <div className={styles.footerbottom}>
+        <p>© 2024 Sparkaxe. All rights reserved</p>
+        </div>
+      </div>
     </div>
   );
 }
