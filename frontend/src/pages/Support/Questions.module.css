@@ -1,5 +1,7 @@
 .accordion {
-    background-color: #eee;
+  border: 1px solid var(--gray);
+  background-color: var(--white);
+  box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -20,13 +22,39 @@
     background-color: white;
     overflow: hidden;
     text-align: left;
+    border: 1px solid var(--gray);
+
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
     
   }
   
 .States{
-    background-color: rgb(182, 178, 178);
+  background: rgba(255, 255, 255, 0.432);
     padding: 10px;
     margin: 100px;
     border-radius: 10px;
     text-align: center;
+}
+
+.goback {
+  all: unset;
+  font-size: 2rem;
+  cursor: pointer;
+  color:black;
+  opacity: 30%;
+  font-weight: bold;
+  border: none;
+  margin: 20px;
+  margin-bottom: 30px;
+  border: none;
+  justify-content: left;
+  display: flex;
+}
+.goback:hover{
+  opacity: 100%;
+}
+
+.goback i{
+  margin-right: 10px;
+  
 }

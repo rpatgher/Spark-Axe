@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Questions.module.css';
+import { Link } from 'react-router-dom';
 
 function Questions() {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -12,7 +13,8 @@ function Questions() {
     <div>
      
 <div className={styles.States}>
-<h2>Accordion</h2>
+<Link to='/contact'> <button className={styles.goback}><i className="fa-solid fa-arrow-left"  ></i>  Regresar</button></Link>
+<h2>Preguntas Frequentes</h2>
 <div>
 </div>
       <button
