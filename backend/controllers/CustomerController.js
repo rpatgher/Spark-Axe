@@ -102,6 +102,8 @@ const getCustomer = async (req, res) => {
     res.json({ msg: 'Get Customer' });
 }
 
+
+// TODO: check if this function is necessary or if it can be deleted (maybe it is not used)
 const deleteCustomer = async (req, res) => {
     const { id } = req.params;
     try {
@@ -131,52 +133,49 @@ const deleteCustomer = async (req, res) => {
 }
 
 const deleteCustomers = async (req, res) => {
-    try{
-        const customers = await Customer.findAll({
-            where: {
-                id: {
-                    [Op.in]: req.body.ids
-                }
+    const customers = await Customer.findAll({
+        where: {
+            id: {
+                [Op.in]: req.body.ids
             }
-        });
-        // Check if all customers belong to the same website
-        const website = await Website.findOne({
-            where: {
-                [Op.and]: [
-                    { id: 
-                        { [Op.in]: customers.map(customer => customer.website_id) }
-                     },
-                    { user_id: req.user.id }
-                ]
-            }
-        });
-        if(!website){
-            const error = new Error('Website not found');
-            return res.status(404).json({ msg: error.message });
         }
-        const orders = await Order.findAll({
-            where: {
-                customer_id: {
-                    [Op.in]: customers.map(customer => customer.id)
-                }
-            }
-        });
-        if(orders.length > 0){
-            return res.status(400).json({ msg: 'Cannot delete customers' });
+    });
+    // Check if all customers belong to the same website
+    const website = await Website.findOne({
+        where: {
+            [Op.and]: [
+                { id: 
+                    { [Op.in]: customers.map(customer => customer.website_id) }
+                    },
+                { user_id: req.user.id }
+            ]
         }
-        // TODO: This can be optimized by using Promise.all
-        customers.forEach(async customer => {
-            const website = await Website.findByPk(customer.website_id);
-            if(website.user_id !== req.user.id){
-                const error = new Error('Unauthorized');
-                return res.status(401).json({ msg: error.message });
-            }
-            await customer.destroy();
-        });
-        res.json({ msg: 'Customers deleted successfully' });
-    } catch (error) {
-        console.log(error);
+    });
+    if(!website){
+        const error = new Error('Website not found');
+        return res.status(404).json({ msg: error.message });
+    }
+    const deletedCustomers = await Promise.all(customers.map(async customer => {
+        const website = await Website.findByPk(customer.website_id);
+        if(website.user_id.toString() !== req.user.id.toString()){
+            const error = new Error('Unauthorized');
+            return res.status(401).json({ msg: error.message });
+        }
+        try {
+            const deletedCustomer = await customer.destroy();
+            return deletedCustomer;
+        } catch (error) {
+            return error;
+        }
+    }));
+    if(deletedCustomers.some(customer => customer instanceof Error)){
+        if(deletedCustomers.some(customer => customer.original.code === 'ER_ROW_IS_REFERENCED_2')){
+            const currentCustomers = deletedCustomers.filter(customer => !(customer instanceof Error));
+            return res.status(400).json({ msg: 'Cannot delete some customers', customers: currentCustomers });
+        }
         return res.status(400).json({ msg: 'An error ocurred' });
+    } else {
+        return res.json({ msg: 'Customers deleted successfully' });
     }
 }
 

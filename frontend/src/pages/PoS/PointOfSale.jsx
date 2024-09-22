@@ -43,6 +43,13 @@ const PointOfSale = () => {
         setVisibleCount(countVisible);
     }, [filteredPoss, limit]);
 
+    useEffect(() => {
+        const newData = [...filteredPoss];
+        newData.map(pos => pos.selected = false);
+        setFilteredPoss(newData);
+    }, [poss]);
+        
+
     const sordedPoss = poss.sort((a, b) => {
         if(order === 'asc'){
             if(orderType === 'name'){
@@ -130,9 +137,15 @@ const PointOfSale = () => {
         } catch (error) {
             console.log(error);
             handleAlert('No se pudo eliminar los puntos de venta', true);
-            const newData = [...filteredPoss];
-            newData.map(pos => pos.selected = false);
-            setFilteredPoss(newData);
+            if(error?.response?.data?.msh === 'Cannot delete some PoS'){
+                handleAlert('No se pudo eliminar algunos puntos de venta', true);
+                setPoss(poss.filter(pos => !error.response.data.pos.map(p => p.id).includes(pos.id)));
+                setFilteredPoss(filteredPoss.filter(pos => !error.response.data.pos.map(p => p.id).includes(pos.id)));
+            } else {
+                handleAlert('No se pudo eliminar los puntos de venta', true);
+                setPoss(poss);
+                setFilteredPoss(filteredPoss);
+            }
         } finally {
             setModalDelete(false);
         }

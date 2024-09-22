@@ -64,35 +64,44 @@ const getContacts = async (req, res) => {
 }
 
 const deleteContacts = async (req, res) => {
-    try {
-        const contacts = await Contact.findAll({
-            where: {
-                id: {
-                    [Op.in]: req.body.ids
-                }
+    
+    const contacts = await Contact.findAll({
+        where: {
+            id: {
+                [Op.in]: req.body.ids
             }
-        });
-        // Check if the contacts belong to the user and website
-        const website = await Website.findOne({
-            where: {
-                [Op.and]: [
-                    { id:
-                        { [Op.in]: contacts.map(contact => contact.website_id) }
-                    },
-                    { user_id: req.user.id }
-                ]
-            }
-        });
-        if(!website){
-            return res.status(401).json({ message: 'Unauthorized' });
         }
-        await Promise.all(contacts.map(async contact => {
-            await contact.destroy();
-        }));
-        return res.json({ message: 'Contacts deleted successfully' });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: 'Internal Server Error' });
+    });
+    // Check if the contacts belong to the user and website
+    const website = await Website.findOne({
+        where: {
+            [Op.and]: [
+                { id:
+                    { [Op.in]: contacts.map(contact => contact.website_id) }
+                },
+                { user_id: req.user.id }
+            ]
+        }
+    });
+    if(!website){
+        return res.status(401).json({ msg: 'Unauthorized' });
+    }
+    const deletedContacts = await Promise.all(contacts.map(async contact => {
+        try {
+            return await contact.destroy();
+        } catch (error) {
+            return error;
+        }
+    }));
+    if(deletedContacts.some(contact => contact instanceof Error)){
+        if(deletedContacts.some(contact => contact?.original?.code === 'ER_ROW_IS_REFERENCED_2')){
+            const currentContacts = deletedContacts.filter(contact => !(contact instanceof Error));
+            return res.status(400).json({ msg: 'Cannot delete this contact', contacts: currentContacts });
+        } else {
+            return res.status(500).json({ msg: 'Internal Server Error' });
+        }
+    } else {
+        return res.json({ msg: 'Contacts deleted successfully' });
     }
 }
 

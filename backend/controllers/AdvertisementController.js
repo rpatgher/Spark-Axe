@@ -185,44 +185,52 @@ const deleteAdvertisement = async (req, res) => {
 }
 
 const deleteAdvertisements = async (req, res) => {
-    try {
-        const advertisements = await Advertisement.findAll({
-            where: {
-                id: {
-                    [Op.in]: req.body.ids
-                }
-            },
-            include: {
-                model: Section,
-                as: 'section',
-                attributes: ['website_id'],
-            },
-            attributes: ['id', 'image'],
-        });
-        // Check if all advertisements belong to the same website
-        const website = await Website.findOne({
-            where: {
-                [Op.and]: [
-                    { id: 
-                        { [Op.in]: advertisements.map(advertisement => advertisement.section.website_id) }
-                    },
-                    { user_id: req.user.id }
-                ]
+    const advertisements = await Advertisement.findAll({
+        where: {
+            id: {
+                [Op.in]: req.body.ids
             }
-        });
-        if(!website){
-            return res.status(401).json({ message: 'Unauthorized' });
+        },
+        include: {
+            model: Section,
+            as: 'section',
+            attributes: ['website_id'],
+        },
+        attributes: ['id', 'image'],
+    });
+    // Check if all advertisements belong to the same website
+    const website = await Website.findOne({
+        where: {
+            [Op.and]: [
+                { id: 
+                    { [Op.in]: advertisements.map(advertisement => advertisement.section.website_id) }
+                },
+                { user_id: req.user.id }
+            ]
         }
-        await Promise.all(advertisements.map(async advertisement => {
-            await advertisement.destroy();
+    });
+    if(!website){
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+    const deletedAdvertisements = await Promise.all(advertisements.map(async advertisement => {
+        try {
+            const deletedAdvertisement = await advertisement.destroy();
             if(advertisement.image){
                 fs.unlinkSync(`./public/uploads/advertisements/${advertisement.image}`);
             }
-        }));
+            return deletedAdvertisement;
+        } catch (error) {
+            return error;
+        }
+    }));
+    if(deletedAdvertisements.some(advertisement => advertisement instanceof Error)){
+        if(deletedAdvertisements.some(advertisemente => advertisemente.origin.code === 'ER_ROW_IS_REFERENCED_2')){
+            const currentAdvertisements = deletedAdvertisements.filter(advertisement => !(advertisement instanceof Error));
+            return res.status(400).json({ message: 'Cannot delete some advertisements', advertisements: currentAdvertisements });
+        }
+        return res.status(500).json({ message: 'Internal Server Error' });
+    } else{
         return res.json({ msg: 'Advertisements deleted successfully' });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ msg: 'Internal Server Error' });
     }
 }
 

@@ -155,48 +155,54 @@ const deletePoS = async (req, res) => {
 }
 
 const deleteManyPoS = async (req, res) => {
-    try {
-        const { ids } = req.body;
-        const pos = await PoS.findAll({
-            where: {
-                id: {
-                    [Op.in]: ids
-                }
-            },
-            attributes: ['id', 'image', 'website_id'],
-            include: {
-                model: Website,
-                as: 'website',
-                attributes: ['user_id']
+    const { ids } = req.body;
+    const pos = await PoS.findAll({
+        where: {
+            id: {
+                [Op.in]: ids
             }
-        });
-        if(!pos || pos.length === 0){
-            return res.status(404).json({ msg: 'PoS not found' });
+        },
+        attributes: ['id', 'image', 'website_id'],
+        include: {
+            model: Website,
+            as: 'website',
+            attributes: ['user_id']
         }
-        console.log(pos);
-        const website = await Website.findOne({
-            where: {
-                [Op.and]: [
-                    { id: 
-                        {[Op.in]: pos.map(p => p.website_id)}
-                    },
-                    { user_id: req.user.id },
-                ]
-            }
-        });
-        if(!website){
-            return res.status(401).json({ msg: 'Unauthorized' });
+    });
+    if(!pos || pos.length === 0){
+        return res.status(404).json({ msg: 'PoS not found' });
+    }
+    const website = await Website.findOne({
+        where: {
+            [Op.and]: [
+                { id: 
+                    {[Op.in]: pos.map(p => p.website_id)}
+                },
+                { user_id: req.user.id },
+            ]
         }
-        await Promise.all(pos.map(async p => {
+    });
+    if(!website){
+        return res.status(401).json({ msg: 'Unauthorized' });
+    }
+    const deletedPoS = await Promise.all(pos.map(async p => {
+        try {
             await p.destroy();
             if(p.image){
                 fs.unlinkSync(`./public/uploads/pos/${p.image}`);
             }
-        }));
-        return res.json({ msg: 'PoS deleted successfully' });        
-    } catch (error) {
-        console.log(error);
+        } catch (error) {
+            return error;
+        }
+    }));
+    if(deletedPoS.some(p => p instanceof Error)){
+        if(deletedPoS.some(p => p?.original?.code === 'ER_ROW_IS_REFERENCED_2')){
+            const currentPoS = deletedPoS.filter(p => !(p instanceof Error));
+            return res.status(400).json({ msg: 'Cannot delete some PoS', pos: currentPoS });
+        }
         return res.status(500).json({ msg: 'Internal Server Error' });
+    } else {
+        return res.json({ msg: 'PoS deleted successfully' });
     }
 }
 

@@ -31,7 +31,7 @@ const Contact = () => {
     const [order, setOrder] = useState('asc');
     const [orderType, setOrderType] = useState('name');
     const [filteredContacts, setFilteredContacts] = useState([]);
-    const [visible, setVisible] = useState('all');
+    const [visible, setVisible] = useState('all');
     const [search, setSearch] = useState('');
     const [selectedCount, setSelectedCount] = useState(0);
     const [visibleCount, setVisibleCount] = useState(0);
@@ -87,6 +87,12 @@ const Contact = () => {
         setSelectedCount(count);
         setVisibleCount(countVisible);
     }, [filteredContacts, limit]);
+
+    useEffect(() => {
+        let newData = [...filteredContacts];
+        filteredContacts.forEach(contact => contact.selected = false);
+        setFilteredContacts(newData);
+    }, [contacts]);
 
     const sordedContacts = filteredContacts.sort((a, b) => {
         if(order === 'asc'){
@@ -198,9 +204,15 @@ const Contact = () => {
         } catch (error) {
             console.log(error);
             handleAlert('Error al eliminar los contactos', true);
-            let newData = [...filteredContacts];
-            newData = filteredContacts.map(contact => contact.selected = false);
-            setFilteredContacts(newData);
+            if(error.response.data.msg === 'Cannot delete some contact'){
+                handleAlert('No se puede eliminar este contacto', true);
+                setContacts(contacts.filter(contact => !error.response.data.contacts.map(contact => contact.id).includes(contact.id)));
+                setFilteredContacts(filteredContacts.filter(contact => !error.response.data.contacts.map(contact => contact.id).includes(contact.id)));
+            } else {
+                handleAlert('Error al eliminar los contactos', true);
+                setContacts(contacts);
+                setFilteredContacts(filteredContacts);
+            }
         } finally {
             setSelectAll(false);
             setModalDelete(false);

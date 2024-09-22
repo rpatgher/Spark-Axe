@@ -4,43 +4,7 @@ import { Op } from 'sequelize';
 // ************* Models *************
 import { Category, Subcategory, Website } from '../models/index.js';
 
-const createCategoriesNew = async (req, res) => {
-    const { website_id, categories: categoriesBody } = req.body;
-    if(!website_id || !categoriesBody || categoriesBody.length === 0){
-        return res.status(400).json({msg: 'Website id and categories are required'});
-    }
-    if(categoriesBody.some(category => !category.category) || categoriesBody.some(category => category.category === '')){
-        return res.status(400).json({msg: 'Category name is required'});
-    }
-    if(categoriesBody.some(category => !category.subcategories) || categoriesBody.some(category => category.subcategories.length === 0)){
-        return res.status(400).json({msg: 'Subcategories of all categories are required'});
-    }
-    // Count all categories that already exist
-    const currentCategories = await Category.findAll({
-        where: {
-            website_id
-        }
-    });
-    const numCurrentCategories = currentCategories.length;
-
-    // Create an array of categories that do not exist
-    let categories = [];
-    if(categoriesBody){
-        categories = categoriesBody.map(category => {
-            if(currentCategories.find(currentCategory => currentCategory.id === category.id)){
-                return null;
-            }
-            return {
-                name: category.category,
-                website_id
-            }
-        });
-    }
-
-
-}
-
-
+// TODO: check if this function is necessary or if it can be deleted (maybe it is not used)
 const createCategories = async (req, res) => {
     const { website_id, categories: categoriesBody } = req.body;
     if(!website_id || !categoriesBody || categoriesBody.length === 0){

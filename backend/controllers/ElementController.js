@@ -132,13 +132,16 @@ const getElements = async (req, res) => {
 }
 
 const createElement = async (req, res) => {
-    const { categories_id } = req.body;
+    const { name, description, price, stock , categories: categoriesStr } = req.body;
+    const categories = JSON.parse(categoriesStr);
+    if(!name || !description || !price || !stock || !categories){
+        const error = new Error('Invalid Request. Missing required fields');
+        return res.status(400).json({ msg: error.message });
+    }
     if (!req.files || Object.keys(req.files).length === 0) {
         const error = new Error('No files were uploaded.');
         return res.status(400).json({ msg: error.message });
     }
-    const subcategories = JSON.parse(categories_id);
-    // return res.status(200).json({ msg: 'ok'});
     const website = await Website.findByPk(req.body.website_id);
     if(!website){
         const error = new Error('Website not found');
@@ -158,14 +161,53 @@ const createElement = async (req, res) => {
     }
     try {
         const createdElement = await element.save();
-        const elementCategory = subcategories.map(category => {
-            return {
-                elementId: createdElement.id,
-                subcategoryId: category
+        const currentCategories = await Category.findAll({
+            where: {
+                website_id: website.id
             }
         });
-        await ElementCategory.bulkCreate(elementCategory);
-        res.json({ msg: 'Element created successfully' });
+        const numCurrentCategories = currentCategories.length;
+        // Save categories
+        const createdCategories = await Promise.all(await categories.map(async (category, i) => {
+            const [createdCategory, created] = await Category.findOrCreate({
+                where: {
+                    name: category.category,
+                    website_id: website.id
+                },
+                defaults: {
+                    index: numCurrentCategories + i + 1
+                }
+            });
+            const numSubcategories = await Subcategory.count({
+                where: {
+                    category_id: createdCategory.id
+                }
+            });
+            const createdSubcategories = await Promise.all(await category.subcategories.map(async (subcategory, i) => {
+                const [createdSubcategory, created2] = await Subcategory.findOrCreate({
+                    where: {
+                        name: subcategory,
+                        category_id: createdCategory.id
+                    },
+                    defaults: {
+                        index: numSubcategories + i + 1
+                    }
+                });
+                const elementCategory = {
+                    elementId: createdElement.id,
+                    subcategoryId: createdSubcategory.id
+                }
+                await ElementCategory.findOrCreate({
+                    where: elementCategory,
+                });
+                return createdSubcategory;
+            }));
+            return {
+                ...createdCategory,
+                subcategories: createdSubcategories
+            };
+        }));
+        return res.json({ msg: 'Element created successfully' });
     } catch (error) {
         console.log(error);
         res.status(400).json({ msg: error.message });
@@ -173,8 +215,12 @@ const createElement = async (req, res) => {
 }
 
 const updateElement = async (req, res) => {
-    const { categories_id } = req.body;
-    const subcategories = JSON.parse(categories_id);
+    const { name, description, price, stock , categories: categoriesStr } = req.body;
+    const categories = JSON.parse(categoriesStr);
+    if(!name || !description || !price || !stock || !categories){
+        const error = new Error('Invalid Request. Missing required fields');
+        return res.status(400).json({ msg: error.message });
+    }
     const elementFromDB = await Element.findOne({
         where: {
             id: req.params.id
@@ -227,19 +273,53 @@ const updateElement = async (req, res) => {
                 id: req.params.id
             }
         });
-        await ElementCategory.destroy({
+        // Save categories
+        const currentCategories = await Category.findAll({
             where: {
-                elementId: req.params.id
+                website_id: website.id
             }
         });
-        const elementCategory = subcategories.map(category => {
+        const numCurrentCategories = currentCategories.length;
+        const createdCategories = await Promise.all(await categories.map(async (category, i) => {
+            const [createdCategory, created] = await Category.findOrCreate({
+                where: {
+                    name: category.category,
+                    website_id: website.id
+                },
+                defaults: {
+                    index: numCurrentCategories + i + 1
+                }
+            });
+            const numSubcategories = await Subcategory.count({
+                where: {
+                    category_id: createdCategory.id
+                }
+            });
+            const createdSubcategories = await Promise.all(await category.subcategories.map(async (subcategory, i) => {
+                const [createdSubcategory, created2] = await Subcategory.findOrCreate({
+                    where: {
+                        name: subcategory,
+                        category_id: createdCategory.id
+                    },
+                    defaults: {
+                        index: numSubcategories + i + 1
+                    }
+                });
+                const elementCategory = {
+                    elementId: elementFromDB.id,
+                    subcategoryId: createdSubcategory.id
+                }
+                await ElementCategory.findOrCreate({
+                    where: elementCategory,
+                });
+                return createdSubcategory;
+            }));
             return {
-                elementId: req.params.id,
-                subcategoryId: category
-            }
-        });
-        await ElementCategory.bulkCreate(elementCategory);
-        res.json({ msg: 'Element updated successfully' });
+                ...createdCategory,
+                subcategories: createdSubcategories
+            };
+        }));
+        return res.json({ msg: 'Element updated successfully' });
     } catch (error) {
         console.log(error);
         res.status(400).json({ msg: error.message });
@@ -284,41 +364,30 @@ const deleteElement = async (req, res) => {
 }
 
 const deleteElements = async (req, res) => {
-    try {
-        const elements = await Element.findAll({
-            where: {
-                id: {
-                    [Op.in]: req.body.ids
-                }
+    const elements = await Element.findAll({
+        where: {
+            id: {
+                [Op.in]: req.body.ids
             }
-        });
-        console.log(elements);
-        // Check if the user is authorized to delete the elements
-        const website = await Website.findOne({
-            where: {
-                id: {
-                    [Op.in]: elements.map(element => element.website_id)
-                },
-                user_id: req.user.id
-            }
-        });
-        if(!website){
-            const error = new Error('Unauthorized');
-            return res.status(401).json({ msg: error.message });
         }
-        // Check if the elements are associated with orders
-        const orders = await OrderElement.findAll({
-            where: {
-                elementId: {
-                    [Op.in]: elements.map(element => element.id)
-                }
-            }
-        });
-        if(orders.length > 0){
-            return res.status(400).json({ msg: 'Cannot delete elements' });
+    });
+    console.log(elements);
+    // Check if the user is authorized to delete the elements
+    const website = await Website.findOne({
+        where: {
+            id: {
+                [Op.in]: elements.map(element => element.website_id)
+            },
+            user_id: req.user.id
         }
-        elements.forEach(async element => {
-            await Element.destroy({
+    });
+    if(!website){
+        const error = new Error('Unauthorized');
+        return res.status(401).json({ msg: error.message });
+    }
+    const deletedElements = await Promise.all(elements.map(async element => {
+        try {
+            const deletedElement = await Element.destroy({
                 where: {
                     id: element.id
                 }
@@ -329,14 +398,19 @@ const deleteElements = async (req, res) => {
             if(element.image_hover){
                 fs.unlinkSync(`public/uploads/elements/${element.image_hover}`);
             }
-        });
-        return res.json({ msg: 'Elements deleted successfully' });
-    } catch (error) {
-        console.log(error);
-        if(error?.original?.code === 'ER_ROW_IS_REFERENCED_2'){
-            return res.status(400).json({ msg: 'Cannot delete elements' });
+            return deletedElement;
+        } catch (error) {
+            return error;
         }
-        return res.status(400).json({ msg: error.message });
+    }));
+    if(deletedElements.some(element => element instanceof Error)){
+        if(deletedElements.some(element => element?.original?.code === 'ER_ROW_IS_REFERENCED_2')){
+            const currentElements = deletedElements.filter(element => !(element instanceof Error));
+            return res.status(400).json({ msg: 'Cannot delete some elements', elements: currentElements });
+        }
+        return res.status(400).json({ msg: 'An error ocurred' });
+    } else {
+        return res.json({ msg: 'Elements deleted successfully' });
     }
 }
 

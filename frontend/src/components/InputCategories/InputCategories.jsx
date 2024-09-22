@@ -37,7 +37,6 @@ const InputCategories = ({
             }
             try {
                 const response = await clientAxios.get(`/api/categories/${auth.websites[0].id}`, config);
-                console.log(response.data);
                 const categoriesRes = response.data.map(category => {
                     return {
                         name: category.name,
@@ -46,11 +45,6 @@ const InputCategories = ({
                 });
                 setBackupInitialCategories(categoriesRes);
                 setInitialCategories(categoriesRes);
-                // console.log(categories.map(item => item.category))
-                // console.log(categories.map(item => item.category).includes('Remy'));
-                // console.log(categories[0].category);
-                // setFilteredInitialCategories(categoriesRes);
-                // setFilteredInitialCategories(categoriesRes.filter(category => !categories.map(item => item.category).includes(category.name)));
             } catch (error) {
                 console.log(error);
                 handleAlert('Hubo un error al cargar las categorías', true);

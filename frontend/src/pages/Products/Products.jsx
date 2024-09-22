@@ -74,6 +74,12 @@ const Products = () => {
         setVisibleCount(countVisible);
     }, [filteredProducts, limit]);
 
+    useEffect(() => {
+        const newData = [...filteredProducts];
+        newData.forEach(item => item.selected = false);
+        setFilteredProducts(newData);
+    }, [products]);
+
     const sortedProducts = products.sort((a, b) => {
         if (order === 'asc') {
             if (orderType === 'id') {
@@ -186,15 +192,16 @@ const Products = () => {
             console.log(error);
             if(error?.response?.data?.msg === 'Cannot delete elements'){
                 handleAlert('No puedes eliminar estos productos, porque alguno está asociado a otro elemento', true);
+                setProducts(products.filter(product => !error.response.data.elements.map(element => element.id).includes(product.id)));
+                setFilteredProducts(filteredProducts.filter(product => !error.response.data.elements.map(element => element.id).includes(product.id)));
             }else{
                 handleAlert("Error al eliminar los productos", true);
+                setProducts(products);
+                setFilteredProducts(filteredProducts);
             }
         } finally {
             setSelectAll(false);
             setModalDelete(false);
-            // const newData = [...filteredProducts];
-            // newData.map(item => item.selected = false);
-            // setFilteredProducts(newData);
         }
 
     }

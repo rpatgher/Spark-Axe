@@ -50,6 +50,12 @@ const Customers = () => {
         setVisibleCount(countVisible);
     }, [filteredElements, limit]);
 
+    useEffect(() => {
+        const newData = [...filteredElements];
+        newData.forEach(item => item.selected = false);
+        setFilteredElements(newData);
+    }, [data]);
+
     const sortedElements = data.sort((a, b) => {
         if (order === 'asc') {
             if (orderType === 'id') {
@@ -213,17 +219,18 @@ const Customers = () => {
             // filterElements(search, visible);
         } catch (error) {
             console.log(error);
-            if(error?.response?.data?.msg === 'Cannot delete customers'){
-                handleAlert('No puedes eliminar estos clientes, porque alguno está asociado a un pedido', true);
+            if(error?.response?.data?.msg === 'Cannot delete some customers'){
+                handleAlert('No se pudieron eliminar algunos clientes, porque alguno están asociado a un pedido', true);
+                setData(data.filter(item => !error.response.data.customers.map(customer => customer.id).includes(item.id)));
+                setFilteredElements(filteredElements.filter(item => !error.response.data.customers.map(customer => customer.id).includes(item.id)));
             }else{
                 handleAlert("Hubo un error al eliminar los clientes", true);
+                setData(data);
+                setFilteredElements(filteredElements);
             }
         } finally {
             setSelectAll(false);
             setModalDelete(false);
-            const newData = [...filteredElements];
-            newData.forEach(item => item.selected = false);
-            setFilteredElements(newData);
         }
     }
 

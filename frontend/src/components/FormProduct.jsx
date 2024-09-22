@@ -113,32 +113,6 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             setSavingProduct(true);
             msgAlert = 'Producto guardado exitosamente';
         }
-        const token = localStorage.getItem('token');
-        const configCat = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            }
-        }
-        let categories_id = [];
-        try {
-            const { data: dataCategories } = await clientAxios.post('/api/categories', { website_id: auth.websites[0].id, categories }, configCat);
-            categories_id = dataCategories.subcategoriesIds;
-        } catch (error) {
-            console.log(error);
-            console.log(error.response);
-            if(error.response.data.msg === 'Website id and categories are required'){
-                handleAlert('Las categorías son obligatorias', true);
-            }else if(error.response.data.msg === 'Subcategories of all categories are required'){
-                handleAlert('Las categorías deben tener al menos una subcategoría', true);
-            
-            }else{
-                handleAlert('Hubo un error al mandar las categorías', true);
-            }
-            setSavingProduct(false);
-            setPublishingProduct(false);
-            return;
-        }
         // Send data to the server
         const data = new FormData();
         data.append('name', product.name);
@@ -153,7 +127,8 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         if(product.published !== undefined && product.published !== null){
             data.append('published', product.published);
         }
-        data.append('categories_id', JSON.stringify(categories_id));
+        data.append('categories', JSON.stringify(categories));
+        const token = localStorage.getItem('token');
         const config = {
             headers: {
                 "Content-Type": "multipart/form-data",
@@ -174,8 +149,11 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             }
         } catch (error) {
             console.log(error);
-            console.log(error.response);
-            handleAlert('Hubo un error al mandar el formulario', true);
+            if(error.response.data.msg === 'Invalid Format'){
+                handleAlert('Formato de imagen no valido', true);
+            }else{
+                handleAlert('Hubo un error al mandar el formulario', true);
+            }
         } finally {
             setSavingProduct(false);
             setPublishingProduct(false);
@@ -263,7 +241,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                                         <p>o</p>
                                         <span>{product.image ? 'Cambiar archivo' : 'Sube un archivo'}</span>
                                     </div>
-                                    <input type="file" id="image" name="image" onChange={handleChangeFile} />
+                                    <input type="file" accept='image/*' id="image" name="image" onChange={handleChangeFile} />
                                 </label>
                             </div>
                         </div>
@@ -281,7 +259,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                                         <p>o</p>
                                         <span>{product.image2 ? 'Cambiar archivo' : 'Sube un archivo'}</span>
                                     </div>
-                                    <input type="file" id="image2" name="image2" onChange={handleChangeFile} />
+                                    <input type="file" accept='image/*' id="image2" name="image2" onChange={handleChangeFile} />
                                 </label>
                             </div>
                         </div>

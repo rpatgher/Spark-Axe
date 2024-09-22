@@ -44,6 +44,12 @@ const Advertisements = () => {
         setVisibleCount(countVisible);
     }, [filteredAdvertisements, limit]);
 
+    useEffect(() => {
+        const newData = [...filteredAdvertisements];
+        newData.forEach(advertisement => advertisement.selected = false);
+        setFilteredAdvertisements(newData);
+    }, [advertisements]);
+
     const sordedAdvertisements = advertisements.sort((a, b) => {
         if(order === 'asc'){
             if(orderType === 'title'){
@@ -136,10 +142,15 @@ const Advertisements = () => {
             handleAlert('Anuncios eliminados correctamente', false);
         } catch (error) {
             console.log(error);
-            handleAlert('Error al eliminar los anuncios', true);
-            const newData = [...filteredAdvertisements];
-            newData.map(advertisement => advertisement.selected = false);
-            setFilteredAdvertisements(newData);
+            if(error?.response?.data?.msg === 'Cannot delete some advertisements'){
+                handleAlert('Error al eliminar algunos anuncion', true);
+                setAdvertisements(advertisements.filter(advertisement => !error.response.data.advertisements.map(add => add.id).includes(advertisement.id)));
+                setFilteredAdvertisements(filteredAdvertisements.filter(advertisement => !error.response.data.advertisements.map(add => add.id).includes(advertisement.id)));
+            } else {
+                handleAlert('Error al eliminar los anuncios', true);
+                setAdvertisements(advertisements);
+                setFilteredAdvertisements(filteredAdvertisements);
+            }
         } finally {
             setSelectAll(false);
             setModalDelete(false);
