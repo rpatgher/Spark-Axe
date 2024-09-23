@@ -23,7 +23,7 @@ const DashboardLayout = () => {
     const { auth, profileModal, logoutAuth } = useAuth();
     const { alert } = useApp();
 
-    const [validURL, setValidURL] = useState(false);
+    const [validURL, setValidURL] = useState(true);
 
     useEffect(() => {
         const validateURL = () => {
@@ -42,20 +42,12 @@ const DashboardLayout = () => {
 
     const takeScreenshot = async () => {
         // Use html2canvas to capture the screenshot
-        const screenshot = await html2canvas(document.body);
+        const screenshot = await html2canvas(document.body, {
+            foreignObjectRendering: true,
+        });
         setScreenshotImage(screenshot.toDataURL("image/png", 1.0));
         // Open the modal
         openModalError();
-        
-        // ******* Download the screenshot ********
-        // const fakeLink = window.document.createElement("a");
-        // fakeLink.style = "display:none;";
-        // fakeLink.download = "screenshot.png";
-        // fakeLink.href = screenshot.toDataURL("image/png", 1.0);
-        // document.body.appendChild(fakeLink);
-        // fakeLink.click();
-        // document.body.removeChild(fakeLink);
-        // fakeLink.remove();
     }
 
     if(auth.websites.length === 0) return (
