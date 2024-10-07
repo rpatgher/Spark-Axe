@@ -1,6 +1,6 @@
 
 // ************* Models *************
-import { Element, Website, Category, Subcategory } from '../models/index.js';
+import { Element, Website, Category, Subcategory, Advertisement, Section } from '../models/index.js';
 
 
 const getElements = async (req, res) => {
@@ -76,6 +76,76 @@ const getElements = async (req, res) => {
 
 
 
+const getInfo = async (req, res) => {
+    const { website } = req;
+    if(!website){
+        const error = new Error('Website not found');
+        return res.status(404).json({ msg: error.message });
+    }
+    const elements = await Element.findAll({
+        where: {
+            website_id: website.id,
+            published: true
+        },
+        include: [
+            {
+                model: Subcategory,
+                attributes: { exclude: ['category_id', 'createdAt', 'updatedAt', 'index', 'element_subcategory'] },
+                include: [
+                    {
+                        model: Category,
+                        attributes: { exclude: ['website_id', 'createdAt', 'updatedAt'] },
+                        order: [
+                            ['index', 'ASC']
+                        ]
+                    }
+                ]
+            }
+        ],
+        attributes: { exclude: ['website_id', 'createdAt', 'updatedAt'] },
+        order: [
+            ['index', 'ASC']
+        ]
+    });
+    const categories = await Category.findAll({
+        where: {
+            website_id: website.id
+        },
+        include: [
+            {
+                model: Subcategory,
+                attributes: { exclude: ['category_id', 'createdAt', 'updatedAt'] },
+                order: [
+                    ['index', 'ASC']
+                ]
+            }
+        ],
+        attributes: { exclude: ['website_id','createdAt', 'updatedAt'] },
+        order: [
+            ['index', 'ASC']
+        ]
+    });
+    const advertisements = await Advertisement.findAll({
+        include: [
+            {
+                model: Section,
+                where: {
+                    website_id: website.id
+                },
+                attributes: { exclude: ['website_id', 'createdAt', 'updatedAt'] }
+            }
+        ],
+        attributes: { exclude: ['section_id', 'createdAt', 'updatedAt'] }
+    });
+    res.json({
+        elements,
+        categories,
+        advertisements
+    });
+}
+
+
 export {
-    getElements
+    getElements,
+    getInfo
 }
