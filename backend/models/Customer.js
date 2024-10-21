@@ -42,7 +42,13 @@ const Customer = db.define('customer', {
     },
     token: {
         type: DataTypes.STRING
-    }
+    },
+    confirmationToken: {
+        type: DataTypes.STRING
+    },
+    resetPasswordToken: {
+        type: DataTypes.STRING
+    },
 }, {
     hooks:{
         beforeSave: async (customer) => {
