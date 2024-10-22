@@ -2,11 +2,15 @@ import express from 'express';
 
 import {
     getElements,
+    getOrders,
     getInfo,
     register,
     login,
     confirmAccount,
-    profile
+    profile,
+    forgotPassword,
+    resetPassword,
+    createOrder
 } from '../controllers/ElibabaController.js';
 
 // ************* Middleware *************
@@ -17,6 +21,9 @@ const router = express.Router();
 
 router.route('/elements')
     .get(validateWebsite, getElements);
+
+router.route('/orders')
+    .get(validateWebsite, checkCustomerAuth, getOrders);
 
 router.route('/main-info')
     .get(validateWebsite, getInfo);
@@ -32,6 +39,17 @@ router.route('/confirm-account')
 
 router.route('/profile')
     .get(validateWebsite, checkCustomerAuth, profile);
+
+router.route('/forgot-password')
+    .post(validateWebsite, forgotPassword);
+
+router.route('/reset-password')
+    .post(validateWebsite, resetPassword);
+
+
+router.route('/create-order')
+    .post(validateWebsite, checkCustomerAuth, createOrder);
+    
 
 
 export default router;

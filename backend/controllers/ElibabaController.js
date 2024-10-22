@@ -7,7 +7,7 @@ import sendEmail from '../helpers/sendEmail.js';
 
 
 // ************* Models *************
-import { Element, Website, Category, Subcategory, Advertisement, Section, Customer } from '../models/index.js';
+import { Element, Website, Category, Subcategory, Advertisement, Section, Customer, Order, OrderElement } from '../models/index.js';
 
 
 const getElements = async (req, res) => {
@@ -81,6 +81,36 @@ const getElements = async (req, res) => {
     res.json({elements, categories});
 }
 
+const getOrders = async (req, res) => {
+    const { customer } = req;
+    const { website } = req;
+    if(customer.website_id !== website.id){
+        return res.status(401).json({ msg: 'User not allowed' });
+    }
+    try {
+        const orders = await customer.getOrders({
+            where: {
+                customer_id: customer.id,
+                status: {
+                    [Op.not]: 'C'
+                }
+            },
+            include: [
+                {
+                    model: Element,
+                    attributes: ['id', 'name', 'price', 'image'],
+                    through: {
+                        attributes: ['quantity']
+                    }
+                }
+            ]
+        });
+        return res.status(200).json(orders);
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
+}
 
 
 const getInfo = async (req, res) => {
@@ -213,6 +243,9 @@ const confirmAccount = async (req, res) => {
         if(!customer){
             return res.status(404).json({ msg: 'Invalid token' });
         }
+        if(customer.website_id !== req.website.id){
+            return res.status(401).json({ msg: 'User not allowed' });
+        }
         customer.confirmed = true;
         customer.confirmationToken = null;
         await customer.save();
@@ -225,6 +258,9 @@ const confirmAccount = async (req, res) => {
 
 const profile = async (req, res) => {
     const { customer } = req;
+    if(customer.website_id !== req.website.id){
+        return res.status(401).json({ msg: 'User not allowed' });
+    }
     return res.json({
         id: customer.id,
         name: customer.name,
@@ -241,8 +277,11 @@ const login = async (req, res) => {
     }
     try {
         const customer = await Customer.findOne({ 
-            where: { email }
+            where: { email },
         });
+        if(customer.website_id !== req.website.id){
+            return res.status(401).json({ msg: 'User not allowed' });
+        }
         if(!customer){
             return res.status(404).json({ msg: 'User not found' });
         }
@@ -269,11 +308,148 @@ const login = async (req, res) => {
 }
 
 
+const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+    if(!email){
+        return res.status(400).json({ msg: 'Missing fields' });
+    }
+    try {
+        const customer = await Customer.findOne({
+            where: { email }
+        });
+        if(!customer){
+            return res.status(404).json({ msg: 'User not found' });
+        }
+        if(customer.website_id !== req.website.id){
+            return res.status(401).json({ msg: 'User not allowed' });
+        }
+        const token = generateToken();
+        customer.resetPasswordToken = token;
+        await customer.save();
+        // TODO: Change mail template for one that fits the website
+        sendEmail({
+            name: `${customer.name} ${customer.lastname}`,
+            email: customer.email,
+            url: `${req.website.url_address}/reset-password/${token}`,
+            subject: 'Reset your password',
+            file: 'reset-password'
+        });
+        return res.json({ msg: 'Email sent' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
+}
+
+const resetPassword = async (req, res) => {
+    const { token, password } = req.body;
+    if(!token || !password){
+        return res.status(400).json({ msg: 'Missing fields' });
+    }
+    try {
+        const customer = await Customer.findOne({ where: { resetPasswordToken: token }});
+        if(!customer){
+            return res.status(404).json({ msg: 'Invalid token' });
+        }
+        if(customer.website_id !== req.website.id){
+            return res.status(401).json({ msg: 'User not allowed' });
+        }
+        customer.password = password;
+        customer.resetPasswordToken = null;
+        await customer.save();
+        return res.json({ msg: 'Password updated' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
+}
+
+
+
+const createOrder = async (req, res) => {
+    const { notes, elements, address } = req.body;
+    const { website } = req;
+    const { customer } = req;
+    if (!elements || !address) {
+        return res.status(400).json({ msg: 'All fields are required' });
+    }
+    if ( customer.website_id !== website.id) {
+        return res.status(400).json({ msg: 'Customer not found' });
+    }
+    const productsFromDB = await Element.findAll({
+        where: {
+            id: elements.map(product => product.id),
+            website_id: website.id
+        },
+        attributes: ['id', 'stock', 'price']
+    });
+    if (!productsFromDB) return res.status(400).json({ msg: 'Products not found' });
+    let isValid = true;
+    const products = elements.map(product => {
+        const productFromDB = productsFromDB.find(p => p.id === product.id);
+        if (!productFromDB) {
+            isValid = false;
+        }
+        if (product.quantity > productFromDB?.stock) {
+            isValid = false;
+        }
+        return {
+            id: productFromDB?.id,
+            quantity: product.quantity,
+            price: productFromDB?.price
+        }
+    });
+    if (!isValid) {
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
+    const numOrders = await customer.countOrders({
+        where: {
+            website_id: website.id
+        }
+    });
+    const order = await Order.create({
+        index: numOrders + 1,
+        status: 'IP',
+        notes,
+        total: products.reduce((acc, current) => acc + current.price * current.quantity, 0),
+        address,
+        customer_id: customer.id,
+        website_id: website.id
+    });
+    products.forEach(async product => {
+        await Element.decrement('stock', {
+            by: product.quantity,
+            where: {
+                id: product.id
+            }
+        });
+    });
+    try{
+        const createdOrder = await order.save();
+        const orderElements = products.map(product => {
+            return {
+                orderId: createdOrder.id,
+                quantity: product.quantity,
+                elementId: product.id,
+            }
+        });
+        await OrderElement.bulkCreate(orderElements);
+        return res.json({ msg: 'Order created' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
+}
+
 export {
     getElements,
+    getOrders,
     getInfo,
     register,
     login,
     confirmAccount,
-    profile
+    profile,
+    forgotPassword,
+    resetPassword,
+    createOrder
 }

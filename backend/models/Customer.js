@@ -59,7 +59,7 @@ const Customer = db.define('customer', {
     },
     scopes:{
         withoutPassword: {
-            attributes: { exclude: ['password', 'token', 'createdAt', 'updatedAt', 'website_id'] }
+            attributes: { exclude: ['password', 'token', 'createdAt', 'updatedAt'] }
         }
     }
 });
