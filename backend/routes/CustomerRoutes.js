@@ -1,25 +1,25 @@
 import express from 'express';
 
 import {
-    createCustomer,
     getCustomers,
     getCustomer,
     deleteCustomer,
     deleteCustomers,
     updateCustomer,
-    login
+    login,
+    register,
+    confirmAccount,
+    profile,
+    forgotPassword,
+    resetPassword
 } from '../controllers/CustomerController.js';
 
+// ************* Middleware *************
 import checkAuth from "../middleware/checkAuth.js";
 import validateWebsite from '../middleware/validateWebsite.js';
+import checkCustomerAuth from '../middleware/checkCustomerAuth.js';
 
 const router = express.Router();
-
-router.route('/login')
-    .post(validateWebsite, login);
-
-router.route('/')
-    .post(validateWebsite, createCustomer);
 
 router.route('/delete')
     .post(checkAuth, deleteCustomers);
@@ -31,5 +31,26 @@ router.route('/:id')
     .get(checkAuth, getCustomer)
     .delete(checkAuth, deleteCustomer)
     .put(checkAuth, updateCustomer);
+
+
+
+// ********************** Routes for websites' customers **********************
+router.route('/login')
+    .post(validateWebsite, login);
+
+router.route('/register')
+    .post(validateWebsite, register);
+
+router.route('/confirm-account')
+    .post(validateWebsite, confirmAccount);
+
+router.route('/profile')
+    .get(validateWebsite, checkCustomerAuth, profile);
+
+router.route('/forgot-password')
+    .post(validateWebsite, forgotPassword);
+
+router.route('/reset-password')
+    .post(validateWebsite, resetPassword);
 
 export default router;

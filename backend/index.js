@@ -14,8 +14,10 @@ import SectionRouter from './routes/SectionRoutes.js';
 import OrderRouter from './routes/OrderRoutes.js';
 import InventoryRouter from './routes/InventoryRoutes.js';
 import CustomerRouter from './routes/CustomerRoutes.js';
-import ElibabaRouter from './routes/ElibabaRoutes.js';
 import PoSRouter from './routes/PoSRoutes.js';
+
+import ElibabaRouter from './routes/ElibabaRoutes.js';
+import NanophosRouter from './routes/NanophosRoutes.js';
 
 // Connect DB
 import db from './config/db.js';
@@ -60,8 +62,9 @@ app.use('/api/inventories', InventoryRouter);
 app.use('/api/customers', CustomerRouter);
 app.use('/api/pos', PoSRouter);
 
-// Routing for Elibaba
+// Routing for websites
 app.use('/api/elibaba', ElibabaRouter);
+app.use('/api/nanophos', NanophosRouter);
 
 
 // Listen

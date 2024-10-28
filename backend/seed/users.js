@@ -30,6 +30,16 @@ const usuarios = [
         phone: "5543456545",
         role: "Admin",
         confirmed: 1
+    },
+    {
+        id: "f6cb083c-879c-444d-9afe-57a6aa9a5b23",
+        name: "Nano",
+        lastname: "Phos",
+        email: "nanophos@correo.com",
+        password: "Password3$",
+        phone: "5543456546",
+        role: "Admin",
+        confirmed: 1
     }
 
 ];

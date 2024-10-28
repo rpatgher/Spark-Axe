@@ -55,6 +55,25 @@ const websites = [
             {name: 'Products'},
             {name: 'Contact'}
         ]
+    },
+    {
+        id: "87f87ad5-25f3-4a2d-8336-430b27baace1",
+        name: "Nanophos",
+        type: "E-commerce",
+        phone: "+5545497970",
+        email: "nanophos@nanophos.com",
+        // url_address: "https://www.nanophos.com",
+        url_address: "http://localhost:5173",
+        currency: "Pesos Mexicanos",
+        slogan: "La mejor tienda online de México",
+        languaje: "Español",
+        features: [1,2,3,4,5,10,11],
+        sections: [
+            {name: 'Principal'},
+            {name: 'About us'},
+            {name: 'Products'},
+            {name: 'Contact'}
+        ]
     }
 ];
 

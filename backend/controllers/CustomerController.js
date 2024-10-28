@@ -10,39 +10,43 @@ import {  Customer, Website, Order } from '../models/index.js';
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-    const customer = await Customer.findOne({ 
-        where: { email }
-    });
-    if(!customer){
-        const error = new Error('Customer not found');
-        return res.status(404).json({ msg: error.message });
+    if (!email || !password) {
+        return res.status(400).json({ msg: 'Missing fields' });
     }
-    if(!customer.confirmed){
-        const error = new Error('Customer is not confirmed');
-        return res.status(401).json({ msg: error.message });
-    }
-    if(!customer.comparePassword(password)){
-        const error = new Error('Invalid password');
-        return res.status(401).json({ msg: error.message });
-    } else {
-        return res.json({
-            msg: 'Logged in successfully',
-            id: customer.id,
-            name: customer.name,
-            lastname: customer.lastname,
-            email: customer.email,
-            phone: customer.phone,
-            token: generateJWT(customer.id)
+    try {
+        const customer = await Customer.findOne({ 
+            where: { email },
         });
+        if(customer.website_id !== req.website.id){
+            return res.status(401).json({ msg: 'User not allowed' });
+        }
+        if(!customer){
+            return res.status(404).json({ msg: 'User not found' });
+        }
+        if(!customer.confirmed){
+            return res.status(401).json({ msg: 'User is not confirmed' });
+        }
+        if(!customer.comparePassword(password)){
+            return res.status(401).json({ msg: 'Invalid password' });
+        } else {
+            return res.json({
+                msg: 'Logged in successfully',
+                id: customer.id,
+                name: customer.name,
+                lastname: customer.lastname,
+                email: customer.email,
+                phone: customer.phone,
+                token: generateJWT(customer.id)
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
     }
 }
 
-const createCustomer = async (req, res) => {
+const register = async (req, res) => {
     const { website } = req;
-    if(!website){
-        const error = new Error('Website not found');
-        return res.status(404).json({ msg: error.message });
-    }
     const { name, lastname, email, phone, password } = req.body;
     if(!name || !lastname || !email || !phone || !password){
         const error = new Error('Missing fields');
@@ -57,26 +61,133 @@ const createCustomer = async (req, res) => {
         }
     });
     if(customerExists){
-        const error = new Error('Customer already exists');
+        const error = new Error('User already exists');
         return res.status(400).json({ msg: error.message });
     }
     try {
         const numCustomer = await Customer.count({ 
             where: { website_id: website.id }
         });
-        const customer = Customer.build(req.body);
+        const customer = Customer.build({
+            name,
+            lastname,
+            email,
+            phone,
+            password
+        });
         customer.website_id = website.id;
         customer.index = numCustomer + 1;
         customer.confirmed = false;
-        customer.token = generateToken();
+        customer.confirmationToken = generateToken();
         await customer.save();
-        // TODO: Send confirmation email
-        res.json({ msg: 'Registered succesfully' });
+        // TODO: Change mail template for one that fits the website
+        sendEmail({
+            name: `${customer.name} ${customer.lastname}`,
+            email: customer.email,
+            url: `${website.url_address}/confirm-account/${customer.confirmationToken}`,
+            subject: 'Confirm your account',
+            file: 'confirm-account'
+        });
+        return res.status(201).json({ msg: 'User created successfully' });
     } catch (error) {
         console.log(error);
         return res.status(400).json({ msg: 'An error ocurred' });
     }
 };
+
+const confirmAccount = async (req, res) => {
+    const { token } = req.body;
+    try {
+        const customer = await Customer.findOne({
+            where: {
+                confirmationToken: token
+            }
+        });
+        if(!customer){
+            return res.status(404).json({ msg: 'Invalid token' });
+        }
+        if(customer.website_id !== req.website.id){
+            return res.status(401).json({ msg: 'User not allowed' });
+        }
+        customer.confirmed = true;
+        customer.confirmationToken = null;
+        await customer.save();
+        return res.json({ msg: 'Account confirmed' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
+}
+
+const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+    if(!email){
+        return res.status(400).json({ msg: 'Missing fields' });
+    }
+    try {
+        const customer = await Customer.findOne({
+            where: { email }
+        });
+        if(!customer){
+            return res.status(404).json({ msg: 'User not found' });
+        }
+        if(customer.website_id !== req.website.id){
+            return res.status(401).json({ msg: 'User not allowed' });
+        }
+        const token = generateToken();
+        customer.resetPasswordToken = token;
+        await customer.save();
+        // TODO: Change mail template for one that fits the website
+        sendEmail({
+            name: `${customer.name} ${customer.lastname}`,
+            email: customer.email,
+            url: `${req.website.url_address}/reset-password/${token}`,
+            subject: 'Reset your password',
+            file: 'reset-password'
+        });
+        return res.json({ msg: 'Email sent' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
+}
+
+const resetPassword = async (req, res) => {
+    const { token, password } = req.body;
+    if(!token || !password){
+        return res.status(400).json({ msg: 'Missing fields' });
+    }
+    try {
+        const customer = await Customer.findOne({ where: { resetPasswordToken: token }});
+        if(!customer){
+            return res.status(404).json({ msg: 'Invalid token' });
+        }
+        if(customer.website_id !== req.website.id){
+            return res.status(401).json({ msg: 'User not allowed' });
+        }
+        customer.password = password;
+        customer.resetPasswordToken = null;
+        await customer.save();
+        return res.json({ msg: 'Password updated' });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ msg: 'An error ocurred' });
+    }
+}
+
+const profile = async (req, res) => {
+    const { customer } = req;
+    if(customer.website_id !== req.website.id){
+        return res.status(401).json({ msg: 'User not allowed' });
+    }
+    return res.json({
+        id: customer.id,
+        name: customer.name,
+        lastname: customer.lastname,
+        email: customer.email,
+        phone: customer.phone
+    });
+}
 
 const getCustomers = async (req, res) => { 
     const { website_id } = req.params;
@@ -214,8 +325,12 @@ const updateCustomer = async (req, res) => {
 }
 
 export {
-    createCustomer,
+    register,
     login,
+    confirmAccount,
+    forgotPassword,
+    resetPassword,
+    profile,
     getCustomers,
     getCustomer,
     deleteCustomer,
