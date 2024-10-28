@@ -3,6 +3,7 @@ import { Op } from 'sequelize';
 // ************* Helpers *************
 import generateToken from '../helpers/generateToken.js';
 import generateJWT from '../helpers/generateJWT.js';
+import sendEmail from '../helpers/sendEmail.js';
 
 
 // ************* Models *************
@@ -15,7 +16,10 @@ const login = async (req, res) => {
     }
     try {
         const customer = await Customer.findOne({ 
-            where: { email },
+            where: { 
+                email,
+                website_id: req.website.id
+            }
         });
         if(customer.website_id !== req.website.id){
             return res.status(401).json({ msg: 'User not allowed' });
@@ -56,8 +60,9 @@ const register = async (req, res) => {
         where: {
             [Op.or]: [
                 { email },
-                { phone }
-            ]
+                { phone },
+            ],
+            website_id: website.id
         }
     });
     if(customerExists){
@@ -126,7 +131,10 @@ const forgotPassword = async (req, res) => {
     }
     try {
         const customer = await Customer.findOne({
-            where: { email }
+            where: { 
+                email,
+                website_id: req.website.id
+            }
         });
         if(!customer){
             return res.status(404).json({ msg: 'User not found' });

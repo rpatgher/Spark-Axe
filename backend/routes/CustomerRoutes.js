@@ -21,19 +21,6 @@ import checkCustomerAuth from '../middleware/checkCustomerAuth.js';
 
 const router = express.Router();
 
-router.route('/delete')
-    .post(checkAuth, deleteCustomers);
-
-router.route('/all/:website_id')
-    .get(checkAuth, getCustomers);
-
-router.route('/:id')
-    .get(checkAuth, getCustomer)
-    .delete(checkAuth, deleteCustomer)
-    .put(checkAuth, updateCustomer);
-
-
-
 // ********************** Routes for websites' customers **********************
 router.route('/login')
     .post(validateWebsite, login);
@@ -52,5 +39,18 @@ router.route('/forgot-password')
 
 router.route('/reset-password')
     .post(validateWebsite, resetPassword);
+
+    
+// ********************** Routes for sparkaxe's users **********************
+router.route('/delete')
+    .post(checkAuth, deleteCustomers);
+
+router.route('/all/:website_id')
+    .get(checkAuth, getCustomers);
+
+router.route('/:id')
+    .get(checkAuth, getCustomer)
+    .delete(checkAuth, deleteCustomer)
+    .put(checkAuth, updateCustomer);
 
 export default router;
