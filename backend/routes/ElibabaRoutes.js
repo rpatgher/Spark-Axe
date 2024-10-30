@@ -3,8 +3,7 @@ import express from 'express';
 import {
     getElements,
     getOrders,
-    getInfo,
-    createOrder
+    getInfo
 } from '../controllers/ElibabaController.js';
 
 // ************* Middleware *************
@@ -21,9 +20,6 @@ router.route('/orders')
 
 router.route('/main-info')
     .get(validateWebsite, getInfo);
-
-router.route('/create-order')
-    .post(validateWebsite, checkCustomerAuth, createOrder);
     
 
 

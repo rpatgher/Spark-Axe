@@ -34,18 +34,11 @@ const getOrders = async (req, res) => {
 }
 
 const createOrder = async (req, res) => {
-    const { notes, elements, customer_id, address } = req.body;
-    const { website_id } = req.params;
-    const website = await Website.findByPk(website_id);
-    if (!website) {
-        return res.status(400).json({ msg: 'Website not found' });
-    }
-    if ( !elements || !website_id || !customer_id || !address) {
+    const { notes, elements, address } = req.body;
+    const { website } = req;
+    const { customer } = req;
+    if (!elements || !address) {
         return res.status(400).json({ msg: 'All fields are required' });
-    }
-    const customer = await Customer.findByPk(customer_id);
-    if (!customer) {
-        return res.status(400).json({ msg: 'Customer not found' });
     }
     if ( customer.website_id !== website.id) {
         return res.status(400).json({ msg: 'Customer not found' });
@@ -53,7 +46,7 @@ const createOrder = async (req, res) => {
     const productsFromDB = await Element.findAll({
         where: {
             id: elements.map(product => product.id),
-            website_id: website_id
+            website_id: website.id
         },
         attributes: ['id', 'stock', 'price']
     });
@@ -76,19 +69,19 @@ const createOrder = async (req, res) => {
     if (!isValid) {
         return res.status(400).json({ msg: 'An error ocurred' });
     }
-    const numOrders = await Order.count({
+    const numOrders = await customer.countOrders({
         where: {
-            website_id
+            website_id: website.id
         }
     });
     const order = await Order.create({
         index: numOrders + 1,
         status: 'IP',
         notes,
-        total: products.reduce((acc, product) => acc + product.price * product.quantity, 0),
-        website_id,
+        total: products.reduce((acc, current) => acc + current.price * current.quantity, 0),
         address,
-        customer_id
+        customer_id: customer.id,
+        website_id: website.id
     });
     products.forEach(async product => {
         await Element.decrement('stock', {
@@ -98,22 +91,104 @@ const createOrder = async (req, res) => {
             }
         });
     });
-    try {
+    try{
         const createdOrder = await order.save();
-        const orderElement = products.map(product => {
+        const orderElements = products.map(product => {
             return {
                 orderId: createdOrder.id,
+                quantity: product.quantity,
                 elementId: product.id,
-                quantity: product.quantity
             }
         });
-        await OrderElement.bulkCreate(orderElement);
-        res.status(200).json({ msg: 'Order created successfully' });
+        await OrderElement.bulkCreate(orderElements);
+        return res.json({ msg: 'Order created' });
     } catch (error) {
         console.log(error);
-        res.status(400).json({ msg: error.message });
+        return res.status(400).json({ msg: 'An error ocurred' });
     }
 }
+
+// const createOrder = async (req, res) => {
+//     const { notes, elements, customer_id, address } = req.body;
+//     const { website_id } = req.params;
+//     const website = await Website.findByPk(website_id);
+//     if (!website) {
+//         return res.status(400).json({ msg: 'Website not found' });
+//     }
+//     if ( !elements || !website_id || !customer_id || !address) {
+//         return res.status(400).json({ msg: 'All fields are required' });
+//     }
+//     const customer = await Customer.findByPk(customer_id);
+//     if (!customer) {
+//         return res.status(400).json({ msg: 'Customer not found' });
+//     }
+//     if ( customer.website_id !== website.id) {
+//         return res.status(400).json({ msg: 'Customer not found' });
+//     }
+//     const productsFromDB = await Element.findAll({
+//         where: {
+//             id: elements.map(product => product.id),
+//             website_id: website_id
+//         },
+//         attributes: ['id', 'stock', 'price']
+//     });
+//     if (!productsFromDB) return res.status(400).json({ msg: 'Products not found' });
+//     let isValid = true;
+//     const products = elements.map(product => {
+//         const productFromDB = productsFromDB.find(p => p.id === product.id);
+//         if (!productFromDB) {
+//             isValid = false;
+//         }
+//         if (product.quantity > productFromDB?.stock) {
+//             isValid = false;
+//         }
+//         return {
+//             id: productFromDB?.id,
+//             quantity: product.quantity,
+//             price: productFromDB?.price
+//         }
+//     });
+//     if (!isValid) {
+//         return res.status(400).json({ msg: 'An error ocurred' });
+//     }
+//     const numOrders = await Order.count({
+//         where: {
+//             website_id
+//         }
+//     });
+//     const order = await Order.create({
+//         index: numOrders + 1,
+//         status: 'IP',
+//         notes,
+//         total: products.reduce((acc, product) => acc + product.price * product.quantity, 0),
+//         website_id,
+//         address,
+//         customer_id
+//     });
+//     products.forEach(async product => {
+//         await Element.decrement('stock', {
+//             by: product.quantity,
+//             where: {
+//                 id: product.id
+//             }
+//         });
+//     });
+//     try {
+//         const createdOrder = await order.save();
+//         const orderElement = products.map(product => {
+//             return {
+//                 orderId: createdOrder.id,
+//                 elementId: product.id,
+//                 quantity: product.quantity
+//             }
+//         });
+//         await OrderElement.bulkCreate(orderElement);
+//         res.status(200).json({ msg: 'Order created successfully' });
+//     } catch (error) {
+//         console.log(error);
+//         res.status(400).json({ msg: error.message });
+//     }
+// }
 
 const updateOrderStatus = async (req, res) => {
     const { status } = req.body;
