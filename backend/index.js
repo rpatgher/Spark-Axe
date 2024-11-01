@@ -18,6 +18,7 @@ import PoSRouter from './routes/PoSRoutes.js';
 
 import ElibabaRouter from './routes/ElibabaRoutes.js';
 import NanophosRouter from './routes/NanophosRoutes.js';
+import OralpeaceRouter from './routes/OralpeaceRoutes.js';
 
 // Connect DB
 import db from './config/db.js';
@@ -65,6 +66,7 @@ app.use('/api/pos', PoSRouter);
 // Routing for websites
 app.use('/api/elibaba', ElibabaRouter);
 app.use('/api/nanophos', NanophosRouter);
+app.use('/api/oralpeace', OralpeaceRouter);
 
 
 // Listen

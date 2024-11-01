@@ -11,6 +11,7 @@ import {
     Section,
 } from "../models/index.js";
 
+
 const getInfo = async (req, res) => {
     const { website } = req;
     if (!website) {
@@ -105,6 +106,29 @@ const getInfo = async (req, res) => {
                 where: {
                     website_id: website.id,
                 },
+                include: [
+                    {
+                        model: Subcategory,
+                        attributes: {
+                            exclude: [
+                                "category_id",
+                                "createdAt",
+                                "updatedAt",
+                                "index",
+                                "element_subcategory",
+                            ],
+                        },
+                        include: [
+                            {
+                                model: Category,
+                                attributes: {
+                                    exclude: ["website_id", "createdAt", "updatedAt"],
+                                },
+                                order: [["index", "ASC"]],
+                            },
+                        ],
+                    },
+                ],
             },
         ],
     });
@@ -148,4 +172,8 @@ const getOrders = async (req, res) => {
     }
 };
 
-export { getOrders, getInfo };
+
+export {
+    getInfo,
+    getOrders
+}

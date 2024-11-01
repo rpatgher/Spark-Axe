@@ -21,11 +21,11 @@ const login = async (req, res) => {
                 website_id: req.website.id
             }
         });
-        if(customer.website_id !== req.website.id){
-            return res.status(401).json({ msg: 'User not allowed' });
-        }
         if(!customer){
             return res.status(404).json({ msg: 'User not found' });
+        }
+        if(customer.website_id !== req.website.id){
+            return res.status(401).json({ msg: 'User not allowed' });
         }
         if(!customer.confirmed){
             return res.status(401).json({ msg: 'User is not confirmed' });
