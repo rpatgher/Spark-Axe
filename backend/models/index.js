@@ -15,6 +15,8 @@ import Advertisement from "./Advertisement.js";
 import Contact from "./Contact.js";
 import PoS from "./PoS.js";
 
+import ConfigElement from "./ConfigElement.js";
+
 
 User.hasMany(Website, { foreignKey: 'user_id', onDelete: 'RESTRICT' });
 Website.belongsTo(User, { foreignKey: 'user_id', onDelete: 'RESTRICT' });
@@ -63,6 +65,10 @@ Website.hasMany(Contact, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 PoS.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 Website.hasMany(PoS, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 
+// Configuration for the website
+ConfigElement.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+Website.hasOne(ConfigElement, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+
 
 //deliveries has one website
 //alrevez website.hasOne(deliveries)
@@ -88,5 +94,6 @@ export {
     Section, 
     Advertisement,
     Contact,
-    PoS
+    PoS,
+    ConfigElement
 };

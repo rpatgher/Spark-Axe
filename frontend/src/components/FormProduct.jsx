@@ -35,6 +35,28 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
     const [savingProduct, setSavingProduct] = useState(false);
     const [publishingProduct, setPublishingProduct] = useState(false);
 
+    const [config, setConfig] = useState({});
+
+    useEffect(() => {
+        const getElemetConfig = async () => {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            try {
+                console.log(auth);
+                const { data } = await clientAxios(`/api/config/elements/${auth.websites[0].id}`, config);
+                setConfig(data.config);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        return () => getElemetConfig();
+    }, []);
+
 
     useEffect(() => {
         setProduct({
@@ -213,20 +235,22 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             value={product.stock}
                         />
                     </div>
-                    <div className={styles.field}>
-                        <label htmlFor="color">Color</label>
-                        <div className={styles["input-color"]}>
-                            <input
-                                type="color"
-                                id="color"
-                                name="color"
-                                onChange={handleChange}
-                                value={product.color || '#000000'}
-                            />
-                            <div style={{ backgroundColor: product.color || 'transparent' }}></div>
+                    {config.color && (
+                        <div className={styles.field}>
+                            <label htmlFor="color">Color</label>
+                            <div className={styles["input-color"]}>
+                                <input
+                                    type="color"
+                                    id="color"
+                                    name="color"
+                                    onChange={handleChange}
+                                    value={product.color || '#000000'}
+                                />
+                                <div style={{ backgroundColor: product.color || 'transparent' }}></div>
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles["field-two-columns"]}>
+                    )}
+                    <div className={`${config.image_hover ? styles["field-two-columns"] : styles.field}`}>
                         <div id="image-field" className={`${styles["field-images"]} ${product.image ? styles["field-images-done"] : ''}`}>
                             <p className={styles.required}>{product.image ? 'Imagen Subida' : 'Sube Primera Imagen'}</p>
                             <div>
@@ -245,35 +269,39 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                                 </label>
                             </div>
                         </div>
-                        <div className={`${styles["field-images"]} ${product.image2 ? styles["field-images-done"] : ''}`}>
-                            <p>{product.image2 ? 'Imagen Subida' : 'Sube segunda Imagen'}</p>
-                            <div>
-                                <label htmlFor="image2">
-                                    <div>
-                                        <svg viewBox="0 0 640 512" height="1em">
-                                            <path
-                                                d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"
-                                            ></path>
-                                        </svg>
-                                        <p>{product.image2 ? 'Subida correcamente' : 'Arrastra la imagen'}</p>
-                                        <p>o</p>
-                                        <span>{product.image2 ? 'Cambiar archivo' : 'Sube un archivo'}</span>
-                                    </div>
-                                    <input type="file" accept='image/*' id="image2" name="image2" onChange={handleChangeFile} />
-                                </label>
+                        {config.image_hover && (
+                            <div className={`${styles["field-images"]} ${product.image2 ? styles["field-images-done"] : ''}`}>
+                                <p>{product.image2 ? 'Imagen Subida' : 'Sube segunda Imagen'}</p>
+                                <div>
+                                    <label htmlFor="image2">
+                                        <div>
+                                            <svg viewBox="0 0 640 512" height="1em">
+                                                <path
+                                                    d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"
+                                                ></path>
+                                            </svg>
+                                            <p>{product.image2 ? 'Subida correcamente' : 'Arrastra la imagen'}</p>
+                                            <p>o</p>
+                                            <span>{product.image2 ? 'Cambiar archivo' : 'Sube un archivo'}</span>
+                                        </div>
+                                        <input type="file" accept='image/*' id="image2" name="image2" onChange={handleChangeFile} />
+                                    </label>
+                                </div>
                             </div>
+                        )}
+                    </div>
+                    {config.main && (
+                        <div className={`${styles.field} ${styles.main}`}>
+                            <input
+                                type="checkbox"
+                                id="main"
+                                name="main"
+                                onChange={handleChange}
+                                checked={product.main}
+                            />
+                            <label htmlFor="main">Indica si el producto es principal</label>
                         </div>
-                    </div>
-                    <div className={`${styles.field} ${styles.main}`}>
-                        <input
-                            type="checkbox"
-                            id="main"
-                            name="main"
-                            onChange={handleChange}
-                            checked={product.main}
-                        />
-                        <label htmlFor="main">Indica si el producto es principal</label>
-                    </div>
+                    )}
                     <div className={styles.field}>
                         <InputCategories 
                             categories={categories}

@@ -162,6 +162,18 @@
     text-align: left;
     padding-left: 3rem;
 }
+.megarow div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10rem;
+}
+.megarow .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
 
 
 

@@ -220,7 +220,6 @@ const Advertisements = () => {
                     { type: 'unpublished', name: 'Archivados' },
                 ]}
                 listName={'anuncios'}
-                colspan={[3,2,2]}
                 createNew={'/dashboard/advertisements/new'}
                 setModalDelete={setModalDelete}
             >

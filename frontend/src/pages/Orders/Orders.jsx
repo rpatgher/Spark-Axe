@@ -280,7 +280,6 @@ const Orders = () => {
                     { type: "canceled", name: "Cancelados" },
                 ]}
                 listName="pedidos"
-                colspan={[3,3,3]}
             >
                 {filteredOrders.map((order, index) => {
                     if (index < limit) {

@@ -1,6 +1,15 @@
 import { Op, Sequelize } from 'sequelize';
 // ************* Models *************
-import { Website, Inventory, Order, Element, OrderElement, PoS, Customer } from '../models/index.js';
+import {
+    Website,
+    Inventory,
+    Order,
+    Element,
+    OrderElement,
+    PoS,
+    Customer,
+    ConfigElement
+} from "../models/index.js";
 
 const getWebsite = async (req, res) => {
     const website = await Website.findByPk(req.params.id);
@@ -18,11 +27,14 @@ const getWebsite = async (req, res) => {
 const createWebsite = async (req, res) => {
     const website = Website.build(req.body);
     const inventory = Inventory.build();
+    const configElement = ConfigElement.build();
     website.user_id = req.user.id;
     try {
         const websiteSaved = await website.save();
         inventory.website_id = websiteSaved.id;
+        configElement.website_id = websiteSaved.id;
         await inventory.save();
+        await configElement.save();
         res.json({ msg: 'Website created successfully' });
     } catch (error) {
         console.log(error);

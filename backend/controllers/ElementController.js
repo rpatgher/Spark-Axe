@@ -3,7 +3,7 @@ import fs from 'fs';
 import { Op } from 'sequelize';
 
 // ************* Models *************
-import { Element, Website, ElementCategory, Category, Subcategory, Order, OrderElement } from '../models/index.js';
+import { Element, ConfigElement, Website, ElementCategory, Category, Subcategory, Order, OrderElement } from '../models/index.js';
 
 const getElement = async (req, res) => {
     const elementFromDB = await Element.findOne({
@@ -77,6 +77,11 @@ const getElements = async (req, res) => {
         const error = new Error('Unauthorized');
         return res.status(401).json({ msg: error.message });
     }
+    const config = await ConfigElement.findOne({
+        where: {
+            website_id: website.id
+        }
+    });
     let elements = await Element.findAll({
         where: {
             website_id: website.id,
@@ -128,7 +133,7 @@ const getElements = async (req, res) => {
         newElement.categories = categories;
         return newElement;
     });
-    return res.status(200).json(elements);
+    return res.status(200).json({ elements, config });
 }
 
 const createElement = async (req, res) => {

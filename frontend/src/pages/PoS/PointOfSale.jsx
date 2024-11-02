@@ -216,7 +216,6 @@ const PointOfSale = () => {
                 listName={'puntos de venta'}
                 createNew={'/dashboard/pos/new'}
                 setModalDelete={setModalDelete}
-                colspan={[4,2,2]}
             >
                 {filteredPoss.map((pos, index) => {
                     if(index < limit ){

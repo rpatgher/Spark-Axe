@@ -26,8 +26,7 @@ const TableDashboard = ({
     visibleOptions,
     setModalDelete,
     listName,
-    createNew,
-    colspan
+    createNew
 }) => {
     const [limitIncrement, setLimitIncrement] = useState(10);
 
@@ -118,34 +117,34 @@ const TableDashboard = ({
                             children
                         )}
                         {listLength > limitIncrement &&
-                                <tr className={styles.megarow}>
-                                    <td colSpan={colspan[0]}>
-                                        <strong>Productos cargados: </strong>{visibleCount}
-                                    </td>
-                                    <td colSpan={colspan[1]}>
-                                        {listLength > limit &&
-                                            <button 
-                                                className={styles.cargar}
-                                                type='button'
-                                                onClick={() => {
-                                                    if(setSelectAll){
-                                                        setSelectAll(false);
-                                                    }
-                                                    setLimit(limit + limitIncrement);
-                                                }}
-                                            >Cargar más</button>
-                                        }
-                                    </td>
-                                    <td colSpan={colspan[2]}>
-                                        {limit > limitIncrement &&
-                                            <button 
-                                                className={styles.cargar}
-                                                type='button'
-                                                onClick={() => setLimit(limit - limitIncrement)}
-                                            >Cargar menos</button>
-                                        }
-                                    </td>
-                                </tr>
+                            <tr className={styles.megarow}>
+                                <td colSpan={columns.length}>
+                                    <div>
+                                        <p><strong>Productos cargados: </strong>{visibleCount}</p>
+                                        <div className={styles.buttons}>
+                                            {listLength > limit &&
+                                                <button 
+                                                    className={styles.cargar}
+                                                    type='button'
+                                                    onClick={() => {
+                                                        if(setSelectAll){
+                                                            setSelectAll(false);
+                                                        }
+                                                        setLimit(limit + limitIncrement);
+                                                    }}
+                                                >Cargar más</button>
+                                            }
+                                            {limit > limitIncrement &&
+                                                <button 
+                                                    className={styles.cargar}
+                                                    type='button'
+                                                    onClick={() => setLimit(limit - limitIncrement)}
+                                                >Cargar menos</button>
+                                            }
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
                             }
                     </tbody>
                 </table>

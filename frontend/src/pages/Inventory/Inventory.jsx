@@ -268,7 +268,6 @@ const Inventory = () => {
                 ]}
                 listName='productos'
                 createNew='/dashboard/products/new'
-                colspan={[3,1,1]}
             >
                 {filteredProducts.map((item, index) => {
                     if(index < limit){

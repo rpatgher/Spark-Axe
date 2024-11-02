@@ -29,7 +29,6 @@ const register = async (req, res) => {
         const token = generateToken();
         user.confirmationToken = token;
         await user.save();
-        // TODO: Send confirmation email
         sendEmail({
             name: `${user.name} ${user.lastname}`,
             email: user.email,

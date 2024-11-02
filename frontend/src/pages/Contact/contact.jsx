@@ -272,7 +272,6 @@ const Contact = () => {
                     {type: 'incompleted', name: 'No Completados'}
                 ]}
                 listName={'contactos'}
-                colspan={[3,2,2]}
                 setModalDelete={setModalDelete}
             >
                 {filteredContacts.map((contact, index) => {

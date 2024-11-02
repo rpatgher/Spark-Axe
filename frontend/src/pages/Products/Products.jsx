@@ -33,6 +33,7 @@ const Products = () => {
     const { auth } = useAuth();
     const { alert, handleAlert } = useApp();
     const [products, setProducts] = useState([]);
+    const [config, setConfig] = useState({});
     // Order means the order of the products, asc or desc (the sorting order)
     const [order, setOrder] = useState('asc');
     const [orderType, setOrderType] = useState('name');
@@ -120,8 +121,9 @@ const Products = () => {
                 const response = await clientAxios(`/api/categories/${auth.websites[0].id}`, config); 
                 const categories = response.data;
                 setCategories(categories);
-                setProducts(data);
-                setFilteredProducts(data);
+                setProducts(data.elements);
+                setFilteredProducts(data.elements);
+                setConfig(data.config);
             } catch (error) {
                 console.log(error);
                 handleAlert("Error al obtener los productos", true);
@@ -252,13 +254,23 @@ const Products = () => {
                 </div>
             </div>
             <TableDashboard
-                columns={[
+                columns={config.color ? [
                     { prop: 'checkbox', width: '5%' },
                     { prop: 'Imagen', width: '5%' },
                     { prop: 'Nombre', width: '15%' },
                     { prop: 'Descripción', width: '10%' },
                     { prop: 'Precio', width: '15%' },
                     { prop: 'Color', width: '5%' },
+                    { prop: 'Categorías', width: '15%' },
+                    { prop: 'ID', width: '5%' },
+                    { prop: 'Publicado', width: '10%' },
+                    { prop: 'actions', width: '10%' }
+                ] : [
+                    { prop: 'checkbox', width: '5%' },
+                    { prop: 'Imagen', width: '10%' },
+                    { prop: 'Nombre', width: '15%' },
+                    { prop: 'Descripción', width: '10%' },
+                    { prop: 'Precio', width: '15%' },
                     { prop: 'Categorías', width: '15%' },
                     { prop: 'ID', width: '5%' },
                     { prop: 'Publicado', width: '10%' },
@@ -283,7 +295,6 @@ const Products = () => {
                 setModalDelete={setModalDelete}
                 listName='productos'
                 createNew="/dashboard/products/new"
-                colspan={[6,2,2]}
             >
                 {filteredProducts.map((product, index) => {
                     if(index < limit){
@@ -313,7 +324,7 @@ const Products = () => {
                                 </button>
                             </td>
                             <td>{formatToMoney(product.price)} MXN</td>
-                            <td className={styles["cell-color"]}><div style={{ backgroundColor: product.color }} ></div></td>
+                            {config.color && <td className={styles["cell-color"]}><div style={{ backgroundColor: product.color }} ></div></td>}
                             <td>
                                 <button
                                     className={styles["btn-categories"]}
