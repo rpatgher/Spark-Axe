@@ -22,7 +22,12 @@ const ConfigElement = db.define('config_element', {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
-    }
+    },
+    instructions: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
 }, {});
 
 export default ConfigElement;

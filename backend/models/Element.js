@@ -28,6 +28,10 @@ const Element = db.define('element', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    instructions: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     image: {
         type: DataTypes.STRING,
         allowNull: false

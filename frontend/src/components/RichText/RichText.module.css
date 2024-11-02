@@ -1,0 +1,39 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 2rem;
+    gap: 1rem;
+    border-radius: 1rem;
+}
+.field label {
+    font-size: 1.4rem;
+}
+.textarea {
+    font-size: 1.4rem;
+    padding: 1rem;
+    border: 1px solid var(--gray);
+    background-color: var(--white);
+    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1);
+    border-radius: 1rem;
+    height: auto;
+}
+.textarea{
+    overflow: hidden;
+}
+.empty-field{
+    border: 1px solid var(--red);
+    background-color: color-mix(in srgb, var(--red) 30%, #fff);
+    height: auto;
+}
+.exceeded{
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--red);
+}
+.editor p{
+    margin: 0;
+}
+.editor:focus-visible{
+    outline: none;
+}

@@ -40,6 +40,7 @@ const getElement = async (req, res) => {
         price: elementFromDB.price,
         stock: elementFromDB.stock,
         color: elementFromDB.color,
+        instructions: elementFromDB.instructions,
         main: elementFromDB.main,
         published: elementFromDB.published,
         categories: elementFromDB.subcategories.map(subcategory => {
@@ -108,6 +109,7 @@ const getElements = async (req, res) => {
             price: element.price,
             stock: element.stock,
             color: element.color,
+            instructions: element.instructions,
             main: element.main,
             published: element.published,
             categories: element.subcategories.map(subcategory => {
@@ -142,6 +144,16 @@ const createElement = async (req, res) => {
     if(!name || !description || !price || !stock || !categories){
         const error = new Error('Invalid Request. Missing required fields');
         return res.status(400).json({ msg: error.message });
+    }
+    if (req.instructions) {
+        if (req.instructions.length > 3000) {
+            const error = new Error('Instructions too long');
+            return res.status(400).json({ msg: error.message });
+        }
+        if (!JSON.parse(req.instructions)){
+            const error = new Error('Invalid instructions');
+            return res.status(400).json({ msg: error.message });
+        }
     }
     if (!req.files || Object.keys(req.files).length === 0) {
         const error = new Error('No files were uploaded.');

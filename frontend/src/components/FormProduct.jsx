@@ -14,6 +14,7 @@ import useApp from '../hooks/useApp';
 import FloatAlert from './Alert/FloatAlert';
 import DynamicElement from './DynamicElement';
 import InputCategories from './InputCategories/InputCategories';
+import RichText from './RichText/RichText';
 
 const FormProduct = ({ initalProduct, setModalDelete }) => {
     const { auth } = useAuth();
@@ -25,6 +26,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         price: initalProduct?.price || '',
         stock: initalProduct?.stock || '',
         color: initalProduct?.color || '',
+        instructions: initalProduct?.instructions || '',
         image: '',
         image2: '',
         main: initalProduct?.main || false,
@@ -35,7 +37,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
     const [savingProduct, setSavingProduct] = useState(false);
     const [publishingProduct, setPublishingProduct] = useState(false);
 
-    const [config, setConfig] = useState({});
+    const [configElement, setConfigElement] = useState({});
 
     useEffect(() => {
         const getElemetConfig = async () => {
@@ -47,9 +49,8 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                 }
             }
             try {
-                console.log(auth);
                 const { data } = await clientAxios(`/api/config/elements/${auth.websites[0].id}`, config);
-                setConfig(data.config);
+                setConfigElement(data.config);
             } catch (error) {
                 console.log(error);
             }
@@ -65,6 +66,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             price: initalProduct?.price || '',
             stock: initalProduct?.stock || '',
             color: initalProduct?.color || '',
+            instructions: initalProduct?.instructions || '',
             image: '',
             image2: '',
             initialImage: initalProduct?.image || '',
@@ -116,6 +118,10 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             });
             return;
         }
+        if(configElement.instructions && product.instructions.length > 3000){
+            handleAlert('Las instrucciones no pueden ser mayor a 3000 caracteres', true);
+            return;
+        }
         if (product.image === '' && !initalProduct?.id) {
             handleAlert("La imagen es obligatoria", true);
             // console.log(document.getElementById('image-field'));
@@ -142,6 +148,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         data.append('price', product.price);
         data.append('stock', product.stock);
         data.append('color', product.color);
+        data.append('instructions', product.instructions);
         data.append('image', product.image);
         data.append('image2', product.image2);
         data.append('main', product.main);
@@ -235,7 +242,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             value={product.stock}
                         />
                     </div>
-                    {config.color && (
+                    {configElement.color && (
                         <div className={styles.field}>
                             <label htmlFor="color">Color</label>
                             <div className={styles["input-color"]}>
@@ -250,7 +257,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             </div>
                         </div>
                     )}
-                    <div className={`${config.image_hover ? styles["field-two-columns"] : styles.field}`}>
+                    <div className={`${configElement.image_hover ? styles["field-two-columns"] : styles.field}`}>
                         <div id="image-field" className={`${styles["field-images"]} ${product.image ? styles["field-images-done"] : ''}`}>
                             <p className={styles.required}>{product.image ? 'Imagen Subida' : 'Sube Primera Imagen'}</p>
                             <div>
@@ -269,7 +276,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                                 </label>
                             </div>
                         </div>
-                        {config.image_hover && (
+                        {configElement.image_hover && (
                             <div className={`${styles["field-images"]} ${product.image2 ? styles["field-images-done"] : ''}`}>
                                 <p>{product.image2 ? 'Imagen Subida' : 'Sube segunda Imagen'}</p>
                                 <div>
@@ -290,7 +297,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             </div>
                         )}
                     </div>
-                    {config.main && (
+                    {configElement.main && (
                         <div className={`${styles.field} ${styles.main}`}>
                             <input
                                 type="checkbox"
@@ -301,6 +308,15 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             />
                             <label htmlFor="main">Indica si el producto es principal</label>
                         </div>
+                    )}
+                    {configElement.instructions && (
+                        <RichText 
+                            label="Instrucciones"
+                            value={product.instructions}
+                            setValue={(element) => setProduct({ ...product, instructions: element })}
+                            placeholder={`Instrucciones de uso del producto`}
+                            limit={3000}
+                        />
                     )}
                     <div className={styles.field}>
                         <InputCategories 
