@@ -1,4 +1,5 @@
 import { Op } from 'sequelize';
+import jwt from "jsonwebtoken";
 
 // ************* Models *************
 import { Contact, Customer, Website } from '../models/index.js';
@@ -16,14 +17,30 @@ const createContact = async (req, res) => {
         const error = new Error('Website not found');
         return res.status(404).json({ msg: error.message });
     }
-    try {
+    let customer;
+    let token;
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
+        try {
+            token = req.headers.authorization.split(' ')[1];
+            if(token && token !== 'null'){
+                const decoded = jwt.verify(token, process.env.JWT_SECRET);
+                customer = await Customer.scope('withoutPassword').findByPk(decoded.id);
+            } else {
+                customer = await Customer.scope('withoutPassword').findOne({ where: { email } });
+            }
+        } catch (error) {
+            console.error(error);
+            return res.status(404).json({msg: 'An error occurred'});
+        }
+    }
+    try {   
         const newContact = await Contact.create({
-            name: req?.customer?.name || name,
-            lastname: req?.customer?.lastname || lastname,
-            email: req?.customer?.email || email,
-            phone: req?.customer?.phone || phone || null,
+            name: customer?.name || name,
+            lastname: customer?.lastname || lastname,
+            email: customer?.email || email,
+            phone: customer?.phone || phone || null,
             message,
-            customer_id: req?.customer?.id || null,
+            customer_id: customer?.id || null,
             website_id: website.id
         });
         if(!newContact){

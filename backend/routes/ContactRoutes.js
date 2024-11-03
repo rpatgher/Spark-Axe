@@ -14,7 +14,7 @@ import checkAuth from '../middleware/checkAuth.js';
 const router = express.Router();
 
 router.route('/')
-    .post(validateWebsite, checkCustomerAuth, createContact);
+    .post(validateWebsite, createContact);
 
 router.route('/delete')
     .post(checkAuth, deleteContacts);

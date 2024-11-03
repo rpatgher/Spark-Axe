@@ -11,7 +11,6 @@ const checkCustomerAuth = async (req, res, next) => {
             if(customer){
                 req.customer = customer;
             } else {
-                
                 const error = new Error('An error occurred');
                 return res.status(404).json({msg: error.message});
             }
