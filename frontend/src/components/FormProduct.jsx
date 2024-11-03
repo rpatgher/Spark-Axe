@@ -27,6 +27,8 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         stock: initalProduct?.stock || '',
         color: initalProduct?.color || '',
         instructions: initalProduct?.instructions || '',
+        fact_sheet: initalProduct?.fact_sheet || '',
+        safety_sheet: initalProduct?.safety_sheet || '',
         image: '',
         image2: '',
         main: initalProduct?.main || false,
@@ -67,6 +69,8 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             stock: initalProduct?.stock || '',
             color: initalProduct?.color || '',
             instructions: initalProduct?.instructions || '',
+            fact_sheet: initalProduct?.fact_sheet || '',
+            safety_sheet: initalProduct?.safety_sheet || '',
             image: '',
             image2: '',
             initialImage: initalProduct?.image || '',
@@ -149,6 +153,8 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         data.append('stock', product.stock);
         data.append('color', product.color);
         data.append('instructions', product.instructions);
+        data.append('fact_sheet', product.fact_sheet);
+        data.append('safety_sheet', product.safety_sheet);
         data.append('image', product.image);
         data.append('image2', product.image2);
         data.append('main', product.main);
@@ -324,6 +330,32 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             setCategories={setCategories}
                         />
                     </div>
+                    {configElement.fact_sheet && (
+                        <div className={styles.field}>
+                            <label htmlFor="fact_sheet">Ficha Técnica</label>
+                            <input
+                                type="text"
+                                id="fact_sheet"
+                                name="fact_sheet"
+                                placeholder={`Enlace de la ficha técnica`}
+                                onChange={handleChange}
+                                value={product.fact_sheet}
+                            />
+                        </div>
+                    )}
+                    {configElement.safety_sheet && (
+                        <div className={styles.field}>
+                            <label htmlFor="safety_sheet">Hoja de Seguridad</label>
+                            <input
+                                type="text"
+                                id="safety_sheet"
+                                name="safety_sheet"
+                                placeholder={`Enlace de la hoja de seguridad`}
+                                onChange={handleChange}
+                                value={product.safety_sheet}
+                            />
+                        </div>
+                    )}
                 </div>
                 <div className={styles.right}>
                     <div className={styles.preview}>

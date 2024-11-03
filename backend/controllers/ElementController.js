@@ -41,6 +41,8 @@ const getElement = async (req, res) => {
         stock: elementFromDB.stock,
         color: elementFromDB.color,
         instructions: elementFromDB.instructions,
+        fact_sheet: elementFromDB.fact_sheet,
+        safety_sheet: elementFromDB.safety_sheet,
         main: elementFromDB.main,
         published: elementFromDB.published,
         categories: elementFromDB.subcategories.map(subcategory => {
@@ -110,6 +112,8 @@ const getElements = async (req, res) => {
             stock: element.stock,
             color: element.color,
             instructions: element.instructions,
+            fact_sheet: element.fact_sheet,
+            safety_sheet: element.safety_sheet,
             main: element.main,
             published: element.published,
             categories: element.subcategories.map(subcategory => {

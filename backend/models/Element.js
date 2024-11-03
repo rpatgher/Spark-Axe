@@ -32,6 +32,14 @@ const Element = db.define('element', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    fact_sheet: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    safety_sheet: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     image: {
         type: DataTypes.STRING,
         allowNull: false
@@ -52,7 +60,7 @@ const Element = db.define('element', {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
-    }
+    },
 }, {});
 
 

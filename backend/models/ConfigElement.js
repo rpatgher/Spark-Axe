@@ -28,6 +28,16 @@ const ConfigElement = db.define('config_element', {
         allowNull: false,
         defaultValue: false
     },
+    fact_sheet: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    safety_sheet: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
 }, {});
 
 export default ConfigElement;
