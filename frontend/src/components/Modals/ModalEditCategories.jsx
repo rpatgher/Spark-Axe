@@ -72,21 +72,30 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
         const token = localStorage.getItem('token');
         const config = {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`
             }
         }
         try {
+            const subcategory = new FormData();
+            subcategory.append('name', editingSubcategory.name);
+            if(editingSubcategory.image){
+                subcategory.append('image', editingSubcategory.image);
+            }
+            subcategory.append('description', editingSubcategory.description);
             setLoading(true);
             document.body.style.cursor = "wait";
-            const response = await clientAxios.put(`/api/categories/sub/${editingSubcategory.id}`, {name: editingSubcategory.name}, config);
+            const response = await clientAxios.put(`/api/categories/sub/${editingSubcategory.id}`, subcategory, config);
+            const editedSubcategory = response.data.subcategory;
             if(response.status === 200 || response.status === 201){
                 handleAlert('Subcategoría editada correctamente', false);
                 setSubcategories(subcategories.map(subcategory => {
                     if(subcategory.id === editingSubcategory.id){
                         return {
                             ...subcategory,
-                            name: editingSubcategory.name
+                            name: editingSubcategory.name,
+                            description: editingSubcategory.description,
+                            image: editedSubcategory.image
                         }
                     }
                     return subcategory;
@@ -99,7 +108,9 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                 if(subcategory.id === editingSubcategory.id){
                                     return {
                                         ...subcategory,
-                                        name: editingSubcategory.name
+                                        name: editingSubcategory.name,
+                                        description: editingSubcategory.description,
+                                        image: editedSubcategory.image
                                     }
                                 }
                                 return subcategory;
@@ -164,21 +175,30 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
         const token = localStorage.getItem('token');
         const config = {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`
             }
         }
         try {
+            const category = new FormData();
+            category.append('name', editingCategory.name);
+            if(editingCategory.image){
+                category.append('image', editingCategory.image);
+            }
+            category.append('description', editingCategory.description);
             setLoading(true);
             document.body.style.cursor = "wait";
-            const response = await clientAxios.put(`/api/categories/${editingCategory.id}`, {name: editingCategory.name}, config);
+            const response = await clientAxios.put(`/api/categories/${editingCategory.id}`, category, config);
+            const editedCategory = response.data.category;
             if(response.status === 200 || response.status === 201){
                 handleAlert('Categoría editada correctamente', false);
                 setCategories(categories.map(category => {
                     if(category.id === editingCategory.id){
                         return {
                             ...category,
-                            name: editingCategory.name
+                            name: editedCategory.name,
+                            description: editedCategory.description,
+                            image: editedCategory.image
                         }
                     }
                     return category;
@@ -231,14 +251,22 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
         const token = localStorage.getItem('token');
         const config = {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`
             }
         }
         try {
+            const category = new FormData();
+            category.append('name', newCategory.name);
+            if(newCategory.image){
+                category.append('image', newCategory.image);
+            }
+            category.append('description', newCategory.description);
+            category.append('website_id', auth.websites[0].id);
+
             setLoading(true);
             document.body.style.cursor = "wait";
-            const response = await clientAxios.post('/api/categories/one', {category: newCategory, website_id: auth.websites[0].id}, config);
+            const response = await clientAxios.post('/api/categories/one', category, config);
             if(response.status === 200 || response.status === 201){
                 handleAlert('Categoría creada correctamente', false);
                 setCategories([
@@ -265,14 +293,21 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
         const token = localStorage.getItem('token');
         const config = {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`
             }
         }
         try {
+            const subcategory = new FormData();
+            subcategory.append('name', newSubcategory.name);
+            if(newSubcategory.image){
+                subcategory.append('image', newSubcategory.image);
+            }
+            subcategory.append('description', newSubcategory.description);
+            subcategory.append('category_id', currentCategory.id);
             setLoading(true);
             document.body.style.cursor = "wait";
-            const response = await clientAxios.post('/api/categories/sub/one', {subcategory: newSubcategory, category_id: currentCategory.id }, config);
+            const response = await clientAxios.post('/api/categories/sub/one', subcategory, config);
             if(response.status === 200 || response.status === 201){
                 handleAlert('Subcategoría creada correctamente', false);
                 setSubcategories([
@@ -478,15 +513,57 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                 <div 
                                                     className={styles.subcategory}
                                                 >
-                                                    {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
-                                                        <input
-                                                            type="text"
-                                                            value={editingSubcategory.name}
-                                                            onChange={handleEditSubcategory}
-                                                        />
-                                                    ) : (
-                                                        <h3>{subcategory.name}</h3>
-                                                    )}
+                                                    <div className={styles.title}>
+                                                        <div className={styles.img}>
+                                                            {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
+                                                                <div
+                                                                    style={{
+                                                                        backgroundImage: typeof editingSubcategory.image == 'object' ? `url(${URL.createObjectURL(editingSubcategory.image)})` : `url(${import.meta.env.VITE_BACKEND_URL}/uploads/categories/${editingSubcategory.image})`,
+                                                                        backgroundSize: '70%',
+                                                                        backgroundRepeat: 'no-repeat',
+                                                                        backgroundPosition: 'center',
+                                                                    }}
+                                                                >
+                                                                    <input 
+                                                                        type="file"
+                                                                        accept="image/*"
+                                                                        onChange={(e) => {
+                                                                            setEditingSubcategory({
+                                                                                ...editingSubcategory,
+                                                                                image: e.target.files[0]
+                                                                            });
+                                                                        }}                                                                  
+                                                                    />
+                                                                    <i className="fa-regular fa-file-image"></i>
+                                                                </div>
+                                                            ) : 
+                                                                subcategory.image ? (<img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/categories/${subcategory.image}`} alt={subcategory.name} />) : (<div></div>)
+                                                            }
+                                                        </div>
+                                                        {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
+                                                            <div className={styles.inputs}>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editingSubcategory.name}
+                                                                    onChange={handleEditSubcategory}
+                                                                />
+                                                                <textarea
+                                                                    value={editingSubcategory.description}
+                                                                    onChange={(e) => {
+                                                                        setEditingSubcategory({
+                                                                            ...editingSubcategory,
+                                                                            description: e.target.value
+                                                                        });
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <div className={styles.content}>
+                                                                <h3>{subcategory.name}</h3>
+                                                                <p>{subcategory.description}</p>
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                     <div className={styles.buttons}>
                                                         {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
                                                             <>
@@ -557,15 +634,51 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                     <form
                                         onSubmit={newSubcategoryFunc}
                                     >
-                                        <input
-                                            type="text"
-                                            value={newSubcategory || ''}
-                                            onChange={(e) => {
-                                                setNewSubcategory(e.target.value);
-                                            }}
-                                            id='newSubcategoryInput'
-                                            autoFocus={true}
-                                        />
+                                        <div className={styles.img}>
+                                            <div
+                                                style={{
+                                                    backgroundImage: newSubcategory?.image && `url(${URL.createObjectURL(newSubcategory.image)})`,
+                                                    backgroundSize: '70%',
+                                                    backgroundRepeat: 'no-repeat',
+                                                    backgroundPosition: 'center',
+                                                }}
+                                            >
+                                                <input 
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={(e) => {
+                                                        setNewSubcategory({
+                                                            ...newSubcategory,
+                                                            image: e.target.files[0]
+                                                        });
+                                                    }}                                                                  
+                                                />
+                                                <i className="fa-regular fa-file-image"></i>
+                                            </div>
+                                        </div>
+                                        <div className={styles.inputs}>
+                                            <input
+                                                type="text"
+                                                value={newSubcategory?.name || ''}
+                                                onChange={(e) => {
+                                                    setNewSubcategory({
+                                                        ...newSubcategory,
+                                                        name: e.target.value
+                                                    });
+                                                }}
+                                                id='newSubcategoryInput'
+                                                autoFocus={true}
+                                            />
+                                            <textarea
+                                                value={newSubcategory?.description || ''}
+                                                onChange={(e) => {
+                                                    setNewSubcategory({
+                                                        ...newSubcategory,
+                                                        description: e.target.value
+                                                    });
+                                                }}
+                                            />
+                                        </div>
                                         <div className={styles.buttonsNewSubcat}>
                                             <button
                                                 style={{
@@ -672,20 +785,61 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                     }}
                                                 >
                                                     <div className={styles.title}>
+                                                        <div className={styles.img}>
+                                                            {editingCategory !== null && editingCategory.id === category.id ? (
+                                                                <div
+                                                                    style={{
+                                                                        backgroundImage: typeof editingCategory.image == 'object' ? `url(${URL.createObjectURL(editingCategory.image)})` : `url(${import.meta.env.VITE_BACKEND_URL}/uploads/categories/${editingCategory.image})`,
+                                                                        backgroundSize: '70%',
+                                                                        backgroundRepeat: 'no-repeat',
+                                                                        backgroundPosition: 'center',
+                                                                    }}
+                                                                >
+                                                                    <input 
+                                                                        type="file"
+                                                                        accept="image/*"
+                                                                        onChange={(e) => {
+                                                                            setEditingCategory({
+                                                                                ...editingCategory,
+                                                                                image: e.target.files[0]
+                                                                            });
+                                                                        }}                                                                  
+                                                                    />
+                                                                    <i className="fa-regular fa-file-image"></i>
+                                                                </div>
+                                                            ) : 
+                                                                category.image ? (<img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/categories/${category.image}`} alt={category.name} />) : (<div></div>)
+                                                            }
+                                                        </div>
                                                         {editingCategory !== null && editingCategory.id === category.id ? (
-                                                            <input
-                                                                type="text"
-                                                                name='name'
-                                                                value={editingCategory.name}
-                                                                onChange={(e) => {
-                                                                    setEditingCategory({
-                                                                        ...editingCategory,
-                                                                        name: e.target.value
-                                                                    });
-                                                                }}
-                                                            />
+                                                            <div className={styles.inputs}>
+                                                                <input
+                                                                    type="text"
+                                                                    name='name'
+                                                                    value={editingCategory.name}
+                                                                    onChange={(e) => {
+                                                                        setEditingCategory({
+                                                                            ...editingCategory,
+                                                                            name: e.target.value
+                                                                        });
+                                                                    }}
+                                                                />
+                                                                <textarea
+                                                                    name='description'
+                                                                    value={editingCategory.description}
+                                                                    onChange={(e) => {
+                                                                        setEditingCategory({
+                                                                            ...editingCategory,
+                                                                            description: e.target.value
+                                                                        });
+                                                                    }}
+                                                                />
+                                                            </div>
                                                         ) : (
-                                                            <h3>{category.name}</h3>
+                                                            <div className={styles.content}>
+                                                                <h3>{category.name}</h3>
+                                                                <p>{category.description}</p>
+                                                            </div>
                                                         )}
                                                         {editCategory && editingCategory ===  null ? (
                                                             <button
@@ -759,15 +913,51 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                     <form
                                         onSubmit={newCategoryFunc}
                                     >
-                                        <input
-                                            type="text"
-                                            value={newCategory || ''}
-                                            onChange={(e) => {
-                                                setNewCategory(e.target.value);
-                                            }}
-                                            id='newCategoryInput'
-                                            autoFocus={true}
-                                        />
+                                        <div className={styles.img}>
+                                            <div
+                                                style={{
+                                                    backgroundImage: newCategory?.image && `url(${URL.createObjectURL(newCategory.image)})`,
+                                                    backgroundSize: '70%',
+                                                    backgroundRepeat: 'no-repeat',
+                                                    backgroundPosition: 'center',
+                                                }}
+                                            >
+                                                <input 
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={(e) => {
+                                                        setNewCategory({
+                                                            ...newCategory,
+                                                            image: e.target.files[0]
+                                                        });
+                                                    }}                                                                  
+                                                />
+                                                <i className="fa-regular fa-file-image"></i>
+                                            </div>
+                                        </div>
+                                        <div className={styles.inputs}>
+                                            <input
+                                                type="text"
+                                                value={newCategory?.name || ''}
+                                                onChange={(e) => {
+                                                    setNewCategory({
+                                                        ...newCategory,
+                                                        name: e.target.value
+                                                    });
+                                                }}
+                                                id='newCategoryInput'
+                                                autoFocus={true}
+                                            />
+                                            <textarea
+                                                value={newCategory?.description || ''}
+                                                onChange={(e) => {
+                                                    setNewCategory({
+                                                        ...newCategory,
+                                                        description: e.target.value
+                                                    });
+                                                }}
+                                            />
+                                        </div>
                                         <div className={styles.buttonsNewCat}>
                                             <button
                                                 style={{

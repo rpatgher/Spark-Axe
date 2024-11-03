@@ -1,5 +1,5 @@
 //This document creates and checks if there are categories with subcategories
-
+import fs from 'fs';
 import { Op } from 'sequelize';
 // ************* Models *************
 import { Category, Subcategory, Website } from '../models/index.js';
@@ -71,7 +71,6 @@ const createCategories = async (req, res) => {
                 subcategoriesCount: categoriesBody.find(categoryBody => categoryBody.category === category.name).subcategories.length
             }
         });
-        console.log(numSubcategories);
         if(categoriesElement){
             subcategories = categoriesBody.map(category => {
                 const categoryId = categoriesElement.find(createdCategory => createdCategory.name === category.category).id;
@@ -91,11 +90,9 @@ const createCategories = async (req, res) => {
         subcategories.map((subcategory, i) => {
             subcategory.index = numSubcategories.find(category => category.name === categoriesElement.find(category => category.id === subcategory.category_id).name).subcategoriesCount + i;
         });
-        console.log(subcategories);
         if(subcategories.length > 0){
             await Subcategory.bulkCreate(subcategories);
         }
-        // return res.json(categoriesBody.map(category => category.subcategories).flat());
         const subcategoriesElement = await Subcategory.findAll({
             where: {
                 category_id: {
@@ -130,9 +127,9 @@ const getCategories = async (req, res) => {
             include: {
                 model: Subcategory,
                 as: 'subcategories',
-                attributes: ['index', 'id', 'name']
+                attributes: ['index', 'id', 'name', 'description', 'image'],
             },
-            attributes: ['index', 'id', 'name'],
+            attributes: ['index', 'id', 'name', 'description', 'image'],
             order: [
                 ['index', 'ASC'],
                 ['subcategories', 'index', 'ASC']
@@ -148,11 +145,19 @@ const getCategories = async (req, res) => {
 
 const editSubcategory = async (req, res) => {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, description } = req.body;
     if(!id){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(400).json({msg: 'Category id is required'});
     }
     if(!name || name === ''){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(400).json({msg: 'Category name is required'});
     }
     const subcategory = await Subcategory.findByPk(id, {
@@ -166,18 +171,33 @@ const editSubcategory = async (req, res) => {
                 attributes: ['id', 'name', 'user_id']
             },
         },
-        attributes: ['id', 'name', 'category_id'],
+        attributes: ['id', 'name', 'category_id', 'image', 'description'],
     });
     if(subcategory.category.website.user_id.toString() !== req.user.id.toString()){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(401).json({msg: 'Unauthorized'});
     }
     if(!subcategory){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(404).json({msg: 'Subcategory not found'});
     }
     subcategory.name = name;
+    subcategory.description = description;
+    const oldImage = subcategory.image;
+    subcategory.image = req.file ? req.file.filename : subcategory.image;
+    if(req.file && oldImage){
+        // delete the previous image from the server
+        fs.unlinkSync(`./public/uploads/categories/${oldImage}`);
+    }
     try{
         await subcategory.save();
-        return res.json({msg: 'Subcategory updated successfully'});
+        return res.json({msg: 'Subcategory updated successfully', subcategory });
     }
     catch(error){
         console.error(error);
@@ -196,14 +216,14 @@ const deleteSubcategory = async (req, res) => {
         include: {
             model: Category,
             as: 'category',
-            attributes: ['id', 'name', 'website_id'],
+            attributes: ['id', 'name', 'website_id', 'image'],
             include: {
                 model: Website,
                 as: 'website',
                 attributes: ['id', 'name', 'user_id']
             },
         },
-        attributes: ['id', 'name', 'category_id'],
+        attributes: ['id', 'name', 'category_id', 'image'],
     });
     if(subcategory.category.website.user_id.toString() !== req.user.id.toString()){
         return res.status(401).json({msg: 'Unauthorized'});
@@ -212,6 +232,9 @@ const deleteSubcategory = async (req, res) => {
         return res.status(404).json({msg: 'Category not found'});
     }
     try{
+        if(subcategory.image){
+            fs.unlinkSync(`./public/uploads/categories/${subcategory.image}`);
+        }
         await subcategory.destroy();
         const subcategories = await Subcategory.findAll({
             where: {
@@ -236,11 +259,20 @@ const deleteSubcategory = async (req, res) => {
 
 const editCategory = async (req, res) => {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, description } = req.body;
     if(!id){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(400).json({msg: 'Category id is required'});
     }
     if(!name || name === ''){
+        // delete the image from the server
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(400).json({msg: 'Category name is required'});
     }
     const category = await Category.findByPk(id, {
@@ -249,18 +281,33 @@ const editCategory = async (req, res) => {
             as: 'website',
             attributes: ['id', 'name', 'user_id']
         },
-        attributes: ['id', 'name', 'website_id'],
+        attributes: ['id', 'name', 'website_id', 'image', 'description'],
     });
     if(category.website.user_id.toString() !== req.user.id.toString()){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(401).json({msg: 'Unauthorized'});
     }
     if(!category){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(404).json({msg: 'Category not found'});
     }
     category.name = name;
+    category.description = description;
+    const oldImage = category.image;
+    category.image = req.file ? req.file.filename : category.image;
+    if(req.file && oldImage){
+        // delete the previous image from the server
+        fs.unlinkSync(`./public/uploads/categories/${oldImage}`);
+    }
     try{
         await category.save();
-        return res.status(200).json({msg: 'Category updated successfully'});
+        return res.status(200).json({msg: 'Category updated successfully', category });
     }
     catch(error){
         console.error(error);
@@ -279,7 +326,7 @@ const deleteCategory = async (req, res) => {
             as: 'website',
             attributes: ['id', 'name', 'user_id']
         },
-        attributes: ['id', 'name', 'website_id'],
+        attributes: ['id', 'name', 'website_id', 'image'],
     });
     if(category.website.user_id.toString() !== req.user.id.toString()){
         return res.status(401).json({msg: 'Unauthorized'});
@@ -288,6 +335,9 @@ const deleteCategory = async (req, res) => {
         return res.status(404).json({msg: 'Category not found'});
     }
     try{
+        if(category.image){
+            fs.unlinkSync(`./public/uploads/categories/${category.image}`);
+        }
         await category.destroy();
         const categories = await Category.findAll({
             where: {
@@ -310,15 +360,27 @@ const deleteCategory = async (req, res) => {
 }
 
 const createOneCategory = async (req, res) => {
-    const { website_id, category } = req.body;
-    if(!website_id || !category || category === ''){
+    const { website_id, name, description } = req.body;
+    if(!website_id || !name || name === ''){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(400).json({msg: 'Website id and category name are required'});
     }
     const website = await Website.findByPk(website_id);
     if(!website){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(404).json({msg: 'Website not found'});
     }
     if(website.user_id.toString() !== req.user.id.toString()){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(401).json({msg: 'Unauthorized'});
     }
     const currentCategories = await Category.findAll({
@@ -328,9 +390,11 @@ const createOneCategory = async (req, res) => {
     });
     const numCurrentCategories = currentCategories.length;
     let categories = [];
-    if(!currentCategories.find(currentCategory => currentCategory.name === category)){
+    if(!currentCategories.find(currentCategory => currentCategory.name === name)){
         categories.push({
-            name: category,
+            name,
+            description,
+            image: req.file ? req.file.filename : '',
             website_id,
             index: numCurrentCategories + 1
         });
@@ -347,11 +411,15 @@ const createOneCategory = async (req, res) => {
         console.error(error);
         return res.status(500).json({msg: error.message});
     }
+    
 }
-
 const createOneSubcategory = async (req, res) => {
-    const { category_id, subcategory } = req.body;
-    if(!category_id || !subcategory || subcategory === ''){
+    const { category_id, name, description } = req.body;
+    if(!category_id || !name || name === ''){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(400).json({msg: 'Category id and subcategory name are required'});
     }
     const category = await Category.findByPk(category_id, {
@@ -363,9 +431,17 @@ const createOneSubcategory = async (req, res) => {
         attributes: ['id', 'name', 'website_id'],
     });
     if(!category){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(404).json({msg: 'Category not found'});
     }
     if(category.website.user_id.toString() !== req.user.id.toString()){
+        // delete the image from the server
+        if(req.file){
+            fs.unlinkSync(req.file.path);
+        }
         return res.status(401).json({msg: 'Unauthorized'});
     }
     const currentSubcategories = await Subcategory.findAll({
@@ -375,9 +451,11 @@ const createOneSubcategory = async (req, res) => {
     });
     const numCurrentSubcategories = currentSubcategories.length;
     let subcategories = [];
-    if(!currentSubcategories.find(currentSubcategory => currentSubcategory.name === subcategory)){
+    if(!currentSubcategories.find(currentSubcategory => currentSubcategory.name === name)){
         subcategories.push({
-            name: subcategory,
+            name,
+            description,
+            image: req.file ? req.file.filename : '',
             category_id,
             index: numCurrentSubcategories + 1
         });

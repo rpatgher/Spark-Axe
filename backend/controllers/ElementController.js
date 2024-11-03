@@ -294,8 +294,32 @@ const updateElement = async (req, res) => {
         const currentCategories = await Category.findAll({
             where: {
                 website_id: website.id
-            }
+            },
+            include: [
+                {
+                    model: Subcategory
+                }
+            ]
         });
+        const currentSubcategories = currentCategories.reduce((acc, current) => {
+            current.subcategories.forEach(subcategory => {
+                acc.push(subcategory);
+            });
+            return acc;
+        }, []);
+        const excludedSubcategories = currentSubcategories.filter(subcategory => {
+            return !categories.some(category => {
+                return category.subcategories.includes(subcategory.name);
+            });
+        });
+        await Promise.all(excludedSubcategories.map(async subcategory => {
+            await ElementCategory.destroy({
+                where: {
+                    elementId: elementFromDB.id,
+                    subcategoryId: subcategory.id
+                }
+            });
+        }));
         const numCurrentCategories = currentCategories.length;
         const createdCategories = await Promise.all(await categories.map(async (category, i) => {
             const [createdCategory, created] = await Category.findOrCreate({

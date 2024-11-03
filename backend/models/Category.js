@@ -15,7 +15,17 @@ const Category = db.define('category', {
     name: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: ''
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: ''
+    },
 });
 
 export default Category;
