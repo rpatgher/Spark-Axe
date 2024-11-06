@@ -1,147 +1,217 @@
 .navbar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #fff9f9d0;
-    position: fixed;   /* Make the navbar stick to the top */
-    top: 0;            /* Position it at the top of the viewport */
-    width: 100%;       /* Make it span the full width of the viewport */
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    z-index: 100;      /* Make sure it appears above other elements */
-  }
-  .nav{
-    margin-bottom: 80px;
-  }
-  
-  .navB {
-    float: left;
-  }
-  
-  .navB  a {
-    display: block;
-    color: var(--dark_gray);
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  .navB a:hover {
-    background-color: #cfcdcd;
-  }
-  
-  .active {
-    background-color: #04AA6D;
-  }
-  
-  .rightnavB{
-    float: right;
-  }
-  
-  .rightnavB a {
-    display: block;
-    color: var(--dark_gray);
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  .rightnavB a:hover {
-    background-color: #cfcdcd;
-  }
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #fff9f9d0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 100;
+  font-weight: normal;
+}
+.nav {
+  margin-bottom: 80px;
+}
+.navB {
+  float: left;
+}
+.navB a {
+  display: block;
+  color: var(--dark_gray);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.navB a:hover {
+  background-color: #cfcdcd;
+}
+.active a {
+  font-weight: bold; /* Make the active page's text bold */
+  color: #04AA6D;    /* Add color for better visual feedback */
+}
+.rightnavB {
+  float: right;
+}
+.rightnavB a {
+  display: block;
+  color: var(--dark_gray);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.rightnavB a:hover {
+  background-color: #cfcdcd;
+}
 
-  .footer{
-    background-color: #ffffffd0;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-   
-    
-  }
-  .footertop{
-    background-color: #ffffffd0;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    
-  }
-  .footerbottom{
-    background-color: #ffffffd0;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .footermenu{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #ffffffd0;
-    color: black;
- 
-  }
-  .footermenu h3{
-    color: black;
-    font-size: 2.5rem;
-    margin-bottom: 5px;
-  }
-
-.link{
+.footer {
+  background-color: #ffffffd0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.footertop {
+  background-color: #ffffffd0;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+.footerbottom {
+  background-color: #ffffffd0;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footermenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffffd0;
+  color: black;
+}
+.footermenu h3 {
+  color: black;
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+}
+.link {
   color: black;
   text-decoration: none;
   font-size: 1.8rem;
   transition: ease-out 0.3s;
   margin-top: 5px;
 }
-.link:hover{
+.link:hover {
   color: #7e8082;
 }
-
-  .footerimg{
-    background-color: #ffffffd0;
-    display: flex;
-    width: 200px;
-    height: 200px;
-    border-radius: 20px; 
-    box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
-    transition: ease-out 0.3s;
-    
-    }
-
-.footerimg:hover{
+.footerimg {
+  background-color: #ffffffd0;
+  display: flex;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+  transition: ease-out 0.3s;
+}
+.footerimg:hover {
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.321);
 }
-.footerimgdiv{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffffd0;
-    padding: 10px;
- 
+.footerimgdiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffffd0;
+  padding: 10px;
 }
-
 .learnMore {
   font-size: 1.8rem;
-  color: #124f8c; 
+  color: #124f8c;
   text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Mejora en transición */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añadido sombra al botón */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 6px 10px;
   background-color: #000000;
   color: white;
   border: none;
-  border-radius: 10px; /* Botón más redondeado */
+  border-radius: 10px;
   cursor: pointer;
   width: 30%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
-
 .learnMore:hover {
   background-color: #8a96a2;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .footertop {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 15px;
+  }
+  .footerimg {
+      width: 150px;
+      height: 150px;
+  }
+  .footermenu h3 {
+      font-size: 2rem;
+  }
+  .link, .learnMore {
+      font-size: 1.5rem;
+  }
+  .learnMore {
+      width: 60%;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar {
+      flex-direction: column;
+  }
+  .navB, .rightnavB {
+      float: none;
+      text-align: center;
+  }
+  .footertop {
+      grid-template-columns: 1fr;
+  }
+  .footerimg {
+      width: 120px;
+      height: 120px;
+  }
+  .footermenu h3 {
+      font-size: 1.8rem;
+  }
+  .link, .learnMore {
+      font-size: 1.2rem;
+  }
+  .learnMore {
+      width: 80%;
+  }
+}
+
+/* Mobile burger menu */
+.burgerMenu {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Show burger menu button and hide regular nav on small screens */
+@media (max-width: 768px) {
+  .burgerMenu {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
+  .navbar {
+    display: none; /* Hide the navbar by default */
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .showMenu {
+    display: flex; /* Show navbar when menuOpen is true */
+  }
+
+  .navB,
+  .rightnavB {
+    float: none;
+    text-align: center;
+    padding: 10px 0;
+  }
 }
