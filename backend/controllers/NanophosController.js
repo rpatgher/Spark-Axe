@@ -9,6 +9,8 @@ import {
     Advertisement,
     PoS,
     Section,
+    Config,
+    ElementProperty,
 } from "../models/index.js";
 
 const getInfo = async (req, res) => {
@@ -47,6 +49,20 @@ const getInfo = async (req, res) => {
         ],
         attributes: { exclude: ["website_id", "createdAt", "updatedAt"] },
         order: [["index", "ASC"]],
+    });
+    const config = await Config.findOne({
+        where: {
+            website_id: website.id,
+        },
+        include: [
+            {
+                model: ElementProperty,
+                attributes: {
+                    exclude: ["config_id", "createdAt", "updatedAt"],
+                },
+            },
+        ],
+        attributes: { exclude: ["website_id", "createdAt", "updatedAt"] },
     });
     const categories = await Category.findAll({
         where: {
@@ -108,12 +124,19 @@ const getInfo = async (req, res) => {
             },
         ],
     });
-    res.json({
+    const formatedConfig = new Object();
+    config.element_properties.forEach(property => {
+        formatedConfig[property.name] = {
+            unit: property.element_config_property.unit
+        }
+    });
+    return res.json({
         elements,
         categories,
         advertisements,
+        topProducts,
         pos,
-        topProducts
+        configElement: formatedConfig,
     });
 };
 

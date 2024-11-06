@@ -366,7 +366,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             <label htmlFor="main">Indica si el producto es principal</label>
                         </div>
                     )}
-                    {((configElement.instructions && product.instructions) || !initalProduct) && (
+                    {((configElement.instructions && product.instructions) || (configElement.instructions && !initalProduct)) && (
                         <RichText 
                             label="Instrucciones"
                             value={product.instructions}
@@ -375,7 +375,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             limit={3000}
                         />
                     )}
-                    {((configElement.ingredients && product.ingredients) || !initalProduct) && (
+                    {((configElement.ingredients && product.ingredients) || (configElement.ingredients && !initalProduct)) && (
                         <RichText 
                             label="Ingredientes"
                             value={product.ingredients}
