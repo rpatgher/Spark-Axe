@@ -32,6 +32,10 @@ const Element = db.define('element', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    ingredients: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     weight: {
         type: DataTypes.FLOAT,
         allowNull: false

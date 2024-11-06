@@ -27,6 +27,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         stock: initalProduct?.stock || '',
         color: initalProduct?.color || '',
         instructions: initalProduct?.instructions || '',
+        ingredients: initalProduct?.ingredients || '',
         weight: initalProduct?.weight || '',
         performance: initalProduct?.performance || '',
         content: initalProduct?.content || '',
@@ -72,6 +73,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             stock: initalProduct?.stock || '',
             color: initalProduct?.color || '',
             instructions: initalProduct?.instructions || '',
+            ingredients: initalProduct?.ingredients || '',
             weight: initalProduct?.weight || '',
             performance: initalProduct?.performance || '',
             content: initalProduct?.content || '',
@@ -159,6 +161,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         data.append('stock', product.stock);
         data.append('color', product.color);
         data.append('instructions', product.instructions);
+        data.append('ingredients', product.ingredients);
         data.append('weight', product.weight);
         data.append('performance', product.performance);
         data.append('content', product.content);
@@ -363,12 +366,21 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             <label htmlFor="main">Indica si el producto es principal</label>
                         </div>
                     )}
-                    {configElement.instructions && product.instructions && (
+                    {((configElement.instructions && product.instructions) || !initalProduct) && (
                         <RichText 
                             label="Instrucciones"
                             value={product.instructions}
                             setValue={(element) => setProduct({ ...product, instructions: element })}
                             placeholder={`Instrucciones de uso del producto`}
+                            limit={3000}
+                        />
+                    )}
+                    {((configElement.ingredients && product.ingredients) || !initalProduct) && (
+                        <RichText 
+                            label="Ingredientes"
+                            value={product.ingredients}
+                            setValue={(element) => setProduct({ ...product, ingredients: element })}
+                            placeholder={`Ingredientes del producto`}
                             limit={3000}
                         />
                     )}
