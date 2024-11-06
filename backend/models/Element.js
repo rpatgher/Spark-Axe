@@ -32,6 +32,18 @@ const Element = db.define('element', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    weight: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    performance: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    content: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
     fact_sheet: {
         type: DataTypes.STRING,
         allowNull: false

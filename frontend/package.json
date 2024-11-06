@@ -12,6 +12,7 @@
   "dependencies": {
     "@dnd-kit/modifiers": "^7.0.0",
     "@dnd-kit/sortable": "^8.0.0",
+    "@emotion/css": "^11.13.4",
     "axios": "^1.7.7",
     "esri-leaflet": "^3.0.12",
     "esri-leaflet-geocoder": "^3.1.4",

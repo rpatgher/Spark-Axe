@@ -89,8 +89,8 @@ const Inventory = () => {
                 const { data } = await clientAxios(`/api/elements/${auth.websites[0].id}`, config);
                 const { data: inventoryData } = await clientAxios(`/api/inventories/${auth.websites[0].id}`, config);
                 setInventory(inventoryData);
-                setData(data);
-                setFilteredProducts(data);
+                setData(data.elements);
+                setFilteredProducts(data.elements);
             } catch (error) {
                 console.log(error);
                 handleAlert("Error al obtener los elementos", true);

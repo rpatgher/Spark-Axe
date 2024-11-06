@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 
 // ************* Models *************
-import {  Website, ConfigElement, Element } from '../models/index.js';
+import {  Website, Config, ElementProperty } from '../models/index.js';
 
 
 const getElementConfig = async (req, res) => {
@@ -17,12 +17,23 @@ const getElementConfig = async (req, res) => {
         if(website.user_id !== req.user.id){
             return res.status(401).json({ msg: 'Unauthorized' });
         }
-        const config = await ConfigElement.findOne({
+        const config = await Config.findOne({
             where: {
                 website_id: req.params.website_id
+            },
+            include: {
+                model: ElementProperty,
+                attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },
+            },
+            attributes: { exclude: ['website_id', 'createdAt', 'updatedAt', 'id'] }
+        });
+        const formatedConfig = new Object();
+        config.element_properties.forEach(property => {
+            formatedConfig[property.name] = {
+                unit: property.element_config_property.unit
             }
         });
-        return res.status(200).json({ config });
+        return res.status(200).json({ config: formatedConfig });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ msg: 'Internal server error' });

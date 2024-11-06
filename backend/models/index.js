@@ -16,6 +16,9 @@ import Contact from "./Contact.js";
 import PoS from "./PoS.js";
 
 import ConfigElement from "./ConfigElement.js";
+import Config from "./Config.js";
+import ElementProperty from "./ElementProperty.js";
+import ElementConfigProperty from "./ElementConfigProperty.js";
 
 
 User.hasMany(Website, { foreignKey: 'user_id', onDelete: 'RESTRICT' });
@@ -65,9 +68,19 @@ Website.hasMany(Contact, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 PoS.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 Website.hasMany(PoS, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 
-// Configuration for the website
-ConfigElement.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
-Website.hasOne(ConfigElement, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+
+
+
+// ****************+ Configuration for the website +****************
+Config.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+Website.hasMany(Config, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+
+ElementProperty.belongsToMany(Config, { through: ElementConfigProperty, onDelete: 'RESTRICT' });
+Config.belongsToMany(ElementProperty, { through: ElementConfigProperty, onDelete: 'RESTRICT' });
+
+
+
+
 
 
 //deliveries has one website
@@ -95,5 +108,8 @@ export {
     Advertisement,
     Contact,
     PoS,
-    ConfigElement
+    ConfigElement,
+    Config,
+    ElementConfigProperty,
+    ElementProperty
 };

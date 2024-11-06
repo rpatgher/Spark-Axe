@@ -27,6 +27,9 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         stock: initalProduct?.stock || '',
         color: initalProduct?.color || '',
         instructions: initalProduct?.instructions || '',
+        weight: initalProduct?.weight || '',
+        performance: initalProduct?.performance || '',
+        content: initalProduct?.content || '',
         fact_sheet: initalProduct?.fact_sheet || '',
         safety_sheet: initalProduct?.safety_sheet || '',
         image: '',
@@ -69,6 +72,9 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             stock: initalProduct?.stock || '',
             color: initalProduct?.color || '',
             instructions: initalProduct?.instructions || '',
+            weight: initalProduct?.weight || '',
+            performance: initalProduct?.performance || '',
+            content: initalProduct?.content || '',
             fact_sheet: initalProduct?.fact_sheet || '',
             safety_sheet: initalProduct?.safety_sheet || '',
             image: '',
@@ -153,6 +159,9 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         data.append('stock', product.stock);
         data.append('color', product.color);
         data.append('instructions', product.instructions);
+        data.append('weight', product.weight);
+        data.append('performance', product.performance);
+        data.append('content', product.content);
         data.append('fact_sheet', product.fact_sheet);
         data.append('safety_sheet', product.safety_sheet);
         data.append('image', product.image);
@@ -248,6 +257,45 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             value={product.stock}
                         />
                     </div>
+                    {configElement.weight && (
+                        <div className={styles.field}>
+                            <label htmlFor="weight">Peso (en {configElement.weight.unit})</label>
+                            <input
+                                type="number"
+                                id="weight"
+                                name="weight"
+                                placeholder={`Peso del producto`}
+                                onChange={handleChange}
+                                value={product.weight}
+                            />
+                        </div>
+                    )}
+                    {configElement.performance && (
+                        <div className={styles.field}>
+                            <label htmlFor="performance">Rendimiento (en {configElement.performance.unit})</label>
+                            <input
+                                type="number"
+                                id="performance"
+                                name="performance"
+                                placeholder={`Rendimiento del producto`}
+                                onChange={handleChange}
+                                value={product.performance}
+                            />
+                        </div>
+                    )}
+                    {configElement.content && (
+                        <div className={styles.field}>
+                            <label htmlFor="content">Contenido (en {configElement.content.unit})</label>
+                            <input
+                                type="number"
+                                id="content"
+                                name="content"
+                                placeholder={`Rendimiento del producto`}
+                                onChange={handleChange}
+                                value={product.content}
+                            />
+                        </div>
+                    )}
                     {configElement.color && (
                         <div className={styles.field}>
                             <label htmlFor="color">Color</label>
@@ -315,7 +363,7 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             <label htmlFor="main">Indica si el producto es principal</label>
                         </div>
                     )}
-                    {configElement.instructions && (
+                    {configElement.instructions && product.instructions && (
                         <RichText 
                             label="Instrucciones"
                             value={product.instructions}
