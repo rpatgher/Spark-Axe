@@ -1,8 +1,8 @@
 // ************* Models *************
-import { Section, Website } from '../models/index.js';
+import { PoSCategory, Website } from '../models/index.js';
 
 
-const getSections = async (req, res) => {
+const getCategories = async (req, res) => {
     const { website_id } = req.params;
     if(website_id === ''){
         return res.status(400).json({ message: 'Website ID is required' });
@@ -14,7 +14,7 @@ const getSections = async (req, res) => {
     if(website.user_id.toString() !== req.user.id.toString()){
         return res.status(401).json({ message: 'Unauthorized' });
     }
-    const sections = await Section.findAll({
+    const sections = await PoSCategory.findAll({
         where: { website_id },
         attributes: ['id', 'name'],
     });
@@ -23,5 +23,5 @@ const getSections = async (req, res) => {
 
 
 export {
-    getSections
+    getCategories
 }

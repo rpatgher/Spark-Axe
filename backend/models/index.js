@@ -14,11 +14,14 @@ import Section from "./Section.js";
 import Advertisement from "./Advertisement.js";
 import Contact from "./Contact.js";
 import PoS from "./PoS.js";
+import PoSCategory from "./PoSCategory.js";
 
 
 import Config from "./Config.js";
 import ElementProperty from "./ElementProperty.js";
 import ElementConfigProperty from "./ElementConfigProperty.js";
+import PoSProperty from "./PoSProperty.js";
+import PoSConfigProperty from "./PoSConfigProperty.js";
 
 
 User.hasMany(Website, { foreignKey: 'user_id', onDelete: 'RESTRICT' });
@@ -68,6 +71,10 @@ Website.hasMany(Contact, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 PoS.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 Website.hasMany(PoS, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 
+Website.hasMany(PoSCategory, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+PoSCategory.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
+PoSCategory.hasMany(PoS, { foreignKey: 'pos_category_id', onDelete: 'RESTRICT' });
+PoS.belongsTo(PoSCategory, { foreignKey: 'pos_category_id', onDelete: 'RESTRICT' });
 
 
 
@@ -77,6 +84,9 @@ Website.hasMany(Config, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 
 ElementProperty.belongsToMany(Config, { through: ElementConfigProperty, onDelete: 'RESTRICT' });
 Config.belongsToMany(ElementProperty, { through: ElementConfigProperty, onDelete: 'RESTRICT' });
+
+PoSProperty.belongsToMany(Config, { through: PoSConfigProperty, onDelete: 'RESTRICT' });
+Config.belongsToMany(PoSProperty, { through: PoSConfigProperty, onDelete: 'RESTRICT' });
 
 
 
@@ -108,7 +118,10 @@ export {
     Advertisement,
     Contact,
     PoS,
+    PoSCategory,
     Config,
     ElementConfigProperty,
-    ElementProperty
+    ElementProperty,
+    PoSProperty,
+    PoSConfigProperty
 };

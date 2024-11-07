@@ -23,7 +23,7 @@ const FormPointOfSale = ({ initialPoS, setModalDelete }) => {
     const navigate = useNavigate();
     const mapRef = useRef();
     const markerRef = useRef(null);
-
+    const [categories, setCategories] = useState([]);
     const [initialCenter, setInitialCenter] = useState([19.4269841, -99.1692928]);
 
     const [markerPosition, setMarkerPosition] = useState({
@@ -41,10 +41,50 @@ const FormPointOfSale = ({ initialPoS, setModalDelete }) => {
         longitude: '',
         image: '',
         email: '',
-        phone: ''
+        phone: '',
+        category_id: ''
     });
+    const [configPoS, setConfigPoS] = useState({});
 
     const [savingPoS, setSavingPoS] = useState(false);
+
+    useEffect(() => {
+        const getPoSConfig = async () => {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            try {
+                const { data } = await clientAxios(`/api/config/pos/${auth.websites[0].id}`, config);
+                setConfigPoS(data.config);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        return () => getPoSConfig();
+    }, []);
+
+    useEffect(() => {
+        const getCategories = async () => {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            try {
+                const response = await clientAxios.get(`/api/pos-categories/${auth.websites[0].id}`, config);
+                setCategories(response.data);
+            } catch (error) {
+                console.log(error);
+                handleAlert('Error al obtener las categorias', true);
+            }
+        }
+        return () => getCategories();
+    }, []);
 
     useEffect(() => {
         setPoS({
@@ -58,7 +98,8 @@ const FormPointOfSale = ({ initialPoS, setModalDelete }) => {
             longitude: initialPoS?.longitude || '',
             image: '',
             email: initialPoS?.email || '',
-            phone: initialPoS?.phone || ''
+            phone: initialPoS?.phone || '',
+            category_id: initialPoS?.pos_category_id || ''
         });
         if (initialPoS?.latitude && initialPoS?.longitude) {
             setMarkerPosition({
@@ -152,6 +193,7 @@ const FormPointOfSale = ({ initialPoS, setModalDelete }) => {
                             name: document.getElementById('name').value,
                             email: document.getElementById('email').value,
                             phone: document.getElementById('phone').value,
+                            category_id: document.getElementById('category_id').value,
                             image: document.getElementById('image').files[0],
                             address: result.address.Match_addr,
                             city: result.address.Region,
@@ -202,6 +244,7 @@ const FormPointOfSale = ({ initialPoS, setModalDelete }) => {
         formData.append('name', pos.name);
         formData.append('email', pos.email);
         formData.append('phone', pos.phone);
+        formData.append('category_id', pos.category_id);
         formData.append('address', pos.address);
         formData.append('city', pos.city);
         formData.append('country', pos.country);
@@ -273,6 +316,22 @@ const FormPointOfSale = ({ initialPoS, setModalDelete }) => {
                         onChange={handleChange}
                     />
                 </div>
+                {configPoS.category && (
+                    <div className={styles.field}>
+                        <label htmlFor="category_id" className={styles.required}>Categoría</label>
+                        <select
+                            id="category_id"
+                            name="category_id"
+                            value={pos.category_id}
+                            onChange={handleChange}
+                        >
+                            <option value="" disabled> ---Selecciona una categoría--- </option>
+                            {categories.map(category => (
+                                <option key={category.id} value={category.id}>{category.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                )}
                 <div className={`${styles.field}`}>
                     <label htmlFor="searcher" className={styles.required}>Dirección</label>
                     <input

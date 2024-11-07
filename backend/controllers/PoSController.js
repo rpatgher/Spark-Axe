@@ -5,7 +5,7 @@ import fs from 'fs';
 import { PoS, Website } from '../models/index.js';
 
 const createPoS = async (req, res) => {
-    const { name, address, city, country, postalCode, countryCode, latitude, longitude, image, email, phone, website_id } = req.body;
+    const { name, address, city, country, postalCode, countryCode, latitude, longitude, image, email, phone, website_id, category_id } = req.body;
     if([name, address, city, country, postalCode, countryCode, latitude, longitude, image, email, phone].includes('')){
         return res.status(400).json({ msg: 'All fields are required' });
     }
@@ -32,6 +32,7 @@ const createPoS = async (req, res) => {
         image: req.file.filename,
         email,
         phone,
+        pos_category_id: category_id,
         website_id
     });
     try {
@@ -66,7 +67,7 @@ const getPoS = async (req, res) => {
 const getPoSById = async (req, res) => {
     const { id } = req.params;
     const pos = await PoS.findByPk(id, {
-        attributes: ['id', 'name', 'address', 'city', 'country', 'postalCode', 'countryCode', 'latitude', 'longitude', 'image', 'email', 'phone', 'website_id'],
+        attributes: ['id', 'name', 'address', 'city', 'country', 'postalCode', 'countryCode', 'latitude', 'longitude', 'image', 'email', 'phone', 'pos_category_id', 'website_id'],
         include: {
             model: Website,
             as: 'website',
@@ -84,7 +85,7 @@ const getPoSById = async (req, res) => {
 
 const updatePoS = async (req, res) => {
     const { id } = req.params;
-    const { name, address, city, country, postalCode, countryCode, latitude, longitude, image, email, phone, website_id } = req.body;
+    const { name, address, city, country, postalCode, countryCode, latitude, longitude, image, email, category_id, phone, website_id } = req.body;
     if([name, address, city, country, postalCode, countryCode, latitude, longitude, email, phone].includes('')){
         return res.status(400).json({ msg: 'All fields are required' });
     }
@@ -111,7 +112,7 @@ const updatePoS = async (req, res) => {
     if(req.file){
         fs.unlinkSync(`./public/uploads/pos/${posFromDB.image}`);
     }
-    const pos = req.body;
+    const pos = {...req.body, pos_category_id: category_id};
     if(req.file){
         pos.image = req.file.filename;
     } else {
