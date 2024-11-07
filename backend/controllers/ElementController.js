@@ -3,7 +3,7 @@ import fs from 'fs';
 import { Op } from 'sequelize';
 
 // ************* Models *************
-import { Element, ConfigElement, Website, ElementCategory, Category, Subcategory, Order, OrderElement } from '../models/index.js';
+import { Element, Config, Website, ElementCategory, Category, Subcategory, Order, OrderElement, ElementProperty } from '../models/index.js';
 
 const getElement = async (req, res) => {
     const elementFromDB = await Element.findOne({
@@ -84,9 +84,24 @@ const getElements = async (req, res) => {
         const error = new Error('Unauthorized');
         return res.status(401).json({ msg: error.message });
     }
-    const config = await ConfigElement.findOne({
+    const config = await Config.findOne({
         where: {
-            website_id: website.id
+            website_id: website.id,
+        },
+        include: [
+            {
+                model: ElementProperty,
+                attributes: {
+                    exclude: ["config_id", "createdAt", "updatedAt"],
+                },
+            },
+        ],
+        attributes: { exclude: ["website_id", "createdAt", "updatedAt"] },
+    });
+    const formatedConfig = new Object();
+    config.element_properties.forEach(property => {
+        formatedConfig[property.name] = {
+            unit: property.element_config_property.unit
         }
     });
     let elements = await Element.findAll({
@@ -147,7 +162,7 @@ const getElements = async (req, res) => {
         newElement.categories = categories;
         return newElement;
     });
-    return res.status(200).json({ elements, config });
+    return res.status(200).json({ elements, config: formatedConfig });
 }
 
 const createElement = async (req, res) => {

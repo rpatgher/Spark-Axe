@@ -8,7 +8,7 @@ import {
     OrderElement,
     PoS,
     Customer,
-    ConfigElement
+    Config
 } from "../models/index.js";
 
 const getWebsite = async (req, res) => {
@@ -27,14 +27,14 @@ const getWebsite = async (req, res) => {
 const createWebsite = async (req, res) => {
     const website = Website.build(req.body);
     const inventory = Inventory.build();
-    const configElement = ConfigElement.build();
+    const config = Config.build();
     website.user_id = req.user.id;
     try {
         const websiteSaved = await website.save();
         inventory.website_id = websiteSaved.id;
-        configElement.website_id = websiteSaved.id;
+        config.website_id = websiteSaved.id;
         await inventory.save();
-        await configElement.save();
+        await config.save();
         res.json({ msg: 'Website created successfully' });
     } catch (error) {
         console.log(error);

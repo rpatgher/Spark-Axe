@@ -15,7 +15,7 @@ import Advertisement from "./Advertisement.js";
 import Contact from "./Contact.js";
 import PoS from "./PoS.js";
 
-import ConfigElement from "./ConfigElement.js";
+
 import Config from "./Config.js";
 import ElementProperty from "./ElementProperty.js";
 import ElementConfigProperty from "./ElementConfigProperty.js";
@@ -108,7 +108,6 @@ export {
     Advertisement,
     Contact,
     PoS,
-    ConfigElement,
     Config,
     ElementConfigProperty,
     ElementProperty
