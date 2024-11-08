@@ -1,9 +1,49 @@
+/* ******************** Styles for About.module.css ******************** */
 
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.head {
+  width: 70%;
+  margin: 0 auto;
+  font-size: 7.4rem;
+  color: rgb(103, 103, 101);
+}
+
+.head span {
+  color: #000000;
+}
+
+.imgdiv {
+  display: flex;
+  justify-content: center;
+  height: 450px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.aboutimg {
+  width: 50%;
+  border-radius: 20px;
+  height: auto;
+}
 
 .about {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 20px;
+}
+
+.content {
+  width: 60%;
+  margin-top: 40px;
+  font-size: 2rem;
+  text-align: justify;
+  line-height: 1.6;
+  padding-bottom: 100px;
 }
 
 .imagecontainer {
@@ -11,127 +51,145 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 20px;
   width: 80%;
-  margin: 20px auto; /* Centra y da espacio alrededor del contenedor de imágenes */
+  margin: 20px auto;
 }
 
-.imagecontainer img {
-  max-width: 100%; 
-  max-height: 100%; 
-  object-fit: contain; 
-}
-
-.content {
-  margin-top: 40px;
-  width: 60%;
-  font-size: 2rem;
-  text-align: justify;
-  padding-bottom: 100px;
-  line-height: 1.6; /* Mejora la legibilidad del texto */
-}
-
-@media (max-width: 800px) {
-  .head {
-      font-size: 5rem; /* Ajuste del tamaño de fuente para pantallas más pequeñas */
-  }
-  .content {
-      width: 90%; /* Ancho ajustado para móviles */
-      font-size: 2rem; /* Ajuste de la fuente para mejor legibilidad en pantallas pequeñas */
-  }
-  .imagecontainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 20px;
-    width: 80%;
-    margin: 20px auto; /* Centra el contenedor de imágenes horizontalmente */
-    justify-items: center; /* Centra los elementos dentro de la cuadrícula */
-}
-
-.imagecontainer img {
-    max-width: 100%; 
-    max-height: 100%; 
-    object-fit: contain; 
-    display: block; /* Asegura que las imágenes se comporten como elementos de bloque */
-}
-}
-
-.contactbuttons{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 20px;
-  cursor: pointer;
-  background-color: transparent;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: 0.5s;
-  color: black;
+.contactSec {
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.432);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.432);
+  margin-bottom: 100px;
   text-align: center;
-  width: 100%;
-
-}
-
-.contactbuttons:hover{
-  box-shadow: 0 6px 34px rgba(0, 0, 0, 0.322);
-  transition: 0.5s;
-}
-
-.axworker{
-  height: 100%;
-  width: 100%;
 }
 
 .contactGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px; 
+  grid-gap: 20px;
   justify-items: center;
   align-items: center;
-  margin: 0 auto; 
-  padding: 20px; 
-  background: transparent;
+  margin-top: 20px;
 }
-.contactSec{
+
+.contactbuttons {
   display: flex;
   flex-direction: column;
-  justify-items: center;
   align-items: center;
-  width: 70%; 
-  margin: 0 auto; 
-  padding: 20px; 
-  background: rgba(255, 255, 255, 0.432);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.432);
-  margin-bottom: 100px;
-}
-
-.aboutimg{
-  border-radius: 20px;
-  width: 50%;
-  height: 100%;
-}
-.imgdiv{
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  height: 450px;
-  overflow: hidden;
-}
-
-.header{
-  font-size: 2rem;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  width: 100%;
   text-align: center;
 }
 
-.head {
-  width: 70%;
-  margin: 0 auto; 
-  font-size: 7.4rem;
-  text-align: center;
-  color:rgb(103, 103, 101);
-  margin-bottom: 40px;
+.contactbuttons:hover {
+  box-shadow: 0 6px 34px rgba(0, 0, 0, 0.322);
 }
 
-.head span {
+.axworker {
+  width: 100%;
+  height: auto;
+}
+
+.headingother {
+  font-size: 1.5rem;
   color: #000000;
+  margin-top: 10px;
+}
+
+/* Media Queries */
+
+/* Phone: 480px */
+@media (max-width: 480px) {
+  .head {
+    font-size: 3.5rem;
+    width: 90%;
+  }
+
+  .aboutimg {
+    width: 100%;
+  }
+
+  .content {
+    width: 90%;
+    font-size: 1.2rem;
+    padding-bottom: 50px;
+  }
+
+  .imagecontainer {
+    width: 90%;
+  }
+
+  .contactGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet: 768px */
+@media (max-width: 768px) {
+  .head {
+    font-size: 5rem;
+    width: 85%;
+  }
+
+  .aboutimg {
+    width: 80%;
+  }
+
+  .content {
+    width: 85%;
+    font-size: 1.5rem;
+  }
+
+  .contactGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 1024px */
+@media (max-width: 1024px) {
+  .head {
+    font-size: 6rem;
+    width: 80%;
+  }
+
+  .aboutimg {
+    width: 70%;
+  }
+
+  .content {
+    width: 70%;
+    font-size: 1.75rem;
+  }
+
+  .contactGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* XL Desktop: 1450px */
+@media (min-width: 1450px) {
+  .head {
+    font-size: 7.4rem;
+    width: 70%;
+  }
+
+  .aboutimg {
+    width: 50%;
+  }
+
+  .content {
+    width: 60%;
+    font-size: 2rem;
+  }
+
+  .contactGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
