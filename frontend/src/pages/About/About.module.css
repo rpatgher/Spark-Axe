@@ -103,60 +103,43 @@
   margin-top: 10px;
 }
 
-/* Media Queries */
+/* ******************** Media Queries ******************** */
 
-/* Phone: 480px */
-@media (max-width: 480px) {
+/* Pantallas pequeñas (dispositivos móviles) */
+@media (max-width: 767px) {
   .head {
+    width: 90%;
     font-size: 3.5rem;
-    width: 90%;
-  }
-
-  .aboutimg {
-    width: 100%;
-  }
-
-  .content {
-    width: 90%;
-    font-size: 1.2rem;
-    padding-bottom: 50px;
-  }
-
-  .imagecontainer {
-    width: 90%;
-  }
-
-  .contactGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Tablet: 768px */
-@media (max-width: 768px) {
-  .head {
-    font-size: 5rem;
-    width: 85%;
   }
 
   .aboutimg {
     width: 80%;
+    height: auto;
   }
 
   .content {
-    width: 85%;
-    font-size: 1.5rem;
+    width: 90%;
+    font-size: 1.6rem;
+  }
+
+  .contactSec {
+    width: 90%;
   }
 
   .contactGrid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .contactbuttons {
+    width: 100%;
+  }
 }
 
-/* Desktop: 1024px */
-@media (max-width: 1024px) {
+/* Pantallas medianas (tabletas) */
+@media (min-width: 768px) and (max-width: 1024px) {
   .head {
-    font-size: 6rem;
     width: 80%;
+    font-size: 5.5rem;
   }
 
   .aboutimg {
@@ -164,24 +147,32 @@
   }
 
   .content {
-    width: 70%;
-    font-size: 1.75rem;
+    width: 80%;
+    font-size: 1.8rem;
+  }
+
+  .contactSec {
+    width: 80%;
   }
 
   .contactGrid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .contactbuttons {
+    width: 90%;
+  }
 }
 
-/* XL Desktop: 1450px */
-@media (min-width: 1450px) {
+/* Pantallas grandes (escritorios) */
+@media (min-width: 1025px) {
   .head {
-    font-size: 7.4rem;
     width: 70%;
+    font-size: 7rem;
   }
 
   .aboutimg {
-    width: 50%;
+    width: 60%;
   }
 
   .content {
@@ -189,7 +180,15 @@
     font-size: 2rem;
   }
 
+  .contactSec {
+    width: 70%;
+  }
+
   .contactGrid {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .contactbuttons {
+    width: 100%;
   }
 }
