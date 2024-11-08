@@ -294,3 +294,131 @@ flex: 2;
 .HeadContactimg {
   width: 80%;
 }
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  .head {
+      font-size: 4rem;
+      margin-left: 5%;
+      width: 90%;
+  }
+  .heading {
+      font-size: 3.5rem;
+      margin: 2rem 0;
+  }
+  .headingback {
+      font-size: 3rem;
+      margin: 2rem 0;
+  }
+  .axworker {
+      width: 100px;
+      height: 100px;
+  }
+  .field input,
+  .field textarea {
+      font-size: 1.2rem;
+  }
+  .Buttonguardar {
+      font-size: 1rem;
+      padding: 8px;
+  }
+  .HeadContactimg {
+      width: 100%;
+  }
+  .enviocontent, .enviocontent0, .enviocontent2 {
+      width: 90%;
+      margin-left: 5%;
+      flex-direction: column;
+      gap: 20px;
+  }
+  .contactbuttons {
+      padding: 5px;
+  }
+  .tabcontent1 {
+      width: 100%;
+      padding: 10px;
+  }
+}
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+  .head {
+      font-size: 5rem;
+      width: 90%;
+      margin-left: 5%;
+  }
+  .heading {
+      font-size: 4.5rem;
+      margin: 3rem 0;
+  }
+  .axworker {
+      width: 150px;
+      height: 150px;
+  }
+  .field input,
+  .field textarea {
+      font-size: 1.3rem;
+      padding: 0.8rem;
+  }
+  .Buttonguardar {
+      font-size: 1.2rem;
+      padding: 10px;
+  }
+  .HeadContactimg {
+      width: 90%;
+  }
+  .enviocontent, .enviocontent0, .enviocontent2 {
+      width: 80%;
+      margin-left: 10%;
+  }
+  .contactbuttons {
+      gap: 15px;
+  }
+  .tabcontent1 {
+      width: 85%;
+      margin-top: 15px;
+  }
+}
+
+/* Small Desktop (1024px and below) */
+@media (max-width: 1024px) {
+  .head {
+      font-size: 6rem;
+      width: 85%;
+      margin-left: 7.5%;
+  }
+  .heading {
+      font-size: 5rem;
+      margin: 3.5rem 0;
+  }
+  .headingback {
+      font-size: 4.5rem;
+  }
+  .axworker {
+      width: 180px;
+      height: 180px;
+  }
+  .field input,
+  .field textarea {
+      font-size: 1.4rem;
+      padding: 1rem;
+  }
+  .Buttonguardar {
+      font-size: 1.3rem;
+      padding: 12px;
+  }
+  .HeadContactimg {
+      width: 85%;
+  }
+  .enviocontent, .enviocontent0, .enviocontent2 {
+      width: 75%;
+      margin-left: 12.5%;
+  }
+  .contactbuttons {
+      padding: 10px;
+  }
+  .tabcontent1 {
+      width: 80%;
+      margin-top: 18px;
+  }
+}
