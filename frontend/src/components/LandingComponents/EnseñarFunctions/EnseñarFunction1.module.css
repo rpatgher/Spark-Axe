@@ -1,77 +1,173 @@
 /* Estilos generales */
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    margin: 0 auto; 
-    background: rgba(255, 255, 255, 0.432);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.432);
-    box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
-    width: 80%;
-    margin-bottom: 20px;
-  }
-  
-  .textSection {
-    flex: 1;
-    text-align: center;
-    color: #1d1d1f;
-  }
-  
-  .textSection h2 {
-    font-size: 4rem; 
-    margin-bottom: 0.5rem;
-  }
-  
-  .textSection h3 {
-    font-size: 2rem; 
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-  
-  .textSection p {
-    font-size: 1.5rem; 
-    margin-bottom: 3rem;
-  }
-  
-  
-    
-    .imageSection {
-      flex: 1;
-      text-align: center;
-      padding: 5%;
-  }
-    
-  .ipadImage {
-      width: 90%; 
-      height: auto; 
-      border-radius: 10px; 
-      margin: 10%;
-      box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  margin: 0 auto; 
+  background: rgba(255, 255, 255, 0.432);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.432);
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+  width: 80%;
+  margin-bottom: 20px;
+}
 
-      
-  }
-    
-  .learnMore {
-    font-size: 2rem;
-    color: #124f8c; 
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Mejora en transición */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añadido sombra al botón */
-    padding: 10px 20px;
-    background-color: #000000;
-    color: white;
-    transform: translateX(-50%);
-    border: none;
-    border-radius: 10px; /* Botón más redondeado */
-    cursor: pointer;
-  }
-  
+.textSection {
+  flex: 1;
+  text-align: center;
+  color: #1d1d1f;
+}
+
+.textSection h2 {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+}
+
+.textSection h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.textSection p {
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.imageSection {
+  flex: 1;
+  text-align: center;
+  padding: 5%;
+}
+
+.ipadImage {
+  width: 90%; 
+  height: auto; 
+  border-radius: 10px; 
+  margin: 10%;
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+}
+
+.learnMore {
+  font-size: 2rem;
+  color: #124f8c; 
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  background-color: #000000;
+  color: white;
+  transform: translateX(-50%);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
 
 .learnMore:hover {
-    background-color: #8a96a2;
-    transform: translateX(-50%) translateY(-2px); /* Ligero levantamiento al hover */
+  background-color: #8a96a2;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* Media Queries */
+
+/* Phone: 480px */
+@media (max-width: 480px) {
+  .container {
+      flex-direction: column;
+      width: 90%;
+      padding: 15px;
+  }
+
+  .textSection h2 {
+      font-size: 2.5rem;
+  }
+
+  .textSection h3 {
+      font-size: 1.5rem;
+  }
+
+  .textSection p {
+      font-size: 1rem;
+  }
+
+  .learnMore {
+      font-size: 1.5rem;
+  }
+}
+
+/* Tablet: 768px */
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+      width: 85%;
+      padding: 15px;
+  }
+
+  .textSection h2 {
+      font-size: 3rem;
+  }
+
+  .textSection h3 {
+      font-size: 1.75rem;
+  }
+
+  .textSection p {
+      font-size: 1.25rem;
+  }
+
+  .learnMore {
+      font-size: 1.75rem;
+  }
+}
+
+/* Desktop: 1024px */
+@media (max-width: 1024px) {
+  .container {
+      flex-direction: row;
+      width: 80%;
+      padding: 20px;
+  }
+
+  .textSection h2 {
+      font-size: 3.5rem;
+  }
+
+  .textSection h3 {
+      font-size: 1.875rem;
+  }
+
+  .textSection p {
+      font-size: 1.375rem;
+  }
+
+  .learnMore {
+      font-size: 1.875rem;
+  }
+}
+
+/* XL Desktop: 1450px */
+@media (min-width: 1450px) {
+  .container {
+      width: 70%;
+      padding: 30px;
+  }
+
+  .textSection h2 {
+      font-size: 4rem;
+  }
+
+  .textSection h3 {
+      font-size: 2rem;
+  }
+
+  .textSection p {
+      font-size: 1.5rem;
+  }
+
+  .learnMore {
+      font-size: 2rem;
+  }
 }

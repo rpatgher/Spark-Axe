@@ -8,7 +8,7 @@ const EnseñarFunctions = () => {
     <div className={styles.container}>
       {/* Sección de texto a la izquierda */}
       <div className={styles.textSection}>
-        <h2>Crea tu propias funciones</h2>
+        <h2>Crea tus propias funciones</h2>
         <h3>Como gestion de tus productos</h3>
         <p>Donde puedes subir, editar y ver tus productos</p>
         <Link to="/support" className={styles.learnMore}>Aplicar</Link>
