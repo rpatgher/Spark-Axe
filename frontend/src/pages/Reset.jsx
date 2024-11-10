@@ -154,6 +154,12 @@ const Reset = () => {
 
     return (
         <>
+         <Link
+                        className={styles.exit}
+                        to="/"
+                    >
+                        <i className="fa-solid fa-xmark"></i>
+                    </Link>
             <h1 className={styles.heading}>Reestablece tu Contraseña</h1>
             <p className={styles.description}>Escribe tu nueva contraseña para recuperar tu cuenta</p>
             <form className={styles.form}>

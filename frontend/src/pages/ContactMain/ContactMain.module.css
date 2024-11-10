@@ -294,3 +294,277 @@ flex: 2;
 .HeadContactimg {
   width: 80%;
 }
+/* Mobile (480px and below) */
+/* Mobile (480px and below) */
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  /* General body adjustments */
+  body {
+    background-color: var(--gray_dashboard);
+    font-family: 'Arial', sans-serif; /* Aseguramos una tipografía clara */
+  }
+
+  /* Heading adjustments */
+  .head {
+    font-size: 3.5rem; /* Reduce font size to fit better */
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    color: #333;
+  }
+
+  .headp {
+    font-size: 1.2rem; /* Reduce font size */
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+    color: #666;
+  }
+
+  .background {
+    padding-bottom: 30px; /* Reduce bottom padding */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .contactbuttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Reduce gap */
+    margin-top: 15px; /* Reduce margin */
+    cursor: pointer;
+    background-color: transparent;
+    padding: 8px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Reduced shadow size */
+    transition: 0.3s;
+  }
+
+  .contactbuttons img {
+    height: 100px; /* Smaller icon size */
+    width: 100px; /* Smaller icon size */
+  }
+
+  .contactbuttons:hover {
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2); /* Slightly bigger shadow on hover */
+    transition: 0.3s;
+  }
+
+  .enviocontent0 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Reduce gap */
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 20px; /* Reduce margin */
+    padding-bottom: 10px;
+  }
+
+  .enviocontent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8); /* Suavizamos el fondo */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Reduced shadow size */
+    border-radius: 15px; /* Borde más suave */
+    padding: 20px; /* Reduced padding */
+    margin-left: 10%;
+    margin-top: 20px; /* Reduced margin */
+    width: 80%;
+    transition: box-shadow 0.3s ease; /* Transición de sombra suave */
+  }
+
+  .enviocontent:hover {
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2); /* Sombra más intensa en hover */
+  }
+
+  /* Form container */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Reduced gap */
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Form field adjustments */
+  .field {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 1rem; /* Reduced padding */
+    gap: 0.8rem; /* Reduced gap */
+    border-radius: 1rem;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Reduced shadow size */
+    transition: box-shadow 0.3s ease;
+  }
+
+  .field:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Aumenta la sombra en hover */
+  }
+
+  .field input,
+  .field textarea {
+    font-size: 1.1rem; /* Reduce font size */
+    padding: 0.8rem; /* Reduced padding */
+    border: 1px solid var(--gray);
+    background-color: var(--white);
+    border-radius: 1rem;
+    width: 100%;
+    transition: border 0.3s ease; /* Suavizamos el borde */
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    border-color: #4caf50; /* Resalta el borde en focus */
+  }
+
+  .field label {
+    font-size: 1.2rem; /* Reduced label size */
+    color: #333; /* Aseguramos que las etiquetas sean claras */
+  }
+
+  /* Button adjustments */
+  .Buttonguardar {
+    font-size: 1.4rem; /* Reduced button text */
+    width: 100%;
+    padding: 10px; /* Reduced padding */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+
+  .marcarerror {
+    font-size: 35px; /* Reduced error text */
+    padding: 8px; /* Reduced padding */
+    width: 100%;
+    margin-top: 15px; /* Reduced margin */
+    background-color: #f44336; /* Fondo rojo para errores */
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .marcarerror:hover {
+    background-color: rgb(112, 0, 0);
+  }
+
+  /* Adjust div de soporte */
+  .enviocontent2 {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 20px; /* Reduced margin */
+    text-align: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9); /* Fondo más claro */
+    border-radius: 20px;
+    padding: 25px; /* Reduced padding */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Reduced shadow size */
+  }
+
+  .marcarerrorimg {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 15px; /* Reduced margin */
+  }
+
+  .HeadContact img {
+    width: 100%;
+    max-height: 200px; /* Reduced image height */
+    object-fit: cover;
+  }
+
+  .linksettings,
+  .Buttonguardar {
+    font-size: 1.3rem; /* Reduced button text */
+    padding: 10px; /* Reduced padding */
+  }
+
+  /* Adjust spacing for form elements */
+  .tabcontent1 {
+    width: 100%;
+    margin-top: 15px; /* Reduced margin */
+  }
+
+  .heading {
+    font-size: 3.2rem; /* Reduced heading size */
+    text-align: center;
+    margin: 1.5rem 0; /* Reduced margin */
+  }
+
+  .go-back button {
+    font-size: 1.6rem; /* Reduced button text */
+    padding: 8px; /* Reduced padding */
+    color: white;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  
+}
+
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+  .head {
+      font-size: 5.5rem;
+  }
+
+  .heading, .headingback {
+      font-size: 4rem;
+  }
+
+  .enviocontent, .enviocontent0, .enviocontent2 {
+      width: 80%;
+      margin-left: 10%;
+  }
+
+  .axworker {
+      height: 150px;
+      width: 150px;
+  }
+
+  .contactbuttons {
+      gap: 30px;
+  }
+
+  .marcarerrorimg, .HeadContactimg {
+      width: 90%;
+  }
+}
+
+/* Small Desktop (1024px and below) */
+@media (max-width: 1024px) {
+  .head {
+      font-size: 6.5rem;
+  }
+
+  .heading, .headingback {
+      font-size: 4.5rem;
+  }
+
+  .enviocontent, .enviocontent0, .enviocontent2 {
+      width: 70%;
+  }
+
+  .HeadContactimg {
+      width: 85%;
+  }
+
+  .contactbuttons {
+      gap: 40px;
+  }
+}

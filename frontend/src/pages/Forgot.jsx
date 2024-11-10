@@ -65,6 +65,12 @@ const Forgot = () => {
 
     return (
         <>
+         <Link
+                        className={styles.exit}
+                        to="/"
+                    >
+                        <i className="fa-solid fa-xmark"></i>
+                    </Link>
             <h1 className={styles.heading}>Reestablece tu Contraseña</h1>
             <p className={styles.description}>Ingresa tu email para reestablecer tu contraseña</p>
             <form className={styles.form}>

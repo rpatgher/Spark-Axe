@@ -1,9 +1,49 @@
+/* ******************** Styles for About.module.css ******************** */
 
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.head {
+  width: 70%;
+  margin: 0 auto;
+  font-size: 7.4rem;
+  color: rgb(103, 103, 101);
+}
+
+.head span {
+  color: #000000;
+}
+
+.imgdiv {
+  display: flex;
+  justify-content: center;
+  height: 450px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.aboutimg {
+  width: 50%;
+  border-radius: 20px;
+  height: auto;
+}
 
 .about {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 20px;
+}
+
+.content {
+  width: 60%;
+  margin-top: 40px;
+  font-size: 2rem;
+  text-align: justify;
+  line-height: 1.6;
+  padding-bottom: 100px;
 }
 
 .imagecontainer {
@@ -11,127 +51,215 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 20px;
   width: 80%;
-  margin: 20px auto; /* Centra y da espacio alrededor del contenedor de imágenes */
+  margin: 20px auto;
 }
 
-.imagecontainer img {
-  max-width: 100%; 
-  max-height: 100%; 
-  object-fit: contain; 
-}
-
-.content {
-  margin-top: 40px;
-  width: 60%;
-  font-size: 2rem;
-  text-align: justify;
-  padding-bottom: 100px;
-  line-height: 1.6; /* Mejora la legibilidad del texto */
-}
-
-@media (max-width: 800px) {
-  .head {
-      font-size: 5rem; /* Ajuste del tamaño de fuente para pantallas más pequeñas */
-  }
-  .content {
-      width: 90%; /* Ancho ajustado para móviles */
-      font-size: 2rem; /* Ajuste de la fuente para mejor legibilidad en pantallas pequeñas */
-  }
-  .imagecontainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 20px;
-    width: 80%;
-    margin: 20px auto; /* Centra el contenedor de imágenes horizontalmente */
-    justify-items: center; /* Centra los elementos dentro de la cuadrícula */
-}
-
-.imagecontainer img {
-    max-width: 100%; 
-    max-height: 100%; 
-    object-fit: contain; 
-    display: block; /* Asegura que las imágenes se comporten como elementos de bloque */
-}
-}
-
-.contactbuttons{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 20px;
-  cursor: pointer;
-  background-color: transparent;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: 0.5s;
-  color: black;
+.contactSec {
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.432);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.432);
+  margin-bottom: 100px;
   text-align: center;
-  width: 100%;
-
-}
-
-.contactbuttons:hover{
-  box-shadow: 0 6px 34px rgba(0, 0, 0, 0.322);
-  transition: 0.5s;
-}
-
-.axworker{
-  height: 100%;
-  width: 100%;
 }
 
 .contactGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px; 
+  grid-gap: 20px;
   justify-items: center;
   align-items: center;
-  margin: 0 auto; 
-  padding: 20px; 
-  background: transparent;
+  margin-top: 20px;
 }
-.contactSec{
+
+.contactbuttons {
   display: flex;
   flex-direction: column;
-  justify-items: center;
   align-items: center;
-  width: 70%; 
-  margin: 0 auto; 
-  padding: 20px; 
-  background: rgba(255, 255, 255, 0.432);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.432);
-  margin-bottom: 100px;
-}
-
-.aboutimg{
-  border-radius: 20px;
-  width: 50%;
-  height: 100%;
-}
-.imgdiv{
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  height: 450px;
-  overflow: hidden;
-}
-
-.header{
-  font-size: 2rem;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  width: 100%;
   text-align: center;
 }
 
-.head {
-  width: 70%;
-  margin: 0 auto; 
-  font-size: 7.4rem;
-  text-align: center;
-  color:rgb(103, 103, 101);
-  margin-bottom: 40px;
+.contactbuttons:hover {
+  box-shadow: 0 6px 34px rgba(0, 0, 0, 0.322);
 }
 
-.head span {
+.axworker {
+  width: 100%;
+  height: auto;
+}
+
+.headingother {
+  font-size: 1.5rem;
   color: #000000;
+  margin-top: 10px;
+}
+
+/* ******************** Media Queries ******************** */
+/* ******************** Improved Media Queries ******************** */
+
+/* Small Screens (Mobile) - max-width: 767px */
+@media (max-width: 767px) {
+  .head {
+    width: 90%;
+    font-size: 2.5rem;
+    margin: 0 auto;
+  }
+
+  .imgdiv {
+    height: auto; /* Allows image to adapt to smaller screens */
+    margin-bottom: 20px;
+  }
+  
+  .aboutimg {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .content {
+    width: 100%;
+    font-size: 1.4rem;
+    padding: 10px;
+    text-align: left; /* Aligns text for better readability on mobile */
+  }
+
+  .contactSec {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 50px;
+  }
+
+  .contactGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .contactbuttons {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .axworker {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 50%; /* Adds a round profile image */
+  }
+
+  .headingother {
+    font-size: 1.2rem;
+  }
+}
+
+/* Medium Screens (Tablets) - min-width: 768px and max-width: 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .head {
+    width: 80%;
+    font-size: 4.5rem;
+    margin: 0 auto;
+  }
+
+  .imgdiv {
+    height: 350px; /* Sets a smaller height for tablets */
+    margin-bottom: 30px;
+  }
+
+  .aboutimg {
+    width: 80%;
+    max-width: 500px;
+    border-radius: 15px;
+  }
+
+  .content {
+    width: 80%;
+    font-size: 1.6rem;
+    padding: 20px;
+  }
+
+  .contactSec {
+    width: 80%;
+    padding: 20px;
+    margin-bottom: 80px;
+  }
+
+  .contactGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .contactbuttons {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .axworker {
+    width: 100%;
+    max-width: 180px;
+    border-radius: 50%;
+  }
+
+  .headingother {
+    font-size: 1.4rem;
+  }
+}
+
+/* Large Screens (Desktops) - min-width: 1025px */
+@media (min-width: 1025px) {
+  .head {
+    width: 70%;
+    font-size: 6rem;
+    margin: 0 auto;
+  }
+
+  .imgdiv {
+    height: 450px;
+    margin-bottom: 40px;
+  }
+
+  .aboutimg {
+    width: 60%;
+    max-width: 700px;
+    border-radius: 20px;
+  }
+
+  .content {
+    width: 60%;
+    font-size: 1.8rem;
+    padding: 20px;
+  }
+
+  .contactSec {
+    width: 70%;
+    padding: 30px;
+    margin-bottom: 100px;
+  }
+
+  .contactGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .contactbuttons {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .axworker {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 50%;
+  }
+
+  .headingother {
+    font-size: 1.5rem;
+  }
 }
