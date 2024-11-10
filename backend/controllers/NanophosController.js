@@ -8,6 +8,7 @@ import {
     Subcategory,
     Advertisement,
     PoS,
+    PoSCategory,
     Section,
     Config,
     ElementProperty,
@@ -81,6 +82,9 @@ const getInfo = async (req, res) => {
         order: [["index", "ASC"]],
     });
     const advertisements = await Advertisement.findAll({
+        where: {
+            published: true
+        },
         include: [
             {
                 model: Section,
@@ -98,6 +102,29 @@ const getInfo = async (req, res) => {
         where: {
             website_id: website.id,
         },
+        include: [
+            {
+                model: PoSCategory,
+                attributes: {
+                    exclude: ["website_id", "createdAt", "updatedAt"],
+                },
+            },
+        ],
+        attributes: { exclude: ["website_id", "createdAt", "updatedAt"] },
+    });
+    const cityMap = {};
+    pos.forEach((item) => {
+        const city = item.city;
+        if (!cityMap[city]) {
+            cityMap[city] = {
+                city: city,
+                pos: [],
+            };
+        }
+
+        cityMap[city].pos.push({
+            ...item.dataValues,
+        });
     });
     const topProducts = await OrderElement.findAll({
         attributes: [
@@ -135,7 +162,7 @@ const getInfo = async (req, res) => {
         categories,
         advertisements,
         topProducts,
-        pos,
+        pos: Object.values(cityMap),
         configElement: formatedConfig,
     });
 };

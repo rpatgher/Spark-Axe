@@ -439,7 +439,7 @@ const deleteElements = async (req, res) => {
             }
         }
     });
-    console.log(elements);
+    // console.log(elements);
     // Check if the user is authorized to delete the elements
     const website = await Website.findOne({
         where: {

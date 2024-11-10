@@ -55,7 +55,7 @@ const createCategories = async (req, res) => {
                 }
             }
         });
-        console.log(categoriesBody);
+        // console.log(categoriesBody);
         // get the number of subcategories of each category
         const categoriesElement = await Category.findAll({
             where: {

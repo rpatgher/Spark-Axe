@@ -14,11 +14,11 @@ const getCategories = async (req, res) => {
     if(website.user_id.toString() !== req.user.id.toString()){
         return res.status(401).json({ message: 'Unauthorized' });
     }
-    const sections = await PoSCategory.findAll({
+    const categories = await PoSCategory.findAll({
         where: { website_id },
         attributes: ['id', 'name'],
     });
-    return res.status(200).json(sections);
+    return res.status(200).json(categories);
 }
 
 

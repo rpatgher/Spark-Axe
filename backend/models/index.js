@@ -73,7 +73,7 @@ Website.hasMany(PoS, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 
 Website.hasMany(PoSCategory, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
 PoSCategory.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' });
-PoSCategory.hasMany(PoS, { foreignKey: 'pos_category_id', onDelete: 'RESTRICT' });
+PoSCategory.hasMany(PoS, { foreignKey: 'pos_category_id', onDelete: 'RESTRICT', allowNull: true });
 PoS.belongsTo(PoSCategory, { foreignKey: 'pos_category_id', onDelete: 'RESTRICT' });
 
 

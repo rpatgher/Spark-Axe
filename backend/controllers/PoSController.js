@@ -2,7 +2,7 @@ import { Op } from 'sequelize';
 import fs from 'fs';
 
 // ************* Models *************
-import { PoS, Website } from '../models/index.js';
+import { PoS, Website, Config, PoSProperty } from '../models/index.js';
 
 const createPoS = async (req, res) => {
     const { name, address, city, country, postalCode, countryCode, latitude, longitude, image, email, phone, website_id, category_id } = req.body;
@@ -20,6 +20,19 @@ const createPoS = async (req, res) => {
     if(website.user_id.toString() !== req.user.id.toString()){
         return res.status(401).json({ msg: 'Unauthorized' });
     }
+    const config = await Config.findOne({
+        where: {
+            website_id
+        },
+        include: {
+            model: PoSProperty,
+            attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },
+        },
+        attributes: { exclude: ['website_id', 'createdAt', 'updatedAt', 'id'] }
+    });
+    if(config.pos_properties.map(p => p.name).includes('category') && !category_id){
+        return res.status(400).json({ msg: 'All fields are required' });
+    }
     const pos = PoS.build({
         name,
         address,
@@ -32,7 +45,7 @@ const createPoS = async (req, res) => {
         image: req.file.filename,
         email,
         phone,
-        pos_category_id: category_id,
+        pos_category_id: category_id || null,
         website_id
     });
     try {
@@ -109,10 +122,23 @@ const updatePoS = async (req, res) => {
         }
         return res.status(401).json({ msg: 'Unauthorized' });
     }
+    const config = await Config.findOne({
+        where: {
+            website_id
+        },
+        include: {
+            model: PoSProperty,
+            attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },
+        },
+        attributes: { exclude: ['website_id', 'createdAt', 'updatedAt', 'id'] }
+    });
+    if(config.pos_properties.map(p => p.name).includes('category') && !category_id){
+        return res.status(400).json({ msg: 'All fields are required' });
+    }
     if(req.file){
         fs.unlinkSync(`./public/uploads/pos/${posFromDB.image}`);
     }
-    const pos = {...req.body, pos_category_id: category_id};
+    const pos = {...req.body, pos_category_id: category_id || null};
     if(req.file){
         pos.image = req.file.filename;
     } else {

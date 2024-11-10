@@ -8,9 +8,9 @@ import {
     Subcategory,
     Advertisement,
     PoS,
+    PoSCategory,
     Section,
 } from "../models/index.js";
-
 
 const getInfo = async (req, res) => {
     const { website } = req;
@@ -83,6 +83,29 @@ const getInfo = async (req, res) => {
         where: {
             website_id: website.id,
         },
+        include: [
+            {
+                model: PoSCategory,
+                attributes: {
+                    exclude: ["website_id", "createdAt", "updatedAt"],
+                },
+            },
+        ],
+        attributes: { exclude: ["website_id", "createdAt", "updatedAt"] },
+    });
+    const cityMap = {};
+    pos.forEach((item) => {
+        const city = item.city;
+        if (!cityMap[city]) {
+            cityMap[city] = {
+                city: city,
+                pos: [],
+            };
+        }
+
+        cityMap[city].pos.push({
+            ...item.dataValues,
+        });
     });
     const topProducts = await OrderElement.findAll({
         attributes: [
@@ -122,7 +145,11 @@ const getInfo = async (req, res) => {
                             {
                                 model: Category,
                                 attributes: {
-                                    exclude: ["website_id", "createdAt", "updatedAt"],
+                                    exclude: [
+                                        "website_id",
+                                        "createdAt",
+                                        "updatedAt",
+                                    ],
                                 },
                                 order: [["index", "ASC"]],
                             },
@@ -136,8 +163,8 @@ const getInfo = async (req, res) => {
         elements,
         categories,
         advertisements,
-        pos,
-        topProducts
+        pos: Object.values(cityMap),
+        topProducts,
     });
 };
 
@@ -172,8 +199,4 @@ const getOrders = async (req, res) => {
     }
 };
 
-
-export {
-    getInfo,
-    getOrders
-}
+export { getInfo, getOrders };
