@@ -29,12 +29,14 @@ const Element = db.define('element', {
         allowNull: false
     },
     instructions: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING(3000),
+        allowNull: false,
+        defaultValue: '[{"type":"paragraph","children":[{"text":""}]}]'
     },
     ingredients: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING(3000),
+        allowNull: false,
+        defaultValue: '[{"type":"paragraph","children":[{"text":""}]}]'
     },
     weight: {
         type: DataTypes.FLOAT,
