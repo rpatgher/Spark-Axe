@@ -1,19 +1,4 @@
-/* Estilos generales */
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  text-align: center;
-  display: flex;
-  margin: 0 auto; 
-  background: rgba(255, 255, 255, 0.432);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.432);
-  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
-  width: 80%;
-  margin-bottom: 20px;
-}
+
 
 .textSection {
   flex: 1;
@@ -99,29 +84,75 @@
 }
 
 /* Tablet: 768px */
+/* Mobile: 768px and below */
+/* General Styles */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  margin: 0 auto; 
+  background: rgba(255, 255, 255, 0.432);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.432);
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.textSection, .imageSection {
+  flex: 1;
+  text-align: center;
+}
+
+.ipadImage {
+  width: 90%; 
+  height: auto; 
+  border-radius: 10px; 
+  margin: 10%;
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+}
+
+/* Mobile: 768px and below */
 @media (max-width: 768px) {
   .container {
-      flex-direction: column;
-      width: 85%;
-      padding: 15px;
+    flex-direction: column;
+    width: 100%; /* Adjust to full width for mobile */
+    padding: 10px;
   }
 
+  .textSection, .imageSection {
+    width: 100%; /* Force full-width for each section */
+    margin: 0;
+  }
+
+  .ipadImage {
+    width: 100%; /* Make image take full width */
+    margin: 0;
+  }
+
+  /* Responsive text sizing */
   .textSection h2 {
-      font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   .textSection h3 {
-      font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 
   .textSection p {
-      font-size: 1.25rem;
+    font-size: 1rem;
   }
 
   .learnMore {
-      font-size: 1.75rem;
+    font-size: 1.5rem;
+    width: 100%; /* Make button full width */
+    padding: 12px;
+    box-sizing: border-box;
   }
 }
+
 
 /* Desktop: 1024px */
 @media (max-width: 1024px) {
@@ -171,3 +202,52 @@
       font-size: 2rem;
   }
 }
+/* Very Small Devices: <360px */
+@media (max-width: 360px) {
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .textSection h2 {
+    font-size: 2rem;
+  }
+
+  .textSection h3 {
+    font-size: 1.25rem;
+  }
+
+  .textSection p {
+    font-size: 0.9rem;
+  }
+
+  .learnMore {
+    font-size: 1.2rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Medium Laptops: 1200px */
+@media (max-width: 1200px) {
+  .container {
+    width: 75%;
+    padding: 20px;
+  }
+
+  .textSection h2 {
+    font-size: 3.25rem;
+  }
+
+  .textSection h3 {
+    font-size: 1.85rem;
+  }
+
+  .textSection p {
+    font-size: 1.3rem;
+  }
+
+  .learnMore {
+    font-size: 1.85rem;
+  }
+}
+

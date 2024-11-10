@@ -159,3 +159,20 @@
     opacity: .5;
     cursor: not-allowed;
 }
+/* Show the exit button only on small screens */
+@media (max-width: 767px) {
+    .exit {
+        display: flex; /* Show exit button on small screens */
+        justify-content: end;
+        color: #000;
+        font-size: 3rem;
+        
+    }
+}
+
+/* Hide the exit button on larger screens */
+@media (min-width: 768px) {
+    .exit {
+        display: none; /* Hide exit button on larger screens */
+    }
+}

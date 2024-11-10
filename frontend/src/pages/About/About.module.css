@@ -104,91 +104,162 @@
 }
 
 /* ******************** Media Queries ******************** */
+/* ******************** Improved Media Queries ******************** */
 
-/* Pantallas pequeñas (dispositivos móviles) */
+/* Small Screens (Mobile) - max-width: 767px */
 @media (max-width: 767px) {
   .head {
     width: 90%;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
+    margin: 0 auto;
   }
 
+  .imgdiv {
+    height: auto; /* Allows image to adapt to smaller screens */
+    margin-bottom: 20px;
+  }
+  
   .aboutimg {
-    width: 80%;
+    width: 100%;
+    max-width: 300px;
     height: auto;
+    border-radius: 10px;
   }
 
   .content {
-    width: 90%;
-    font-size: 1.6rem;
+    width: 100%;
+    font-size: 1.4rem;
+    padding: 10px;
+    text-align: left; /* Aligns text for better readability on mobile */
   }
 
   .contactSec {
-    width: 90%;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 50px;
   }
 
   .contactGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
   .contactbuttons {
     width: 100%;
+    padding: 10px;
+  }
+
+  .axworker {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 50%; /* Adds a round profile image */
+  }
+
+  .headingother {
+    font-size: 1.2rem;
   }
 }
 
-/* Pantallas medianas (tabletas) */
+/* Medium Screens (Tablets) - min-width: 768px and max-width: 1024px */
 @media (min-width: 768px) and (max-width: 1024px) {
   .head {
     width: 80%;
-    font-size: 5.5rem;
+    font-size: 4.5rem;
+    margin: 0 auto;
+  }
+
+  .imgdiv {
+    height: 350px; /* Sets a smaller height for tablets */
+    margin-bottom: 30px;
   }
 
   .aboutimg {
-    width: 70%;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 15px;
   }
 
   .content {
     width: 80%;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    padding: 20px;
   }
 
   .contactSec {
     width: 80%;
+    padding: 20px;
+    margin-bottom: 80px;
   }
 
   .contactGrid {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  .contactbuttons {
-    width: 90%;
-  }
-}
-
-/* Pantallas grandes (escritorios) */
-@media (min-width: 1025px) {
-  .head {
-    width: 70%;
-    font-size: 7rem;
-  }
-
-  .aboutimg {
-    width: 60%;
-  }
-
-  .content {
-    width: 60%;
-    font-size: 2rem;
-  }
-
-  .contactSec {
-    width: 70%;
-  }
-
-  .contactGrid {
-    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
   }
 
   .contactbuttons {
     width: 100%;
+    padding: 15px;
+  }
+
+  .axworker {
+    width: 100%;
+    max-width: 180px;
+    border-radius: 50%;
+  }
+
+  .headingother {
+    font-size: 1.4rem;
+  }
+}
+
+/* Large Screens (Desktops) - min-width: 1025px */
+@media (min-width: 1025px) {
+  .head {
+    width: 70%;
+    font-size: 6rem;
+    margin: 0 auto;
+  }
+
+  .imgdiv {
+    height: 450px;
+    margin-bottom: 40px;
+  }
+
+  .aboutimg {
+    width: 60%;
+    max-width: 700px;
+    border-radius: 20px;
+  }
+
+  .content {
+    width: 60%;
+    font-size: 1.8rem;
+    padding: 20px;
+  }
+
+  .contactSec {
+    width: 70%;
+    padding: 30px;
+    margin-bottom: 100px;
+  }
+
+  .contactGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .contactbuttons {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .axworker {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 50%;
+  }
+
+  .headingother {
+    font-size: 1.5rem;
   }
 }

@@ -13,6 +13,12 @@ import google from '../../assets/img/google.png'
 const Login = () => {
     return (
         <LoginProvider>
+             <Link
+                        className={styles.exit}
+                        to="/"
+                    >
+                        <i className="fa-solid fa-xmark"></i>
+                    </Link>
             <h1 className={styles.heading}>Iniciar Sesión</h1>
             <p className={styles.description}>Ingresa tus credenciales para acceder a tu cuenta</p>
             {/* <div className={styles["google-btn"]}>
