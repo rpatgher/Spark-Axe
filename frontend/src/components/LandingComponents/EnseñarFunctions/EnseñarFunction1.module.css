@@ -1,46 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  margin: 0 auto; 
+  background: rgba(255, 255, 255, 0.432);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.432);
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+  width: 80%;
+  margin-bottom: 20px;
+  transition: all 0.5s ease-in-out; /* Smooth transition for layout changes */
+}
 
-
-.textSection {
+.textSection, .imageSection {
   flex: 1;
   text-align: center;
-  color: #1d1d1f;
-}
-
-.textSection h2 {
-  font-size: 4rem;
-  margin-bottom: 0.5rem;
-}
-
-.textSection h3 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.textSection p {
-  font-size: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.imageSection {
-  flex: 1;
-  text-align: center;
-  padding: 5%;
+  transition: all 0.5s ease-in-out; /* Smooth transition for content changes */
 }
 
 .ipadImage {
-  width: 90%; 
-  height: auto; 
-  border-radius: 10px; 
+  width: 90%;
+  height: auto;
+  border-radius: 10px;
   margin: 10%;
   box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+  transition: width 0.5s ease-in-out, margin 0.5s ease-in-out; /* Smooth transition for resizing */
 }
 
 .learnMore {
   font-size: 2rem;
-  color: #124f8c; 
+  color: #124f8c;
   text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for hover */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
   background-color: #000000;
@@ -54,200 +48,29 @@
 .learnMore:hover {
   background-color: #8a96a2;
   transform: translateX(-50%) translateY(-2px);
+  opacity: 0.9; /* Slight opacity change on hover */
 }
 
-/* Media Queries */
-
-/* Phone: 480px */
-@media (max-width: 480px) {
-  .container {
-      flex-direction: column;
-      width: 90%;
-      padding: 15px;
-  }
-
-  .textSection h2 {
-      font-size: 2.5rem;
-  }
-
-  .textSection h3 {
-      font-size: 1.5rem;
-  }
-
-  .textSection p {
-      font-size: 1rem;
-  }
-
-  .learnMore {
-      font-size: 1.5rem;
-  }
-}
-
-/* Tablet: 768px */
-/* Mobile: 768px and below */
-/* General Styles */
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  text-align: center;
-  margin: 0 auto; 
-  background: rgba(255, 255, 255, 0.432);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.432);
-  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
-  width: 80%;
-  margin-bottom: 20px;
-}
-
-.textSection, .imageSection {
-  flex: 1;
-  text-align: center;
-}
-
-.ipadImage {
-  width: 90%; 
-  height: auto; 
-  border-radius: 10px; 
-  margin: 10%;
-  box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
-}
-
-/* Mobile: 768px and below */
+/* Small screens: 768px and below */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
-    width: 100%; /* Adjust to full width for mobile */
+    flex-direction: column; /* Stack content in column layout */
+    width: 100%;
     padding: 10px;
   }
 
   .textSection, .imageSection {
-    width: 100%; /* Force full-width for each section */
+    width: 100%;
     margin: 0;
   }
 
   .ipadImage {
-    width: 100%; /* Make image take full width */
+    width: 100%; /* Make image take full width on small screens */
     margin: 0;
   }
 
-  /* Responsive text sizing */
-  .textSection h2 {
-    font-size: 2.5rem;
-  }
-
-  .textSection h3 {
-    font-size: 1.5rem;
-  }
-
-  .textSection p {
-    font-size: 1rem;
-  }
-
   .learnMore {
-    font-size: 1.5rem;
-    width: 100%; /* Make button full width */
-    padding: 12px;
-    box-sizing: border-box;
+    opacity: 0; /* Hide button on small screens */
+    transition: opacity 0.3s ease; /* Smooth opacity transition */
   }
 }
-
-
-/* Desktop: 1024px */
-@media (max-width: 1024px) {
-  .container {
-      flex-direction: row;
-      width: 80%;
-      padding: 20px;
-  }
-
-  .textSection h2 {
-      font-size: 3.5rem;
-  }
-
-  .textSection h3 {
-      font-size: 1.875rem;
-  }
-
-  .textSection p {
-      font-size: 1.375rem;
-  }
-
-  .learnMore {
-      font-size: 1.875rem;
-  }
-}
-
-/* XL Desktop: 1450px */
-@media (min-width: 1450px) {
-  .container {
-      width: 70%;
-      padding: 30px;
-  }
-
-  .textSection h2 {
-      font-size: 4rem;
-  }
-
-  .textSection h3 {
-      font-size: 2rem;
-  }
-
-  .textSection p {
-      font-size: 1.5rem;
-  }
-
-  .learnMore {
-      font-size: 2rem;
-  }
-}
-/* Very Small Devices: <360px */
-@media (max-width: 360px) {
-  .container {
-    width: 95%;
-    padding: 10px;
-  }
-
-  .textSection h2 {
-    font-size: 2rem;
-  }
-
-  .textSection h3 {
-    font-size: 1.25rem;
-  }
-
-  .textSection p {
-    font-size: 0.9rem;
-  }
-
-  .learnMore {
-    font-size: 1.2rem;
-    padding: 8px 16px;
-  }
-}
-
-/* Medium Laptops: 1200px */
-@media (max-width: 1200px) {
-  .container {
-    width: 75%;
-    padding: 20px;
-  }
-
-  .textSection h2 {
-    font-size: 3.25rem;
-  }
-
-  .textSection h3 {
-    font-size: 1.85rem;
-  }
-
-  .textSection p {
-    font-size: 1.3rem;
-  }
-
-  .learnMore {
-    font-size: 1.85rem;
-  }
-}
-

@@ -1,3 +1,9 @@
+/* Global Styles */
+:root {
+  --dark_gray: #333;
+}
+
+/* Navbar */
 .navbar {
   list-style-type: none;
   margin: 0;
@@ -12,12 +18,15 @@
   z-index: 100;
   font-weight: normal;
 }
+
 .nav {
   margin-bottom: 80px;
 }
+
 .navB {
   float: left;
 }
+
 .navB a {
   display: block;
   color: var(--dark_gray);
@@ -25,16 +34,20 @@
   padding: 14px 16px;
   text-decoration: none;
 }
+
 .navB a:hover {
   background-color: #cfcdcd;
 }
+
 .active a {
-  font-weight: bold; /* Make the active page's text bold */
-  color: #04AA6D;    /* Add color for better visual feedback */
+  font-weight: bold;
+  color: #04AA6D;
 }
+
 .rightnavB {
   float: right;
 }
+
 .rightnavB a {
   display: block;
   color: var(--dark_gray);
@@ -42,16 +55,28 @@
   padding: 14px 16px;
   text-decoration: none;
 }
+
 .rightnavB a:hover {
   background-color: #cfcdcd;
 }
 
+.burgerMenu {
+  background-color: #fff9f9d0;
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Footer */
 .footer {
   background-color: #ffffffd0;
   padding: 10px;
   display: flex;
   flex-direction: column;
 }
+
 .footertop {
   background-color: #ffffffd0;
   padding: 10px;
@@ -59,6 +84,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
 }
+
 .footerbottom {
   background-color: #ffffffd0;
   padding: 5px;
@@ -66,6 +92,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .footermenu {
   display: flex;
   flex-direction: column;
@@ -73,11 +100,13 @@
   background-color: #ffffffd0;
   color: black;
 }
+
 .footermenu h3 {
   color: black;
   font-size: 2.5rem;
   margin-bottom: 5px;
 }
+
 .link {
   color: black;
   text-decoration: none;
@@ -85,9 +114,11 @@
   transition: ease-out 0.3s;
   margin-top: 5px;
 }
+
 .link:hover {
   color: #7e8082;
 }
+
 .footerimg {
   background-color: #ffffffd0;
   display: flex;
@@ -97,9 +128,11 @@
   box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
   transition: ease-out 0.3s;
 }
+
 .footerimg:hover {
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.321);
 }
+
 .footerimgdiv {
   display: flex;
   flex-direction: column;
@@ -108,6 +141,7 @@
   background-color: #ffffffd0;
   padding: 10px;
 }
+
 .learnMore {
   font-size: 1.8rem;
   color: #124f8c;
@@ -124,68 +158,40 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 .learnMore:hover {
   background-color: #8a96a2;
+}
+
+.navLink {
+  color: var(--dark_gray);
+  text-decoration: none;
+  padding: 14px 16px;
+}
+
+.activeLink {
+  font-weight: bold;
 }
 
 /* Media Queries */
 @media (max-width: 768px) {
   .footertop {
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
   }
   .footerimg {
-      width: 150px;
-      height: 150px;
+    width: 150px;
+    height: 150px;
   }
   .footermenu h3 {
-      font-size: 2rem;
+    font-size: 2rem;
   }
   .link, .learnMore {
-      font-size: 1.5rem;
+    font-size: 1.5rem;
   }
   .learnMore {
-      width: 60%;
+    width: 60%;
   }
-}
-
-@media (max-width: 576px) {
-  .navbar {
-      flex-direction: column;
-  }
-  .navB, .rightnavB {
-      float: none;
-      text-align: center;
-  }
-  .footertop {
-      grid-template-columns: 1fr;
-  }
-  .footerimg {
-      width: 120px;
-      height: 120px;
-  }
-  .footermenu h3 {
-      font-size: 1.8rem;
-  }
-  .link, .learnMore {
-      font-size: 1.2rem;
-  }
-  .learnMore {
-      width: 80%;
-  }
-}
-
-/* Mobile burger menu */
-.burgerMenu {
-  display: none;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* Show burger menu button and hide regular nav on small screens */
-@media (max-width: 768px) {
   .burgerMenu {
     display: block;
     position: absolute;
@@ -201,6 +207,7 @@
     right: 0;
     background-color: #fff;
     width: 100%;
+    height: 100vh;
     z-index: 1000;
   }
 
@@ -213,5 +220,31 @@
     float: none;
     text-align: center;
     padding: 10px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .navB, .rightnavB {
+    float: none;
+    text-align: center;
+  }
+  .footertop {
+    grid-template-columns: 1fr;
+  }
+  .footerimg {
+    width: 120px;
+    height: 120px;
+  }
+  .footermenu h3 {
+    font-size: 1.8rem;
+  }
+  .link, .learnMore {
+    font-size: 1.2rem;
+  }
+  .learnMore {
+    width: 80%;
   }
 }
