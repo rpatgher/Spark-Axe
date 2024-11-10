@@ -78,7 +78,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
   background-color: transparent;
   padding: 10px;
   border-radius: 10px;
@@ -86,6 +85,7 @@
   transition: 0.3s;
   width: 100%;
   text-align: center;
+  cursor:auto;
 }
 
 .contactbuttons:hover {
@@ -95,6 +95,7 @@
 .axworker {
   width: 100%;
   height: auto;
+  cursor: normal;
 }
 
 .headingother {
@@ -152,7 +153,6 @@
   .axworker {
     width: 100%;
     max-width: 150px;
-    border-radius: 50%; /* Adds a round profile image */
   }
 
   .headingother {
@@ -204,7 +204,6 @@
   .axworker {
     width: 100%;
     max-width: 180px;
-    border-radius: 50%;
   }
 
   .headingother {
@@ -256,7 +255,6 @@
   .axworker {
     width: 100%;
     max-width: 200px;
-    border-radius: 50%;
   }
 
   .headingother {
