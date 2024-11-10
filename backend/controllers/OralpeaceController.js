@@ -66,6 +66,9 @@ const getInfo = async (req, res) => {
         order: [["index", "ASC"]],
     });
     const advertisements = await Advertisement.findAll({
+        where: {
+            published: true,
+        },
         include: [
             {
                 model: Section,
