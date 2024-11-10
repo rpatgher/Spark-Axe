@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, NavLink, Link } from 'react-router-dom';
 import styles from '../styles/LandingLayout.module.css';
 import Logo from '../assets/img/Landing/Logo.png';
 import useAuth from '../hooks/useAuth';
@@ -10,6 +10,7 @@ function LandingLayout() {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+    
   };
 
   return (
@@ -21,15 +22,70 @@ function LandingLayout() {
           </button>
         </div>
         <ul className={`${styles.navbar} ${menuOpen ? styles.showMenu : ''}`}>
-          <li className={styles.navB}><Link to="/">Inicio</Link></li>
-          <li className={styles.navB}><Link to="/about">Sobre Nosotros</Link></li>
-          <li className={styles.navB}><Link to="/contact">Contactanos</Link></li>
+          <li className={styles.navB}>
+            <NavLink
+              exact
+              to="/"
+              className={({ isActive }) =>
+                isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
+              } onClick={toggleMenu}
+            >
+              Inicio
+            </NavLink>
+          </li>
+          <li className={styles.navB}>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
+              } onClick={toggleMenu}
+            >
+              Sobre Nosotros
+            </NavLink>
+          </li>
+          <li className={styles.navB}>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
+              } onClick={toggleMenu}
+            >
+              Contactanos
+            </NavLink>
+          </li>
           {auth.id ? (
-            <li className={styles.rightnavB}><Link to="/dashboard">Dashboard</Link></li>
+            <li className={styles.rightnavB}>
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
+                } onClick={toggleMenu}
+              >
+                Dashboard
+              </NavLink>
+            </li>
           ) : (
             <>
-              <li className={styles.rightnavB}><Link to="/signup">Registrarse</Link></li>
-              <li className={styles.rightnavB}><Link to="/login">Iniciar Sesion</Link></li>
+              <li className={styles.rightnavB}>
+                <NavLink
+                  to="/signup"
+                  className={({ isActive }) =>
+                    isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
+                  } onClick={toggleMenu}
+                >
+                  Registrarse
+                </NavLink>
+              </li>
+              <li className={styles.rightnavB}>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
+                  } onClick={toggleMenu}
+                >
+                  Iniciar Sesion
+                </NavLink>
+              </li>
             </>
           )}
         </ul>
