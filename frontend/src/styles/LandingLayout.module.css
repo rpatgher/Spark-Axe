@@ -175,6 +175,13 @@
 
 /* Media Queries */
 @media (max-width: 768px) {
+  .footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
   .footertop {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 15px;
