@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  flex-direction: row; /* Default row layout for larger screens */
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 20px;
@@ -12,11 +12,13 @@
   box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
   width: 80%;
   margin-bottom: 20px;
+  transition: all 0.5s ease-in-out; /* Smooth transition for layout changes */
 }
 
 .textSection, .imageSection {
   flex: 1;
   text-align: center;
+  transition: all 0.5s ease-in-out; /* Smooth transition for content changes */
 }
 
 .ipadImage {
@@ -25,13 +27,14 @@
   border-radius: 10px;
   margin: 10%;
   box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+  transition: width 0.5s ease-in-out, margin 0.5s ease-in-out; /* Smooth transition for resizing */
 }
 
 .learnMore {
   font-size: 2rem;
   color: #124f8c;
   text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for hover */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
   background-color: #000000;
@@ -45,12 +48,13 @@
 .learnMore:hover {
   background-color: #8a96a2;
   transform: translateX(-50%) translateY(-2px);
+  opacity: 0.9; /* Slight opacity change on hover */
 }
 
 /* Small screens: 768px and below */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* Stack image on top */
+    flex-direction: column; /* Stack content in column layout */
     width: 100%;
     padding: 10px;
   }
@@ -61,10 +65,12 @@
   }
 
   .ipadImage {
-    width: 100%; /* Make image take full width */
+    width: 100%; /* Make image take full width on small screens */
     margin: 0;
   }
-  .learnMore{
-    display: none;
+
+  .learnMore {
+    opacity: 0; /* Hide button on small screens */
+    transition: opacity 0.3s ease; /* Smooth opacity transition */
   }
 }
