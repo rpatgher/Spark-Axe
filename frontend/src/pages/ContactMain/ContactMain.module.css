@@ -434,7 +434,6 @@ flex: 2;
     font-size: 1.4rem; /* Reduced button text */
     width: 100%;
     padding: 10px; /* Reduced padding */
-    background-color: #4caf50; /* Botón de color verde */
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -442,9 +441,6 @@ flex: 2;
     transition: background-color 0.3s ease;
   }
 
-  .Buttonguardar:hover {
-    background-color: #45a049; /* Color más oscuro en hover */
-  }
 
   .marcarerror {
     font-size: 35px; /* Reduced error text */
@@ -510,7 +506,6 @@ flex: 2;
   .go-back button {
     font-size: 1.6rem; /* Reduced button text */
     padding: 8px; /* Reduced padding */
-    background-color: #4caf50;
     color: white;
     border-radius: 8px;
     border: none;
@@ -518,9 +513,7 @@ flex: 2;
     transition: background-color 0.3s ease;
   }
 
-  .go-back button:hover {
-    background-color: #45a049;
-  }
+  
 }
 
 

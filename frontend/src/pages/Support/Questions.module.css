@@ -2,59 +2,98 @@
   border: 1px solid var(--gray);
   background-color: var(--white);
   box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
-  }
-  
-  .active, .accordion:hover {
-    background-color: #ccc; 
-  }
-  
-  .panel {
-    padding: 0 18px;
-    background-color: white;
-    overflow: hidden;
-    text-align: left;
-    border: 1px solid var(--gray);
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
-    
-  }
-  
-.States{
+.accordion .fa-caret-down {
+  transition: transform 0.3s ease;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  overflow: hidden;
+  text-align: left;
+  border: 1px solid var(--gray);
+  box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); /* Box shadow for depth */
+}
+
+.States {
   background: rgba(255, 255, 255, 0.432);
-    padding: 10px;
-    margin: 100px;
-    border-radius: 10px;
-    text-align: center;
+  padding: 10px;
+  margin: 100px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .goback {
   all: unset;
   font-size: 2rem;
   cursor: pointer;
-  color:black;
+  color: black;
   opacity: 30%;
   font-weight: bold;
   border: none;
   margin: 20px;
   margin-bottom: 30px;
-  border: none;
   justify-content: left;
   display: flex;
 }
-.goback:hover{
+
+.goback:hover {
   opacity: 100%;
 }
 
-.goback i{
+.goback i {
   margin-right: 10px;
-  
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+/* Media Queries for responsiveness */
+@media screen and (max-width: 768px) {
+  .accordion {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .States {
+    margin: 20px;
+  }
+
+  .goback {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .accordion {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .States {
+    margin: 10px;
+  }
+
+  .goback {
+    font-size: 1.2rem;
+  }
 }
