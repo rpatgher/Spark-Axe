@@ -54,9 +54,9 @@ const HeaderDashboard = () => {
                     <div className={styles.dropdown}>
                     <div className={styles.dropdownContent}>
                         <button
-                            onClick={() => setProfileModal(true)}
+                            onClick={() => setProfileModal(true)} 
                         >
-                            <i className="fa-solid fa-user-gear"></i>Perfil
+                            <i className="fa-solid fa-user-gear"></i>Perfil 
                         </button>
                         <button
                             onClick={logoutAuth}

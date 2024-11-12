@@ -11,6 +11,7 @@
     background-position: center;
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
+    z-index: 1;
 }
 @media (max-width: 1024px){
     .header{
@@ -158,6 +159,7 @@
     bottom: 0;
     left: 0;
     transform: translateY(100%);
+    z-index: 10;
 }
 .dropdownContent {
     background-color: #f9f9f9;

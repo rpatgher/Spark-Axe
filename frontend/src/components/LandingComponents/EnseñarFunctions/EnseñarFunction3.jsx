@@ -14,13 +14,13 @@ const EnseñarFunctions = () => {
         <p>Aplica hoy para crear tu sitio personalizado con su dahsboard personalizado</p>
         <Link to="/dashboard" className={styles.learnMore}>Entra a tu portal</Link>
 
-      </div>
+      </div> 
 
       {/* Sección de imagen a la derecha */}
       <div className={styles.imageSection}>
         <img 
           src={Spark}
-          alt="Apple Fitness on iPad" 
+          alt="Sparkaxe image" 
           className ={styles.ipadImage}
         />
       </div>
