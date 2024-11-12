@@ -9,6 +9,30 @@ body{
   text-align: center;
 }
 
+.supportText {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5; /* Espaciado para mejorar la legibilidad */
+  margin-bottom: 1em; /* Espaciado inferior */
+}
+
+.supportLink strong {
+  cursor: pointer;
+  color: #f37b1d;
+  text-decoration: none;
+  font-weight: bold; /* Hace el texto más prominente */
+  transition: color 0.3s ease, text-decoration 0.3s ease; /* Transición suave en hover */
+}
+
+.supportLink strong:hover {
+  color: #d46916; /* Color más oscuro al pasar el cursor */
+  text-decoration: underline;
+}
+
+.supportLink strong:active {
+  color: #a64910; /* Color aún más oscuro cuando se hace clic */
+}
+
 .imgA {
   align-items: center;
   width: auto;
@@ -303,6 +327,8 @@ flex: 2;
   body {
     background-color: var(--gray_dashboard);
     font-family: 'Arial', sans-serif; /* Aseguramos una tipografía clara */
+    overflow-x: hidden; /* Evita el desplazamiento horizontal */
+
   }
 
   /* Heading adjustments */
@@ -485,7 +511,7 @@ flex: 2;
 
   .HeadContact img {
     width: 100%;
-    max-height: 200px; /* Reduced image height */
+    max-height: 100px; /* Reduced image height */
     object-fit: cover;
   }
 
@@ -516,8 +542,6 @@ flex: 2;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-
-  
 }
 
 
@@ -546,7 +570,7 @@ flex: 2;
   }
 
   .marcarerrorimg, .HeadContactimg {
-      width: 90%;
+      width: 100%;
   }
 }
 
@@ -561,7 +585,7 @@ flex: 2;
   }
 
   .enviocontent, .enviocontent0, .enviocontent2 {
-      width: 70%;
+      width: 80%;
   }
 
   .HeadContactimg {
