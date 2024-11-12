@@ -20,11 +20,12 @@
 }
 
 .ipadImage {
-  width: 90%;
+  width: 50%;
   height: auto;
   border-radius: 10px;
   margin: 10%;
   box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
+  border: 1px black solid;
 }
 
 .learnMore {
@@ -51,7 +52,7 @@
 @media (max-width: 768px) {
   .container {
     flex-direction: column; /* Stack image on top */
-    width: 100%;
+    width: 90%;
     padding: 10px;
   }
 
@@ -61,8 +62,9 @@
   }
 
   .ipadImage {
-    width: 100%; /* Make image take full width */
+    width: 50%; /* Make image take full width */
     margin: 0;
+    border: 1px black solid;
   }
   .learnMore{
     display: none;

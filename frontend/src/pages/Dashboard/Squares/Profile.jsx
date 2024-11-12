@@ -16,12 +16,8 @@ const Profile = ({name, websites}) => {
             </div>
             <h2 className={styles["ProfileHead"]}>Hola {name}</h2>
             <p className={styles["ProfileHead"]}>
-                Bienvenido a {websites[0].name}, tienes{" "}
-                <span style={{ fontWeight: "bold" }}>
-                    4 notificaciones
-                </span>{" "}
+                Bienvenido al portal de tu tienda online! Aquí podrás ver tus ventas, productos, clientes y mucho más.
             </p>
-            <p className={styles["ProfileHead"]}>Sparkaxe+</p>
         </div>
     )
 }

@@ -35,7 +35,7 @@
   overflow: hidden;
   background-color: #fff9f95b;
 }
-
+ 
 .navB {
   float: left;
 }
@@ -121,4 +121,83 @@
   height: 100%;
   padding-bottom: 10%;
   background-color: black;
+}
+
+/* Estilos generales */
+@media (max-width: 1200px) {
+  .head {
+    font-size: 4.2rem;
+    width: 85%;
+  }
+
+  .logo {
+    width: 200px;
+    height: 200px;
+  }
+
+  .header {
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 992px) {
+  .head {
+    font-size: 3.6rem;
+    width: 90%;
+  }
+
+  .logo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .navbar {
+    background-color: #fff9f95b;
+  }
+
+  .navB a,
+  .rightnavB a {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .head {
+    font-size: 2.8rem;
+    margin-left: 5%;
+  }
+
+  .logo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .header {
+    margin-top: 50px;
+  }
+
+  .navbar {
+    background-color: #cfcdcd;
+  }
+
+  .navB a,
+  .rightnavB a {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .head {
+    font-size: 2rem;
+    margin-left: 5%;
+  }
+
+  .logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .Trueheader {
+    padding-bottom: 15%;
+  }
 }

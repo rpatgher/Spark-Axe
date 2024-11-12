@@ -28,6 +28,7 @@
   margin: 10%;
   box-shadow: 6px 6px 30px rgba(0, 0, 0, 0.23);
   transition: width 0.5s ease-in-out, margin 0.5s ease-in-out; /* Smooth transition for resizing */
+  border: 1px black solid;
 }
 
 .learnMore {
@@ -55,7 +56,7 @@
 @media (max-width: 768px) {
   .container {
     flex-direction: column; /* Stack content in column layout */
-    width: 100%;
+    width: 90%;
     padding: 10px;
   }
 
@@ -67,6 +68,8 @@
   .ipadImage {
     width: 100%; /* Make image take full width on small screens */
     margin: 0;
+    border: 1px black solid;
+
   }
 
   .learnMore {

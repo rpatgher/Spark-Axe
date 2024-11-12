@@ -88,16 +88,18 @@ const Dashboard = () => {
                     <Most mostSold={mostSold} />
                     <Big elements={elements} inventory={inventory} />
                 </div>
-                <div className={styles["row"]}>
-                    {/* <Delivery /> */}
+                <div className={styles["row"]}> 
+                        {/* <Delivery /> */}
                     <FourSmall 
                         squares={[
-                            { title: "Productos", value: totalElements },
-                            { title: "Ventas", value: sales },
-                            { title: "Puntos de Venta", value: totalPos },
-                            { title: "Clientes", value: totalCustomers },
-                        ]}
+                            { title: "Productos", value: totalElements, className: styles.square },
+                            { title: "Ventas", value: sales, className: styles.square },
+                            { title: "Puntos de Venta", value: totalPos, className: styles.square },
+                            { title: "Clientes", value: totalCustomers, className: styles.square },
+                        ]} 
+                        
                     />
+ 
                     <BigOrders orders={orders} />
                     <div className={styles["Menu"]}>
                         <i className="fa-solid fa-person-digging"></i>
