@@ -12,7 +12,7 @@ const FourSmall = ({ squares }) => {
                     className={styles.square}
                 >
                     <h3>{square.value}</h3>
-                    <p>{square.title}</p>
+                    <p> <i className={`${square.icon}`}></i> {square.title}</p>
                 </div>
             ))}
         </div>

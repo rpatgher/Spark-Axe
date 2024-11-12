@@ -548,7 +548,7 @@ flex: 2;
 /* Tablet (768px and below) */
 @media (max-width: 768px) {
   .head {
-      font-size: 5.5rem;
+      font-size: 4.5rem;
   }
 
   .heading, .headingback {
@@ -577,7 +577,7 @@ flex: 2;
 /* Small Desktop (1024px and below) */
 @media (max-width: 1024px) {
   .head {
-      font-size: 6.5rem;
+      font-size: 5.5rem;
   }
 
   .heading, .headingback {

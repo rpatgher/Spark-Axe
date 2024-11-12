@@ -92,10 +92,10 @@ const Dashboard = () => {
                         {/* <Delivery /> */}
                     <FourSmall 
                         squares={[
-                            { title: "Productos", value: totalElements, className: styles.square },
-                            { title: "Ventas", value: sales, className: styles.square },
-                            { title: "Puntos de Venta", value: totalPos, className: styles.square },
-                            { title: "Clientes", value: totalCustomers, className: styles.square },
+                            { title: "Productos", value: totalElements, className: styles.square, icon: "fa-solid fa-tags"  },
+                            { title: "Ventas", value: sales, className: styles.square, icon: "fa-solid fa-basket-shopping"  },
+                            { title: "Puntos de Venta", value: totalPos, className: styles.square, icon: "fa-solid fa-map-pin"  },
+                            { title: "Clientes", value: totalCustomers, className: styles.square, icon: "fa-solid fa-users" },
                         ]} 
                         
                     />
