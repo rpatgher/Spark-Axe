@@ -2,8 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
-import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from 'react-leaflet';
-import L from 'leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import * as esriGeo from 'esri-leaflet-geocoder';
 
 import clientAxios from '../../config/clientAxios';
@@ -19,7 +18,7 @@ import useApp from '../../hooks/useApp';
 
 const FormPointOfSale = ({ initialPoS, setModalDelete }) => {
     const { auth } = useAuth();
-    const { alert, handleAlert } = useApp();
+    const { handleAlert } = useApp();
     const navigate = useNavigate();
     const mapRef = useRef();
     const markerRef = useRef(null);
@@ -193,7 +192,7 @@ const FormPointOfSale = ({ initialPoS, setModalDelete }) => {
                             name: document.getElementById('name').value,
                             email: document.getElementById('email').value,
                             phone: document.getElementById('phone').value,
-                            category_id: document.getElementById('category_id').value,
+                            category_id: document.getElementById('category_id')?.value || '',
                             image: document.getElementById('image').files[0],
                             address: result.address.Match_addr,
                             city: result.address.Region,

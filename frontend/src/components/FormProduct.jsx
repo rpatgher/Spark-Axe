@@ -11,14 +11,13 @@ import useAuth from '../hooks/useAuth';
 import useApp from '../hooks/useApp';
 
 // ************** components *************
-import FloatAlert from './Alert/FloatAlert';
 import DynamicElement from './DynamicElement';
 import InputCategories from './InputCategories/InputCategories';
 import RichText from './RichText/RichText';
 
 const FormProduct = ({ initalProduct, setModalDelete }) => {
     const { auth } = useAuth();
-    const { alert, handleAlert } = useApp();
+    const { handleAlert } = useApp();
     const navigate = useNavigate();
     const [product, setProduct] = useState({
         name: initalProduct?.name || '',
