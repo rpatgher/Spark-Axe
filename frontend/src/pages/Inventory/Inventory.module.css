@@ -154,3 +154,28 @@ tr.selectedRow td {
       color: #838383; /* Color opaco */
     }
 }
+@media (max-width: 768px){
+    .filters {
+        flex-direction: row;
+        gap: 1rem;
+    }
+    .input-stock{
+        width: 3rem;
+    }
+    .guardar, .cancel{
+        width: 6rem;
+    }
+    .editar{
+        width: 6rem;
+    }
+    .status{
+        width: 3rem;
+    }
+    .configinventory{
+        font-size: 1.5rem;
+    }
+    .configinventoryP{
+        display: none;
+    }
+    
+}

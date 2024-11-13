@@ -112,3 +112,45 @@ a.editar i{
 a.editar:hover{
     background-color: black;
 }
+@media screen and (max-width: 768px) {
+    .adverts-wrapper{
+        padding-top: 6rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .cell-actions {
+        font-size: 1.5rem;
+    }
+    .cell-actions a {
+        margin: 0 .5rem;
+    }
+    .cell-title{
+        font-size: 1rem;
+    }
+    .cell-published div {
+        font-size: .8rem;
+    }
+    .cell-image img {
+        width: 4rem;
+        height: 4rem;
+    }
+    .cell-name, .cell-address, .cell-phone, .cell-email {
+        font-size: 1rem;
+    }
+    .cell-actions {
+        font-size: 1.5rem;
+    }
+    .cell-actions a {
+        margin: 0 .5rem;
+    }
+    .cell-actions i {
+        font-size: 1.5rem;
+    }
+    a.editar{
+        font-size: 1rem;
+        width: 6rem;
+    }
+    .btnP{
+        display: none;
+    }
+}
