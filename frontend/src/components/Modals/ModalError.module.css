@@ -1,20 +1,22 @@
-.body{
+/* ModalError.module.css */
+
+.body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
-    position:fixed;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(8px); /* Blur the background color */
-    transition: background-color 0.3s, backdrop-filter 0.3s; /* Smooth transition */
+    backdrop-filter: blur(8px);
+    transition: background-color 0.3s, backdrop-filter 0.3s;
 }
 
 /* Style for the card container (initially hidden) */
-.container{
+.container {
     border-radius: 1rem;
     width: 50rem;
     padding: 2rem;
@@ -22,7 +24,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
 }
-.container i{
+
+.container i {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
@@ -31,27 +34,33 @@
     cursor: pointer;
     z-index: 1000;
 }
-.container i:hover{
+
+.container i:hover {
     color: color-mix(in srgb, var(--red) 80%, #000);
 }
-.show{
+
+.show {
     opacity: 1;
     transition: opacity 0.5s ease;
 }
-.hide{
+
+.hide {
     opacity: 0;
     transition: opacity 0.5s ease;
 }
+
 /* Style for the form inside the card */
 .form {
     display: flex;
     flex-direction: column;
 }
-.form label{
+
+.form label {
     margin: 1rem 0;
     font-size: 2.2rem;
     font-weight: var(--bold);
 }
+
 /* Style for form inputs */
 .form textarea {
     color: var(--dark_gray);
@@ -64,25 +73,85 @@
     margin-bottom: 1rem;
     height: 10rem;
 }
-.form img{
+
+.form img {
     width: 50%;
-    /* margin: 0 auto; */
 }
-/* Style for form submit button */
+
 .form button {
     padding: 1rem;
-    background-color:  var(--red);
+    background-color: var(--red);
     color: #fff;
     border: none;
     cursor: pointer;
     border-radius: .5rem;
 }
+
 .form button:hover {
     background-color: color-mix(in srgb, var(--red) 80%, #000);
 }
-/* Style for error text */
+
 .description {
     font-size: 1.2rem;
     color: var(--dark_gray);
     text-align: center;
+}
+
+/* Media Queries */
+
+/* Tablet screens */
+@media (max-width: 768px) {
+    .container {
+        width: 80%; /* Adjust modal width for smaller screens */
+        padding: 1.5rem;
+    }
+
+    .form label {
+        font-size: 1.8rem;
+    }
+
+    .form img {
+        height: 20rem;
+        width: auto; /* Adjust image size */
+    }
+    .form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+    .container {
+        width: 90%; /* Make modal full width on small screens */
+        padding: 1rem;
+    }
+
+    .container i {
+        font-size: 2.5rem; /* Adjust close icon size */
+    }
+    .form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .form img{
+      height: 10rem;
+      width: auto;
+      border: #000 1px solid;
+    }
+
+
+    .form label {
+        font-size: 1.6rem;
+    }
+
+    .form textarea {
+        height: 10rem; /* Reduce textarea height */
+    }
+
+    .description {
+        font-size: 1rem; /* Smaller font for description */
+    }
 }

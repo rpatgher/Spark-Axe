@@ -44,12 +44,12 @@ const SidebarDashboard = () => {
             </header>
             <div className={`${styles.body} ${menuActive ? styles["menu-active"] : ""}`}>
                 <div className={styles["main-menu"]}>
-                    <Link to='/dashboard' className={`${styles.item} ${location.pathname === '/dashboard' ? styles.item_active : ''}`}>
+                    <Link to='/dashboard'onClick={() => setMenuActive(!menuActive)} className={`${styles.item} ${location.pathname === '/dashboard' ? styles.item_active : ''}`}>
                         <i className="fa-solid fa-house"></i>
                         <p>Inicio</p>
                     </Link>
                     {website.features.map(feature => (
-                        <Link key={feature.id} to={`/dashboard/${feature.url}`} className={`${styles.item} ${location.pathname === `/dashboard/${feature.url}` ? styles.item_active : ''}`}>
+                        <Link key={feature.id} onClick={() => setMenuActive(!menuActive)} to={`/dashboard/${feature.url}`} className={`${styles.item} ${location.pathname === `/dashboard/${feature.url}` ? styles.item_active : ''}`}>
                             <i className={feature.icon || 'fa-solid fa-cube'}></i>
                             <p>{feature.name}</p>
                         </Link>
