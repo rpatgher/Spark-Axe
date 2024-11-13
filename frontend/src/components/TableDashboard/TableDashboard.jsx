@@ -50,42 +50,48 @@ const TableDashboard = ({
         setVisible(e.target.dataset.value);
         filterList(search, e.target.dataset.value);
     };
+    const [isVisibleOptionsOpen, setIsVisibleOptionsOpen] = useState(false);
+
+    const handleVisibleoptions = () => {
+        setIsVisibleOptionsOpen(!isVisibleOptionsOpen);
+    };
+
 
     return (
         <>
             <div className={styles["Filtertabs"]}>
-                <div className={styles["radio-inputs"]}>
-                    <p className={styles.visibles}>Visibles: </p>
-                    <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "all" ? styles.active : ''}`} data-value="all">Todos</button>
-                    {visibleOptions.map((option, index) => (
-                        <button 
-                            key={index}
-                            onClick={handleVisible} 
-                            className={`${styles.visibles2} ${visible === option.type ? styles.active : ''}`} 
-                            data-value={option.type}
-                        >
-                            {option.name}
-                        </button>    
-                    ))}
-                </div>
-                {selectedCount !== null && selectedCount > 0 && 
-                    <div className={styles.selected}>
-                        <p className={styles.counter}><strong>Seleccionados:</strong> {selectedCount}</p>
-                        {setModalDelete ? (
-                            <button 
-                                className={styles.delete}
-                                type='button'
-                                onClick={() => setModalDelete(true)}
-                            ><i className="fa-solid fa-trash"></i> Eliminar</button>
-                        ) : (
-                            <button
-                                className={styles["share-seleted"]}
-                                type="button"
-                            >
-                                Compartir <i className="fa-solid fa-share"></i>
-                            </button>
-                        )}
-                    </div>
+            <div className={styles["radio-inputs"]}>
+        <p className={styles.visibles} onClick={handleVisibleoptions}>Visibles: </p>
+        <button onClick={handleVisible} className={`${styles.visibles2} ${visible === "all" ? styles.active : ''} ${isVisibleOptionsOpen ? styles.show : ''}`} data-value="all">Todos</button>
+        {visibleOptions.map((option, index) => (
+            <button 
+                key={index}
+                onClick={handleVisible} 
+                className={`${styles.visibles2} ${visible === option.type ? styles.active : ''} ${isVisibleOptionsOpen ? styles.show : ''}`} 
+                data-value={option.type}
+            >
+                {option.name}
+            </button>    
+        ))}
+    </div>
+    {selectedCount !== null && selectedCount > 0 && 
+        <div className={styles.selected}>
+            <p className={styles.counter}><strong>Seleccionados:</strong> {selectedCount}</p>
+            {setModalDelete ? (
+                <button 
+                    className={styles.delete}
+                    type='button'
+                    onClick={() => setModalDelete(true)}
+                ><i className="fa-solid fa-trash"></i> Eliminar</button>
+            ) : (
+                <button
+                    className={styles["share-seleted"]}
+                    type="button"
+                >
+                    Compartir <i className="fa-solid fa-share"></i>
+                </button>
+            )}
+        </div>
                 }
             </div>
             <div className={styles["table-wrapper"]}>

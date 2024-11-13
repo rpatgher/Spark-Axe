@@ -2,22 +2,24 @@
     border-top: 2px solid var(--gray);
     display: flex;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
 }
+
 .radio-inputs {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     padding: 0.25rem;
-    /* width: 40rem; */
     font-size: 14px;
 }
+
 .radio-inputs button {
     margin: 0;
     border: none;
     padding: .5rem 1rem;
     border-radius: 0.5rem;
 }
+
 .visibles {
     border-radius: 0.5rem;
     color: var(--dark_blue);
@@ -27,22 +29,27 @@
     padding: 0;
     background-color: transparent;
 }
-.visibles2{
+
+.visibles2 {
     cursor: pointer;
     background-color: transparent;
 }
+
 .active {
     background-color: #fff;
     font-weight: 600;
 }
+
 .selected {
     display: flex; /* Make .selected a flex container */
     align-items: center; /* Center items vertically */
     gap: 2rem;
 }
+
 .counter {
     margin: 0;
 }
+
 .delete {
     background-color: var(--red);
     color: white;
@@ -53,9 +60,11 @@
     font-weight: bold;
     cursor: pointer;
 }
-.delete:hover{
+
+.delete:hover {
     background-color: color-mix(in srgb, var(--red) 80%, #000000);
 }
+
 .share-seleted {
     background-color: black;
     color: white;
@@ -65,32 +74,58 @@
     padding: .5rem 1rem;
     cursor: pointer;
 }
-.share-seleted:hover{
+
+.share-seleted:hover {
     background-color: color-mix(in srgb, var(--red) 80%, #000000);
 }
 
-
-
-
 .table-wrapper {
-    overflow-x: scroll, hidden;
+    overflow-x: auto; /* Enable horizontal scroll */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    padding: 0 1rem; /* Optional: Add space around the table */
 }
+
 .table-dash {
-    width: 100%;
+    width: 100%; /* Ensure the table is full-width */
     border-collapse: separate;
     border-spacing: 0;
     border: 2px solid var(--gray);
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1);
-    /* Box shadow for depth */
 }
 
 @media (max-width: 768px) {
     .table-dash {
-        width: 90rem;
+        width: 90rem; /* Ensure the table takes up more space on smaller screens */
+    }
+    .Filtertabs {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    .radio-inputs{
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    .visibles2 {
+        display: none;
+    }
+    .visibles2.show {
+        display: inline-block;
+    }
+    .visibles{
+        background-color: #beb8b8;
+        padding: 1rem 4rem;
     }
 }
+/* Default state: on small screens, hide the visibles2 buttons */
+
 
 .table-dash thead {
     background-color: var(--gray);
@@ -100,6 +135,7 @@
     padding: 1.5rem 0;
     font-size: 1.4rem;
 }
+
 .table-dash th input[type="checkbox"] {
     appearance: none;
     width: 2rem;
@@ -110,11 +146,13 @@
     transition: all .3s ease-in-out;
     cursor: pointer;
 }
+
 .table-dash th input[type="checkbox"]:checked {
     background-color: var(--dark_gray);
     transition: all .3s ease-in-out;
     position: relative;
 }
+
 .table-dash th input[type="checkbox"]:checked::after {
     position: absolute;
     top: 50%;
@@ -145,47 +183,40 @@
 .table-dash td.noproducts a {
     color: var(--blue);
 }
+
 .imgAX {
     height: 300px;
     width: 400px;
 }
 
-
-.table-dash tr.selectedRow{
+.table-dash tr.selectedRow {
     border: #d1c5ff;
 }
+
 .table-dash tr.selectedRow td {
     background-color: #eef1f3;
 }
 
-.megarow td:first-of-type{
+.megarow td:first-of-type {
     text-align: left;
     padding-left: 3rem;
 }
-.megarow div{
+
+.megarow div {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10rem;
 }
-.megarow .buttons{
+
+.megarow .buttons {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
 }
 
-
-
-
-
-
-
-
-
-
-
-.cargar{
+.cargar {
     background-color: var(--dark_gray);
     padding: 5px;
     color: white;
@@ -194,6 +225,7 @@
     width: 120px;
     cursor: pointer;
 }
-.cargar:hover{
+
+.cargar:hover {
     background-color: black;
 }
