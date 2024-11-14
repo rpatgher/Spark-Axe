@@ -275,7 +275,7 @@ const Orders = () => {
                 setVisible={setVisible}
                 visibleOptions={[
                     { type: "send", name: "Enviados" },
-                    { type: "progress", name: "En progreso" },
+                    { type: "progress", name: "En proceso" },
                     { type: "closed", name: "Cerrados" },
                     { type: "canceled", name: "Cancelados" },
                 ]}
@@ -286,40 +286,57 @@ const Orders = () => {
                         order.visible = true;
                         //Share to whatsapp pedidos
                         const share = () => {
-                            const formatProductTable = (elements) => {
-                                let table = "\n";
-                                table += "  *Productos*\t*Cantidad*\t  *Precio*\t*Subtotal*\n";
-                                elements.forEach((element) => {
-                                    const name = element.name;
-                                    const quantity = element.order_element.quantity;
-                                    const price = element.price;
-                                    const subtotal = price * quantity;
-                                    table += `  ${name}\t${quantity}\t  ${price}\t${subtotal}\n`;
-                                });
-                                return table;
-                            };
+                            // Log the order object to inspect the structure of order.elements
+                            console.log('Order to share:', order);
                         
-                            const shareToWhatsApp = (message) => {
-                                const url = `whatsapp://send?text=${encodeURIComponent(message)}`;
-                                window.open(url, "_blank");
-                            };
+                            // Check if order.elements is defined and an array
+                            if (order.elements && Array.isArray(order.elements)) {
+                                if (order.elements.length > 0) {
+                                    const formatProductTable = (elements) => {
+                                        let table = "\n";
+                                        table += "Productos\tCantidad\t  Precio\tSubtotal\n";
+                                        elements.forEach((element) => {
+                                            const name = element.name;
+                                            const quantity = element.order_element ? element.order_element.quantity : 0; // Safeguard for missing nested properties
+                                            const price = element.price;
+                                            const subtotal = price * quantity;
+                                            table += `${name}\t${quantity}\t  ${price}\t${subtotal}\n`;
+                                        });
+                                        return table;
+                                    };
                         
-                            const shareArrayToWhatsApp = (elements) => {
-                                const message = `
-                        *ID de Pedido:* ${order.index}
-                        *Fecha de Pedido:* ${formatDate(order.createdAt)}
-                        *Cliente :* Issac Shakalo
-                        *Nota de pedido:* ${order.notes}
-                        *Destino:* ${order.address}
-                        ${formatProductTable(elements)}
-                        *Total:* $${formatToMoney(parseFloat(order.total))}
-                                `;
-                                shareToWhatsApp(message);
-                            };
+                                    const shareToWhatsApp = (message) => {
+                                        const url = `whatsapp://send?text=${encodeURIComponent(message)}`;
+                                        window.open(url, "_blank");
+                                    };
                         
-                            // Call the function with order elements
-                            shareArrayToWhatsApp(order.elements);
+                                    const shareArrayToWhatsApp = (elements) => {
+                                        const message = `
+                                            *ID de Pedido:* ${order.index}
+                                            *Fecha de Pedido:* ${formatDate(order.createdAt)}
+                                            *Cliente :* Issac Shakalo
+                                            *Nota de pedido:* ${order.notes}
+                                            *Destino:* ${order.address}
+                                            *Tabla de Productos:*
+                                            ${formatProductTable(elements)}          
+                                            *Total:* $${formatToMoney(parseFloat(order.total))}
+                                        `.trim().replace(/\n\s+/g, '\n');
+                                        shareToWhatsApp(message);
+                                    };
+                        
+                                    // Call the function with order elements
+                                    shareArrayToWhatsApp(order.elements);
+                                } else {
+                                    console.error('Order has no products to share');
+                                    handleAlert("No products found in the order to share", true);
+                                }
+                            } else {
+                                console.error('order.elements is not an array or is missing:', order.elements);
+                                handleAlert("Invalid order elements format", true);
+                            }
                         };
+                        
+                        
                         
 
                         return (
