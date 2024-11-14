@@ -27,7 +27,7 @@ const Orders = () => {
     const { auth } = useAuth();
     const { alert, handleAlert } = useApp();
     const [orders, setOrders] = useState([]);
-    const [order, setOrder] = useState("desc"); // For sorting the orders
+    const [order, setOrder] = useState("asc"); // For sorting the orders
     const [orderType, setOrderType] = useState("id");
     const [filteredOrders, setFilteredOrders] = useState([]);
     const [visible, setVisible] = useState("all");
