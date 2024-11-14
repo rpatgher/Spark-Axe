@@ -1,10 +1,8 @@
-/* Base styles for searcher and filter components */
 .searcher {
     display: flex;
     align-items: center;
     position: relative;
 }
-
 .searcher input {
     padding: .5rem .5rem .5rem 3rem;
     width: 400px;
@@ -26,7 +24,6 @@
     font-size: 1.2rem;
     color: var(--dark_gray);
 }
-
 .filterter {
     display: flex;
     align-items: center;
@@ -40,23 +37,19 @@
     cursor: pointer;
     border-radius: 1rem;
 }
-
 .filterter:hover .dropdown,
 .filterter .dropdown:hover {
     display: block;
 }
-
 .btn-filter {
     all: unset;
     margin-left: 0rem;
     cursor: pointer;
     background-color: transparent;
 }
-
 .Textfilter {
     margin-right: 10px;
 }
-
 .dropdown {
     position: absolute;
     display: none;
@@ -96,62 +89,4 @@
 .divider {
     border-top: 1px solid var(--gray);
     margin: 0;
-}
-
-/* Media Queries */
-
-/* Tablet screens (max-width: 768px) */
-@media (max-width: 768px) {
-    .searcher input {
-        width: 100%; /* Make the search input field take up full width */
-        padding: .5rem 1rem .5rem 3rem; /* Add more padding for touch targets */
-        font-size: 1.3rem; /* Slightly smaller font size */
-    }
-
-    .search-icon {
-        font-size: 1.5rem; /* Slightly larger icon on tablets */
-        left: 1rem; /* Position adjustment for better touch target */
-    }
-
-    .filterter {
-        gap: 0.5rem; /* Reduce gap between elements for better alignment */
-        padding: 0.8rem; /* Reduced padding for tablets */
-    }
-
-    .dropdownContent {
-        font-size: 1.1rem; /* Smaller font size for dropdown */
-        width: 10rem; /* Narrower dropdown for tablets */
-    }
-
-    .dropdownContent button {
-        padding: 0.8rem 1.2rem; /* Reduced padding for smaller screens */
-    }
-}
-
-/* Mobile screens (max-width: 480px) */
-@media (max-width: 480px) {
-    .searcher input {
-        width: 100%; /* Make the search input field take up full width */
-        padding: .5rem 1rem .5rem 3rem;
-        font-size: 1.2rem; /* Further reduce font size for mobile */
-    }
-
-    .search-icon {
-        font-size: 1.5rem; /* Keep the icon size larger for mobile */
-        left: 1rem;
-    }
-
-    .filterter {
-        gap: 0.5rem; /* Further reduce gap between filter and button */
-        padding: 0.6rem; /* Reduce padding for mobile */
-    }
-
-    .dropdownContent {
-        font-size: 1rem; /* Even smaller font size for mobile */
-        width: 9rem; /* Narrower dropdown */
-    }
-
-    .dropdownContent button {
-        padding: 0.8rem 1.2rem; /* Smaller padding for mobile */
-    }
 }
