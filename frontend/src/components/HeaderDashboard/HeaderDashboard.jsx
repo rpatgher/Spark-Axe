@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 // **************** Hooks ****************
 import useApp from '../../hooks/useApp';
 import useAuth from '../../hooks/useAuth';
+import { useNavigate } from "react-router-dom";
+
 
 // **************** Styles ****************
 import styles from './HeaderDashboard.module.css';
@@ -12,6 +14,13 @@ const HeaderDashboard = () => {
     const { theme, handleToggleTheme } = useApp();
     const { logoutAuth, auth, setProfileModal } = useAuth();
     const { name, lastname, websites, role } = auth;
+    const navigate = useNavigate();
+
+    const handleLogoutAndRedirect = () => {
+    logoutAuth(); // Perform the logout function
+    setProfileModal(false); // Close the profile modal, if necessary
+    navigate("/"); // Redirect to the root ("/")
+  };
 
     return (
         <header className={styles.header}>
@@ -59,7 +68,7 @@ const HeaderDashboard = () => {
                             <i className="fa-solid fa-user-gear"></i>Perfil 
                         </button>
                         <button
-                            onClick={logoutAuth}
+                            onClick={handleLogoutAndRedirect}
                         ><i className="fa-solid fa-right-from-bracket"></i>Cerrar Sesión</button>
                     </div>
                     </div>

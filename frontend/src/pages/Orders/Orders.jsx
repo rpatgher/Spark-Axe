@@ -286,56 +286,41 @@ const Orders = () => {
                         order.visible = true;
                         //Share to whatsapp pedidos
                         const share = () => {
-                            const formatProductTable = (products) => {
+                            const formatProductTable = (elements) => {
                                 let table = "\n";
-                                table +=
-                                    "Producto\tCantidad\tPrecio\tSubtotal\n";
-                                products.forEach((product) => {
-                                    table += `${product.name}\t${
-                                        product.quantity
-                                    }\t${product.price}\t${
-                                        product.price * product.quantity
-                                    }\n`;
+                                table += "  *Productos*\t*Cantidad*\t  *Precio*\t*Subtotal*\n";
+                                elements.forEach((element) => {
+                                    const name = element.name;
+                                    const quantity = element.order_element.quantity;
+                                    const price = element.price;
+                                    const subtotal = price * quantity;
+                                    table += `  ${name}\t${quantity}\t  ${price}\t${subtotal}\n`;
                                 });
                                 return table;
                             };
-
+                        
                             const shareToWhatsApp = (message) => {
-                                const url = `whatsapp://send?text=${encodeURIComponent(
-                                    message
-                                )}`;
+                                const url = `whatsapp://send?text=${encodeURIComponent(message)}`;
                                 window.open(url, "_blank");
                             };
-
-                            const shareArrayToWhatsApp = (products) => {
+                        
+                            const shareArrayToWhatsApp = (elements) => {
                                 const message = `
-*ID de Pedido:* ${order.index}
-*Fecha de Pedido:* ${formatDate(order.createdAt)}
-*Cliente :* Issac Shakalo
-*Nota de pedido:* ${order.notes}
-*Destino:* ubicacion de entrega
-${formatProductTable(products)}
-*Total:* $${formatToMoney(parseFloat(order.total))}
-                            `;
+                        *ID de Pedido:* ${order.index}
+                        *Fecha de Pedido:* ${formatDate(order.createdAt)}
+                        *Cliente :* Issac Shakalo
+                        *Nota de pedido:* ${order.notes}
+                        *Destino:* ${order.address}
+                        ${formatProductTable(elements)}
+                        *Total:* $${formatToMoney(parseFloat(order.total))}
+                                `;
                                 shareToWhatsApp(message);
                             };
-
-                            // Example product array
-                            const products = [
-                                {
-                                    name: "Producto 1",
-                                    quantity: 2,
-                                    price: 10,
-                                },
-                                {
-                                    name: "Producto 2",
-                                    quantity: 1,
-                                    price: 20,
-                                },
-                            ];
-
-                            shareArrayToWhatsApp(products);
+                        
+                            // Call the function with order elements
+                            shareArrayToWhatsApp(order.elements);
                         };
+                        
 
                         return (
                             <Fragment key={`${order.id}-${order.website_id}`}>
