@@ -233,7 +233,7 @@ const Products = () => {
                         { type: 'name', name: 'Nombre' },
                         { type: 'price', name: 'Precio' },
                     ]}
-                    listName='productos por nombre'
+                    listName='productos'
                 />
                 <div className={styles.buttons}>
                     <button
@@ -293,7 +293,7 @@ const Products = () => {
                     { type: 'unpublished', name: 'Archivados' }
                 ]}
                 setModalDelete={setModalDelete}
-                listName='productos por nombre'
+                listName='productos'
                 createNew="/dashboard/products/new"
             >
                 {filteredProducts.map((product, index) => {

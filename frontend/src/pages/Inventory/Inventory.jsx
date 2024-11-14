@@ -241,7 +241,7 @@ const Inventory = () => {
                         {name: 'Cantidad', type: 'stock'},
                         {name: 'Precio', type: 'price'}
                     ]}
-                    listName='productos por nombre'
+                    listName='productos'
                 />
                 <Link to='/dashboard/inventory/set'><button className={styles.configinventory}><i className="fa-solid fa-dolly"></i> <span className={styles.configinventoryP}>Configurar inventario</span></button></Link>
             </div>
@@ -266,7 +266,7 @@ const Inventory = () => {
                     {name: 'Medio', type: 'medium'},
                     {name: 'Bajo', type: 'low'},
                 ]}
-                listName='productos por nombre'
+                listName='productos'
                 createNew='/dashboard/products/new'
             >
                 {filteredProducts.map((item, index) => {

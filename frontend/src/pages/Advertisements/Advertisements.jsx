@@ -181,7 +181,7 @@ const Advertisements = () => {
                         { name: 'Título', type: 'title' },
                         { name: 'Sección', type: 'section' }
                     ]}
-                    listName={'anuncios por titulo'}
+                    listName={'anuncios'}
                 />
                 <div className={styles.buttons}>
                     <Link to='/dashboard/advertisements/new'>
@@ -219,7 +219,7 @@ const Advertisements = () => {
                     { type: 'published', name: 'Publicados' },
                     { type: 'unpublished', name: 'Archivados' },
                 ]}
-                listName={'anuncios por titulo'}
+                listName={'anuncios'}
                 createNew={'/dashboard/advertisements/new'}
                 setModalDelete={setModalDelete}
             >

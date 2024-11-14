@@ -175,7 +175,7 @@ const PointOfSale = () => {
                     { name: 'Nombre', type: 'name' },
                     // { name: 'No seleccionados', type: 'unselected' }
                 ]}
-                listName={'puntos de venta por nombre'}
+                listName={'puntos de venta'}
             />
                 <div className={styles.buttons}>
                     <Link to='/dashboard/pos/new'>
@@ -213,7 +213,7 @@ const PointOfSale = () => {
                 visibleOptions={[
 
                 ]}
-                listName={'puntos de venta por nombre'}
+                listName={'puntos de venta'}
                 createNew={'/dashboard/pos/new'}
                 setModalDelete={setModalDelete}
             >
