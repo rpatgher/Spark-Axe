@@ -189,7 +189,7 @@ const Advertisements = () => {
                             className={styles["btn-new-add"]}
                         >
                             <i className="fa-solid fa-plus"></i>
-                           <span className={styles.btnP}>Agregar Anuncio</span> 
+                            Agregar Anuncio
                         </button>
                     </Link>
                 </div>

@@ -77,7 +77,7 @@ const SearcherDashboard = ({
             <i className={`fa-solid fa-search ${styles["search-icon"]}`}></i>
             <div className={styles.filterter}>
                 <button className={`${styles["btn-filter"]}`}>
-                    <strong className={`${styles["Textfilter"]}`}>Ordenar</strong>
+                    <strong className={`${styles["Textfilter"]}`}>Filtrar</strong>
                     <i className='fa-solid fa-sort'></i>
                 </button>
                 <div className={styles.dropdown}>

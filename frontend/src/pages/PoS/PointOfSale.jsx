@@ -183,7 +183,7 @@ const PointOfSale = () => {
                             className={styles["btn-new-add"]}
                         >
                             <i className="fa-solid fa-plus"></i>
-                           <span className={styles.btnP}> Agregar Punto de Venta </span>
+                            Agregar Punto de Venta
                         </button>
                     </Link>
                 </div>

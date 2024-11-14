@@ -134,35 +134,3 @@ a.editar i{
 a.editar:hover{
     background-color: black;
 }
-@media screen and (max-width: 768px) {
-    .adverts-wrapper{
-        padding-top: 6rem;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
-    .cell-actions {
-        font-size: 1.5rem;
-    }
-    .cell-actions a {
-        margin: 0 .5rem;
-    }
-    .cell-title{
-        font-size: 1rem;
-    }
-    .cell-published div {
-        font-size: .8rem;
-    }
-    .cell-image img {
-        height: 3rem;
-    }
-    .cell-actions {
-        font-size: 1.5rem;
-    }
-    a.editar{
-        font-size: 1rem;
-    }
-    .btnP{
-        display: none;
-    }
-
-}

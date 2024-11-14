@@ -243,7 +243,7 @@ const Inventory = () => {
                     ]}
                     listName='productos'
                 />
-                <Link to='/dashboard/inventory/set'><button className={styles.configinventory}><i className="fa-solid fa-dolly"></i> <span className={styles.configinventoryP}>Configurar inventario</span></button></Link>
+                <Link to='/dashboard/inventory/set'><button className={styles.configinventory}><i className="fa-solid fa-dolly"></i> Configurar inventario</button></Link>
             </div>
             <TableDashboard
                 columns={[
