@@ -126,11 +126,6 @@
     .dropdownContent button {
         padding: 0.8rem 1.2rem; /* Reduced padding for smaller screens */
     }
-    .btn-filter{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
 }
 
 /* Mobile screens (max-width: 480px) */
@@ -158,16 +153,5 @@
 
     .dropdownContent button {
         padding: 0.8rem 1.2rem; /* Smaller padding for mobile */
-    }
-    .btn-filter {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        border: black 1px solid;
-        border-radius: 1rem;
-        padding: 0.5rem;
-    }
-    .Textfilter {
-        font-size: 1rem;
     }
 }

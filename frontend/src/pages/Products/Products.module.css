@@ -47,9 +47,6 @@
     .btn-new-product p {
         display: none;
     }
-    .btn-edit-categories p {
-        display: none;
-    }
 }
 .btn-new-product:hover {
     color: #fff;

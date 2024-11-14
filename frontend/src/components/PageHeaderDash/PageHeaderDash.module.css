@@ -1,14 +1,7 @@
-/* Base styles for PageHeaderDash */
-.top {
+.top{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 2rem;
 }
-
-.top-content {
+.top-content{
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -16,57 +9,16 @@
     justify-content: flex-end;
     padding-bottom: 3rem;
 }
-
-.top-content h4 {
+.top-content h4{
     margin: 0;
 }
-
-.top-image {
+.top-image{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-.top-image img {
+.top-image img{
     width: 45rem;
     aspect-ratio: 5/2;
     object-fit: contain;
-}
-
-/* Media Queries */
-
-/* Tablet screens (max-width: 768px) */
-@media (max-width: 768px) {
-    .top {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .top-content {
-        width: 100%;
-        text-align: center; /* Center the text on tablets */
-    }
-
-    .top-content h4 {
-        font-size: 1.4rem; /* Slightly smaller font size for description */
-        padding: 0.5rem 0; /* Add some spacing for readability */
-    }
-
-    .top-image img {
-        width: 100%; /* Make the image responsive */
-        height: auto; /* Maintain aspect ratio */
-    }
-}
-
-/* Mobile screens (max-width: 480px) */
-@media (max-width: 480px) {
-    .top-content h4 {
-        font-size: 1.2rem; /* Smaller font size for mobile */
-    }
-
-    .top-image img {
-        width: 100%; /* Make the image even more responsive */
-        height: auto; /* Maintain aspect ratio */
-    }
 }
