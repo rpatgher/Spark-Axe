@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import styles from './ModalCategories.module.css';
 
 const ModalCategories = ({ categories, closeModal }) => {
-  const [categoryActive, setCategoryActive] = useState(null);
+  const [categoryActive, setCategoryActive] = useState(null); // Initially, no category is active
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -28,24 +28,16 @@ const ModalCategories = ({ categories, closeModal }) => {
   };
 
   const handleCategoryClick = (category) => {
-    // Check if the category clicked is the same as the active one
-    setCategoryActive((prevState) => {
-      if (prevState?.id === category.id) {
-        // If it's the same, set to null (collapse it)
-        return null;
-      }
-      // Otherwise, set the clicked category as active
-      return category;
-    });
+    // Toggle the category, if clicked again, close the active category
+    setCategoryActive((prevState) =>
+      prevState?.id === category.id ? null : category
+    );
   };
 
   return (
     <div className={styles['modal-wrapper']}>
       <div className={`${styles['modal']} ${show ? styles.show : ''}`}>
-        <button
-          className={styles['close-modal']}
-          onClick={unshowModal}
-        >
+        <button className={styles['close-modal']} onClick={unshowModal}>
           <i className="fa-solid fa-times"></i>
         </button>
         <h2>Categorías</h2>
@@ -59,7 +51,7 @@ const ModalCategories = ({ categories, closeModal }) => {
               key={index}
               onClick={() => handleCategoryClick(category)}
             >
-              <div className={`${styles['category']}`}>
+              <div className={styles['category']}>
                 <h3>{category.category}</h3>
                 {categoryActive?.id === category.id ? (
                   <i className="fa-solid fa-chevron-up"></i>

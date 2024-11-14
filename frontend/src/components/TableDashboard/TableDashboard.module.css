@@ -120,8 +120,11 @@
         display: inline-block;
     }
     .visibles{
-        background-color: #beb8b8;
+        background-color: #ffffff;
         padding: 1rem 4rem;
+    }
+    .visibles:active {
+        background-color: #908484; /* Change to your desired color on click */
     }
 }
 /* Default state: on small screens, hide the visibles2 buttons */
