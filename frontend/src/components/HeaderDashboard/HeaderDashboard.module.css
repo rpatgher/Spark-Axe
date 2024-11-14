@@ -1,69 +1,23 @@
-/* Header general styling */
-.header {
-    background-color: var(--gray_dashboard);
+.header{
+    background-color:var(--gray_dashboard);
     padding: 1rem 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); /* Applies a blur effect to the background */
     box-shadow: var(--boxed);
     background-image: url('../../assets/img/backgroundcard.jpg');
+    background-blend-mode:initial;
     background-position: center;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
     z-index: 1;
 }
-
-/* 1024px Media Query */
-@media (max-width: 1024px) {
-    .header {
+@media (max-width: 1024px){
+    .header{
         padding: 1rem;
     }
-    .heading h2 {
-        font-size: 2rem;
-    }
 }
-
-/* 768px Media Query */
-@media (max-width: 768px) {
-    .header {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-    .heading {
-        align-items: flex-start;
-        margin-bottom: 1rem;
-    }
-    .main {
-        padding: 0 1rem;
-        gap: 0.5rem;
-    }
-    .profile,
-    .notification {
-        display: none;
-    }
-    .darkmode {
-        display: none;
-    }
-    .heading p {
-        font-size: 1.8rem;
-    }
-}
-
-/* 480px Media Query */
-@media (max-width: 480px) {
-    .heading h2 {
-        font-size: 1.8rem;
-    }
-    .heading p {
-        font-size: 1.6rem;
-    }
-    .header {
-        padding: 1rem;
-    }
-    .dropdownContent {
-        width: 100%;
-    }
-}
-
 .heading{
     display: flex;
     flex-direction: column;
@@ -99,7 +53,6 @@
     .main{
         padding: 0 1rem;
         gap: 0;
-        flex-direction: row;
     }
 }
 
@@ -114,9 +67,9 @@
 }
 @media (max-width: 768px){
     .profile{
-        width: auto;
+        width: 13rem;
+        display: none;
     }
-    
 }
 .darkmode{
     all: unset;
@@ -215,11 +168,6 @@
     font-size: 1.2rem;
     transform: translateY(1rem);
     width: 15rem;
-}
-@media (max-width: 768px){
-    .dropdownContent {
-        width: 13rem;
-    }
 }
 .dropdownContent button{
     all: unset;

@@ -1,4 +1,4 @@
-.modal-wrapper {
+.modal-wrapper{
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -6,32 +6,29 @@
     top: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-.modal {
+.modal{
     background-color: var(--white);
     position: relative;
     border-radius: 1rem;
     padding: 2rem;
-    width: 40rem;  /* Default width for larger screens */
-    max-width: 90%; /* Ensures modal doesn’t exceed screen width */
+    min-width: 40rem;
     height: 50rem;
     transform: translateY(-2rem);
-    transition: all 0.3s;
+    transition: all .3s;
     opacity: 0;
     display: flex;
     flex-direction: column;
 }
-
-.show {
+.show{
     opacity: 1;
     transform: translateY(0);
-    transition: all 0.3s;
+    transition: all .3s;
 }
-
 .close-modal {
     all: unset;
     position: absolute;
@@ -46,93 +43,56 @@
     align-items: center;
     justify-content: center;
 }
-
 .close-modal:hover {
     background-color: var(--gray);
 }
-
-h2 {
+h2{
     font-size: 2rem;
+   
 }
-
-.categories {
+.categories{
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow: scroll;
     justify-content: flex-start;
     flex: 1;
 }
-
-.category-container {
+.category-container{
     padding: 1rem;
-    border-radius: 0.5rem;
+    border-radius: .5rem;
 }
-
-.category-container:hover {
+.category-container:hover{
     background-color: var(--gray);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
 }
-
 .category {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-.category-active {
+.category-active{
     flex-direction: column;
     background-color: var(--gray);
 }
-
-.category h3 {
+.category h3{
     font-size: 1.8rem;
     margin: 0;
     font-weight: 400;
 }
-
-.subcategories {
+.subcategories{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin: 1rem 0;
 }
-
-.subcategory {
+.subcategory{
     color: rgb(99, 93, 93);
     font-size: 1.6rem;
     margin: 0;
 }
-
-.divider {
+.divider{
     border-bottom: 1px solid var(--blue);
     margin: 1rem 0;
     width: 100%;
-}
-
-/* Media Query for Small Screens */
-@media (max-width: 768px) {
-    .modal {
-        padding: 1rem;
-        width: 90%; /* Ensures modal takes up most of the screen width */
-        height: 50%;
-    }
-
-    h2 {
-        font-size: 1.6rem;
-    }
-
-    .close-modal {
-        width: 3rem;
-        height: 3rem;
-        font-size: 2rem;
-    }
-
-    .category h3 {
-        font-size: 1.5rem;
-    }
-
-    .subcategory {
-        font-size: 1.4rem;
-    }
 }

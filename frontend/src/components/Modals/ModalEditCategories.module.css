@@ -1,5 +1,4 @@
-/* Default styles for larger screens */
-.modal-wrapper {
+.modal-wrapper{
     position: fixed;
     z-index: 10;
     left: 0;
@@ -7,12 +6,12 @@
     top: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-.modal {
+.modal{
     background-color: var(--white);
     position: relative;
     border-radius: 1rem;
@@ -25,51 +24,6 @@
     display: flex;
     flex-direction: column;
 }
-
-/* Tablet screens */
-@media (max-width: 768px) {
-    .modal {
-        min-width: 50rem;
-        height: 40rem;
-        padding: 1.5rem;
-    }
-    .modal h2 {
-        font-size: 1.8rem;
-    }
-    .content p {
-        font-size: 1.3rem;
-    }
-}
-
-/* Mobile screens */
-@media (max-width: 480px) {
-    .modal {
-        min-width: 90%;
-        height: auto;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        transform: translateY(0);
-    }
-    .modal h2 {
-        font-size: 1.5rem;
-    }
-    .content p {
-        font-size: 1.2rem;
-    }
-    .close-modal {
-        width: 3rem;
-        height: 3rem;
-        font-size: 2.5rem;
-    }
-    .header button {
-        font-size: 1.2rem;
-    }
-    .inputs input, .inputs textarea {
-        font-size: 1.4rem;
-        padding: 1rem;
-    }
-}
-
 .modal form{
     display: flex;
     align-items: center;
