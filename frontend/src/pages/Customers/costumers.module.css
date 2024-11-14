@@ -122,7 +122,6 @@ tr.selectedRow{
     flex-direction: row;
     justify-content: center;
     align-items: center; /* Optional: To vertically center the icons */
-    background-color: #eef1f3 !important;
 }
 .contactbtn{
     font-size: 15px;
