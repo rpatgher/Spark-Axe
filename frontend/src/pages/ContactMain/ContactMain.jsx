@@ -3,6 +3,8 @@ import styles from './ContactMain.module.css';
 
 import { Link } from "react-router-dom"
 import logo from '../../assets/img/axolotl worker.png';
+import PlusL from '../../assets/img/PlusL.png';
+import FQL from '../../assets/img/FQL.png';
 import Marcarerror from '../../assets/img/Marcarerror.png';
 import HeadContact from '../../assets/img/HeadContact.png';
 
@@ -25,14 +27,14 @@ const About = () => {
             </Link>
             <Link to='/support'>
             <div className={styles.contactbuttons}>
-            <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
+            <img className={styles["axworker"]} src={PlusL} alt="Sparkaxe-logo" />
 
             <h3><span className={styles.headingother}>Aplicar</span></h3>
             </div>
             </Link>
             <Link to='/support/questions'>
             <div className={styles.contactbuttons}>
-            <img className={styles["axworker"]} src={logo} alt="Sparkaxe-logo" />
+            <img className={styles["axworker"]} src={FQL} alt="Sparkaxe-logo" />
 
             <h3><span className={styles.headingother}>Preguntas frequentes</span></h3>
             </div>
