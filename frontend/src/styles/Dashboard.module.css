@@ -66,3 +66,14 @@
     border: none;
     padding: 10px;
 }
+
+/* Add this to your Dashboard.module.css */
+.outlet-wrapper {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+  }
+  
+  .outlet-wrapper.exit {
+    opacity: 0;
+  }
+  
