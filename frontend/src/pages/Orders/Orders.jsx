@@ -240,7 +240,7 @@ const Orders = () => {
                     sortedList={sortedOrders}
                     setFilteredList={setFilteredOrders}
                     setSelectAll={setSelectAll}
-                    listName="pedidos"
+                    listName="pedidos por ID"
                     options={[
                         { name: "Número", type: "id" },
                         { name: "Fecha de pedido", type: "date" },
@@ -279,7 +279,7 @@ const Orders = () => {
                     { type: "closed", name: "Cerrados" },
                     { type: "canceled", name: "Cancelados" },
                 ]}
-                listName="pedidos"
+                listName="pedidos por ID"
             >
                 {filteredOrders.map((order, index) => {
                     if (index < limit) {

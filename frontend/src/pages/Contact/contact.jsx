@@ -242,7 +242,7 @@ const Contact = () => {
                         {name: 'Nombre', type: 'name'},
                         {name: 'Fecha', type: 'date'}
                     ]}
-                    listName={'contactos'}
+                    listName={'contactos por nombre'}
                 />
             </div>
             <TableDashboard 
@@ -271,7 +271,7 @@ const Contact = () => {
                     {type: 'completed', name: 'Completados'},
                     {type: 'incompleted', name: 'No Completados'}
                 ]}
-                listName={'contactos'}
+                listName={'contactos por nombre'}
                 setModalDelete={setModalDelete}
             >
                 {filteredContacts.map((contact, index) => {

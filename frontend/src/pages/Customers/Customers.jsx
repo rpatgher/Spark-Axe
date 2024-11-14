@@ -259,7 +259,7 @@ const Customers = () => {
                             { name: 'Número de ID', type: 'id' },
                             { name: 'Nombre', type: 'name' },
                         ]}
-                        listName='clientes'
+                        listName='clientes por nombre'
                     />
                 </div>
                 <TableDashboard
@@ -300,7 +300,7 @@ const Customers = () => {
                         { name: 'No Confirmados', type: 'unconfirmed' },
                     ]}
                     setModalDelete={setModalDelete}
-                    listName='clientes'
+                    listName='clientes  por nombre'
                     colspan={editingRow !== null ? [4,4,4] : [3,3,3]}
                 >
                     {filteredElements.map((item, index) => {
