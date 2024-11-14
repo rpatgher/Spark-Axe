@@ -298,3 +298,127 @@ input.empty-field, textarea.empty-field{
     }
 }
 
+/* Mobile and tablet responsiveness */
+
+/* Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    .body {
+        grid-template-columns: 1fr; /* Switch to single column layout */
+        gap: 1rem;
+    }
+
+    /* Form adjustments */
+    .form {
+        padding: 1rem;
+    }
+
+    .field {
+        padding: 1.5rem;
+    }
+
+    /* Two-column fields become one-column */
+    .field-two-columns {
+        grid-template-columns: 1fr; /* Switch to one column layout */
+        padding: 0 2rem;
+    }
+
+    /* Increase font size for better readability */
+    .field label,
+    .field input,
+    .field textarea,
+    .field select {
+        font-size: 1.2rem;
+    }
+
+    /* Image fields: reduce size and spacing */
+    .field-images label {
+        padding: 20px 30px;
+        font-size: 1.2rem;
+    }
+
+    .field-images svg {
+        height: 40px;
+    }
+
+    .field-images span,
+    .field-images-done span {
+        font-size: 1.2rem;
+    }
+
+    /* Preview section */
+    .preview {
+        padding: 1.5rem;
+        gap: 2rem;
+    }
+
+    .preview p {
+        font-size: 1.4rem;
+    }
+
+    /* Adjust button sizes */
+    .button {
+        padding: 0.8rem;
+        font-size: 1.4rem;
+    }
+
+    .btn-publish,
+    .btn-unpublish,
+    .btn-delete {
+        width: 100%;
+        font-size: 1.4rem;
+    }
+
+    /* Sticky right column to top */
+    .right {
+        position: relative; /* Sticky behavior is less needed on mobile */
+        top: unset;
+    }
+}
+
+/* Very small devices (Mobile phones in portrait mode) */
+@media (max-width: 480px) {
+    /* Reduce padding and margins */
+    .field {
+        padding: 1rem;
+    }
+
+    .field-images label {
+        padding: 15px 25px;
+    }
+
+    .field-images span,
+    .field-images-done span {
+        font-size: 1rem;
+    }
+
+    .button {
+        padding: 0.7rem;
+        font-size: 1.3rem;
+    }
+
+    .btn-publish,
+    .btn-unpublish,
+    .btn-delete {
+        font-size: 1.3rem;
+    }
+
+    /* Adjust form spacing and alignment */
+    .form {
+        gap: 1rem;
+    }
+
+    .field label,
+    .field input,
+    .field textarea,
+    .field select {
+        font-size: 1.2rem;
+    }
+
+    .preview {
+        padding: 1rem;
+    }
+
+    .preview p {
+        font-size: 1.4rem;
+    }
+}

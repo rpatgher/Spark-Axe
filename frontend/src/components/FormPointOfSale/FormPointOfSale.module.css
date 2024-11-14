@@ -1,3 +1,4 @@
+/* Estilos base (desktop) */
 .body {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -5,11 +6,13 @@
     align-items: flex-start;
     position: relative;
 }
+
 .form {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
+
 .field {
     display: flex;
     flex-direction: column;
@@ -18,12 +21,15 @@
     gap: 1rem;
     border-radius: 1rem;
 }
+
 .field label {
     font-size: 1.4rem;
 }
+
 .field textarea {
     resize: none;
 }
+
 .field input,
 .field textarea,
 .field select {
@@ -32,44 +38,49 @@
     border: 1px solid var(--gray);
     background-color: var(--white);
     box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1);
-    /* Box shadow for depth */
     border-radius: 1rem;
     height: auto;
 }
+
 .required{
     position: relative;
 }
+
 .required::after {
     position: absolute;
     content: "*";
     color: var(--red);
 }
+
 .address{
     font-size: 1.4rem;
     font-weight: bold;
     margin-bottom: 0;
 }
+
 .address span {
     font-weight: normal;
 }
+
 .note{
     font-size: 1.2rem;
     color: var(--dark_gray);
     margin: 0;
 }
+
 .map{
     height: 400px;
-    /* width: 10rem; */
-    /* border-radius: 1rem;
-    box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.1); */
 }
+
 .popup-restyling {
     width: 20rem;
 }
+
 .popup-restyling p{
     font-size: 1.2rem;
     width: 100%;
 }
+
 .field-images, .field-images-done {
     display: flex;
     flex-direction: column;
@@ -135,6 +146,7 @@
     background-color: #c3c2fc;
     border: 2px dashed var(--blue);
 }
+
 .field-images-done span {
     background-color: var(--blue);
 }
@@ -143,9 +155,11 @@
     border: 2px dashed var(--red);
     background-color: color-mix(in srgb, var(--red) 20%, #fff );
 }
+
 .empty-field-image svg {
     fill: var(--red);
 }
+
 .empty-field-image span {
     background-color: var(--red);
 }
@@ -153,7 +167,6 @@
 .field-images-done span:hover {
     background-color: color-mix(in srgb, var(--blue) 80%, #000);
 }
-
 
 input.empty-field, textarea.empty-field, select.empty-field {
     border: 1px solid var(--red);
@@ -169,6 +182,7 @@ input.empty-field, textarea.empty-field, select.empty-field {
     position: sticky;
     top: 3rem;
 }
+
 .preview {
     background-color: var(--white);
     border-radius: 1rem;
@@ -189,7 +203,6 @@ input.empty-field, textarea.empty-field, select.empty-field {
     flex-direction: column;
 }
 
-
 .button {
     all: unset;
     background-color: var(--blue);
@@ -199,8 +212,6 @@ input.empty-field, textarea.empty-field, select.empty-field {
     font-size: 1.6rem;
     text-align: center;
     cursor: pointer;
-
-
     display: flex;
     gap: .5rem;
     justify-content: center;
@@ -218,20 +229,91 @@ input.empty-field, textarea.empty-field, select.empty-field {
     background-color: color-mix(in srgb, var(--red) 85%, #000);
 }
 
-
 .btn-disabled{
     opacity: .5;
     cursor: not-allowed;
 }
+
 .btn-saving{
     animation: pulse 2s infinite;
     cursor: progress;
 }
+
 @keyframes pulse {
     0%, 100% {
-      color: #fff; /* Color original */
+      color: #fff;
     }
     50% {
-      color: #838383; /* Color opaco */
+      color: #838383;
+    }
+}
+
+/* Media Queries */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .body {
+        grid-template-columns: 1fr; /* Solo una columna en tabletas */
+    }
+
+    .form {
+        gap: 1.5rem;
+    }
+
+    .field {
+        padding: 1.5rem;
+    }
+
+    .map {
+        height: 300px;
+    }
+
+    .preview {
+        padding: 1.5rem;
+    }
+
+    .button {
+        padding: 0.8rem;
+        font-size: 1.4rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .body {
+        padding: 1rem;
+    }
+
+    .form {
+        gap: 1rem;
+    }
+
+    .field {
+        padding: 1rem;
+    }
+
+    .map {
+        height: 200px;
+    }
+
+    .preview {
+        padding: 1rem;
+    }
+
+    .button {
+        font-size: 1.2rem;
+        padding: 0.8rem;
+    }
+
+    .right {
+        position: relative; /* Elimina la posición sticky en pantallas pequeñas */
+    }
+
+    .field input, .field textarea, .field select {
+        font-size: 1.2rem;
+    }
+
+    .field label {
+        font-size: 1.2rem;
     }
 }
