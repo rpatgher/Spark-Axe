@@ -57,8 +57,3 @@
 .buttondeliver:hover {
     background-color: #706c67;
 }
-@media (max-width: 768px) {
-    .enviodiv {
-        width: 100%;
-    }
-}
