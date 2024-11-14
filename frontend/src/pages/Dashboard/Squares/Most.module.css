@@ -31,3 +31,8 @@
     max-width: 100%;
     filter: drop-shadow(10px 10px 10px grey);
 }
+@media (max-width: 768px) {
+    .Most {
+        width: 100%;
+    }
+}

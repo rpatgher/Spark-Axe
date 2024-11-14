@@ -108,3 +108,9 @@
     background-color: color-mix(in srgb, var(--red) 20%, #fff);
     color: color-mix(in srgb, var(--red) 80%, #000);
 }
+@media (max-width: 768px) {
+    .big {
+        width: 100%;
+        height: 100%;
+    }
+}

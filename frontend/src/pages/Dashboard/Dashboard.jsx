@@ -84,9 +84,9 @@ const Dashboard = () => {
                     </span>
                 </h1>
                 <div className={styles["row"]}>
-                    <Profile name={name} websites={websites} />
-                    <Most mostSold={mostSold} />
-                    <Big elements={elements} inventory={inventory} />
+                    <Profile className={styles["div"]}name={name} websites={websites} />
+                    <Most  className={styles["div"]} mostSold={mostSold} />
+                    <Big className={styles["div"]} elements={elements} inventory={inventory} />
                 </div>
                 <div className={styles["row"]}> 
                         {/* <Delivery /> */}

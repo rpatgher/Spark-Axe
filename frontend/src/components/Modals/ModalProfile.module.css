@@ -133,3 +133,89 @@ h3.config-title{
   color: #858383;
   cursor: pointer;
 }
+/* For devices with a max width of 768px (tablets and mobile devices) */
+@media (max-width: 768px) {
+  .modal-profile {
+    min-width: 90%; /* Make the modal narrower on smaller screens */
+    padding: 1.5rem; /* Reduce padding for smaller screens */
+  }
+
+  .info {
+    gap: 1rem; /* Reduce gap between elements in the info section */
+  }
+
+  .info-field, .info-field-website {
+    flex-direction: column; /* Stack the fields vertically on smaller screens */
+    align-items: flex-start; /* Align text to the left */
+    padding: 0.5rem 0; /* Reduce padding */
+  }
+
+  .info-field h3, .info-field-website h3 {
+    font-size: 1.4rem; /* Reduce font size for headings */
+  }
+
+  .info-field p, .info-field-website p {
+    font-size: 1.4rem; /* Adjust font size for smaller screens */
+  }
+
+  .Newwebsite {
+    font-size: 1.2rem; /* Adjust button font size */
+    padding: 0.5rem 1rem; /* Adjust padding */
+  }
+
+  .edit {
+    font-size: 14px; /* Adjust the font size for the "Edit" button */
+    padding: 8px; /* Reduce padding */
+  }
+
+  .close-modal {
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem; /* Adjust icon size */
+  }
+
+  .line {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .config-title {
+    font-size: 1.8rem; /* Adjust the title font size for mobile */
+  }
+}
+
+/* For devices with a max width of 480px (small mobile devices) */
+@media (max-width: 480px) {
+  .modal-profile {
+    min-width: 100%; /* Make modal take the full width */
+    padding: 1rem; /* Further reduce padding */
+  }
+
+  .info-field h3, .info-field-website h3 {
+    font-size: 1.2rem; /* Further reduce font size for smaller devices */
+  }
+
+  .info-field p, .info-field-website p {
+    font-size: 1.2rem; /* Adjust paragraph text size */
+  }
+
+  .Newwebsite {
+    font-size: 1rem; /* Make the button text smaller */
+    padding: 0.4rem 1rem; /* Reduce padding */
+  }
+
+  .edit {
+    font-size: 12px; /* Adjust font size for the edit button */
+    padding: 6px; /* Reduce padding */
+  }
+
+  .close-modal {
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem; /* Adjust icon size */
+  }
+}

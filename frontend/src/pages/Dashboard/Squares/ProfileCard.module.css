@@ -49,3 +49,55 @@
 .linkother:hover {
     color: color-mix(in srgb, var(--yellow) 90%, #fff);
 }
+/* Base styles remain the same */
+
+/* Mobile first (small screens) */
+@media (max-width: 600px) {
+    .profilecard {
+        padding: 1rem 2rem;
+        box-shadow: none;
+    }
+
+    .profilecard h3 {
+        font-size: 3rem;
+        margin: 2rem 0;
+    }
+
+    .linkother {
+        font-size: 16px;
+    }
+}
+
+/* Tablet screens */
+@media (max-width: 768px) {
+    .profilecard {
+        padding: 1.5rem 3rem;
+    }
+
+    .profilecard h3 {
+        font-size: 4rem;
+        margin: 2.5rem 0;
+    }
+
+    .linkother {
+        font-size: 18px;
+    }
+}
+
+/* Desktop screens and larger */
+@media (min-width: 1024px) {
+    .profilecard {
+        padding: 2rem 4rem;
+        box-shadow: 0 16px 32px 0 rgba(56, 57, 71, 0.3);
+        width: 80%;
+    }
+
+    .profilecard h3 {
+        font-size: 5rem;
+        margin: 3rem 0;
+    }
+
+    .linkother {
+        font-size: 20px;
+    }
+}
