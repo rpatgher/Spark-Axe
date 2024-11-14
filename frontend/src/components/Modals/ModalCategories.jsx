@@ -3,18 +3,12 @@ import { useEffect, useState } from 'react';
 // **************+ Styles +***************
 import styles from './ModalCategories.module.css';
 
-const ModalCategories = ({categories, closeModal}) => {
+const ModalCategories = ({ categories, closeModal }) => {
     const [categoryActive, setCategoryActive] = useState(null);
-
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-        const showModal = () => {
-            setTimeout(() => {
-                setShow(true);
-            }, 300);
-        }
-        return () => showModal();
+        setShow(true); // Immediately show the modal
     }, []);
 
     const unshowModal = () => {
@@ -22,7 +16,12 @@ const ModalCategories = ({categories, closeModal}) => {
         setTimeout(() => {
             closeModal();
         }, 300);
-    }
+    };
+
+    const handleCategoryClick = (category) => {
+        // Toggle the active category
+        setCategoryActive((prev) => prev?.id === category.id ? null : category);
+    };
 
     return (
         <div className={styles["modal-wrapper"]}>
@@ -40,23 +39,17 @@ const ModalCategories = ({categories, closeModal}) => {
                         <div 
                             className={`${styles["category-container"]} ${categoryActive?.category === category.category ? styles['category-active'] : ''}`}
                             key={index}
-                            onClick={() => {
-                                if (categoryActive === null || categoryActive?.id !== category.id) {
-                                    setCategoryActive(category);
-                                } else {
-                                    setCategoryActive(null);
-                                }
-                            }}
+                            onClick={() => handleCategoryClick(category)} // Using a helper function
                         >
                             <div className={`${styles["category"]}`}>
                                 <h3>{category.category}</h3>
-                                {categoryActive !== null && categoryActive.category === category.category ? (
+                                {categoryActive?.category === category.category ? (
                                     <i className="fa-solid fa-chevron-up"></i>
                                 ) : (
                                     <i className="fa-solid fa-chevron-down"></i>
                                 )}
                             </div>
-                            {categoryActive !== null && categoryActive.category === category.category &&
+                            {categoryActive?.category === category.category &&
                                 <div
                                     className={styles["subcategories"]}
                                 >
@@ -73,7 +66,7 @@ const ModalCategories = ({categories, closeModal}) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ModalCategories
+export default ModalCategories;

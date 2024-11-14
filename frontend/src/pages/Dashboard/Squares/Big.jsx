@@ -42,16 +42,21 @@ const Big = ({elements, inventory}) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {elements.map(item => (
-                            <tr key={item.id}>
-                                <td>{item.name}</td>
-                                <td>{item.stock}</td>
-                                <td>
-                                    {setStatus(item.stock)}
-                                </td>
-                            </tr>
-                        ))}
+                        {elements
+                            .sort((a, b) => a.stock - b.stock) // Sort elements by stock in ascending order
+                            .map(item => (
+                                <tr key={item.id}>
+                                    <td>{item.name}</td>
+                                    <td>{item.stock}</td>
+                                    <td>
+                                        {setStatus(item.stock)}
+                                    </td>
+                                </tr>
+                            ))
+                        }
                     </tbody>
+
+
                 </table>
             )}
         </div>

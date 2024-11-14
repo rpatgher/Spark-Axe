@@ -509,6 +509,8 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                 key={subcategory.id}
                                                 id={subcategory.id}
                                                 handleActive={true}
+                                                draggable="true"
+
                                             >
                                                 <div 
                                                     className={styles.subcategory}
@@ -534,7 +536,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                                             });
                                                                         }}                                                                  
                                                                     />
-                                                                    <i className="fa-regular fa-file-image"></i>
+                                                                    <i className="fa-solid fa-file-arrow-up"></i>
                                                                 </div>
                                                             ) : 
                                                                 subcategory.image ? (<img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/categories/${subcategory.image}`} alt={subcategory.name} />) : (<div></div>)
@@ -967,6 +969,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                 disabled={loading}
                                                 className={styles.save}
                                                 type='submit'
+                                                title="Guardar"
                                             >
                                                 <i className="fa-solid fa-floppy-disk"></i>
                                             </button>
