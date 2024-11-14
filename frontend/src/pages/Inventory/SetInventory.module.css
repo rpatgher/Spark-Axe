@@ -1,8 +1,11 @@
+/* Base Styles */
 .inventory-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
 }
 
 .enviocontent {
@@ -58,6 +61,7 @@
     border-radius: 1rem;
     height: auto;
 }
+
 .Buttonguardar {
     border: none;
     background-color: var(--blue);
@@ -68,9 +72,11 @@
     width: 100%;
     cursor: pointer;
 }
+
 .Buttonguardar:hover {
     background-color: var(--dark_blue)
 }
+
 .linksettings:hover {
     background-color: var(--dark_gray)
 }
@@ -90,101 +96,99 @@
 .go-back button:hover {
     opacity: 100%;
 }
+
 .notes{
     font-size: 1.2rem;
     text-align: center;
     margin: 0;
 }
 
-/* Mobile and tablet responsiveness */
+/* Media Queries */
 
-/* Adjust layout for smaller screens */
-@media (max-width: 768px) {
-    .inventory-wrapper {
-        flex-direction: column; /* Stack elements vertically */
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 1rem;
-    }
-
+/* For screens smaller than 1024px */
+@media (max-width: 1024px) {
     .enviocontent {
-        min-width: 100%;
-        padding: 1rem 0 3rem 0;
-        box-shadow: none; /* Remove shadow for smaller screens */
+        min-width: 60rem;
     }
-
     .tabcontent1 {
-        width: 90%; /* Reduce width to fit mobile */
+        width: 90%;
     }
-
     .body {
-        display: block; /* Stack fields vertically */
-        gap: 1.5rem;
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
     }
-
-    .field {
-        padding: 1.5rem;
-        gap: 1rem;
-    }
-
-    .field label,
     .field input,
     .field textarea {
         font-size: 1.2rem;
-    }
-
-    .Buttonguardar {
-        font-size: 1.4rem;
         padding: 0.8rem;
-        width: 100%;
     }
-
     .go-back button {
-        font-size: 1.6rem;
-        margin: 10px 0;
-    }
-
-    .notes {
-        font-size: 1.4rem; /* Slightly larger text for better readability */
+        font-size: 1.5rem;
+        margin-bottom: 20px;
     }
 }
 
-/* Very small devices (Mobile phones in portrait mode) */
-@media (max-width: 480px) {
-    .inventory-wrapper {
-        padding: 0.5rem;
-    }
-
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
     .enviocontent {
-        padding: 1rem;
-        box-shadow: none;
+        min-width: 100%;
+        padding: 1.5rem 0 3rem 0;
     }
-
     .tabcontent1 {
-        width: 100%; /* Full width on very small screens */
+        width: 100%;
     }
+    .body {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    .field {
+        padding: 1.5rem;
+    }
+    .field input,
+    .field textarea {
+        font-size: 1.1rem;
+        padding: 0.7rem;
+    }
+    .Buttonguardar {
+        font-size: 14px;
+        padding: 8px;
+    }
+    .notes {
+        font-size: 1rem;
+    }
+    .go-back button {
+        font-size: 1.2rem;
+    }
+}
 
+/* For screens smaller than 480px */
+@media (max-width: 480px) {
+    .enviocontent {
+        padding: 1rem 0 2rem 0;
+    }
+    .tabcontent1 {
+        width: 100%;
+    }
+    .body {
+        padding: 0 1rem;
+    }
     .field {
         padding: 1rem;
     }
-
-    .field label,
     .field input,
     .field textarea {
-        font-size: 1.1rem; /* Further reduced font size for very small screens */
+        font-size: 1rem;
+        padding: 0.6rem;
     }
-
     .Buttonguardar {
-        font-size: 1.3rem;
-        padding: 0.8rem;
+        font-size: 13px;
+        padding: 7px;
     }
-
     .go-back button {
-        font-size: 1.4rem;
-        margin: 8px 0;
+        font-size: 1rem;
+        margin-bottom: 10px;
     }
-
     .notes {
-        font-size: 1.3rem;
+        font-size: 0.9rem;
     }
 }

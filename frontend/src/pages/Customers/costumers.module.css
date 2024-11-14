@@ -117,6 +117,13 @@ tr.selectedRow{
 .selectedRow td {
     background-color: #eef1f3 !important;
 }
+.contact-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; /* Optional: To vertically center the icons */
+    background-color: #eef1f3 !important;
+}
 .contactbtn{
     font-size: 15px;
     color: white;

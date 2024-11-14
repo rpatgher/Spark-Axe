@@ -138,6 +138,7 @@ h3.config-title{
   .modal-profile {
     min-width: 90%; /* Make the modal narrower on smaller screens */
     padding: 1.5rem; /* Reduce padding for smaller screens */
+    margin: 0 1rem; /* Add margin on the sides */
   }
 
   .info {
@@ -191,7 +192,11 @@ h3.config-title{
   .modal-profile {
     min-width: 100%; /* Make modal take the full width */
     padding: 1rem; /* Further reduce padding */
+    margin: 0 0.5rem; /* Add smaller margin on the sides */
+    max-height: 60%;
+    overflow-y: auto; /* Allow scrolling if content overflows */
   }
+
 
   .info-field h3, .info-field-website h3 {
     font-size: 1.2rem; /* Further reduce font size for smaller devices */

@@ -179,3 +179,5 @@
         padding: 1rem; /* Reduce padding for extra small screens */
     }
 }
+
+/* Media Queries for larger screens (Min width 1024px) */
