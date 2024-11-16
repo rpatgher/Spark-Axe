@@ -261,10 +261,11 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
             category.append('name', newCategory.name);
             if(newCategory.image){
                 category.append('image', newCategory.image);
+            } else{
+                category.append('image', '');
             }
-            category.append('description', newCategory.description);
+            category.append('description', newCategory.description || '');
             category.append('website_id', auth.websites[0].id);
-
             setLoading(true);
             document.body.style.cursor = "wait";
             const response = await clientAxios.post('/api/categories/one', category, config);
@@ -303,8 +304,10 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
             subcategory.append('name', newSubcategory.name);
             if(newSubcategory.image){
                 subcategory.append('image', newSubcategory.image);
+            } else{
+                subcategory.append('image', '');
             }
-            subcategory.append('description', newSubcategory.description);
+            subcategory.append('description', newSubcategory.description || '');
             subcategory.append('category_id', currentCategory.id);
             setLoading(true);
             document.body.style.cursor = "wait";
@@ -654,7 +657,8 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                             ...newSubcategory,
                                                             image: e.target.files[0]
                                                         });
-                                                    }}                                                                  
+                                                    }} 
+                                                    name='image'
                                                 />
                                                 <i className="fa-regular fa-file-image"></i>
                                             </div>
@@ -669,6 +673,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                         name: e.target.value
                                                     });
                                                 }}
+                                                name='name'
                                                 id='newSubcategoryInput'
                                                 autoFocus={true}
                                             />
@@ -680,6 +685,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                         description: e.target.value
                                                     });
                                                 }}
+                                                name='description'
                                             />
                                         </div>
                                         <div className={styles.buttonsNewSubcat}>
@@ -933,7 +939,8 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                             ...newCategory,
                                                             image: e.target.files[0]
                                                         });
-                                                    }}                                                                  
+                                                    }}
+                                                    name='image'                                                            
                                                 />
                                                 <i className="fa-regular fa-file-image"></i>
                                             </div>
@@ -950,6 +957,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                 }}
                                                 id='newCategoryInput'
                                                 autoFocus={true}
+                                                name='name'
                                             />
                                             <textarea
                                                 value={newCategory?.description || ''}
@@ -959,6 +967,7 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                         description: e.target.value
                                                     });
                                                 }}
+                                                name='description'
                                             />
                                         </div>
                                         <div className={styles.buttonsNewCat}>
