@@ -23,3 +23,15 @@
     margin-left: 20px;
     margin-right: 20px;
 }
+@media (max-width: 768px) {
+    .Profile {
+        width: 100%;
+    }
+    .ProfilePic {
+        height: 50px;
+        width: 50px;
+    }
+    .ProfileHead {
+        font-size: 1.5rem;
+    }
+}

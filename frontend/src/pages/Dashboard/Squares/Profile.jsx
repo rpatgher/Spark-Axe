@@ -14,7 +14,7 @@ const Profile = ({name, websites}) => {
                     alt="Axolotl-Waiting"
                 />
             </div>
-            <h2 className={styles["ProfileHead"]}>Hola {name}</h2>
+            <h2 className={styles["ProfileHead"]}>Hola {name},</h2>
             <p className={styles["ProfileHead"]}>
                 Bienvenido al portal de tu tienda online! Aquí podrás ver tus ventas, productos, clientes y mucho más.
             </p>

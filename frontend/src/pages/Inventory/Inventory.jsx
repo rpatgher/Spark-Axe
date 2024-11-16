@@ -29,8 +29,8 @@ const Inventory = () => {
     const [editingRow, setEditingRow] = useState(null);
     const [data, setData] = useState([]);
     const [visible, setVisible] = useState('all');
-    const [order, setOrder] = useState('asc');
-    const [orderType, setOrderType] = useState('name');
+    const [order, setOrder] = useState('asc');  // Default to ascending order
+    const [orderType, setOrderType] = useState('stock');  // Default to sorting by stock    
     const [search, setSearch] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([]);
 

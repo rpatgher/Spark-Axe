@@ -230,3 +230,60 @@ tr.selectedRow td {
 .descriptioninfotitle{
     font-weight: bold;
 }
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+
+    .modal-wrapper {
+        padding: 40px;
+        margin: 0 auto;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .modal-description {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .descriptioninfotitle {
+        font-size: 16px;
+    }
+
+    .descriptioninfo {
+        font-size: 14px;
+    }
+
+    .close-modal {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-description {
+        padding: 20px;
+        margin-left: 30px;
+        margin-right: 20%;
+        width: 50%;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    .descriptioninfotitle {
+        font-size: 14px;
+    }
+
+    .descriptioninfo {
+        font-size: 12px;
+    }
+
+    .close-modal {
+        font-size: 18px;
+    }
+}

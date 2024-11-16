@@ -59,13 +59,14 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
         }, 300);
     }
 
-
     const handleEditSubcategory = (e) => {
-        setEditingSubcategory({
-            ...editingSubcategory,
-            name: e.target.value
-        });
-    }
+        const { value } = e.target;  // Get the input value
+        setEditingSubcategory((prevState) => ({
+            ...prevState,  // Spread previous state to preserve other properties
+            name: value     // Update the 'name' property
+        }));
+    };
+    
 
     const editSubcategoryFunc = async (e) => {
         e.preventDefault();
@@ -594,18 +595,20 @@ const ModalEditCategories = ({closeModal, categories, setCategories}) => {
                                                             </>
                                                         ) : editingSubcategory === null ? !newSubcategoryActive && (
                                                             <button
-                                                                onClick={() => {
-                                                                    setEditingSubcategory(subcategory);
-                                                                }}
-                                                                style={{
-                                                                    opacity: loading ? 0.5 : 1,
-                                                                    cursor: loading ? "wait" : "pointer"
-                                                                }}
-                                                                disabled={loading}
-                                                                className={styles.editBtn}
-                                                            >
-                                                                <i className="fa-solid fa-pencil"></i> Editar
-                                                            </button>
+                                                            onClick={() => {
+                                                              console.log("Button clicked, setting editing subcategory to:", subcategory);
+                                                              setEditingSubcategory(subcategory);  // Set the subcategory to edit
+                                                            }}
+                                                            style={{
+                                                              opacity: loading ? 0.5 : 1,  // Disable opacity if loading
+                                                              cursor: loading ? "wait" : "pointer"  // Show "wait" cursor if loading
+                                                            }}
+                                                            disabled={loading}  // Disable the button if loading is true
+                                                            className={styles.editBtn}
+                                                          >
+                                                            <i className="fa-solid fa-pencil"></i> Editar
+                                                          </button>
+                                                          
                                                         ) : null}
                                                         {editingSubcategory !== null && editingSubcategory.id === subcategory.id ? (
                                                             <button

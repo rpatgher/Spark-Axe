@@ -336,7 +336,7 @@ const Customers = () => {
                                     <td>{renderTableCell(item.email, "email", item.id)}</td>
                                     <td>{renderTableCell(item.phone, "phone", item.id)}</td>
                                     <td>{String(item.index).padStart(10, '0')}</td>
-                                    <td>
+                                    <td className={styles['contact-buttons']}>
                                         <button className={styles.contactbtn} onClick={() => window.location.href = `https://api.whatsapp.com/send?phone=${item.numero}`}><i className="fab fa-whatsapp"></i></button>
                                         <button className={styles.contactbtnt} onClick={() => window.location.href = `tel:${item.numero}`}>
                                             <i className="fas fa-phone-alt"></i>

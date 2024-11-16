@@ -88,9 +88,38 @@
 
 @media (max-width: 768px) {
     .table-dash {
-        width: 90rem;
+        width: 90rem; /* Ensure the table takes up more space on smaller screens */
+    }
+    .Filtertabs {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    .radio-inputs{
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    .visibles2 {
+        display: none;
+    }
+    .visibles2.show {
+        display: inline-block;
+    }
+    .visibles{
+        background-color: #ffffff;
+        padding: 1rem 4rem;
+    }
+    .visibles:active {
+        background-color: #908484; /* Change to your desired color on click */
     }
 }
+/* Default state: on small screens, hide the visibles2 buttons */
+
 
 .table-dash thead {
     background-color: var(--gray);

@@ -1,8 +1,11 @@
+/* Base Styles */
 .inventory-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
 }
 
 .enviocontent {
@@ -58,6 +61,7 @@
     border-radius: 1rem;
     height: auto;
 }
+
 .Buttonguardar {
     border: none;
     background-color: var(--blue);
@@ -68,9 +72,11 @@
     width: 100%;
     cursor: pointer;
 }
+
 .Buttonguardar:hover {
     background-color: var(--dark_blue)
 }
+
 .linksettings:hover {
     background-color: var(--dark_gray)
 }
@@ -90,8 +96,99 @@
 .go-back button:hover {
     opacity: 100%;
 }
+
 .notes{
     font-size: 1.2rem;
     text-align: center;
     margin: 0;
+}
+
+/* Media Queries */
+
+/* For screens smaller than 1024px */
+@media (max-width: 1024px) {
+    .enviocontent {
+        min-width: 60rem;
+    }
+    .tabcontent1 {
+        width: 90%;
+    }
+    .body {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    .field input,
+    .field textarea {
+        font-size: 1.2rem;
+        padding: 0.8rem;
+    }
+    .go-back button {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+    .enviocontent {
+        min-width: 100%;
+        padding: 1.5rem 0 3rem 0;
+    }
+    .tabcontent1 {
+        width: 100%;
+    }
+    .body {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    .field {
+        padding: 1.5rem;
+    }
+    .field input,
+    .field textarea {
+        font-size: 1.1rem;
+        padding: 0.7rem;
+    }
+    .Buttonguardar {
+        font-size: 14px;
+        padding: 8px;
+    }
+    .notes {
+        font-size: 1rem;
+    }
+    .go-back button {
+        font-size: 1.2rem;
+    }
+}
+
+/* For screens smaller than 480px */
+@media (max-width: 480px) {
+    .enviocontent {
+        padding: 1rem 0 2rem 0;
+    }
+    .tabcontent1 {
+        width: 100%;
+    }
+    .body {
+        padding: 0 1rem;
+    }
+    .field {
+        padding: 1rem;
+    }
+    .field input,
+    .field textarea {
+        font-size: 1rem;
+        padding: 0.6rem;
+    }
+    .Buttonguardar {
+        font-size: 13px;
+        padding: 7px;
+    }
+    .go-back button {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    .notes {
+        font-size: 0.9rem;
+    }
 }

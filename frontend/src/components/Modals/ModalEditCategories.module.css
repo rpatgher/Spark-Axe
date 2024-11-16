@@ -11,19 +11,76 @@
     align-items: center;
     justify-content: center;
 }
+
+.img:hover{
+    background-color: #393232;
+
+}
+.modal {
 .modal{
     background-color: var(--white);
     position: relative;
     border-radius: 1rem;
     padding: 2rem;
-    min-width: 60rem;
+    min-width: 40rem;
+    max-width: 60%;
     height: 50rem;
     transform: translateY(-2rem);
     transition: all .3s;
     opacity: 0;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
+
+/* Tablet screens */
+@media (max-width: 768px) {
+    .modal {
+        min-width: 50rem;
+        height: 40rem;
+        padding: 1.5rem;
+    }
+    .modal h2 {
+        font-size: 1.8rem;
+    }
+    .content p {
+        font-size: 1.3rem;
+    }
+}
+
+/* Mobile screens */
+/* Mobile screens */
+@media (max-width: 480px) {
+    .modal {
+        min-width: 90%;
+        max-height: 80vh; /* Set max-height to 80% of viewport */
+        height: auto;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        transform: translateY(0);
+        overflow-y: auto; /* Allows scrolling if content overflows */
+    }
+    .modal h2 {
+        font-size: 1.5rem;
+    }
+    .content p {
+        font-size: 1.2rem;
+    }
+    .close-modal {
+        width: 3rem;
+        height: 3rem;
+        font-size: 2.5rem;
+    }
+    .header button {
+        font-size: 1.2rem;
+    }
+    .inputs input, .inputs textarea {
+        font-size: 1.4rem;
+        padding: 1rem;
+    }
+}
+
+
 .modal form{
     display: flex;
     align-items: center;
@@ -327,4 +384,14 @@ button.create:hover{
 .buttonsNewCat, .buttonsNewSubcat{
     display: flex;
     align-items: center;
+}
+.phonealert{
+    text-align: center;
+    display: none;
+}
+@media (max-width: 480px) {
+    .phonealert{
+        font-size: 1.4rem;
+        display: block;
+    }
 }

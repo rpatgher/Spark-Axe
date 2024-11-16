@@ -65,6 +65,116 @@
     box-shadow: 0 16px 32px 0 rgba(31, 38, 135, 0.37);
     transition: 0.4s;
     transform: scale(1.02);
-  
 }
 
+/* Media Queries for responsiveness */
+
+/* Medium Screens (Tablets) */
+/* Media Queries for responsiveness */
+
+/* Medium Screens (Tablets) */
+@media (max-width: 1024px) {
+    .Homehead {
+        font-size: 5.5rem; /* Slightly smaller, but still large */
+        text-align: center;
+        width: 90%; /* Reduce width to fit the screen better */
+    }
+    .Homehead-grey {
+        font-size: 5.5rem;
+    }
+    .row {
+        flex-direction: row; /* Keep row layout for tablets */
+        height: 30rem; /* Retain a similar height for the row */
+        justify-content: space-between; /* Add some space between the elements */
+        margin: 0 auto; /* Center the row */
+    }
+    .div {
+        width: 30%; /* Slightly smaller widths for the items */
+    }
+    .Menu {
+        font-size: 2.5rem;
+        padding: 1.5rem;
+        flex: 1; /* Allow menu to expand and fit better */
+    }
+    .Menu i {
+        font-size: 6rem;
+    }
+    .square {
+        font-size: 2.5rem; /* Keep the squares readable */
+        margin-bottom: 1.5rem; /* Add more space between squares */
+    }
+    .Dashboard {
+        padding: 2.5rem;
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+
+/* Small Screens (Phones) */
+@media (max-width: 768px) {
+    .Homehead {
+        font-size: 4rem;
+        text-align: center;
+        width: 80%;
+    }
+    .Homehead-grey {
+        font-size: 4rem;
+    }
+    .row {
+        flex-direction: column; /* Stack items vertically on small screens */
+        height: auto;
+        width: 100%;
+        margin: auto;
+    }
+    .div {
+        width: 100%; 
+    }
+    .Menu {
+        font-size: 2rem;
+        padding: 1.5rem;
+    }
+    .Menu i {
+        font-size: 5rem;
+    }
+    .square {
+        font-size: 2rem;
+        margin-bottom: 1rem; /* Add margin for spacing between squares */
+    }
+    .Dashboard {
+        padding: 2rem;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+    }
+}
+
+/* Extra Small Screens (Portrait Phones) */
+@media (max-width: 480px) {
+    .Homehead {
+        font-size: 3rem; /* Much smaller font for extra small screens */
+        width: 80%;
+    }
+    .Homehead-grey {
+        font-size: 3rem;
+    }
+    .row {
+        flex-direction: column; /* Ensure items are stacked vertically */
+        height: auto;
+    }
+    .Menu {
+        font-size: 1.8rem;
+        padding: 1rem;
+    }
+    .Menu i {
+        font-size: 4rem;
+    }
+    .square {
+        font-size: 1.8rem;
+    }
+    .Dashboard {
+        padding: 1rem; /* Reduce padding for extra small screens */
+    }
+}
+
+/* Media Queries for larger screens (Min width 1024px) */
