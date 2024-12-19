@@ -20,6 +20,11 @@ const Element = db.define('element', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    cost : {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        defaultValue: 0
+    },
     price: {
         type: DataTypes.FLOAT,
         allowNull: false
@@ -70,6 +75,11 @@ const Element = db.define('element', {
         allowNull: false
     },
     main:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    wholesaler: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false

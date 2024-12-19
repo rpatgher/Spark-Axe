@@ -22,8 +22,10 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
     const [product, setProduct] = useState({
         name: initalProduct?.name || '',
         description: initalProduct?.description || '',
+        cost: initalProduct?.cost || '',
         price: initalProduct?.price || '',
         stock: initalProduct?.stock || '',
+        wholesaler: initalProduct?.wholesaler || '',
         color: initalProduct?.color || '',
         instructions: initalProduct?.instructions || '',
         ingredients: initalProduct?.ingredients || '',
@@ -68,8 +70,10 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         setProduct({
             name: initalProduct?.name || '',
             description: initalProduct?.description || '',
+            cost: initalProduct?.cost || '',
             price: initalProduct?.price || '',
             stock: initalProduct?.stock || '',
+            wholesaler: initalProduct?.wholesaler || '',
             color: initalProduct?.color || '',
             instructions: initalProduct?.instructions || '',
             ingredients: initalProduct?.ingredients || '',
@@ -94,6 +98,11 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
             e.target.classList.remove(styles["empty-field"]);
         }
         if(e.target.name === 'main' ){
+            setProduct({
+                ...product,
+                [e.target.name]: e.target.checked
+            });
+        }else if(e.target.name === 'wholesaler' ){
             setProduct({
                 ...product,
                 [e.target.name]: e.target.checked
@@ -156,8 +165,10 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
         const data = new FormData();
         data.append('name', product.name);
         data.append('description', product.description);
+        data.append('cost', product.cost);
         data.append('price', product.price);
         data.append('stock', product.stock);
+        data.append('wholesaler', product.wholesaler);
         data.append('color', product.color);
         data.append('instructions', product.instructions);
         data.append('ingredients', product.ingredients);
@@ -238,6 +249,17 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                         />
                     </div>
                     <div className={styles.field}>
+                        <label htmlFor="cost" className={styles.required}>Costo</label>
+                        <input
+                            type="number"
+                            id="cost"
+                            name="cost"
+                            placeholder={`Costo del producto`}
+                            onChange={handleChange}
+                            value={product.cost}                        
+                        />
+                    </div>
+                    <div className={styles.field}>
                         <label htmlFor="price" className={styles.required}>Precio</label>
                         <input
                             type="number"
@@ -258,6 +280,16 @@ const FormProduct = ({ initalProduct, setModalDelete }) => {
                             onChange={handleChange}
                             value={product.stock}
                         />
+                    </div>
+                    <div className={styles.field}>
+                        <label html="wholesaler" className={styles.required}>Producto Mayorista</label>
+                        <input
+                            type="checkbox"
+                            id="wholesaler"
+                            name="wholesaler"
+                            onChange={handleChange}
+                            checked={product.wholesaler}
+                        />                        
                     </div>
                     {configElement.weight && (
                         <div className={styles.field}>
