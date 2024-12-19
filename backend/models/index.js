@@ -15,6 +15,8 @@ import Advertisement from "./Advertisement.js";
 import Contact from "./Contact.js";
 import PoS from "./PoS.js";
 import PoSCategory from "./PoSCategory.js";
+import Delivery from "./Delivery.js";
+import Destination from "./Destination.js";
 
 
 import Config from "./Config.js";
@@ -76,6 +78,12 @@ PoSCategory.belongsTo(Website, { foreignKey: 'website_id', onDelete: 'RESTRICT' 
 PoSCategory.hasMany(PoS, { foreignKey: 'pos_category_id', onDelete: 'RESTRICT', allowNull: true });
 PoS.belongsTo(PoSCategory, { foreignKey: 'pos_category_id', onDelete: 'RESTRICT' });
 
+//Delivery.belongsTo(Order, { foreignKey: 'order_id', onDelete: 'RESTRICT' });
+//Order.hasOne(Delivery, { foreignKey: 'order_id', onDelete: 'RESTRICT' });
+Delivery.hasMany(Destination, { foreignKey: 'delivery_id', onDelete: 'CASCADE' });
+Destination.belongsTo(Delivery, { foreignKey: 'delivery_id', onDelete: 'CASCADE' });
+//Delivery.belongsTo(Website, { foreignKey: "website_id", onDelete: "RESTRICT" });
+//Website.hasMany(Delivery, { foreignKey: "website_id", onDelete: "RESTRICT" });
 
 
 // ****************+ Configuration for the website +****************
@@ -118,6 +126,8 @@ export {
     Advertisement,
     Contact,
     PoS,
+    Delivery,
+    Destination,
     PoSCategory,
     Config,
     ElementConfigProperty,

@@ -232,6 +232,8 @@ const Products = () => {
                         { type: 'id', name: 'Número de ID' },
                         { type: 'name', name: 'Nombre' },
                         { type: 'price', name: 'Precio' },
+                        { type: 'cost' , name: 'Costo' },
+                        { type: 'wholesale', name: 'Producto Mayorista' }
                     ]}
                     listName='productos'
                 />
@@ -257,23 +259,27 @@ const Products = () => {
                 columns={config.color ? [
                     { prop: 'checkbox', width: '5%' },
                     { prop: 'Imagen', width: '5%' },
-                    { prop: 'Nombre', width: '15%' },
+                    { prop: 'Nombre', width: '10%' },
                     { prop: 'Descripción', width: '10%' },
-                    { prop: 'Precio', width: '15%' },
+                    { prop: 'Precio', width: '10%' },
+                    { prop: 'Costo', width: '10%' },
                     { prop: 'Color', width: '5%' },
-                    { prop: 'Categorías', width: '15%' },
-                    { prop: 'ID', width: '5%' },
-                    { prop: 'Publicado', width: '10%' },
+                    { prop: 'Categorías', width: '1%' },
+                    { prop: 'Producto Mayorista', width: '5%' },
+                    { prop: 'ID', width: '10%' },
+                    { prop: 'Publicado', width: '5%' },
                     { prop: 'actions', width: '10%' }
                 ] : [
                     { prop: 'checkbox', width: '5%' },
                     { prop: 'Imagen', width: '10%' },
-                    { prop: 'Nombre', width: '15%' },
+                    { prop: 'Nombre', width: '10%' },
                     { prop: 'Descripción', width: '10%' },
-                    { prop: 'Precio', width: '15%' },
-                    { prop: 'Categorías', width: '15%' },
-                    { prop: 'ID', width: '5%' },
-                    { prop: 'Publicado', width: '10%' },
+                    { prop: 'Precio', width: '10%' },
+                    { prop: 'Costo', width: '10%' },
+                    { prop: 'Categorías', width: '10%' },
+                    { prop: 'Producto Mayorista', width: '5%' },
+                    { prop: 'ID', width: '10%' },
+                    { prop: 'Publicado', width: '5%' },
                     { prop: 'actions', width: '10%' }
                 ]}
                 listLength={filteredProducts.length}
@@ -297,59 +303,93 @@ const Products = () => {
                 createNew="/dashboard/products/new"
             >
                 {filteredProducts.map((product, index) => {
-                    if(index < limit){
+                    if (index < limit) {
                         product.visible = true;
                         return (
-                        <tr
-                            key={product.id}
-                            className={product.selected ? styles.selectedRow : ''}
-                        >
-                            <td className={styles["cell-select"]}>
-                                <input 
-                                    type="checkbox"
-                                    onChange={() => handleSelect(index)}
-                                    checked={product.selected || false}
-                                />
-                            </td>
-                            <td className={styles["cell-image"]}><img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/elements/${product.image}`} alt={`${product.name} Product Image`} /></td>
-                            <td>{product.name}</td>
-                            <td className={styles["cell-description"]}>
-                                <button
-                                    onClick={() => {
-                                        showDescription(product)
-                                        showModal();
-                                    }}
-                                >
-                                    <i className="fa-regular fa-note-sticky"></i>
-                                </button>
-                            </td>
-                            <td>{formatToMoney(product.price)} MXN</td>
-                            {config.color && <td className={styles["cell-color"]}><div style={{ backgroundColor: product.color }} ></div></td>}
-                            <td>
-                                <button
-                                    className={styles["btn-categories"]}
-                                    onClick={() => showCategories(product.categories)}
-                                >
-                                    <i className="fa-solid fa-layer-group"></i>
-                                </button>
-                            </td>
-                            <td className={styles["cell-id"]}>{String(product.index).padStart(10, '0')}</td>
-                            <td className={styles["cell-published"]}><div className={`${product.published ? styles.published : styles.unpublished}`}>{product.published ? 'Publicado' : 'Archivado'}</div></td>
-                            <td 
-                                className={styles["cell-actions"]}
+                            <tr
+                                key={product.id}
+                                className={product.selected ? styles.selectedRow : ''}
                             >
-                                <Link to={`edit/${product.id}`} className={styles.editar}>
-                                    <i className="fa-solid fa-pen"></i>
-                                    Editar
-                                </Link>
-                            </td>
-                        </tr>
-                        ) 
-                    }else{
+                                {/* Checkbox */}
+                                <td className={styles["cell-select"]}>
+                                    <input 
+                                        type="checkbox"
+                                        onChange={() => handleSelect(index)}
+                                        checked={product.selected || false}
+                                    />
+                                </td>
+                                
+                                {/* Imagen */}
+                                <td className={styles["cell-image"]}>
+                                    <img src={`${import.meta.env.VITE_BACKEND_URL}/uploads/elements/${product.image}`} 
+                                        alt={`${product.name} Product Image`} />
+                                </td>
+
+                                {/* Nombre */}
+                                <td>{product.name}</td>
+
+                                {/* Descripción */}
+                                <td className={styles["cell-description"]}>
+                                    <button
+                                        onClick={() => {
+                                            showDescription(product);
+                                            showModal();
+                                        }}
+                                    >
+                                        <i className="fa-regular fa-note-sticky"></i>
+                                    </button>
+                                </td>
+
+                                {/* Precio */}
+                                <td>{formatToMoney(product.price)} MXN</td>
+
+                                {/* Costo */}
+                                <td>{formatToMoney(product.cost)} MXN</td>
+
+                                {/* Categorías */}
+                                <td>
+                                    <button
+                                        className={styles["btn-categories"]}
+                                        onClick={() => showCategories(product.categories)}
+                                    >
+                                        <i className="fa-solid fa-layer-group"></i>
+                                    </button>
+                                </td>
+
+                                {/* Producto Mayorista */}
+                                <td>
+                                    <div className={product.wholesaler ? styles.wholesalerTrue : styles.wholesalerFalse}>
+                                        {product.wholesaler ? 'Sí' : 'No'}
+                                    </div>
+                                </td>
+
+                                {/* ID */}
+                                <td className={styles["cell-id"]}>
+                                    {String(product.index).padStart(10, '0')}
+                                </td>
+
+                                {/* Publicado */}
+                                <td className={styles["cell-published"]}>
+                                    <div className={`${product.published ? styles.published : styles.unpublished}`}>
+                                        {product.published ? 'Publicado' : 'Archivado'}
+                                    </div>
+                                </td>
+
+                                {/* Acciones */}
+                                <td className={styles["cell-actions"]}>
+                                    <Link to={`edit/${product.id}`} className={styles.editar}>
+                                        <i className="fa-solid fa-pen"></i>
+                                        Editar
+                                    </Link>
+                                </td>
+                            </tr>
+                        );
+                    } else {
                         product.visible = false;
                         product.selected = false;
                     }
                 })}
+
             </TableDashboard>
             {productDescription.name &&
                 <div className={styles["modal-wrapper"]}>

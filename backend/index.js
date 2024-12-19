@@ -16,6 +16,7 @@ import InventoryRouter from './routes/InventoryRoutes.js';
 import CustomerRouter from './routes/CustomerRoutes.js';
 import PoSRouter from './routes/PoSRoutes.js';
 import PoSCategoryRouter from './routes/PoSCategoryRoutes.js';
+import DeliveryRouter from './routes/DeliveryRoutes.js';
 
 import ConfigRouter from './routes/ConfigRoutes.js';
 
@@ -67,6 +68,7 @@ app.use('/api/inventories', InventoryRouter);
 app.use('/api/customers', CustomerRouter);
 app.use('/api/pos', PoSRouter);
 app.use('/api/pos-categories', PoSCategoryRouter);
+app.use('/api/deliveries', DeliveryRouter);
 
 // Configurations
 app.use('/api/config', ConfigRouter);

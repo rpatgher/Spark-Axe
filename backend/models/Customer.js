@@ -21,6 +21,11 @@ const Customer = db.define('customer', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    /*wholesaler: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },*/
     email: {
         type: DataTypes.STRING,
         allowNull: false

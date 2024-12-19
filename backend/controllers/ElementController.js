@@ -37,6 +37,7 @@ const getElement = async (req, res) => {
         description: elementFromDB.description,
         image: elementFromDB.image,
         image_hover: elementFromDB.image_hover,
+        cost: elementFromDB.cost,
         price: elementFromDB.price,
         stock: elementFromDB.stock,
         color: elementFromDB.color,
@@ -48,6 +49,7 @@ const getElement = async (req, res) => {
         fact_sheet: elementFromDB.fact_sheet,
         safety_sheet: elementFromDB.safety_sheet,
         main: elementFromDB.main,
+        wholesaler: elementFromDB.wholesaler,
         published: elementFromDB.published,
         categories: elementFromDB.subcategories.map(subcategory => {
             return {
@@ -127,6 +129,7 @@ const getElements = async (req, res) => {
             description: element.description,
             image: element.image,
             image_hover: element.image_hover,
+            cost: element.cost,
             price: element.price,
             stock: element.stock,
             color: element.color,
@@ -138,6 +141,7 @@ const getElements = async (req, res) => {
             fact_sheet: element.fact_sheet,
             safety_sheet: element.safety_sheet,
             main: element.main,
+            wholesaler: element.wholesaler,
             published: element.published,
             categories: element.subcategories.map(subcategory => {
                 return {
@@ -166,9 +170,9 @@ const getElements = async (req, res) => {
 }
 
 const createElement = async (req, res) => {
-    const { name, description, price, stock , categories: categoriesStr } = req.body;
+    const { name, description, price, cost, stock, wholesaler,categories: categoriesStr } = req.body;
     const categories = JSON.parse(categoriesStr);
-    if(!name || !description || !price || !stock || !categories){
+    if(!name || !description || !price || !cost || !stock || !categories || !wholesaler){
         const error = new Error('Invalid Request. Missing required fields');
         return res.status(400).json({ msg: error.message });
     }
@@ -259,9 +263,9 @@ const createElement = async (req, res) => {
 }
 
 const updateElement = async (req, res) => {
-    const { name, description, price, stock , categories: categoriesStr } = req.body;
+    const { name, description, price, cost, stock, wholesaler, categories: categoriesStr } = req.body;
     const categories = JSON.parse(categoriesStr);
-    if(!name || !description || !price || !stock || !categories){
+    if(!name || !description || !price || !cost || !stock || !categories || !wholesaler){
         const error = new Error('Invalid Request. Missing required fields');
         return res.status(400).json({ msg: error.message });
     }
